@@ -40,12 +40,18 @@ Sample 3, a Gene1&2 double deletion strain:
 Gene1	Gene2	Gene3	Gene4
 0	0	20	30
 ```
+Sample 4, a Gene2 overexpression strain:
+```
+Gene1	Gene2	Gene3	Gene4
+5	1000	20	30
+```
 
 The `input_RNAseq.txt` will then be:
 ```
 -1	5	10	20	30
 0	0	10	20	30
-0,1	0	0	20	30
+0,1	0 0	20	30
+-4, 5 1000 20 30
 ```
 
 ## How to construct `promoter_strengths.txt`

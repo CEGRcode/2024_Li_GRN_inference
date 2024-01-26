@@ -50,8 +50,8 @@ The `input_RNAseq.txt` will then be:
 ```
 -1	5	10	20	30
 0	0	10	20	30
-0,1	0	0	20	30
--4	5	1000	20	30
+0,1	0	  0	  20  	30
+-4	  5  	1000  	20  	30
 ```
 
 ## How to construct `promoter_strengths.txt`

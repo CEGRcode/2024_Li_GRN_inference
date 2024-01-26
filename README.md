@@ -21,7 +21,8 @@ python EGRN_Multi_Genalg.py -r data/Alpha_Attractors_example.txt -n 250 -i 3 -t 
 ```
 
 ## How to construct `input_RNAseq.txt`
-The `input_RNAseq.txt` file is tab separated. The first row is a comma-separated list of indices for deleted genes. 
+The `input_RNAseq.txt` file is tab separated. The first column is a comma-separated list of indices for deleted or overexpressed genes.
+If none is deleted or overexpressed, the index is -1. If the $i^{th}$ gene is deleted, the index will be $i-1$. If the $i^{th}$ gene is overexpressed, the index will be $-i-2$.
 Subsequent rows represent the transcriptional profile.
 
 ### Example
@@ -51,7 +52,7 @@ The `input_RNAseq.txt` will then be:
 -1	5	10	20	30
 0	0	10	20	30
 0,1	0	  0	  20  	30
--4	  5  	1000  	20  	30
+-3	  5  	1000  	20  	30
 ```
 
 ## How to construct `promoter_strengths.txt`

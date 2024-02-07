@@ -31,7 +31,7 @@ if __name__ == '__main__':
     sys_aa_elongation_rate = 8
     sys_gene_length = []
     sys_samplesize = 100
-    sys_training_count = 200
+    sys_training_count = 250
     sys_PerturbationPower = 0.1
     sys_iteration_num = 800
     sys_output_name = ""
@@ -64,15 +64,16 @@ if __name__ == '__main__':
         elif opt in ("-r", "--input_RNAseq"):
             sys_input_RNAseq = sys_path + '/' + arg
             sys_input_RNAseq = np.array(pd.read_csv(
-                sys_input_RNAseq, header=None, delimiter='\t'))
+                sys_input_RNAseq, header=None, delimiter='\t', dtype=str))
             sys_WTTP = {}
             for i in range(0, sys_input_RNAseq.shape[0]):
+                #print(sys_input_RNAseq[i][0], type(sys_input_RNAseq[i][0]))
                 if sys_input_RNAseq[i][0] == '-1':
-                    sys_WTTP[str(i)] = [[], sys_input_RNAseq[i][1:]]
+                    sys_WTTP[str(i)] = [[], np.array(sys_input_RNAseq[i][1:], dtype=float)]
                 elif len(sys_input_RNAseq[i][0]) == 1:
-                    sys_WTTP[str(i)] = [[int(sys_input_RNAseq[i][0])], sys_input_RNAseq[i][1:]]
+                    sys_WTTP[str(i)] = [[int(sys_input_RNAseq[i][0])], np.array(sys_input_RNAseq[i][1:], dtype=float)]
                 else:
-                    sys_WTTP[str(i)] = [np.array(sys_input_RNAseq[i][0].split(','), dtype = int).tolist(), sys_input_RNAseq[i][1:]]
+                    sys_WTTP[str(i)] = [np.array(sys_input_RNAseq[i][0].split(','), dtype = int).tolist(), np.array(sys_input_RNAseq[i][1:], dtype=float)]
         elif opt in ("-c", "--input_ChIP"):
             sys_input_ChIP = sys_path + '/' + arg
             sys_input_ChIP = np.array(pd.read_csv(
@@ -158,8 +159,8 @@ if __name__ == '__main__':
     for row in BaseMatrixCollector.T:
         TranscriptionPofileMax.append(np.nanmax(row))
         TranscriptionPofileMin.append(np.nanmin(row))
-        TranscriptionPofileAve.append(
-            0.5*(TranscriptionPofileMax[-1]+TranscriptionPofileMin[-1]))
+        #print(TranscriptionPofileMax, '\n', TranscriptionPofileMin)
+        TranscriptionPofileAve.append(0.5*(TranscriptionPofileMax[-1]+TranscriptionPofileMin[-1]))
 
     #### Scaling promoter Strengths ###
     dt_scaler = (max(TranscriptionPofileMax/(np.min(sys_promoter_strengths,
@@ -761,7 +762,7 @@ if __name__ == '__main__':
                         [0, TrainingCount],
                         list(NewmRNA)+list(NewProtein),
                         args=([WTTP[str(Global_i)][0]]),
-                        t_eval=[int(TrainingCount/250)*tick for tick in range(0, 250+1)]) 
+                        t_eval=[int(TrainingCount/250)*tick for tick in range(0, 250+1)])
 
         npmRNA_continuous = sol.y[:TotalNumberOfGenes].T
         npmRNA = np.round(sol.y[:TotalNumberOfGenes]).T

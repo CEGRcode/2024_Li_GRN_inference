@@ -3,6 +3,8 @@ import pandas as pd
 
 def Combine_redundant_attractors(input_path, output_path, StableStateThreshold):
     '''Merge together any pair of attractors if the Euclidean distance between them is below a certain threshold.'''
+
+    '''Input RNAseq data in specified format.'''
     RNAseq_data = open('input_path, 'r')
     StableStatesCollector = {}
     TranscriptionPofiles = []
@@ -24,6 +26,7 @@ def Combine_redundant_attractors(input_path, output_path, StableStateThreshold):
     for each in TranscriptionPofileMax:
         TransMaxOver1.append(1/each)
 
+    '''Filtering low-frequency attractors, specifically for global searching.'''
     VectorCollector = []
     FreqCollector = []
     for keys in StableStatesCollector:
@@ -44,6 +47,7 @@ def Combine_redundant_attractors(input_path, output_path, StableStateThreshold):
     MyCounter = 0
     
     #print(len(MatrixCollector))
+    '''Combining redundant attractors.'''
     while MyCounter < MatrixCollector.shape[0] - 1:
         j = MyCounter + 1
         if MyCounter == MatrixCollector.shape[0] - 1 - 1:
@@ -84,6 +88,7 @@ def Combine_redundant_attractors(input_path, output_path, StableStateThreshold):
         print(str(MatrixCollector[i]))
     print(len(MatrixCollector))
 
+    '''Make output RNAseq. KO considered but overexpression needs specific care.'''
     outfile = open(output_path, 'a')
     for each in MatrixCollector:
         if len(np.argwhere(each == 0)) == 0:

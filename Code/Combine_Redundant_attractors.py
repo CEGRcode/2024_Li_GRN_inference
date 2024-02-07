@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 
-def Combine_redundant_attractors(input_path, output_path):
+def Combine_redundant_attractors(input_path, output_path, StableStateThreshold):
+    '''Merge together any pair of attractors if the Euclidean distance between them is below a certain threshold.'''
     RNAseq_data = open('input_path, 'r')
     StableStatesCollector = {}
     TranscriptionPofiles = []
@@ -18,6 +19,7 @@ def Combine_redundant_attractors(input_path, output_path):
     TranscriptionPofiles = np.array(TranscriptionPofiles)
     TranscriptionPofileMax = np.max(TranscriptionPofiles, axis=0)
 
+    '''Normalize genes of different maximal expression levels.'''
     TransMaxOver1 = []
     for each in TranscriptionPofileMax:
         TransMaxOver1.append(1/each)
@@ -40,7 +42,7 @@ def Combine_redundant_attractors(input_path, output_path):
             MatrixCollector[i][j] = float(TempVec[j][0:-1])
 
     MyCounter = 0
-    StableStateThreshold = 0.3
+    
     #print(len(MatrixCollector))
     while MyCounter < MatrixCollector.shape[0] - 1:
         j = MyCounter + 1

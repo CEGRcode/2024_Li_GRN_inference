@@ -1,102 +1,66 @@
 import numpy as np
-import pandas as pd
+from distance_functions import *
 
-def Combine_redundant_attractors(input_path, output_path, StableStateThreshold):
-    '''Merge together any pair of attractors if the Euclidean distance between them is below a certain threshold.'''
-
-    '''Input RNAseq data in specified format.'''
-    RNAseq_data = open('input_path, 'r')
-    StableStatesCollector = {}
-    TranscriptionPofiles = []
-    for line in RNAseq_data:
-        line_split = line.split()
-        if line_split[0] == 'ABF1':
-            continue
-        else:
-            for i in range(0, len(line_split)):
-                line_split[i] = float(line_split[i])
-        TranscriptionPofiles.append(line_split[1:])
-        StableStatesCollector[str(line_split[1:])] = 1
-
-    TranscriptionPofiles = np.array(TranscriptionPofiles)
-    TranscriptionPofileMax = np.max(TranscriptionPofiles, axis=0)
-
-    '''Normalize genes of different maximal expression levels.'''
-    TransMaxOver1 = []
-    for each in TranscriptionPofileMax:
-        TransMaxOver1.append(1/each)
-
-    '''Filtering low-frequency attractors, specifically for global searching.'''
-    VectorCollector = []
-    FreqCollector = []
-    for keys in StableStatesCollector:
-        if StableStatesCollector[keys] >= 0: # Threshold for the Stable States frequency
-            VectorCollector.append(keys)
-            FreqCollector.append(StableStatesCollector[keys])
-        else:
-            pass
-    for i in range(0, len(VectorCollector)):
-        VectorCollector[i] = VectorCollector[i][:-1]
-        VectorCollector[i] = VectorCollector[i][1:]
-    MatrixCollector = np.random.randint(2,size=(1, len(VectorCollector), len(VectorCollector[0].split())))[0]
-    for i in range(0, len(VectorCollector)):
-        TempVec = VectorCollector[i].split()
-        for j in range(0, len(TempVec)):
-            MatrixCollector[i][j] = float(TempVec[j][0:-1])
-
-    MyCounter = 0
-    
-    #print(len(MatrixCollector))
-    '''Combining redundant attractors.'''
-    while MyCounter < MatrixCollector.shape[0] - 1:
-        j = MyCounter + 1
-        if MyCounter == MatrixCollector.shape[0] - 1 - 1:
-            #print(np.dot(abs(MatrixCollector[MyCounter] - MatrixCollector[j]), TransMaxOver1))
-            if np.dot(abs(MatrixCollector[MyCounter] - MatrixCollector[j]), TransMaxOver1) < StableStateThreshold:
-                print(MatrixCollector[MyCounter], '\n', MatrixCollector[j], '\n', np.dot(abs(MatrixCollector[MyCounter] - MatrixCollector[j]), TransMaxOver1), '\n\n')
-                TempCombineVector = (MatrixCollector[MyCounter] + MatrixCollector[j]) * 0.5
-                MatrixCollector[MyCounter] = TempCombineVector
-                MatrixCollector = np.delete(MatrixCollector, j, axis = 0)
-                TempCombineFreq = FreqCollector[MyCounter] + FreqCollector[j]
-                FreqCollector[MyCounter] = TempCombineFreq
-                FreqCollector.pop(j)
+def to_combine(_matrix, AttractorDistance_Threshold, Identical_Expression_Threshold):
+    '''Determine if a set of transcriptional profiles have two whose attractor distance is below threshold.'''
+    '''Also return two transcriptional profiles if there's one and only one variable gene.'''
+    _matrix = np.array(_matrix)
+    for i in range(0, _matrix.shape[0]):
+        for j in range(0, _matrix.shape[0]):
+            if i == j:
+                continue
             else:
-                pass
-            break
-        else:
-            while True:
-                if np.dot(abs(MatrixCollector[MyCounter] - MatrixCollector[j]), TransMaxOver1) < StableStateThreshold:
-                    print(MatrixCollector[MyCounter], '\n', MatrixCollector[j], '\n', np.dot(abs(MatrixCollector[MyCounter] - MatrixCollector[j]), TransMaxOver1), '\n\n')
-                    TempCombineVector = (MatrixCollector[MyCounter] + MatrixCollector[j]) * 0.5
-                    MatrixCollector[MyCounter] = TempCombineVector
-                    MatrixCollector = np.delete(MatrixCollector, j, axis = 0)
-                    TempCombineFreq = FreqCollector[MyCounter] + FreqCollector[j]
-                    FreqCollector[MyCounter] = TempCombineFreq
-                    FreqCollector.pop(j)
-                    break
-                else:
-                    j = j + 1
-                if j == MatrixCollector.shape[0]:
-                    MyCounter = MyCounter + 1
-                    break
+                if GetAttractorDistance(_matrix[i], _matrix[j], np.max(_matrix, axis=0)) <= AttractorDistance_Threshold:
+                    return False, min(i, j), max(i, j)
                 else:
                     pass
 
-    #print(StableStatesCollector)
+                temp_vector = _matrix[j] - _matrix[i]
+                for k in (0, len(temp_vector)):
+                    if k == len(temp_vector):
+                        if GetAttractorDistance(temp_vector[:-1], np.array([0 for repeat in range(0, len(temp_vector)-1)]), np.max(_matrix, axis=0)[:-1]) <= Identical_Expression_Threshold:
+                            return False, min(i, j), max(i, j)
+                        else:
+                            pass
+                    elif k == 0:
+                        if GetAttractorDistance(temp_vector[1:], np.array([0 for repeat in range(0, len(temp_vector)-1)]), np.max(_matrix, axis=0)[1:]) <= Identical_Expression_Threshold:
+                            return False, min(i, j), max(i, j)
+                        else:
+                            pass
+                    else:
+                        if GetAttractorDistance(temp_vector[:k]+temp_vector[k+1:], np.array([0 for repeat in range(0, len(temp_vector)-1)]), np.max(_matrix, axis=0)[:k]+np.max(_matrix, axis=0)[k+1:]) <= Identical_Expression_Threshold:
+                            return False, min(i, j), max(i, j)
+                        else:
+                            pass
 
-    for i in range(0, len(MatrixCollector)):
-        print(str(MatrixCollector[i]))
-    print(len(MatrixCollector))
+    return True, min(i, j), max(i, j)
 
-    '''Make output RNAseq. KO considered but overexpression needs specific care.'''
-    outfile = open(output_path, 'a')
-    for each in MatrixCollector:
-        if len(np.argwhere(each == 0)) == 0:
-               outfile.write('-1\t')
+def Combine_Redundant_Attractors(Path_input, AttractorDistance_Threshold, Identical_Expression_Threshold):
+    '''Combine redundant attractors according to criterion specified in to_combine.'''
+    RNAseq_data = open(Path_input, 'r')
+    TranscriptionPofiles = []
+
+    '''Specify a genotype for combining.'''
+    for line in RNAseq_data:
+        line_split = line.split()
+        if line_split[0] != '-1':
+            continue
         else:
-               outfile.write(str(np.argwhere(each == 0)[0][0])+'\t')
-        for values in each:
-               outfile.write(str(values)+'\t')
-        outfile.write('\n')
-    outfile.close()
-    return
+            for i in range(0, len(line_split)):
+                line_split[i] = 100*float(line_split[i])
+        TranscriptionPofiles.append(line_split[1:])
+
+    while True:
+        _end, i, j = to_combine(TranscriptionPofiles, AttractorDistance_Threshold, Identical_Expression_Threshold)
+        print(len(TranscriptionPofiles))
+        if _end:
+            break
+        else:
+            new_profile = (np.array(TranscriptionPofiles[i]) + np.array(TranscriptionPofiles[j])) * 0.5
+            del TranscriptionPofiles[j]
+            del TranscriptionPofiles[i]
+            TranscriptionPofiles.insert(i, list(new_profile))
+    return TranscriptionPofiles
+
+
+Combined = Combine_Redundant_Attractors('/Users/rl884/Downloads/PICIN/Data/isolated_subnetwork_5/RNAseq_full.txt', 0.2, 0.1)

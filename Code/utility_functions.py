@@ -1,8 +1,40 @@
 import numpy as np
+import copy
 
+
+def Sort_LG(_Matrix_LG):
+    Out_Matrix_LG = []
+    for j in range(0, len(_Matrix_LG)):
+        _Matrix = _Matrix_LG[j]
+        Complexes = {}
+        for i in range(0, len(_Matrix)):
+            if _Matrix[i] not in Complexes:
+                Complexes[_Matrix[i]] = [i]
+            else:
+                Complexes[_Matrix[i]].append(i)
+        Temp_LG_List = ['a' for i in range(0, len(_Matrix))]
+        To_Count = 0
+        To_fill = 0
+        Done_complexes = {}
+        while len(Done_complexes) < len(Complexes):
+            for keys in Complexes:
+                if keys not in Done_complexes:
+                    if To_Count in Complexes[keys]:
+                        for each_index in Complexes[keys]:
+                            Temp_LG_List[each_index] = To_fill
+                        To_fill = To_fill + 1
+                        Done_complexes[keys] = ''
+                    else:
+                        pass
+                else:
+                    pass
+            To_Count = To_Count + 1
+        Out_Matrix_LG.append(Temp_LG_List)
+    return Out_Matrix_LG
 
 def Matrix2String01_LG(_Matrix):
-    '''Convert 1-D string representation of Logic Gate Matrix into numpy array for fast matrix manipulations'''
+    '''Convert numpy array into 1-D string representation of Logic Gate Matrix'''
+    _Matrix = np.array(_Matrix)
     OutString01 = ''
     for i in range(0, _Matrix.shape[0]):
         for j in range(0, _Matrix.shape[1]):
@@ -20,6 +52,16 @@ def LogicGatesString2Matrix(string):
             stringindex = stringindex + 1
     return outmatrix
 
+def LogicGatesString2Matrix_Expanded(string):
+    '''Convert 1-D string representation of Logic Gate Matrix into numpy array for fast matrix manipulations'''
+    SQRTLEN = int(np.sqrt(len(string)))
+    outmatrix = np.random.randint(8, 9, (SQRTLEN, SQRTLEN))
+    stringindex = 0
+    for i in range(0, outmatrix.shape[0]):
+        for j in range(0, outmatrix.shape[1]):
+            outmatrix[i][j] = int(string[stringindex])
+            stringindex = stringindex + 1
+    return outmatrix
 
 def GetCorespondingMatrix(List012):
     '''Convert 1-D array representation of Weighted Adjacency Matrix into numpy array for fast matrix manipulations'''
@@ -136,10 +178,4 @@ def GetmRNASearchSpace(TotalGeneNum, RunNum, BoundList):
                 break
     return np.array(OutList)
 
-def LogicGatesMatrix2String(matrix):
-    outstring = ''
-    for i in range(0, matrix.shape[0]):
-        for j in range(0, matrix.shape[1]):
-            outstring = outstring + str(matrix[i][j])
-    return outstring
 

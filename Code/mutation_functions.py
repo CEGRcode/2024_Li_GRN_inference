@@ -6,7 +6,6 @@ import random
 
 def HammingMutation_LG(_HammingDistance, _Matrix, _globalmutationdirection, _samplesize):
     '''Hamming mutation function for Logic Gate Matrix'''
-    # The shape of matrix is (2,x,x)
     Temp_String = []
     _S = Matrix2String01_LG(_Matrix)
     for i in range(0, len(_S)):
@@ -36,6 +35,31 @@ def HammingMutation_LG(_HammingDistance, _Matrix, _globalmutationdirection, _sam
             Counteri = Counteri + 1
             del MutationIndexList[MutationIndexList.index(Index_to_Mutate)]
     return GetCorespondingMatrix_LG(Temp_String)
+
+def Mutation_LG(_HammingDistance, _Matrix_LG, _AR_List):
+    # Mutation for the expanded combinatorial LG.
+    Counteri = 0
+    while Counteri < _HammingDistance:
+        Gene_to_mutate = np.random.choice([i for i in range(0, len(_Matrix_LG[0]))])
+        TF_to_mutate = np.random.choice([i for i in range(0, len(_Matrix_LG[0]))])
+        if TF_to_mutate in _AR_List[0][Gene_to_mutate]:
+            Acceptable_complex_to_mutate = []
+            for each_TF in range(0, len(_Matrix_LG[0])):
+                if each_TF not in _AR_List[1][Gene_to_mutate] and each_TF != _Matrix_LG[Gene_to_mutate][TF_to_mutate]:
+                    Acceptable_complex_to_mutate.append(each_TF)
+                else:
+                    pass
+        else:
+            Acceptable_complex_to_mutate = []
+            for each_TF in range(0, len(_Matrix_LG[0])):
+                if each_TF not in _AR_List[0][Gene_to_mutate] and each_TF != _Matrix_LG[Gene_to_mutate][TF_to_mutate]:
+                    Acceptable_complex_to_mutate.append(each_TF)
+                else:
+                    pass
+        _Matrix_LG[Gene_to_mutate][TF_to_mutate] = np.random.choice(Acceptable_complex_to_mutate)
+        Counteri = Counteri + 1
+
+    return Sort_LG(_Matrix_LG)
 
 
 def HammingMutation(sys_input_ChIP,
@@ -155,35 +179,6 @@ def HammingMutation(sys_input_ChIP,
             raise Exception('Temp_String has something wrong!')
         Counteri = Counteri + 1
     return GetCorespondingMatrix(Temp_String)
-
-
-def GetHammingDistance(_MatrixA, _MatrixB):
-    '''Compute Hamming distances for matrices without flattening (for adjacency matrices)'''
-    HammingDistance = 0
-    if _MatrixA.shape == _MatrixB.shape:
-        for i in range(0, _MatrixA.shape[0]):
-            for j in range(0, _MatrixA.shape[1]):
-                for z in range(0, _MatrixA.shape[2]):
-                    if _MatrixA[i, j, z] != _MatrixB[i, j, z]:
-                        HammingDistance = HammingDistance + 1
-                    else:
-                        pass
-    else:
-        raise Exception('Shapes don\'t match!')
-    return HammingDistance
-
-
-def GetHammingDistance_LG(_MA, _MB):
-    '''Compute Hamming distances for matrices with flattening (for logic gate matrices)'''
-    HammingDis = 0
-    _SA = Matrix2String01_LG(_MA)
-    _SB = Matrix2String01_LG(_MB)
-    for i in range(0, len(_SA)):
-        if _SA[i] == _SB[i]:
-            pass
-        else:
-            HammingDis = HammingDis + 1
-    return HammingDis
 
 
 def Recombination(MatrixA, MatrixB):

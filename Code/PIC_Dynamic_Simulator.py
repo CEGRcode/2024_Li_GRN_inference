@@ -25,14 +25,14 @@ sys_aa_elongation_rate = 8
 sys_gene_length = []
 sys_samplesize = 1
 sys_training_count = 250
-sys_event = {300:{}} # variables are mRNA, Protein, TranscriptionRate, TranslationRate, DegradationRatemRNA, DegradationRateProtein
+sys_event = {300:[]} # variables are mRNA, Protein, TranscriptionRate, TranslationRate, DegradationRatemRNA, DegradationRateProtein
 sys_PerturbationPower = 0.1
 sys_iteration_num = 800
 sys_output_name = ""
 #######################################################################################################################################################################################
 
 ############################################################################ Data from an existing model ##############################################################################
-sys_input_RNAseq = np.array(pd.read_csv('/Users/rl884/Downloads/PICIN/Data/Example/RNAseq.txt', header=None, delimiter='\t', dtype=str))
+sys_input_RNAseq = np.array(pd.read_csv('/Users/rl884/Downloads/in_silico_GRN7/Alpha_Attractors_7.txt', header=None, delimiter='\t', dtype=str))
 #print(sys_input_RNAseq)
 sys_WTTP = {}
 for i in range(0, sys_input_RNAseq.shape[0]):
@@ -46,11 +46,11 @@ for i in range(0, sys_input_RNAseq.shape[0]):
                             np.array(sys_input_RNAseq[i][1:], dtype=float)]
 
 sys_gene_length = np.array(pd.read_csv(
-    '/Users/rl884/Downloads/PICIN/Data/Example/GeneLength.txt',
+    '/Users/rl884/Downloads/in_silico_GRN7/Alpha_GeneLength_7.txt',
     header=None, delimiter='\t'), dtype=int)[0]
 
 sys_promoter_strengths = np.array(pd.read_csv(
-    '/Users/rl884/Downloads/PICIN/Data/Example/PromoterStrength.txt',
+    '/Users/rl884/Downloads/in_silico_GRN7/Alpha_PromoterStrength_7.txt',
     header=None, delimiter='\t'), dtype=float)
 
 sys_protein_degradation_rate = [(0.00796) * 60 for i in range(0, len(sys_gene_length))]
@@ -127,7 +127,7 @@ def ParametersInitiations():
     Protein = [0.0 for i in range(0, TotalNumberOfGenes)]
 
     # Configuration = String012ToMatrix('0112002121110112020202200')
-    Configuration = String012ToMatrix('1000100001000001001002002000000000000000002001100020000000010001')
+    Configuration = String012ToMatrix('0000000000000001102002001021000010010000100001001')
     ########################################################################################################
     '''RandomStringList = np.random.randint(3,size = (1, TotalNumberOfGenes**2))[0]
     RandomString = ''
@@ -149,7 +149,7 @@ def ParametersInitiations():
 
     # Need to make sure the activators/repressors proportion is ~10%, and the activators and repressors do not present simutaneously.
 
-    MutationRate = 0  # must be integer
+    MutationRate = 2  # must be integer
 
     #TranscriptionRate = sys_promoter_strengths[0]*60*sys_mRNA_elongation_rate/sys_gene_length.tolist()
     TranscriptionRate = ((np.max(sys_promoter_strengths, axis=0) * 60 * sys_mRNA_elongation_rate) / sys_gene_length).tolist()
@@ -174,8 +174,8 @@ def ParametersInitiations():
 
     Sigmoid_k_init = []
     for i in range(0, TotalNumberOfGenes):
-        Sigmoid_k_init.append(np.log(10 ** -3 / (1 - 10 ** -3)) / np.log(TranscriptionThreshold[i][0] / (
-                    TranscriptionPofileMax[i] * TranslationRate[i] / DegradationRateProtein[i])))
+        Sigmoid_k_init.append(2)
+        #Sigmoid_k_init.append(np.log(10 ** -3 / (1 - 10 ** -3)) / np.log(TranscriptionThreshold[i][0] / (TranscriptionPofileMax[i] * TranslationRate[i] / DegradationRateProtein[i])))
         # Sigmoid_k_init.append(np.log((1-10**-3)/10**-3)/np.log(TranscriptionThreshold[i][0]/(TranscriptionPofileMin[i]*TranslationRate[i]/DegradationRateProtein[i])))
 
     LogicGates = LogicGatesString2Matrix('0000000000000010')
@@ -187,7 +187,7 @@ def ParametersInitiations():
         # Leakage.append(min(TranscriptionPofileMin[i]*DegradationRatemRNA[i], PromoterMinList[i]))
         Leakage.append(TranscriptionPofileMin[i] * DegradationRatemRNA[i])
     # f0 = np.random.uniform(0,1,TotalNumberOfGenes)
-    # f0 = [0.2260398,  0.72477163 ,0.18961756, 0.53594393, 0.24441876]
+    # f0 = [0.2986138181818182, 0.2068589655172414, 0.3149736842105263, 0.1908036507936508, 0.21152409836065572, 0.5706108955223882, 0.18780870370370373, 0.08679802469135803]
     # f0 = []
     # for i in range(0, TotalNumberOfGenes):
     #    f0.append((DegradationRatemRNA[i]*TranscriptionPofileAve[i]-Leakage[i])/(TranscriptionRate[i]-Leakage[i]))
@@ -295,10 +295,10 @@ for Global_i in range(0, len(WTTP)):
         for events_timepoints in sys_event:
             time_interval = events_timepoints - temp_previous_timepoint
             # solve the DEs separately in the time intervals of each event
-            scipystring = eval('{}.Delta_mRNA(WTTP[str(Global_i)][0], Overexpression[Global_i])'.format(GRN_List[0]))  # Construct the differential equations
+            scipystring = eval('{}.Delta_PIC(WTTP[str(Global_i)][0], Overexpression[Global_i])'.format(GRN_List[0]))  # Construct the differential equations
             #print(events_timepoints, '/n', scipystring)
             exec(scipystring)
-            sol = solve_ivp(update_mRNA_protein, [0, time_interval], previous_state,
+            sol = solve_ivp(update_PIC, [0, time_interval], previous_state,
                             args=([WTTP[str(Global_i)][0]]), t_eval=[tick for tick in range(0, time_interval)])
             if len(npmRNA_continuous) == len(npmRNA) == 0:
                 npmRNA_continuous = sol.y[:TotalNumberOfGenes].T
@@ -423,11 +423,12 @@ for novel_i in range(0, len(Calculate_AttractorDistance)):
 Unique_attractor_N = (1 + np.count_nonzero(np.mean(Attractor_Distance_matrix, axis=0) > 1))
 
 # print(np.sum(Calculate_AttractorDistance, axis=0))
-#print(np.sum(CurrentDistance))
+print(np.sum(CurrentDistance))
 print('# Unique Attractors: ', Unique_attractor_N)
 
 #CurrentDistance = np.array(CurrentDistance)
-print('Mean Attractor Distance: ', np.mean(CurrentDistance) / Unique_attractor_N)
-#print(len(WTTP), '\t', Matched_Number)
-#print('\n', sorted(StableStatesCollector.items(), key=lambda StableStatesCollector:StableStatesCollector[1]))
+#print('Mean Attractor Distance: ', np.mean(CurrentDistance) / Unique_attractor_N)
+# print(len(WTTP), '\t', Matched_Number)
+# print('\n', sorted(StableStatesCollector.items(), key=lambda StableStatesCollector:StableStatesCollector[1]))
 #print(GRN_1.TranscriptionRate)
+#print(eval('{}.Sigmoid_k'.format(GRN_List[0])))

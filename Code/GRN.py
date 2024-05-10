@@ -16,11 +16,12 @@ class GRN:
                  TranslationRate, DegradationRatemRNA,
                  DegradationRateProtein, DilutionRate,
                  TranscriptionThreshold, LogicGates, Sigmoid_k,
-                 Leakage, f0, sys_input_ChIP):
+                 Leakage, f0, sys_input_ChIP, cis_impact=1):
         '''Parameters Initiation'''
         self.Name = Name
         self.mRNA = mRNA
         self.Protein = Protein
+        self.cis_impact = cis_impact
         # Configuration.shape = (2,m,n); (0,m,n) for Activation and (1,m,n) for Repression
         self.Configuration = Configuration
         self.Proportion = Proportion
@@ -79,7 +80,7 @@ class GRN:
         arlist = [[] for i in range(0, self.Configuration.shape[0])]
         for i in range(0, self.Configuration.shape[0]):
             temp_list = []
-            for j in range(0, len(self.mRNA)):
+            for j in range(0, len(self.f0)):
                 temp_list.append(
                     np.where(self.Configuration[i][:, j] == 1)[0].tolist())
             arlist[i] = temp_list
@@ -91,9 +92,9 @@ class GRN:
         scipystring = 'def update_mRNA_protein(t, y, knockoutlist):' + \
             '\n    delta_mRNA = [0]*int(len(y)/2)' + '\n    delta_protein = [0]*int(len(y)/2)' + \
             '\n    outlist = [0]*len(y)'  # Scipy
-        for i in range(0, len(self.mRNA)):
+        for i in range(0, len(self.f0)):
             '''loop the mRNA list (For each gene)'''
-# CurrentActivators are ARList[0][i]; CurrentRepressors are ARList[1][i]
+        # CurrentActivators are ARList[0][i]; CurrentRepressors are ARList[1][i]
 
             '''Form the differential equations'''
             TempString_CA_sci = ''  # Scipy
@@ -105,7 +106,7 @@ class GRN:
                 # Activators AND
                 for j in range(0, len(ARList[0][i])):
                     TempString_CA_sci = 'ActivatorSigmoid({}, {}, {})*'.format(
-                        'y[{}]'.format(len(self.mRNA)+ARList[0][i][j]),
+                        'y[{}]'.format(len(self.f0)+ARList[0][i][j]),
                         self.TranscriptionThreshold[ARList[0][i][j]][i],
                         self.Sigmoid_k[ARList[0][i][j]]) + TempString_CA_sci  # Scipy
                 TempString_CA_sci = TempString_CA_sci[:-1]
@@ -118,7 +119,7 @@ class GRN:
                 # Activators OR
                 for j in range(0, len(ARList[0][i])):
                     TempString_CA_sci = '(1-ActivatorSigmoid({}, {}, {}))*'.format(
-                        'y[{}]'.format(len(self.mRNA)+ARList[0][i][j]),
+                        'y[{}]'.format(len(self.f0)+ARList[0][i][j]),
                         self.TranscriptionThreshold[ARList[0][i][j]][i],
                         self.Sigmoid_k[ARList[0][i][j]]) + TempString_CA_sci  # Scipy
                 TempString_CA_sci = TempString_CA_sci[:-1]
@@ -136,7 +137,7 @@ class GRN:
                 # If Repressors AND
                 for j in range(0, len(ARList[1][i])):
                     TempString_CR_sci = 'ActivatorSigmoid({}, {}, {})*'.format(
-                        'y[{}]'.format(len(self.mRNA)+ARList[1][i][j]),
+                        'y[{}]'.format(len(self.f0)+ARList[1][i][j]),
                         self.TranscriptionThreshold[ARList[1][i][j]][i],
                         self.Sigmoid_k[ARList[1][i][j]]) + TempString_CR_sci  # Scipy
                 TempString_CR_sci = TempString_CR_sci[:-1]
@@ -149,7 +150,7 @@ class GRN:
                 # If Repressor OR
                 for j in range(0, len(ARList[1][i])):
                     TempString_CR_sci = '(1-ActivatorSigmoid({}, {}, {}))*'.format(
-                        'y[{}]'.format(len(self.mRNA)+ARList[1][i][j]),
+                        'y[{}]'.format(len(self.f0)+ARList[1][i][j]),
                         self.TranscriptionThreshold[ARList[1][i][j]][i],
                         self.Sigmoid_k[ARList[1][i][j]]) + TempString_CR_sci  # Scipy
                 TempString_CR_sci = TempString_CR_sci[:-1]
@@ -179,7 +180,7 @@ class GRN:
                                                               i,
                                                               self.DegradationRateProtein[i],
                                                               self.DilutionRate[i],
-                                                              i+len(self.mRNA))
+                                                              i+len(self.f0))
 
             scipystring = (scipystring
                            + '\n    delta_mRNA[{}]='.format(i)
@@ -187,7 +188,7 @@ class GRN:
                            + '\n    delta_protein[{}]='.format(i)
                            + proteinstring)
 
-        for i in range(0, len(self.mRNA)):
+        for i in range(0, len(self.f0)):
             scipystring = scipystring + ('\n    if (y[{}]<=0 and delta_mRNA[{}]<=0) or ({} in knockoutlist):'
                                          '\n        outlist[{}] = -y[{}]'
                                          '\n    elif {} in knockoutlist:'
@@ -200,18 +201,17 @@ class GRN:
                                          '\n        outlist[{}]=delta_protein[{}]').format(
                 i, i, i, i, i,
                 -2-i, i, TRM[i], i, i,
-                i, i+len(self.mRNA), i, i+len(self.mRNA), i+len(self.mRNA),
-                i+len(self.mRNA), i)
+                i, i+len(self.f0), i, i+len(self.f0), i+len(self.f0),
+                i+len(self.f0), i)
 
         scipystring = scipystring + '\n    return outlist'
-
         return(scipystring)
 
     def Updatef0_1(self):
-        '''Given a GRN and an attractor'''
+        '''Given a GRN and an attractor, return the f0 based on the steady-state assumption for each gene.'''
         ARList = self.GetActivatorsRepressors()
         f0_list = []
-        for i in range(0, len(self.mRNA)):
+        for i in range(0, len(self.f0)):
             '''Form the differential equations'''
             TempString_CA_sci = ''  # Scipy
             TempString_CR_sci = ''  # Scipy
@@ -303,7 +303,7 @@ class GRN:
         '''1.Mutation upon Configuration'''
         self.Configuration = HammingMutation(
             self.sys_input_ChIP, self.MutationRate, self.Configuration,
-            globalmutationdirection, samplesize, 0.9)
+            globalmutationdirection, samplesize, 0.99)
 
         '''2.Mutation upon LogicGates'''
         self.LogicGates = HammingMutation_LG(
@@ -329,9 +329,7 @@ class GRN:
         to_append = 0
         for i in range(0, len(self.mRNA[0])):
 
-            if ((self.Configuration[0][i][i] == 1 and self.Configuration[1][i][i] == 0)
-                    and (self.LogicGates[i][0] == 0
-                         or np.count_nonzero(self.Configuration[0][:, i]) < 2)):
+            if ((self.Configuration[0][i][i] == 1 and self.Configuration[1][i][i] == 0) and (self.LogicGates[i][0] == 0 or np.count_nonzero(self.Configuration[0][:, i]) < 2)):
                 Comparison_List = []
                 Comp_mRNA = copy.deepcopy(WTTP_[str(sysi)][1])
                 Comp_mRNA[i] = max(TMax[i], overexpression[i])

@@ -14,7 +14,7 @@ def GetHammingDistance(_MatrixA, _MatrixB):
         for i in range(0, _MatrixA.shape[0]):
             for j in range(0, _MatrixA.shape[1]):
                 for z in range(0, _MatrixA.shape[2]):
-                    if _MatrixA[i,j,z] != _MatrixB[i,j,z]:
+                    if _MatrixA[i, j, z] != _MatrixB[i, j, z]:
                         HammingDistance = HammingDistance + 1
                     else:
                         pass
@@ -22,14 +22,14 @@ def GetHammingDistance(_MatrixA, _MatrixB):
         raise Exception('Shapes don\'t match!')
     return HammingDistance
 
+
 def GetHammingDistance_LG(_MA, _MB):
     '''Compute Hamming distances for matrices with flattening (for logic gate matrices)'''
     HammingDis = 0
-    _SA = Matrix2String01_LG(_MA)
-    _SB = Matrix2String01_LG(_MB)
-    for i in range(0, len(_SA)):
-        if _SA[i] == _SB[i]:
-            pass
-        else:
-            HammingDis = HammingDis + 1
+    for i in range(0, len(_MA)):
+        for j in range(0, len(_MA[i])):
+            if _MA[i][j] == _MB[i][j]:
+                pass
+            else:
+                HammingDis = HammingDis + 1
     return HammingDis

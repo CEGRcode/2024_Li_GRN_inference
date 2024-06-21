@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamically Add Nodes and Edges with Cytoscape</title>
+  <style>
+    #cy {
+      width: 100%;
+      height: 800px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    label, input, select, button {
+      margin-bottom: 5px;
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 600px;
+      height: 500px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.1/cytoscape.min.js"></script>
+</head>
+<body>
+  <div id="cy"></div>
+
+  <div class="controls">
+    <div>
+      <label for="sourceNode">Source Node:</label>
+      <input type="text" id="sourceNode" placeholder="Enter source node">
+    </div>
+    <div>
+      <label for="targetNode">Target Node:</label>
+      <input type="text" id="targetNode" placeholder="Enter target node">
+    </div>
+    <div>
+      <label for="edgeLabel">Edge Label:</label>
+      <input type="text" id="edgeLabel" placeholder="Enter edge label">
+    </div>
+    <div>
+      <label for="edgeStyle">Edge Style:</label>
+      <select id="edgeStyle">
+        <option value="solid">Solid</option>
+        <option value="dashed">Dashed</option>
+      </select>
+    </div>
+    <div>
+      <label for="arrowShape">Arrow Shape:</label>
+      <select id="arrowShape">
+        <option value="triangle">Triangle</option>
+        <option value="tee">Blunt Arrow</option>
+      </select>
+    </div>
+    <button id="addEdgeBtn">Add/Update Edge</button>
+  </div>
+
+  <div class="controls">
+    <div>
+      <label for="deleteNode">Node to Delete:</label>
+      <input type="text" id="deleteNode" placeholder="Enter node ID">
+      <button id="deleteNodeBtn">Delete Node</button>
+    </div>
+    <div>
+      <label for="deleteSourceNode">Source Node:</label>
+      <input type="text" id="deleteSourceNode" placeholder="Enter source node">
+      <label for="deleteTargetNode">Target Node:</label>
+      <input type="text" id="deleteTargetNode" placeholder="Enter target node">
+      <button id="deleteEdgeBtn">Delete Edge</button>
+    </div>
+    <div>
+      <button id="layoutBtn">Re-layout</button>
+    </div>
+    <div>
+      <button id="downloadBtn">Download Nodes & Edges</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="nodeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p id="nodeInfo"></p>
+    </div>
+  </div>
+
+  <!-- Edge Modal -->
+  <div id="edgeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="test.jpg" alt="Edge Image" id="edgeImage" style="width:600px; height:500px">
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+
+      const cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: {
+          nodes: [
+            { data: { id: 'a', label: 'Node A', sua7Occupancy: 1 } },
+            { data: { id: 'b', label: 'Node B', sua7Occupancy: 1 } },
+            { data: { id: 'c', label: 'Node C', sua7Occupancy: 1 } },
+            { data: { id: 'd', label: 'Node D', sua7Occupancy: 1 } },
+            { data: { id: 'e', label: 'Node E', sua7Occupancy: 1 } }
+          ],
+          edges: []
+        },
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'shape': 'ellipse',
+              'border-width': 2,
+              'background-color': 'white',
+              'label': 'data(label)',
+              'color': 'black',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'font-size': '8'
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'curve-style': 'bezier',
+              'label': 'data(label)',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.solid',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'line-style': 'solid',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.dashed',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'line-style': 'dashed',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.tee',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'tee',
+              'color': 'red'
+            }
+          }
+        ],
+        layout: { name: 'concentric' }
+      });
+
+      // Function to add or update an edge
+      function addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape) {
+        // Check if source and target nodes exist
+        if (cy.getElementById(sourceNode).empty()) {
+          alert(`Source node "${sourceNode}" does not exist.`);
+          return;
+        }
+        if (cy.getElementById(targetNode).empty()) {
+          alert(`Target node "${targetNode}" does not exist.`);
+          return;
+        }
+
+        const existingEdge = cy.edges().filter(edge =>
+          (edge.data('source') === sourceNode && edge.data('target') === targetNode) ||
+          (edge.data('source') === targetNode && edge.data('target') === sourceNode)
+        );
+
+        if (existingEdge.length > 0) {
+          existingEdge.data('label', edgeLabel);
+          existingEdge.removeClass('solid dashed').addClass(edgeStyle);
+          existingEdge.removeClass('triangle tee').addClass(arrowShape);
+        } else {
+          cy.add({
+            data: {
+              source: sourceNode,
+              target: targetNode,
+              label: edgeLabel
+            },
+            classes: `${edgeStyle} ${arrowShape}`
+          });
+        }
+      }
+
+      // Event listener for Add/Update Edge button
+      document.getElementById('addEdgeBtn').addEventListener('click', function(){
+        const sourceNode = document.getElementById('sourceNode').value.trim();
+        const targetNode = document.getElementById('targetNode').value.trim();
+        const edgeLabel = document.getElementById('edgeLabel').value.trim();
+        const edgeStyle = document.getElementById('edgeStyle').value;
+        const arrowShape = document.getElementById('arrowShape').value;
+
+        if (sourceNode !== '' && targetNode !== '') {
+          addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape);
+        } else {
+          alert('Please enter source and target node names.');
+        }
+      });
+
+      // Function to delete a node
+      function deleteNode(nodeId) {
+        cy.remove(cy.getElementById(nodeId));
+      }
+
+      // Event listener for Delete Node button
+      document.getElementById('deleteNodeBtn').addEventListener('click', function(){
+        const nodeId = document.getElementById('deleteNode').value.trim();
+        if (nodeId !== '') {
+          deleteNode(nodeId);
+        } else {
+          alert('Please enter a node ID to delete.');
+        }
+      });
+
+      // Function to delete an edge
+      function deleteEdge(sourceNode, targetNode) {
+        const edgesToRemove = cy.edges().filter(edge =>
+          (edge.data('source') === sourceNode && edge.data('target') === targetNode) ||
+          (edge.data('source') === targetNode && edge.data('target') === sourceNode)
+        );
+
+        if (edgesToRemove.length > 0) {
+          cy.remove(edgesToRemove);
+        } else {
+          alert('Edge does not exist between the specified nodes.');
+        }
+      }
+
+      // Event listener for Delete Edge button
+      document.getElementById('deleteEdgeBtn').addEventListener('click', function(){
+        const sourceNode = document.getElementById('deleteSourceNode').value.trim();
+        const targetNode = document.getElementById('deleteTargetNode').value.trim();
+        if (sourceNode !== '' && targetNode !== '') {
+          deleteEdge(sourceNode, targetNode);
+        } else {
+          alert('Please enter source and target node names.');
+        }
+      });
+
+      // Event listener for Layout button
+      document.getElementById('layoutBtn').addEventListener('click', function(){
+        cy.layout({ name: 'concentric' }).run();
+      });
+
+      // Functions to get nodes and edges
+      function getNodes() {
+        return cy.nodes().map(node => {
+          return {
+            id: node.id(),
+            label: node.data('label'),
+            sua7Occupancy: node.data('sua7Occupancy')
+          };
+        });
+      }
+
+      function getEdges() {
+        return cy.edges().map(edge => {
+          return {
+            source: edge.source().id(),
+            target: edge.target().id(),
+            label: edge.data('label'),
+            style: edge.classes()
+          };
+        });
+      }
+
+      // Function to download nodes and edges as JSON file
+      function downloadNodesAndEdges() {
+        const nodes = getNodes();
+        const edges = getEdges();
+        const data = {
+          nodes: nodes,
+          edges: edges
+        };
+        const jsonData = JSON.stringify(data, null, 2);
+
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'nodes_and_edges.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      // Event listener for Download Nodes & Edges button
+      document.getElementById('downloadBtn').addEventListener('click', function(){
+        downloadNodesAndEdges();
+      });
+
+      // Function to show modal with node information
+      function showNodeModal(node) {
+        const modal = document.getElementById('nodeModal');
+        const span = modal.getElementsByClassName('close')[0];
+        const nodeInfo = document.getElementById('nodeInfo');
+
+        nodeInfo.textContent = `${node.data('label')}'s \tSua7 occupancy: ${node.data('sua7Occupancy')}`;
+
+        modal.style.display = 'block';
+
+        span.onclick = function() {
+          modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+
+      // Event listener for node click
+      cy.on('click', 'node', function(event) {
+        const node = event.target;
+        showNodeModal(node);
+      });
+
+      // Function to show modal with edge information
+      function showEdgeModal(edge) {
+        const modal = document.getElementById('edgeModal');
+        const span = modal.getElementsByClassName('close')[0];
+
+        modal.style.display = 'block';
+
+        span.onclick = function() {
+          modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+
+      // Event listener for edge click
+      cy.on('click', 'edge', function(event) {
+        const edge = event.target;
+        showEdgeModal(edge);
+      });
+
+    });
+  </script>
+</body>
+</html>

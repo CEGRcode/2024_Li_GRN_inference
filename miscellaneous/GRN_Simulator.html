@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gene Regulatory Network </title>
+  <style>
+    #cy {
+      position: absolute;
+      top: 2.5%;
+      left: 1%; 
+      width: 63%;
+      height: 89%;
+      display: block;
+      margin-bottom: 10px;
+    }
+    h1 {
+      position: absolute;
+      top: -1.8%;
+      left: 25%;
+      text-align: center;
+      margin-bottom: 200px;
+      font-size: 20px;
+    }
+    .controls {
+      position: absolute;
+      top: 92%;
+      left: 1%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .controls_2 {
+      position: absolute;
+      top: 95.5%;
+      left: 1%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    label, input, select, button {
+      margin-bottom: 5px;
+    }
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 600px;
+      height: 500px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    #cy2 {
+      position: absolute;
+      top: 1.5%;
+      right: 0%; 
+      width: 35%;
+      height: 89%;
+      padding: 10px;
+      border: 0px solid #ddd;
+    }
+    .right_button {
+      display: flex;
+      flex-wrap: wrap;
+      position: absolute;
+      top: 95.5%;
+      left: 80%;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    h2 {
+      position: absolute;
+      top: -2%;
+      left: 75%;
+      text-align: center;
+      margin-bottom: 200px;
+      font-size: 20px;
+    }
+    .container {
+      display: flex;
+      width: 80%;
+      height: 800px;
+      border: 0px solid #ddd;
+      overflow: hidden;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.1/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+  <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+  <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://unpkg.com/cytoscape-cise/cytoscape-cise.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="cy"></div>
+      <h1>Gene Regulatory Network</h1>
+    <div id="cy2"></div>
+      <h2>Fixed-point Attractors</h1>
+  </div>
+
+  <div class="controls">
+    <div>
+      <label for="sourceNode">Source Node:</label>
+      <input type="text" id="sourceNode" placeholder="Enter source node">
+    </div>
+    <div>
+      <label for="targetNode">Target Node:</label>
+      <input type="text" id="targetNode" placeholder="Enter target node">
+    </div>
+    <div>
+      <label for="edgeLabel">Edge Label:</label>
+      <input type="text" id="edgeLabel" placeholder="Enter edge label">
+    </div>
+    <div>
+      <label for="edgeStyle">Edge Style:</label>
+      <select id="edgeStyle">
+        <option value="solid">Solid</option>
+        <option value="dashed">Dashed</option>
+      </select>
+    </div>
+    <div>
+      <label for="arrowShape">Arrow Shape:</label>
+      <select id="arrowShape">
+        <option value="triangle">Triangle</option>
+        <option value="tee">Blunt Arrow</option>
+      </select>
+    </div>
+    <button id="addEdgeBtn">Add/Update Edge</button>
+  </div>
+
+  <div class="controls_2">
+    <div>
+      <label for="deleteNode">Node to Delete:</label>
+      <input type="text" id="deleteNode" placeholder="Enter node ID">
+      <button id="deleteNodeBtn">Delete Node</button>
+    </div>
+    <div>
+      <label for="deleteSourceNode">Source Node:</label>
+      <input type="text" id="deleteSourceNode" placeholder="Enter source node">
+      <label for="deleteTargetNode">Target Node:</label>
+      <input type="text" id="deleteTargetNode" placeholder="Enter target node">
+      <button id="deleteEdgeBtn">Delete Edge</button>
+    </div>
+    <div>
+      <button id="layoutBtn">Re-layout</button>
+    </div>
+    <div>
+      <button id="downloadBtn">Download Nodes & Edges</button>
+    </div>
+  </div>
+  <div class="right_button">
+    <div>
+      <button id="addElementsBtn">Add More Nodes and Edges</button>
+    <div>
+  <div>
+
+
+  <!-- Modal -->
+  <div id="nodeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p id="nodeInfo"></p>
+    </div>
+  </div>
+
+  <!-- Edge Modal for Solid Edges -->
+  <div id="edgeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="" alt="Edge Image" id="edgeImage" style="max-width:100%; max-height:100%;">
+    </div>
+  </div>
+
+  <!-- Edge Modal for Dashed Edges -->
+  <div id="edgeModalDashed" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="" alt="Dashed Edge Image 1" id="edgeImageDashed1" style="max-width:45%; max-height:100%;">
+      <img src="" alt="Dashed Edge Image 2" id="edgeImageDashed2" style="max-width:45%; max-height:100%;">
+    </div>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+
+      const cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: {
+          nodes: [
+            { data: { id: 'a', label: 'Node A', sua7Occupancy: 1, f0: 0 } },
+            { data: { id: 'b', label: 'Node B', sua7Occupancy: 1, f0: 1 } },
+            { data: { id: 'c', label: 'Node C', sua7Occupancy: 1, f0: 0.5 } },
+            { data: { id: 'd', label: 'Node D', sua7Occupancy: 1, f0: 0.2 } },
+            { data: { id: 'e', label: 'Node E', sua7Occupancy: 1, f0:0.8 } }
+          ],
+          edges: []
+        },
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'shape': 'ellipse',
+              'border-width': 1,
+              'background-color': 'mapData(f0, 0, 1, white, black)',
+              'label': 'data(label)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'font-size': '8',
+              'color': function(ele) {
+                        const f0 = ele.data('f0');
+                        return f0 < 0.5 ? 'black' : 'white';
+                      }
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'curve-style': 'bezier',
+              'label': 'data(label)',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.solid',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'line-style': 'solid',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.dashed',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'line-style': 'dashed',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.tee',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'tee',
+              'color': 'red'
+            }
+          }
+        ],
+        userZoomingEnabled: true,
+        wheelSensitivity: 0.1,
+        layout: { name: 'concentric' }
+      });
+
+      //Create clusters for cytoscape
+      var clusters = cy.elements().markovClustering({
+            inflateFactor: 1.5,
+            attributes: [
+                function(edge) {
+                  console.log(edge.data('weight'))
+                    return (edge.data('weight'));
+                }
+            ]
+        });
+      cy.layout({
+          name: 'cise',
+          clusters: clusters.map(cluster => cluster.map(node => node.id())),
+          nodeSeparation: 25
+      }).run();
+
+
+
+      // Function to add or update an edge
+      function addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape) {
+        // Check if source and target nodes exist
+        if (cy.getElementById(sourceNode).empty()) {
+          alert(`Source node "${sourceNode}" does not exist.`);
+          return;
+        }
+        if (cy.getElementById(targetNode).empty()) {
+          alert(`Target node "${targetNode}" does not exist.`);
+          return;
+        }
+
+        const existingEdge = cy.edges().filter(edge =>
+          (edge.data('source') === sourceNode && edge.data('target') === targetNode)
+        );
+
+        if (existingEdge.length > 0) {
+          existingEdge.data('label', edgeLabel);
+          existingEdge.removeClass('solid dashed').addClass(edgeStyle);
+          existingEdge.removeClass('triangle tee').addClass(arrowShape);
+        } else {
+          cy.add({
+            data: {
+              source: sourceNode,
+              target: targetNode,
+              label: edgeLabel
+            },
+            classes: `${edgeStyle} ${arrowShape}`
+          });
+        }
+      }
+
+      // Event listener for Add/Update Edge button
+      document.getElementById('addEdgeBtn').addEventListener('click', function(){
+        const sourceNode = document.getElementById('sourceNode').value.trim();
+        const targetNode = document.getElementById('targetNode').value.trim();
+        const edgeLabel = document.getElementById('edgeLabel').value.trim();
+        const edgeStyle = document.getElementById('edgeStyle').value;
+        const arrowShape = document.getElementById('arrowShape').value;
+
+        if (sourceNode !== '' && targetNode !== '') {
+          addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape);
+        } else {
+          alert('Please enter source and target node names.');
+        }
+      });
+
+      // Function to delete a node
+      function deleteNode(nodeId) {
+        cy.remove(cy.getElementById(nodeId));
+      }
+
+      // Event listener for Delete Node button
+      document.getElementById('deleteNodeBtn').addEventListener('click', function(){
+        const nodeId = document.getElementById('deleteNode').value.trim();
+        if (nodeId !== '') {
+          deleteNode(nodeId);
+        } else {
+          alert('Please enter a node ID to delete.');
+        }
+      });
+
+      // Function to delete an edge
+      function deleteEdge(sourceNode, targetNode) {
+        const edgesToRemove = cy.edges().filter(edge =>
+          (edge.data('source') === sourceNode && edge.data('target') === targetNode) ||
+          (edge.data('source') === targetNode && edge.data('target') === sourceNode)
+        );
+
+        if (edgesToRemove.length > 0) {
+          cy.remove(edgesToRemove);
+        } else {
+          alert('Edge does not exist between the specified nodes.');
+        }
+      }
+
+      // Event listener for Delete Edge button
+      document.getElementById('deleteEdgeBtn').addEventListener('click', function(){
+        const sourceNode = document.getElementById('deleteSourceNode').value.trim();
+        const targetNode = document.getElementById('deleteTargetNode').value.trim();
+        if (sourceNode !== '' && targetNode !== '') {
+          deleteEdge(sourceNode, targetNode);
+        } else {
+          alert('Please enter source and target node names.');
+        }
+      });
+
+      // Event listener for Layout button
+      document.getElementById('layoutBtn').addEventListener('click', function(){
+        //Create clusters for cytoscape
+        var clusters = cy.elements().markovClustering({
+            inflateFactor: 1.5,
+            attributes: [
+                function(edge) {
+                  console.log(edge.data('weight'))
+                    return (edge.data('weight'));
+                }
+            ]
+        });
+        cy.layout({
+            name: 'cise',
+            clusters: clusters.map(cluster => cluster.map(node => node.id())),
+            nodeSeparation: 25
+        }).run();
+      });
+
+      // Functions to get nodes and edges
+      function getNodes() {
+        return cy.nodes().map(node => {
+          return {
+            id: node.id(),
+            label: node.data('label'),
+            sua7Occupancy: node.data('sua7Occupancy'),
+            f0: node.data('f0')
+          };
+        });
+      }
+
+      function getEdges() {
+        return cy.edges().map(edge => {
+          return {
+            source: edge.source().id(),
+            target: edge.target().id(),
+            label: edge.data('label'),
+            style: edge.classes()
+          };
+        });
+      }
+
+      // Function to download nodes and edges as JSON file
+      function downloadNodesAndEdges() {
+        const nodes = getNodes();
+        const edges = getEdges();
+        const data = {
+          nodes: nodes,
+          edges: edges
+        };
+        const jsonData = JSON.stringify(data, null, 2);
+
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'nodes_and_edges.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      // Event listener for Download Nodes & Edges button
+      document.getElementById('downloadBtn').addEventListener('click', function(){
+        downloadNodesAndEdges();
+      });
+
+      // Function to show modal with node information
+      function showNodeModal(node) {
+        const modal = document.getElementById('nodeModal');
+        const span = modal.getElementsByClassName('close')[0];
+        const nodeInfo = document.getElementById('nodeInfo');
+
+        nodeInfo.textContent = `${node.data('label')}'s \tSua7 occupancy: ${node.data('sua7Occupancy')}`;
+
+        modal.style.display = 'block';
+
+        span.onclick = function() {
+          modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+
+      // Event listener for node click
+      cy.on('click', 'node', function(event) {
+        const node = event.target;
+        showNodeModal(node);
+      });
+
+      // Function to show modal with edge information
+      function showEdgeModal(edge) {
+        const modal = document.getElementById('edgeModal');
+        const span = modal.getElementsByClassName('close')[0];
+
+        modal.style.display = 'block';
+
+        span.onclick = function() {
+          modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+
+      // Function to find the closest node
+      function findClosestNode(distances) {
+        return Object.entries(distances).reduce((closest, [node, distance]) => {
+          return distance < closest.distance ? { node, distance } : closest;
+        }, { node: null, distance: Infinity }).node;
+      }
+
+      // Event listener for edge click to show different modals based on edge style
+      cy.on('tap', 'edge', function(event) {
+        const edge = event.target;
+        if (edge.hasClass('dashed')) {
+          document.getElementById('edgeModalDashed').style.display = 'block';
+          document.getElementById('edgeImageDashed1').src = 'test.jpg';
+          document.getElementById('edgeImageDashed2').src = 'test2.jpg';
+        } else {
+          document.getElementById('edgeModal').style.display = 'block';
+          document.getElementById('edgeImage').src = 'test.jpg';
+        }
+      });
+      
+      // Event listener for closing modal
+      document.querySelectorAll('.close').forEach(function(el) {
+        el.addEventListener('click', function(){
+          document.querySelectorAll('.modal').forEach(function(modal) {
+            modal.style.display = 'none';
+          });
+        });
+      });
+
+      // Event listener for edge click
+      cy.on('click', 'edge', function(event) {
+        const edge = event.target;
+        showEdgeModal(edge);
+      });
+
+      // Generate distance plot for mRNA steady states
+      const initialNodes = [
+        { data: { id: 'a', label: 'A' }, classes: "Batch_1" },
+        { data: { id: 'b', label: 'B' }, classes: "Batch_1" },
+        { data: { id: 'c', label: 'C' }, classes: "Batch_1" },
+        { data: { id: 'd', label: 'D' }, classes: "Batch_1" },
+        { data: { id: 'e', label: 'E' }, classes: "Batch_1" },
+        { data: { id: 'f', label: 'F' }, classes: "Batch_1" }
+      ];
+
+      let Distances = {
+        a: { b: 5, c: 10, d: 15, e: 20, f: 25 },
+        b: { a: 5, c: 8, d: 12, e: 18, f: 22 },
+        c: { a: 10, b: 8, d: 7, e: 14, f: 19 },
+        d: { a: 15, b: 12, c: 7, e: 9, f: 11 },
+        e: { a: 20, b: 18, c: 14, d: 9, f: 6 },
+        f: { a: 25, b: 22, c: 19, d: 11, e: 6 }
+      };
+
+      const cy2 = cytoscape({
+        container: document.getElementById('cy2'),
+        elements: {
+          nodes: initialNodes,
+          edges: []
+        },
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'shape': 'ellipse',
+              'border-width': 1,
+              'background-color': 'white',
+              'label': 'data(label)',
+              'color': 'black',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'font-size': '8'
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'curve-style': 'bezier',
+              'target-arrow-shape': 'none',
+              'source-arrow-shape': 'none',
+              'color': 'red'
+            }
+          }
+        ],
+        userZoomingEnabled: true,
+        wheelSensitivity: 0.1,
+        layout: { name: 'preset' }
+      });
+
+      function updateGraphBasedOnNode(nodeId, distances) {
+        const newEdges = [];
+        let positions = {};
+
+        const batch1Nodes = cy2.elements('node.Batch_1');
+        const batch2Nodes = cy2.elements('node.Batch_2');
+
+        const DistancesBatch_1 = {};
+        batch1Nodes.forEach(node => {
+          if (distances.hasOwnProperty(node.id())) {
+            DistancesBatch_1[node.id()] = distances[node.id()];
+          }
+        });
+
+        const DistancesBatch_2 = {};
+        batch2Nodes.forEach(node => {
+          if (distances.hasOwnProperty(node.id())) {
+            DistancesBatch_2[node.id()] = distances[node.id()];
+          }
+        });
+
+        // Get the cloeset Batch_1 nodes
+        let closestRelationship = {}
+        Object.keys(DistancesBatch_2).forEach(nodeId => {
+          let closestNode = findClosestNode(DistancesBatch_2[nodeId]);
+          if (!closestRelationship[closestNode]) {
+            closestRelationship[closestNode] = [];
+          }
+          closestRelationship[findClosestNode(DistancesBatch_2[nodeId])].push(nodeId)
+        });
+
+        // Position the center node
+        positions[nodeId] = { x: cy2.width() / 2, y: cy2.height() / 2 };
+        const angles = {};
+
+        if (batch1Nodes.some(node => node.id() === nodeId)) {
+          const length_1 = nodeId in closestRelationship ? closestRelationship[nodeId].length : 0;
+          const length_2 = batch1Nodes.map(node => node.id()).length - 1;
+
+          // Calculate positions for other nodes if nodeId is from batch 1
+          let angle = 0;
+          const step = (2 * Math.PI) / (length_1+length_2);
+
+          for (let target in DistancesBatch_1[nodeId]) {
+            const distance = DistancesBatch_1[nodeId][target] * 10; // Scale distance for visualization
+            if (batch1Nodes.some(node => node.id() === target)) {
+              positions[String(target)] = {
+                x: positions[nodeId].x + distance * Math.cos(angle),
+                y: positions[nodeId].y + distance * Math.sin(angle)
+              };
+              angles[target] = angle;
+              angle += step;
+            } else if (batch2Nodes.some(node => node.id() === target) && (closestRelationship.hasOwnProperty(nodeId) && Object.values(closestRelationship[nodeId]).includes(target))){
+              positions[String(target)] = {
+                x: positions[nodeId].x + distance * Math.cos(angle),
+                y: positions[nodeId].y + distance * Math.sin(angle)
+              };
+              angles[target] = angle;
+              angle += step;
+            }
+
+            if (batch1Nodes.some(node => node.id() === target)){
+              newEdges.push({
+                data: {
+                  source: nodeId,
+                  target: target
+                },
+                style: {
+                  'line-color': 'black',
+                }
+              });
+            } else if (closestRelationship.hasOwnProperty(nodeId) && Object.values(closestRelationship[nodeId]).includes(target)) {
+              newEdges.push({
+                data: {
+                  source: nodeId,
+                  target: target
+                },
+                style: {
+                  'line-color': 'red',
+                }
+              });
+            }
+          }
+        } else if (batch2Nodes.some(node => node.id() === nodeId)) {
+          // Calculate positions for other nodes if nodeId is from batch 2
+          let angle = 0;
+          const step = (2 * Math.PI) / (batch1Nodes.map(node => node.id()).length);
+
+          for (let target in DistancesBatch_2[nodeId]) {
+            if (!batch2Nodes.some(node => node.id() === target)) {
+              const distance = DistancesBatch_2[nodeId][target] * 10; // Scale distance for visualization
+              positions[target] = {
+                x: positions[nodeId].x + distance * Math.cos(angle),
+                y: positions[nodeId].y + distance * Math.sin(angle)
+              };
+              angles[target] = angle;
+              angle += step;
+              newEdges.push({
+                data: {
+                  source: nodeId,
+                  target: target
+                },
+                style: {
+                  'line-color': 'red',
+                }
+              });
+            }
+          }
+        }
+
+        // Put the Batch_2 nodes to the closest Batch_1 nodes
+        for (let closestNode in closestRelationship) {
+
+          // Get the array of nodes that are closest to this node
+          const denominator = 12+(closestRelationship[closestNode].length-1);
+          let angle = 0;
+          if (Object.values(closestRelationship[closestNode]).includes(nodeId)) {
+            angle = ((2*denominator-2*(closestRelationship[closestNode].length-2)) * Math.PI) / denominator;
+          } else {
+            angle = ((2*denominator-2*(closestRelationship[closestNode].length-1)) * Math.PI) / denominator;
+          }
+
+          const step = (4 * Math.PI) / denominator;
+
+          for (const target of closestRelationship[closestNode]) {
+            const distance = DistancesBatch_2[target][closestNode] * 10; // Scale distance for visualization
+            const exist = closestRelationship.hasOwnProperty(nodeId) && Object.values(closestRelationship[nodeId]).includes(target);
+            if (target !== nodeId && !exist) {
+              positions[target] = {
+                x: positions[closestNode].x + distance * Math.cos((angle + angles[closestNode])),
+                y: positions[closestNode].y + distance * Math.sin(angle + angles[closestNode])
+              };
+              angle += step;
+            }
+            if (String(nodeId)!==String(target) && !exist) {
+              newEdges.push({
+                data: {
+                  source: closestNode,
+                  target: target
+                },
+                style: {
+                  'line-color': 'red',
+                }
+              });
+            }
+          }
+        }
+
+        cy2.elements('edge').remove();
+        cy2.add(newEdges);
+
+        for (let nodes in positions) {
+          cy2.getElementById(nodes).position(positions[nodes]);
+        }
+
+        cy2.layout({ name: 'preset' }).run();
+      }
+
+      // Initial plot for node 'a'
+      updateGraphBasedOnNode(Object.keys(Distances)[0], Distances);
+
+      // Event listener for node clicks
+      cy2.on('tap', 'node', function(event) {
+        const node = event.target;
+        const nodeId_click = node.id();
+        updateGraphBasedOnNode(nodeId_click, Distances);
+      });
+
+      document.getElementById('addElementsBtn').addEventListener('click', function() {
+        // New set of nodes and edges to be added
+        const newNodes = [
+          { data: { id: 'g', label: 'G' }, style: { 'color': 'red', 'width': 20, 'height': 20, 'border-color': 'red' }, classes: 'Batch_2' },
+          { data: { id: 'h', label: 'H' }, style: { 'color': 'red', 'width': 20, 'height': 20, 'border-color': 'red' }, classes: 'Batch_2' },
+          { data: { id: 'i', label: 'I' }, style: { 'color': 'red', 'width': 20, 'height': 20, 'border-color': 'red' }, classes: 'Batch_2' }
+        ];
+
+        const NewDistances = {
+          a: { b: 5, c: 10, d: 15, e: 20, f: 25, g: 22, h: 18, i: 30 },
+          b: { a: 5, c: 8, d: 12, e: 18, f: 22, g:13, h: 21, i: 19 },
+          c: { a: 10, b: 8, d: 7, e: 14, f: 19, g: 14, h: 33, i: 16 },
+          d: { a: 15, b: 12, c: 7, e: 9, f: 11, g:21, h: 9, i: 5 },
+          e: { a: 20, b: 18, c: 14, d: 9, f: 6, g: 22, h: 19, i: 14 },
+          f: { a: 25, b: 22, c: 19, d: 11, e: 6, g: 12, h: 8, i: 11 },
+          g: { a: 2, b: 5, c: 10, d: 15, e: 20, f: 25, h: 14, i: 7 },
+          h: { a: 5, b: 9, c: 8, d: 12, e: 18, f: 22, g: 15, i: 10 },
+          i: { a: 13, b: 9, c: 8, d: 12, e: 18, f: 22, g: 15, h: 10 },
+        };
+
+        cy2.add(newNodes);
+
+        Distances = NewDistances;
+
+      });
+
+    });
+  </script>
+</body>
+</html>

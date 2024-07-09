@@ -200,7 +200,7 @@ def json2ea(json_data):
     edges = [(edge["source"], edge["target"], edge["label"], edge["style"]) for edge in data["edges"]]
 
     # Identify unique node IDs
-    Order_of_genes = ['a', 'b', 'c', 'd', 'e']
+    Order_of_genes = list(nodes.keys())
     num_nodes = len(Order_of_genes)
 
     # Initialize adjacency matrix
@@ -223,7 +223,7 @@ def json2ea(json_data):
 
     # Get the f0
     f0 = []
-    for node in nodes:
+    for node in Order_of_genes:
         f0.append(nodes[node])
     f0 = str(f0)
 
@@ -269,7 +269,8 @@ def json2ea(json_data):
         for each_j in each_i:
             LG_ = LG_ + str(each_j) + ','
     LG_ = LG_[:-1]
-    return AM, f0, LG_
+
+    return AM, f0, LG_, '\t'.join(Order_of_genes)
 
 def ea2json(AM, LG, f0, Order_of_genes, Vmax=''):
     '''Convert EA output to .json'''

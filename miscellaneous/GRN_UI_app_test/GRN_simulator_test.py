@@ -19,7 +19,7 @@ sys_path = os.getcwd()
 
 # Get the input data from the command-line arguments
 input_data = sys.argv[1]
-AM_input, f0_input, LG_input = json2ea(input_data)
+AM_input, f0_input, LG_input, Order_of_genes = json2ea(input_data)
 
 
 ########################################################################### Setting systematic Parameters #############################################################################
@@ -367,4 +367,4 @@ for novel_i in range(0, len(Combined)):
                                                                            np.max(Combined, axis=0))
 Unique_attractor_N = (1 + np.count_nonzero(np.mean(Attractor_Distance_matrix, axis=0) > 1))
 #print('Unique: ', Unique_attractor_N)
-print(Combined)
+print(Combined, '\n', Order_of_genes)

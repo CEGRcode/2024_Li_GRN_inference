@@ -31,6 +31,9 @@
       gap: 10px;
       margin-bottom: 10px;
     }
+    .controls input {
+            width: 105px;
+        }
     .controls_2 {
       position: absolute;
       top: 95.5%;
@@ -40,7 +43,10 @@
       gap: 10px;
       margin-bottom: 10px;
     }
-    label, input, select, button {
+    .controls_2 input {
+            width: 105px;
+        }
+    label, select, button {
       margin-bottom: 5px;
     }
     button {
@@ -155,19 +161,18 @@
     <div id="cy2"></div>
       <h2>Fixed-point Attractors</h1>
   </div>
-
   <div id="fileInputContainer">
       <label for="fileInput" id="fileInputLabel">Load GRN from .json</label>
       <input type="file" id="fileInput" />
   </div>
   <div class="controls">
     <div>
-      <label for="sourceNode">Source Node:</label>
-      <input type="text" id="sourceNode" placeholder="Enter source node">
+      <label for="sourceNode">Regulator:</label>
+      <input type="text" id="sourceNode" placeholder="Enter regulator">
     </div>
     <div>
-      <label for="targetNode">Target Node:</label>
-      <input type="text" id="targetNode" placeholder="Enter target node">
+      <label for="targetNode">Target Gene:</label>
+      <input type="text" id="targetNode" placeholder="Enter target gene">
     </div>
     <div>
       <label for="edgeLabel">Edge Label:</label>
@@ -187,33 +192,34 @@
         <option value="tee">Blunt Arrow</option>
       </select>
     </div>
-    <button id="addEdgeBtn">Add/Update Edge</button>
+      <button id="addEdgeBtn">Add/Update Edge</button>
+      <button id="layoutBtn">Re-layout</button>
   </div>
 
   <div class="controls_2">
     <div>
-      <label for="deleteNode">Node to Delete:</label>
-      <input type="text" id="deleteNode" placeholder="Enter node ID">
-      <button id="deleteNodeBtn">Delete Node</button>
+      <label for="deleteNode">Gene to Delete:</label>
+      <input type="text" id="deleteNode" placeholder="Enter gene">
+      <button id="deleteNodeBtn">Delete Gene</button>
     </div>
     <div>
-      <label for="deleteSourceNode">Source Node:</label>
-      <input type="text" id="deleteSourceNode" placeholder="Enter source node">
-      <label for="deleteTargetNode">Target Node:</label>
-      <input type="text" id="deleteTargetNode" placeholder="Enter target node">
+      <label for="deleteSourceNode">Regulator:</label>
+      <input type="text" id="deleteSourceNode" placeholder="Enter regulator">
+      <label for="deleteTargetNode">Target Gene:</label>
+      <input type="text" id="deleteTargetNode" placeholder="Enter target gene">
       <button id="deleteEdgeBtn">Delete Edge</button>
     </div>
+
     <div>
-      <button id="layoutBtn">Re-layout</button>
-    </div>
-    <div>
-      <button id="downloadBtn">Download Nodes & Edges</button>
+      <button id="saveBtn">Save GRN</button>
+      <button id="returnBtn">Return to saved GRN</button>
+      <button id="downloadBtn">Download GRN</button>
     </div>
   </div>
   <div class="right_button">
     <div>
       <button id="addElementsBtn">Generate/Compare Attractors</button>
-      <button id="downloadAttractorsBtn">Download attractors</button>
+      <button id="downloadAttractorsBtn">Download Attractors</button>
     <div>
   <div>
 
@@ -485,8 +491,29 @@
         });
       }
 
-      // Function to download nodes and edges as JSON file
+      // Function to obtain current time for naming download files
+      function getCurrentDateTimeString() {
+          const now = new Date();
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+          const day = String(now.getDate()).padStart(2, '0');
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          return `${year}${month}${day}_`;
+      }
+
+      // Function to download nodes and edges as JSON and SVG file
       function downloadNodesAndEdges() {
+        // as svg
+        const imgData = cy.png({ output: 'base64' });
+        const link = document.createElement('a');
+        link.href = 'data:image/png;base64,' + imgData;
+        link.download = getCurrentDateTimeString()+'GRN.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // as json
         const nodes = getNodes();
         const edges = getEdges();
         const data = {
@@ -494,13 +521,11 @@
           edges: edges
         };
         const jsonData = JSON.stringify(data, null, 2);
-
         const blob = new Blob([jsonData], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
-
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'GRN.json';
+        a.download = getCurrentDateTimeString()+'GRN.json';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -536,6 +561,32 @@
       cy.on('click', 'node', function(event) {
         const node = event.target;
         showNodeModal(node);
+      });
+
+      let savedNetworkState;
+      // Save the current network state
+      document.getElementById('saveBtn').addEventListener('click', function() {
+          savedNetworkState = cy.json();
+          console.log('Network state saved.');
+      });
+
+      // Function to return node label's color dynamically
+      function getNodeLabelColor(ele) {
+          const f0 = ele.data('f0');
+          return f0 < 0.5 ? 'black' : 'white';
+      }
+
+      // Return to the saved network state
+      document.getElementById('returnBtn').addEventListener('click', function() {
+          if (savedNetworkState) {
+              cy.json(savedNetworkState);
+              cy.nodes().forEach(node => {
+                node.style('color', getNodeLabelColor(node));
+              });
+              console.log('Returned to saved network state.');
+          } else {
+              console.log('No saved network state to return to.');
+          }
       });
 
       // Function to show modal with edge information
@@ -993,8 +1044,17 @@
       return myList;
     }
 
-    // Function to download the attractors
+    // Function to download the attractors as tsv and png
     function downloadAttractorsAsFile() {
+      // as png
+      const imgData = cy2.png({ output: 'base64' });
+      const link1 = document.createElement('a');
+      link1.href = 'data:image/png;base64,' + imgData;
+      link1.download = getCurrentDateTimeString()+'_attractors.png';
+      document.body.appendChild(link1);
+      link1.click();
+      document.body.removeChild(link1);
+      // as tsv
       const indexed_mRNAProfiles = renameRows(mRNAProfiles, length_of_As);
       let dataAsText = '\t' + Order_of_genes + '\n';
       indexed_mRNAProfiles.forEach(item => {
@@ -1004,7 +1064,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'GRN_attractors.tsv'; // Specify the filename for download
+      link.download = getCurrentDateTimeString()+'_attractors.tsv'; // Specify the filename for download
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

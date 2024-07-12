@@ -14,6 +14,31 @@
       display: block;
       margin-bottom: 10px;
     }
+    #layoutBtn {
+      position: absolute;
+      top: 92%; 
+      right: 38%; 
+    }
+    #downloadBtn {
+      position: absolute;
+      top: 96.3%;
+      right: 37%;
+    }
+    .save-return {
+      position: absolute;
+      top: 96.3%;
+      right: 43.5%;
+      background-color: rgba(221, 221, 221, 0.95);
+    }
+    .controls_3 {
+      position: absolute;
+      top: 96.3%;
+      right: 56.5%;
+      background-color: rgba(221, 221, 221, 0.95);
+    }
+    .controls_3 input {
+      width: 105px;
+    }
     h1 {
       position: absolute;
       top: 0%;
@@ -23,25 +48,28 @@
       font-size: 20px;
     }
     .controls {
+      border: 0px, black;
       position: absolute;
       top: 92%;
       left: 1%;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 3px;
+      margin-bottom: 1px;
+      background-color: rgba(221, 221, 221, 0.95);
     }
     .controls input {
-            width: 105px;
-        }
+      width: 105px;
+    }
     .controls_2 {
       position: absolute;
-      top: 95.5%;
+      top: 96.3%;
       left: 1%;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 3px;
+      margin-bottom: 1px;
+      background-color: rgba(221, 221, 221, 0.95);
     }
     .controls_2 input {
             width: 105px;
@@ -100,7 +128,7 @@
       display: flex;
       flex-wrap: wrap;
       position: absolute;
-      top: 95.5%;
+      top: 95%;
       left: 75%;
       gap: 50px;
       margin-bottom: 10px;
@@ -181,19 +209,24 @@
     <div>
       <label for="edgeStyle">Edge Style:</label>
       <select id="edgeStyle">
-        <option value="solid">Solid</option>
-        <option value="dashed">Dashed</option>
+        <option value="solid">Independent</option>
+        <option value="dashed">Synergistic</option>
       </select>
     </div>
     <div>
       <label for="arrowShape">Arrow Shape:</label>
       <select id="arrowShape">
-        <option value="triangle">Triangle</option>
-        <option value="tee">Blunt Arrow</option>
+        <option value="triangle">Activation</option>
+        <option value="tee">Inhibition</option>
       </select>
     </div>
       <button id="addEdgeBtn">Add/Update Edge</button>
-      <button id="layoutBtn">Re-layout</button>
+  </div>
+  <button id="layoutBtn">Re-layout</button>
+  <button id="downloadBtn">Download GRN</button>
+  <div class="save-return">
+    <button id="saveBtn">Save GRN</button>
+    <button id="returnBtn">Return to saved GRN</button>
   </div>
 
   <div class="controls_2">
@@ -202,20 +235,15 @@
       <input type="text" id="deleteNode" placeholder="Enter gene">
       <button id="deleteNodeBtn">Delete Gene</button>
     </div>
-    <div>
-      <label for="deleteSourceNode">Regulator:</label>
-      <input type="text" id="deleteSourceNode" placeholder="Enter regulator">
-      <label for="deleteTargetNode">Target Gene:</label>
-      <input type="text" id="deleteTargetNode" placeholder="Enter target gene">
-      <button id="deleteEdgeBtn">Delete Edge</button>
-    </div>
-
-    <div>
-      <button id="saveBtn">Save GRN</button>
-      <button id="returnBtn">Return to saved GRN</button>
-      <button id="downloadBtn">Download GRN</button>
-    </div>
   </div>
+  <div class="controls_3">
+    <label for="deleteSourceNode">Regulator:</label>
+    <input type="text" id="deleteSourceNode" placeholder="Enter regulator">
+    <label for="deleteTargetNode">Target Gene:</label>
+    <input type="text" id="deleteTargetNode" placeholder="Enter target gene">
+    <button id="deleteEdgeBtn">Delete Edge</button>
+  </div>
+
   <div class="right_button">
     <div>
       <button id="addElementsBtn">Generate/Compare Attractors</button>
@@ -362,11 +390,11 @@
       function addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape) {
         // Check if source and target nodes exist
         if (cy.getElementById(sourceNode).empty()) {
-          alert(`Source node "${sourceNode}" does not exist.`);
+          alert(`Regulator "${sourceNode}" does not exist.`);
           return;
         }
         if (cy.getElementById(targetNode).empty()) {
-          alert(`Target node "${targetNode}" does not exist.`);
+          alert(`Target gene "${targetNode}" does not exist.`);
           return;
         }
 
@@ -972,52 +1000,79 @@
         let Json_data_str = JSON.stringify(JS_data, null, 2);
         let newNodes = null;
         let NewDistances = null;
-        document.getElementById('addElementsBtn').textContent = 'Calculating Attractors...';
+        let All_progress = 0;
+        let counter = 0;
+        let percentage_progress = 0;
+        document.getElementById('addElementsBtn').textContent = 'Calculating Attractors... 0%';
 
-        fetch('/run_python', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ input_data: Json_data_str })
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Assign data.output to the global variable
-                Order_of_genes = data.output.split('\n')[1];
-                globalPyOutput = JSON.parse(data.output.split('\n')[0]);
-                if (mRNAProfiles.length === 0) {
-                  length_of_As = 0;
-                  mRNAProfiles = globalPyOutput;
-                  [NewDistances, newNodes] = calculateDistances(mRNAProfiles, 'A', Previous_Order_of_genes, Order_of_genes); 
+        // Use Fetch API to send the input value to the server
+        fetch('/set-input', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ 'input_value': Json_data_str })
+        }).then(response => {
+            if (response.ok) {
+              const eventSource = new EventSource('/stream-data');
+
+              eventSource.onmessage = function(event) {
+                if (event.data.split('\t')[0] == 'All') {
+                  All_progress = 2*parseInt(event.data.split('\t')[1], 10);
+                } else if (event.data.split('\t')[0] == 'Final') {
+                  // Assign data.output to the global variable
+                  Order_of_genes = event.data.split('\t')[2];
+                  globalPyOutput = JSON.parse(event.data.split('\t')[1]);
+                  if (mRNAProfiles.length === 0) {
+                    length_of_As = 0;
+                    mRNAProfiles = globalPyOutput;
+                    [NewDistances, newNodes] = calculateDistances(mRNAProfiles, 'A', Previous_Order_of_genes, Order_of_genes); 
+                  } else {
+                    // remove the A1, A2, .. from the mRNA profiles
+                    if (length_of_As > 0) {
+                      mRNAProfiles.splice(0, length_of_As);
+                    }
+                    length_of_As = mRNAProfiles.length;
+                    mRNAProfiles = mRNAProfiles.concat(globalPyOutput);
+                    [NewDistances, newNodes] = calculateDistances(mRNAProfiles, 'B', Previous_Order_of_genes, Order_of_genes, length_of_As);
+                  }
+                  Previous_Order_of_genes = JSON.parse(JSON.stringify(Order_of_genes));
+
+                  // Add new nodes to cy2
+                  cy2.elements('node').remove();
+                  cy2.add(newNodes);
+                  Distances = NewDistances;
+                  // Find the maximum value
+                  let allValues = Object.values(Distances).flatMap(obj => Object.values(obj));
+                  let maxDistance = Math.max(...allValues);
+                  // Divide all elements by the maximum value
+                  for (let key in Distances) {
+                    for (let subKey in Distances[key]) {
+                      Distances[key][subKey] /= (maxDistance/25);
+                    }
+                  }
+                  updateGraphBasedOnNode(Object.keys(Distances)[0], Distances);
+                  document.getElementById('addElementsBtn').textContent = 'Generate/Compare Attractors';
+
+
+                  eventSource.close();
                 } else {
-                  // remove the A1, A2, .. from the mRNA profiles
-                  if (length_of_As > 0) {
-                    mRNAProfiles.splice(0, length_of_As);
-                  }
-                  length_of_As = mRNAProfiles.length;
-                  mRNAProfiles = mRNAProfiles.concat(globalPyOutput);
-                  [NewDistances, newNodes] = calculateDistances(mRNAProfiles, 'B', Previous_Order_of_genes, Order_of_genes, length_of_As);
+                  document.getElementById('addElementsBtn').textContent = 'Calculating Attractors... '+((100*counter/All_progress).toFixed(0)).toString()+'%';
+                  counter = counter + 1;
                 }
-                Previous_Order_of_genes = JSON.parse(JSON.stringify(Order_of_genes));
-
-                // Add new nodes to cy2
-                cy2.elements('node').remove();
-                cy2.add(newNodes);
-                Distances = NewDistances;
-                // Find the maximum value
-                let allValues = Object.values(Distances).flatMap(obj => Object.values(obj));
-                let maxDistance = Math.max(...allValues);
-                // Divide all elements by the maximum value
-                for (let key in Distances) {
-                  for (let subKey in Distances[key]) {
-                    Distances[key][subKey] /= (maxDistance/25);
-                  }
-                }
-                updateGraphBasedOnNode(Object.keys(Distances)[0], Distances);
-                document.getElementById('addElementsBtn').textContent = 'Generate/Compare Attractors';
-            })
-            .catch(error => console.error('Error:', error));
+                
+              };
+              eventSource.onerror = function(event) {
+                  console.error('SSE error:', event);
+                  eventSource.close();
+              };
+            } else {
+                console.error('Failed to set input value');
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+        
       });
 
     // Function to rename the rows

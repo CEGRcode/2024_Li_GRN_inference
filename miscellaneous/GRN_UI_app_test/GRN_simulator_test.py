@@ -219,7 +219,8 @@ WTTP = [[[],[]] for size in range(0, len(mRNASearchSpaceList))]
 for SSL_i in range(0, len(mRNASearchSpaceList)):
     WTTP[SSL_i][0] = [] # KO or Overexpression
     WTTP[SSL_i][1] = mRNASearchSpaceList[SSL_i]
-#print('len(mRNASearchSpaceList)= ', len(mRNASearchSpaceList))
+print('All\t'+str(len(mRNASearchSpaceList)))
+sys.stdout.flush()  # Ensure the output is flushed immediately
 #######################################################################################################################################################################################
 
 ############################################################################ Test example #######################################################################################################
@@ -332,7 +333,8 @@ for Global_i in range(0, len(WTTP)):
             pass
         else:
             raise Exception('Error 007!')
-        #print(Global_i)
+        print(str(Global_i))
+        sys.stdout.flush()  # Ensure the output is flushed immediately
         ########################################################################################################################################################################################
         #x = range(0, Total_Time_Span)
         #colormap = ['red', 'blue', 'green', 'orange', 'black', 'yellow', 'purple', 'gold', 'silver']
@@ -367,4 +369,5 @@ for novel_i in range(0, len(Combined)):
                                                                            np.max(Combined, axis=0))
 Unique_attractor_N = (1 + np.count_nonzero(np.mean(Attractor_Distance_matrix, axis=0) > 1))
 #print('Unique: ', Unique_attractor_N)
-print(Combined, '\n', Order_of_genes)
+print('Final\t', Combined, '\t', Order_of_genes)
+sys.stdout.flush()  # Ensure the output is flushed immediately

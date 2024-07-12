@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, Response, request
 import subprocess
 import sys
 import os
@@ -16,28 +16,38 @@ from utility_functions import *
 from population_functions import *
 from GRN_Expanded_Combinatorial import GRN
 from Combine_Redundant_Attractors import *
+from flask_sslify import SSLify
 
-app = Flask(__name__, static_folder='/home/ubuntu/GRN_UI_app_test/public')
+app = Flask(__name__)
+sslify = SSLify(app)
+input_value = None  # Store the input value globally
 
 @app.route('/')
 def index():
     return render_template('GRN_Simulator_test.html')
 
-@app.route('/run_python', methods=['POST'])
-def run_python():
-    input_data = request.json.get('input_data')
-    
-    # Path to the Python executable
-    python_script = 'GRN_simulator_test.py'  # Change this to the path of your script
-    
-    try:
-        # Pass input_data as an argument to the Python script
-        result = subprocess.run(['python', python_script, input_data], capture_output=True, text=True, check=True)
-        output = result.stdout
-    except subprocess.CalledProcessError as e:
-        output = f"An error occurred: {e.output}"
-    
-    return jsonify({'output': output})
+@app.route('/set-input', methods=['POST'])
+def set_input():
+    global input_value
+    input_value = request.form['input_value']
+    return '', 204  # No Content
+
+@app.route('/stream-data')
+def stream_data():
+    global input_value
+
+    def generate():
+        with subprocess.Popen(['python', 'GRN_simulator_test.py', input_value], stdout=subprocess.PIPE, text=True) as process:
+            for line in process.stdout:
+                if line.strip() == 'Process completed.':
+                    yield f"data: {line}\n\n"  # Signal completion
+                    break
+                yield f"data: {line}\n\n"
+            process.stdout.close()
+            process.wait()
+        yield "data: Attractor calculation completed.\n\n"  # Signal completion
+
+    return Response(generate(), mimetype='text/event-stream')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

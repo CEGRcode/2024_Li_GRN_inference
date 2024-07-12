@@ -1,5 +1,6 @@
 import numpy as np
 from distance_functions import *
+import sys
 
 def to_combine(_matrix, AttractorDistance_Threshold, Identical_Expression_Threshold):
     '''Determine if a set of transcriptional profiles have two whose attractor distance is below threshold.'''
@@ -56,7 +57,8 @@ def Combine_Redundant_Attractors(file_or_matrix=0, Matrix=[], Path_input='', Att
 
     while True:
         _end, i, j = to_combine(TranscriptionPofiles, AttractorDistance_Threshold, Identical_Expression_Threshold)
-        #print(len(TranscriptionPofiles))
+        print(str(len(TranscriptionPofiles)))
+        sys.stdout.flush() 
         if _end:
             break
         else:

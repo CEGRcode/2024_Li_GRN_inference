@@ -5,6 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gene Regulatory Network </title>
   <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 800px;
+      height: 300px;
+      position: absolute;
+      top: 0%;
+      left: 10%;
+    }
+    .close {
+      color: #aaa;
+      position: absolute;
+      top: -7px;
+      left: 0px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
     #cy {
       position: absolute;
       top: 2.5%;
@@ -14,26 +51,98 @@
       display: block;
       margin-bottom: 10px;
     }
-    #layoutBtn {
+    #legend {
+        width: 18%;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 2%;
+        margin-left: 0%;
+    }
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .legend-line {
+        width: 50px;
+        height: 2px;
+        margin-right: 10px;
+        position: relative;
+        background-color: #000000;
+    }
+    .legend-dashed {
+        border-top: 2px dashed #000000;
+        background-color: transparent;
+    }
+    .legend-solid {
+        background-color: #000000;
+    }
+    .legend-triangle {
+        background-color: #000000;
+        position: relative;
+    }
+    .legend-triangle::after {
+        content: '';
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid #000000;
+        transform: rotate(90deg);
+    }
+    .legend-tee::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -5px;
+        width: 10px;
+        height: 2px;
+        background-color: #000000;
+        transform: rotate(90deg);
+    }
+    .scale-bar {
+        width: 15%;
+        height: 20px;
+        background: linear-gradient(to right, white, black);
+        border: 1px solid #000;
+        box-sizing: border-box;
+        margin-top: 0px;
+        margin-right: 5px;
+    }
+    .scale-bar-labels {
+        display: flex;
+        justify-content: space-between;
+        width: 15%;
+        font-size: 12px;
+        color: #000;
+        margin-top: 1px;
+    }
+    .layoutBtn {
       position: absolute;
-      top: 92%; 
-      right: 38%; 
+      top: 96.3%; 
+      left: 58%; 
+      gap: 3px;
+      margin-bottom: 1px;
+      background-color: rgba(221, 221, 221, 0.95);
     }
     #downloadBtn {
       position: absolute;
-      top: 96.3%;
-      right: 37%;
+      top: 92%;
+      left: 57.5%;
     }
     .save-return {
       position: absolute;
       top: 96.3%;
-      right: 43.5%;
+      left: 44.7%;
       background-color: rgba(221, 221, 221, 0.95);
     }
     .controls_3 {
       position: absolute;
       top: 96.3%;
-      right: 56.5%;
+      left: 18.5%;
       background-color: rgba(221, 221, 221, 0.95);
     }
     .controls_3 input {
@@ -79,40 +188,6 @@
     }
     button {
       padding: 5px 10px;
-      cursor: pointer;
-    }
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-      padding-top: 60px;
-    }
-    .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 600px;
-      height: 500px;
-    }
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
       cursor: pointer;
     }
     #cy2 {
@@ -174,20 +249,102 @@
       border: 0px solid #ddd;
       overflow: hidden;
     }
+    .legend-2 {
+      position: absolute;
+      top: 1.5%;
+      right: 17%;
+      width: 18%;
+      display: inline-block;
+      vertical-align: top;
+    }
+    .legend-item2 {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .legend-node-black {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border: 2px solid #000;
+        border-radius: 50%;
+    }
+
+    .legend-node-red {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border: 2px solid #f00;
+        background-color: transparent;
+        border-radius: 50%;
+    }
+    .legend-edge {
+        width: 50px;
+        height: 2px;
+        margin-right: 10px;
+        background-color: #000000;
+    }
+
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.1/cytoscape.min.js"></script>
-  <script src="https://unpkg.com/layout-base/layout-base.js"></script>
-  <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
-  <script src="https://unpkg.com/cose-base/cose-base.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="https://unpkg.com/cytoscape-cise/cytoscape-cise.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.9.4/dist/igv.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/igv@2.9.4/dist/igv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.1/cytoscape.min.js"></script>
+    <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+    <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+    <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://unpkg.com/cytoscape-cise/cytoscape-cise.js"></script>
 </head>
 <body>
   <div class="container">
     <div id="cy"></div>
+    <div id="legend">
+      <div class="legend-item">
+        <div class="legend-line legend-solid legend-triangle"></div>
+        <span>Independent activation</span>
+      </div>
+      <div class="legend-item">
+          <div class="legend-line legend-dashed">
+              <div class="legend-triangle"></div>
+          </div>
+          <span>Synergistic activation</span>
+      </div>
+        <div class="legend-item">
+            <div class="legend-line legend-solid legend-tee"></div>
+            <span>Independent inhibition</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-line legend-dashed legend-tee"></div>
+            <span>Synergistic inhibition</span>
+        </div>
+        <div class="legend-item">
+          <div class="scale-bar"></div>
+          <span>Constitutive expression</span>
+        </div>
+        <div class="scale-bar-labels">
+          <span>0</span>
+          <span>1</span>
+        </div>
+    </div>
       <h1>Gene Regulatory Network</h1>
-    <div id="cy2"></div>
-      <h2>Fixed-point Attractors</h1>
+    </div>
+    <div class="container">
+      <div id="cy2"></div>
+      <div id="legend-cy2" class="legend-2">
+          <div class="legend-item2">
+              <div class="legend-node-black"></div>
+              <span>Attractors of last GRN</span>
+          </div>
+          <div class="legend-item2">
+              <div class="legend-node-red"></div>
+              <span>Attractors of current GRN</span>
+          </div>
+          <div class="legend-item2">
+              <div class="legend-edge"></div>
+              <span>Distances</span>
+          </div>
+      </div>
+      <h2>Fixed-point Attractors</h2>
   </div>
   <div id="fileInputContainer">
       <label for="fileInput" id="fileInputLabel">Load GRN from .json</label>
@@ -222,7 +379,18 @@
     </div>
       <button id="addEdgeBtn">Add/Update Edge</button>
   </div>
-  <button id="layoutBtn">Re-layout</button>
+
+  <div class="layoutBtn">
+    <label for="layoutMethod">Approach:</label>
+    <select id="layoutMethod">
+      <option value="CiSE">CiSE</option>
+      <option value="Concentric">Concentric</option>
+      <option value="Circle">Circle</option>
+    </select>
+    <button id="layoutBtn">Re-layout</button>
+  </div>
+  
+
   <button id="downloadBtn">Download GRN</button>
   <div class="save-return">
     <button id="saveBtn">Save GRN</button>
@@ -263,7 +431,7 @@
   <div id="edgeModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <img src="" alt="Edge Image" id="edgeImage" style="max-width:100%; max-height:100%;">
+      <div id="igv-container" style="width: 100%; height: 400px;"></div>
     </div>
   </div>
 
@@ -271,8 +439,7 @@
   <div id="edgeModalDashed" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <img src="" alt="Dashed Edge Image 1" id="edgeImageDashed1" style="max-width:45%; max-height:100%;">
-      <img src="" alt="Dashed Edge Image 2" id="edgeImageDashed2" style="max-width:45%; max-height:100%;">
+      <div id="igv-container" style="width: 100%; height: 400px;"></div>
     </div>
   </div>
 
@@ -386,6 +553,8 @@
           nodeSeparation: 25
       }).run();
 
+      cy.layout({ name: 'concentric' }).run();
+
       // Function to add or update an edge
       function addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape) {
         // Check if source and target nodes exist
@@ -479,22 +648,32 @@
 
       // Event listener for Layout button
       document.getElementById('layoutBtn').addEventListener('click', function(){
+        let layoutMethod = document.getElementById('layoutMethod').value;
+        if (layoutMethod == 'CiSE') {
         //Create clusters for cytoscape
-        var clusters = cy.elements().markovClustering({
-            inflateFactor: 1.5,
-            attributes: [
-                function(edge) {
-                  console.log(edge.data('weight'))
-                    return (edge.data('weight'));
-                }
-            ]
-        });
-        cy.layout({
-            name: 'cise',
-            clusters: clusters.map(cluster => cluster.map(node => node.id())),
-            nodeSeparation: 25
-        }).run();
+          var clusters = cy.elements().markovClustering({
+              inflateFactor: 1.5,
+              attributes: [
+                  function(edge) {
+                    console.log(edge.data('weight'))
+                      return (edge.data('weight'));
+                  }
+              ]
+          });
+          cy.layout({
+              name: 'cise',
+              clusters: clusters.map(cluster => cluster.map(node => node.id())),
+              nodeSeparation: 25
+          }).run();
+        } else if (layoutMethod == 'Concentric') {
+          cy.layout({ name: 'concentric' }).run();
+        } else if (layoutMethod == 'Circle') {
+          cy.layout({ name: 'circle' }).run();
+        } else {
+          alert('Undefined layout approach.');
+        }
       });
+      
 
       // Functions to get nodes and edges
       function getNodes() {
@@ -644,34 +823,42 @@
 
       // Function to calculate Euclidean distance between two arrays
       function euclideanDistance(arr1, arr2, PreO, O) {
-        O = O.slice(1);
-        if (PreO == '') {
-          PreO = []
-        } else {
-          PreO = PreO.split('\t');
-        }
-        O = O.split('\t');
-        KO_indexes = PreO.map((element, index) => O.includes(element) ? -1 : index).filter(index => index !== -1);
-        // Sort the index array in descending order
-        KO_indexes.sort((a, b) => b - a);
-        if (arr1.length > arr2.length) {
-          // Remove elements at each index
-          KO_indexes.forEach(i => {
-            arr1.splice(i, 1);
-          });
-        } else if (arr1.length < arr2.length) {
-         // Remove elements at each index
-         KO_indexes.forEach(i => {
-            arr2.splice(i, 1);
-          });
-        }
-        let sum = 0;
-        for (let i = 0; i < arr1.length; i++) {
-            sum += Math.pow(arr1[i] - arr2[i], 2);
-        }
-        return Math.sqrt(sum);
-      }
+          // Make copies of O and PreO to avoid mutation
+          let modifiedO = O.slice(1).split('\t');
+          let modifiedPreO = PreO;
+          if (modifiedPreO !== '') {
+              // Split modifiedPreO by tabs
+              modifiedPreO = modifiedPreO.trimStart();
+              modifiedPreO = modifiedPreO.split('\t');
+          } else {
+              modifiedPreO = [];
+          }
+          console.log('modifiedPreO', modifiedPreO);
+          console.log('modifiedO', modifiedO);
+          // Create a copy of arr1 and arr2 to avoid mutation
+          let copyArr1 = arr1.slice();
+          let copyArr2 = arr2.slice();
 
+          let KO_indexes = modifiedPreO.map((element, index) => modifiedO.indexOf(element) === -1 ? index : -1).filter(index => index !== -1);
+          console.log('before sorting KO_indexes: ', KO_indexes);
+          // Sort the index array in descending order
+          KO_indexes.sort((a, b) => b - a);
+          console.log('KO_indexes: ', KO_indexes);
+          if (copyArr1.length > copyArr2.length) {
+              // Create a new array with elements removed based on KO_indexes
+              copyArr1 = copyArr1.filter((_, index) => !KO_indexes.includes(index));
+          } else if (copyArr1.length < copyArr2.length) {
+              // Create a new array with elements removed based on KO_indexes
+              copyArr2 = copyArr2.filter((_, index) => !KO_indexes.includes(index));
+          }
+          console.log(copyArr1, copyArr2);
+          let sum = 0;
+          for (let i = 0; i < copyArr1.length; i++) {
+              sum += Math.pow(copyArr1[i] - copyArr2[i], 2);
+          }
+          return Math.sqrt(sum);
+      }
+      
       // Function to calculate distances and construct the dictionary
       function calculateDistances(list, Batch, PreOrder, Order, length_A) {
           let nodes = [];
@@ -726,16 +913,116 @@
           return [distances, nodes];
       }
 
+      // Function to generate IGV browser for an edge
+      async function makeIGV(source, target) {
+            return new Promise((resolve, reject) => {
+                try {
+                    let igvContainer = document.getElementById('igv-container');
+                    igvContainer.style.width = '800px';
+                    igvContainer.style.height = '600px';
+                    igvContainer.style.position = 'absolute';
+                    igvContainer.style.top = '0px';
+                    igvContainer.style.left = '10px';
+                    const options = {
+                        genome: 'sacCer3',  // Replace with your genome assembly
+                        tracks: [
+                            {
+                                name: 'Example BigWig Track',
+                                type: 'wig',
+                                format: 'bigwig',
+                                //url: '/static/data/unzipped/'+source.toUpperCase()+'_reverse.bigwig',  // Path to your BigWig file
+                                url: '/static/data/unzipped/NRG2_reverse.bigwig',
+                                indexed: false,  // Set to true if your BigWig file is indexed
+                                height: 100,
+                                autoHeight: true
+                            }
+                        ]
+                    };
+
+                    igv.createBrowser(igvContainer, options)
+                        .then(function (browser) {
+                            // Search for target gene to get its coordinates
+                            browser.search('CBF1').then(() => {
+                                // Obtain the current locus
+                                const currentLocus = browser.referenceFrameList;
+                                const chr = currentLocus[0]['chr'];
+                                let start = currentLocus[0]['initialStart'];
+                                let end = currentLocus[0]['initialEnd'];
+
+                                // Adjust start position by 1000 base pairs upstream
+                                start = Math.max(start - 1000, 0);
+
+                                // Set the new locus string with extended region
+                                const newLocus = `${chr}:${start}-${end}`;
+                                browser.search(newLocus).then(() => {
+                                    console.log(`Navigated to ${newLocus}`);
+                                }).catch((error) => {
+                                    console.error('Error navigating to the new locus:', error);
+                                });
+                            }).catch((error) => {
+                                console.error('Error navigating to CBF1:', error);
+                            });
+                        })
+                        .catch(function (error) {
+                            console.error('Error creating IGV.js browser', error);
+                        });
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+
+        // Function to handle the files for Composite plot
+        async function makeComposite(source, target) {
+        }
+
+        // Function to handle the files for Composite plot
+        async function unzipAndProcess(source, target) {
+            try {
+                // Unzip the file
+                const unzipResponse = await fetch('/unzip', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ filename: 'Archive.zip' })
+                });
+                const unzipData = await unzipResponse.json();
+                if (unzipData.success) {
+                    await makeComposite(source, target);
+                } else {
+                    alert('Error unzipping file: ' + unzipData.error);
+                    return;
+                }
+
+                // Delete the files after processing
+                const deleteResponse = await fetch('/delete', {
+                    method: 'POST',
+                });
+                const deleteData = await deleteResponse.json();
+                if (deleteData.success) {
+                } else {
+                    alert('Error deleting files: ' + deleteData.error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error during the unzip and process sequence');
+            }
+        }
+      const modal = document.getElementById('edgeModal');
+      const closeButton = document.querySelector('.close');
       // Event listener for edge click to show different modals based on edge style
       cy.on('tap', 'edge', function(event) {
         const edge = event.target;
+        const sourceNodeforIGV = edge._private.data.source;
+        const targetNodeforIGV = edge._private.data.target;
+        const labelforIGV = edge._private.data.label;
         if (edge.hasClass('dashed')) {
           document.getElementById('edgeModalDashed').style.display = 'block';
-          document.getElementById('edgeImageDashed1').src = "{{ url_for('static', filename='images/test.jpg') }}";
-          document.getElementById('edgeImageDashed2').src = "{{ url_for('static', filename='images/test2.jpg') }}";
+          makeIGV(sourceNodeforIGV, targetNodeforIGV);
         } else {
           document.getElementById('edgeModal').style.display = 'block';
-          document.getElementById('edgeImage').src = "{{ url_for('static', filename='images/test.jpg') }}";
+          makeIGV(sourceNodeforIGV, targetNodeforIGV);
         }
       });
 
@@ -749,6 +1036,7 @@
       document.querySelectorAll('.close').forEach(function(el) {
         el.addEventListener('click', function(){
           document.querySelectorAll('.modal').forEach(function(modal) {
+            igv.removeAllBrowsers();
             modal.style.display = 'none';
           });
         });
@@ -1019,10 +1307,11 @@
               eventSource.onmessage = function(event) {
                 if (event.data.split('\t')[0] == 'All') {
                   All_progress = 2*parseInt(event.data.split('\t')[1], 10);
-                } else if (event.data.split('\t')[0] == 'Final') {
+                } else if (event.data.split('|')[0] == 'Final') {
                   // Assign data.output to the global variable
-                  Order_of_genes = event.data.split('\t')[2];
-                  globalPyOutput = JSON.parse(event.data.split('\t')[1]);
+                  Order_of_genes = (event.data.split('|')).slice(-(event.data.split('|').length-2))[0];
+                  globalPyOutput = JSON.parse(event.data.split('|')[1]);
+                  //console.log(globalPyOutput);
                   if (mRNAProfiles.length === 0) {
                     length_of_As = 0;
                     mRNAProfiles = globalPyOutput;
@@ -1042,6 +1331,7 @@
                   cy2.elements('node').remove();
                   cy2.add(newNodes);
                   Distances = NewDistances;
+                  console.log(NewDistances);
                   // Find the maximum value
                   let allValues = Object.values(Distances).flatMap(obj => Object.values(obj));
                   let maxDistance = Math.max(...allValues);
@@ -1105,7 +1395,7 @@
       const imgData = cy2.png({ output: 'base64' });
       const link1 = document.createElement('a');
       link1.href = 'data:image/png;base64,' + imgData;
-      link1.download = getCurrentDateTimeString()+'_attractors.png';
+      link1.download = getCurrentDateTimeString()+'attractors.png';
       document.body.appendChild(link1);
       link1.click();
       document.body.removeChild(link1);
@@ -1119,7 +1409,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = getCurrentDateTimeString()+'_attractors.tsv'; // Specify the filename for download
+      link.download = getCurrentDateTimeString()+'attractors.tsv'; // Specify the filename for download
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

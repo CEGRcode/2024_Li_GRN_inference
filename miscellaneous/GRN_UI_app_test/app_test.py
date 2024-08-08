@@ -89,4 +89,4 @@ if __name__ == '__main__':
     data = [1, 2, 3, 4, 5]
     result = run_computation_on_vm(data)
     print(f"Computation result: {result}")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    #app.run(host='0.0.0.0', port=5000, debug=True)

@@ -1,0 +1,384 @@
+Bye1	Pre-Initiation complex
+Rad3	Pre-Initiation complex
+Ssl2	Pre-Initiation complex
+Sua7	Pre-Initiation complex
+Tfa1	Pre-Initiation complex
+Tfa2	Pre-Initiation complex
+Tfb4	Pre-Initiation complex
+Tfg1	Pre-Initiation complex
+Ino2	Pre-Initiation complex
+Ino4	Pre-Initiation complex
+Matalpha2	Pre-Initiation complex
+Dat1	Not clustered
+Ifh1	Not clustered
+Rtr1	Not clustered
+Acs2	Not clustered
+Cca1	Not clustered
+Chd1	Not clustered
+Cka1	Not clustered
+Dst1	Not clustered
+Fun30	Not clustered
+Hst1	Not clustered
+Lys20	Not clustered
+Nab2	Not clustered
+Scc2	Not clustered
+Top1	Not clustered
+Fhl1	Not clustered
+Hmo1	Not clustered
+Reb1	Not clustered
+Nrm1	Chromatin regulation
+Pho23	Chromatin regulation
+Rpd3	Chromatin regulation
+Rxt1	Chromatin regulation
+Rxt2	Chromatin regulation
+Rxt3	Chromatin regulation
+Sap30	Chromatin regulation
+Sin3	Chromatin regulation
+Gcn4	Chromatin regulation
+Ume6	Chromatin regulation
+Rsc30	RNA Polymerase II elongation
+CTDSer2	RNA Polymerase II elongation
+Rpb2	RNA Polymerase II elongation
+Rpb3	RNA Polymerase II elongation
+Rpb4	RNA Polymerase II elongation
+Rpb7	RNA Polymerase II elongation
+Rpb9	RNA Polymerase II elongation
+Yta7	RNA Polymerase II elongation
+Ret1	RNA Polymerase III
+Rpc17	RNA Polymerase III
+Rpc19	RNA Polymerase III
+Rpc34	RNA Polymerase III
+Rpc37	RNA Polymerase III
+Rpc53	RNA Polymerase III
+Rpo31	RNA Polymerase III
+Eaf3	Not clustered
+Ino80	Not clustered
+Ioc3	Not clustered
+Cdc46	Specialized DNA sequences
+Orc1	Specialized DNA sequences
+Orc2	Specialized DNA sequences
+Orc4	Specialized DNA sequences
+Orc5	Specialized DNA sequences
+Orc6	Specialized DNA sequences
+Lea1	mRNA processing
+Mud1	mRNA processing
+Prp45	mRNA processing
+Prp46	mRNA processing
+Prp4	mRNA processing
+Rts2	mRNA processing
+Smd1	mRNA processing
+Cln1	Specialized DNA sequences
+Mcd1	Specialized DNA sequences
+Brn1	Specialized DNA sequences
+Irr1	Specialized DNA sequences
+Mcm16	Specialized DNA sequences
+Mif2	Specialized DNA sequences
+Nkp1	Specialized DNA sequences
+Nkp2	Specialized DNA sequences
+Smc1	Specialized DNA sequences
+Smc3	Specialized DNA sequences
+Smc4	Specialized DNA sequences
+Cbf1	Specialized DNA sequences
+Msn2	RNA Polymerase II regulation
+Mss11	RNA Polymerase II regulation
+Rtg3	RNA Polymerase II regulation
+Srb8	RNA Polymerase II regulation
+Med11	RNA Polymerase II regulation
+Srb5	RNA Polymerase II regulation
+Srb6	RNA Polymerase II regulation
+Ssn2	RNA Polymerase II regulation
+Ssn8	RNA Polymerase II regulation
+Ubp8	RNA Polymerase II regulation
+Spt20	RNA Polymerase II regulation
+Spt8	RNA Polymerase II regulation
+Rtt102	RNA Polymerase II regulation
+Abf1	RNA Polymerase II regulation
+Azf1	RNA Polymerase II regulation
+Crz1	RNA Polymerase II regulation
+Rpn4	RNA Polymerase II regulation
+Ste12	RNA Polymerase II regulation
+Gzf3	Chromatin regulation
+Rfx1	Chromatin regulation
+Gis1	Chromatin regulation
+Bas1	Chromatin regulation
+Mig1	Chromatin regulation
+Mig2	Chromatin regulation
+Rlm1	Chromatin regulation
+Rvb1	Chromatin regulation
+Aor1	Chromatin regulation
+Arp6	Chromatin regulation
+Bdf1	Chromatin regulation
+Bdf2	Chromatin regulation
+Htz1	Chromatin regulation
+Swc7	Chromatin regulation
+Swr1	Chromatin regulation
+Vps71	Chromatin regulation
+Vps72	Chromatin regulation
+Bre1	RNA Polymerase II elongation
+Bre2	RNA Polymerase II elongation
+Ctk1	RNA Polymerase II elongation
+Ctk2	RNA Polymerase II elongation
+Dbp2	RNA Polymerase II elongation
+Hos2	RNA Polymerase II elongation
+Hos4	RNA Polymerase II elongation
+Npl3	RNA Polymerase II elongation
+Rad6	RNA Polymerase II elongation
+Sdc1	RNA Polymerase II elongation
+Set1	RNA Polymerase II elongation
+Set3	RNA Polymerase II elongation
+Sgv1	RNA Polymerase II elongation
+Shg1	RNA Polymerase II elongation
+Sif2	RNA Polymerase II elongation
+Spp1	RNA Polymerase II elongation
+Swd1	RNA Polymerase II elongation
+Swd3	RNA Polymerase II elongation
+Htl1	Chromatin regulation
+Rsc1	Chromatin regulation
+Rsc58	Chromatin regulation
+Rsc6	Chromatin regulation
+Rsc8	Chromatin regulation
+Rsc9	Chromatin regulation
+Sfh1	Chromatin regulation
+Sth1	Chromatin regulation
+Rsc3	Chromatin regulation
+Taf10	Pre-Initiation complex
+Taf12	Pre-Initiation complex
+Taf4	Pre-Initiation complex
+Taf5	Pre-Initiation complex
+Taf6	Pre-Initiation complex
+Taf9	Pre-Initiation complex
+Snf2	Not clustered
+Tda9	Not clustered
+Ume1	Not clustered
+Nut2	Not clustered
+Hem2	Not clustered
+Rox1	Not clustered
+Ecm22	Not clustered
+Fkh1	Not clustered
+Gcr1	Not clustered
+Mcm1	Not clustered
+Pdr3	Not clustered
+Stb4	Not clustered
+Urc2	Not clustered
+War1	Not clustered
+Aro80	RNA Polymerase II regulation
+Hot1	RNA Polymerase II regulation
+Snf6	RNA Polymerase II regulation
+Swi1	RNA Polymerase II regulation
+Swi3	RNA Polymerase II regulation
+Hap1	RNA Polymerase II regulation
+Leu3	RNA Polymerase II regulation
+Pip2	RNA Polymerase II regulation
+Stb5	RNA Polymerase II regulation
+Stp1	RNA Polymerase II regulation
+Tea1	RNA Polymerase II regulation
+Yku70	Chromatin regulation
+Hhf1	Chromatin regulation
+Hhf2	Chromatin regulation
+Hht1	Chromatin regulation
+Hta2	Chromatin regulation
+Htb2	Chromatin regulation
+Eaf5	RNA Polymerase II regulation
+Eaf6	RNA Polymerase II regulation
+Esa1	RNA Polymerase II regulation
+Nhp6a	RNA Polymerase II regulation
+Stb3	RNA Polymerase II regulation
+Yng2	RNA Polymerase II regulation
+Sgf11	RNA Polymerase II regulation
+Spt7	RNA Polymerase II regulation
+Ada2	RNA Polymerase II regulation
+Sgf73	RNA Polymerase II regulation
+God1	RNA Polymerase II regulation
+Rif1	RNA Polymerase II regulation
+Rif2	RNA Polymerase II regulation
+Lys14	RNA Polymerase II regulation
+Rap1	RNA Polymerase II regulation
+Sfp1	RNA Polymerase II regulation
+Hpr1	mRNA processing
+Mft1	mRNA processing
+Rlr1	mRNA processing
+Set2	mRNA processing
+Tho1	mRNA processing
+Thp2	mRNA processing
+Bcy1	RNA Polymerase II elongation
+Csn12	RNA Polymerase II elongation
+Elf1	RNA Polymerase II elongation
+Nrd1	RNA Polymerase II elongation
+Pub1	RNA Polymerase II elongation
+Rpo21	RNA Polymerase II elongation
+Sen1	RNA Polymerase II elongation
+Tpk1	RNA Polymerase II elongation
+Oaf3	Chromatin regulation
+Cyc8	Chromatin regulation
+Tup1	Chromatin regulation
+Cin5	Chromatin regulation
+Cup9	Chromatin regulation
+Rds2	Chromatin regulation
+Sko1	Chromatin regulation
+Stp4	Chromatin regulation
+Tbs1	Chromatin regulation
+Nrg1	Chromatin regulation
+Nrg2	Chromatin regulation
+Phd1	Chromatin regulation
+Sfl1	Chromatin regulation
+Sok2	Chromatin regulation
+Sut1	Chromatin regulation
+Cft1	RNA Polymerase II elongation
+Naf1	RNA Polymerase II elongation
+Pap1	RNA Polymerase II elongation
+Pcf11	RNA Polymerase II elongation
+Ref2	RNA Polymerase II elongation
+Rna14	RNA Polymerase II elongation
+Rtt103	RNA Polymerase II elongation
+Swd2	RNA Polymerase II elongation
+Ysh1	RNA Polymerase II elongation
+Kar4	RNA Polymerase III
+Bdp1	RNA Polymerase III
+Brf1	RNA Polymerase III
+Rpc25	RNA Polymerase III
+Rpc40	RNA Polymerase III
+Tfc1	RNA Polymerase III
+Tfc3	RNA Polymerase III
+Tfc4	RNA Polymerase III
+Tfc6	RNA Polymerase III
+Tfc7	RNA Polymerase III
+Tfc8	RNA Polymerase III
+Cse2	RNA Polymerase II regulation
+Med4	RNA Polymerase II regulation
+Med6	RNA Polymerase II regulation
+Nut1	RNA Polymerase II regulation
+Rgr1	RNA Polymerase II regulation
+Sin4	RNA Polymerase II regulation
+Soh1	RNA Polymerase II regulation
+Srb4	RNA Polymerase II regulation
+Rtt106	RNA Polymerase II regulation
+Hal9	RNA Polymerase II regulation
+Mac1	RNA Polymerase II regulation
+Yap1	RNA Polymerase II regulation
+Yrr1	RNA Polymerase II regulation
+Zap1	RNA Polymerase II regulation
+Sir2	Chromatin regulation
+Sir3	Chromatin regulation
+Sir4	Chromatin regulation
+Mot1	Pre-Initiation complex
+Bur6	Pre-Initiation complex
+Ncb2	Pre-Initiation complex
+Taf3	Pre-Initiation complex
+Dig1	Not clustered
+Hir1	Not clustered
+Ubp12	Not clustered
+Aap1	Not clustered
+Dbf4	Not clustered
+Hho1	Not clustered
+Rph1	Not clustered
+Ycs4	Not clustered
+Put3	Not clustered
+Cad1	Not clustered
+Yap7	Not clustered
+CTDSer5	Pre-Initiation complex
+CTDSer7	Pre-Initiation complex
+Ccl1	Pre-Initiation complex
+Kin28	Pre-Initiation complex
+Spt15	Pre-Initiation complex
+Ssl1	Pre-Initiation complex
+Sub1	Pre-Initiation complex
+Taf2	Pre-Initiation complex
+Tfb1	Pre-Initiation complex
+Tfb2	Pre-Initiation complex
+Tfb3	Pre-Initiation complex
+Toa1	Pre-Initiation complex
+Vid21	RNA Polymerase II regulation
+Gcn5	RNA Polymerase II regulation
+Ngg1	RNA Polymerase II regulation
+Spt3	RNA Polymerase II regulation
+Arp7	RNA Polymerase II regulation
+Hsf1	RNA Polymerase II regulation
+Ecm5	Chromatin regulation
+Yap5	Chromatin regulation
+Hap2	Chromatin regulation
+Hap3	Chromatin regulation
+Hap5	Chromatin regulation
+Snt2	Chromatin regulation
+Fzf1	RNA Polymerase II regulation
+Hir2	RNA Polymerase II regulation
+Hir3	RNA Polymerase II regulation
+Stp2	RNA Polymerase II regulation
+Gln3	RNA Polymerase II regulation
+Spt10	RNA Polymerase II regulation
+Spt21	RNA Polymerase II regulation
+Met31	RNA Polymerase II regulation
+Met32	RNA Polymerase II regulation
+Met4	RNA Polymerase II regulation
+Pdr1	RNA Polymerase II regulation
+Sum1	RNA Polymerase II regulation
+Stb1	Chromatin regulation
+Whi5	Chromatin regulation
+Ndd1	Chromatin regulation
+Fkh2	Chromatin regulation
+Mbp1	Chromatin regulation
+Swi4	Chromatin regulation
+Swi6	Chromatin regulation
+Isw1	RNA Polymerase II elongation
+Bur2	RNA Polymerase II elongation
+Cbc2	RNA Polymerase II elongation
+Spn1	RNA Polymerase II elongation
+Pob3	RNA Polymerase II elongation
+Spt16	RNA Polymerase II elongation
+Spt2	RNA Polymerase II elongation
+Spt4	RNA Polymerase II elongation
+Spt5	RNA Polymerase II elongation
+Spt6	RNA Polymerase II elongation
+Ctr9	RNA Polymerase II elongation
+Leo1	RNA Polymerase II elongation
+Paf1	RNA Polymerase II elongation
+Rtf1	RNA Polymerase II elongation
+Vid22	Not clustered
+Hst3	Not clustered
+Tbf1	Not clustered
+Taf11	Pre-Initiation complex
+Taf13	Pre-Initiation complex
+Taf14	Pre-Initiation complex
+Taf1	Pre-Initiation complex
+Taf7	Pre-Initiation complex
+Taf8	Pre-Initiation complex
+Ctk3	Not clustered
+Rpa12	Not clustered
+Gal4	Not clustered
+Hpc2	Not clustered
+Hht2	Chromatin regulation
+Ess1	Not clustered
+Asf2	Not clustered
+Cka2	Not clustered
+Ckb2	Not clustered
+Esc2	Not clustered
+Ies3	Not clustered
+Ies6	Not clustered
+Lys21	Not clustered
+Maf1	Not clustered
+Mlp1	Not clustered
+Tpk2	Not clustered
+Yku80	Not clustered
+Cha4	Not clustered
+Ace2	RNA Polymerase II regulation
+Snf11	RNA Polymerase II regulation
+Gal11	RNA Polymerase II regulation
+Med2	RNA Polymerase II regulation
+Pgd1	RNA Polymerase II regulation
+Aft2	RNA Polymerase II regulation
+Hms2	RNA Polymerase II regulation
+Aft1	RNA Polymerase II regulation
+Swi5	RNA Polymerase II regulation
+Skn7	RNA Polymerase II regulation
+Ckb1	Exclude
+Isw2	Exclude
+Kti12	Exclude
+Nfi1	Exclude
+Rsc2	Exclude
+Rpa135	Exclude
+Rpa190	Exclude
+Rpa34	Exclude
+Rrn10	Exclude
+Rrn5	Exclude
+Rrn6	Exclude
+Rrn9	Exclude
+Uaf30	Exclude

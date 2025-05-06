@@ -18,3 +18,10 @@ done
 mv masterNoTag_20180928.bam ./masterNoTag_20180928
 find ./masterNoTag_20180928/ -exec touch {} +
 rm -- ./*.zip
+
+# Downlad protein-protein interaction data in yeast from STRING
+wget https://stringdb-downloads.org/download/protein.links.v12.0/4932.protein.links.v12.0.txt.gz \
+     https://stringdb-downloads.org/download/protein.info.v12.0/4932.protein.info.v12.0.txt.gz
+
+gunzip 4932.protein.links.v12.0.txt.gz
+gunzip 4932.protein.info.v12.0.txt.gz

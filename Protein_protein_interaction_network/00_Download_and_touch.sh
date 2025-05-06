@@ -5,7 +5,8 @@
 # Downlad YEP data
 wget -r -np -nH --cut-dirs=5 --timestamping --reject "index.html*" "https://www.datacommons.psu.edu/download/eberly/pughlab/yeast-epigenome-project/"
 
-for file in ./*.zip; do
+mkdir ./masterNoTag_20180928
+for file in ./*_YEP.zip ./masterNoTag_20180928.zip; do
     # Unzip the file
     unzip "$file" -d ./
     
@@ -14,5 +15,6 @@ for file in ./*.zip; do
 done
 
 # Put masterNoTag in folder.
-mkdir ./masterNoTag_20180928
 mv masterNoTag_20180928.bam ./masterNoTag_20180928
+find ./masterNoTag_20180928/ -exec touch {} +
+rm -- ./*.zip

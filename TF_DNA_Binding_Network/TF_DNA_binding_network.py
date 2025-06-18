@@ -95,6 +95,13 @@ for line in inputfile:
     
 inputfile.close()
 
+for each_key in TF_Gene_Matrix:
+    for each_i in range(0, len(TF_Gene_Matrix[each_key])):
+        if TF_Gene_Matrix[each_key][each_i] == 0:
+            continue
+        else:
+            TF_Gene_Matrix[each_key][each_i] = 1
+
 # get the ssTFs to build the TF-DNA binding network
 inputfile = open('./data/ssTFs_common_names.txt', 'r')
 ssTF_names = []

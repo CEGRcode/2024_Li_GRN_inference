@@ -15,8 +15,8 @@ conda create -n TF_DNA -c bioconda -c conda-forge numpy pandas os json math date
 
 ## Table of Contents
 
-### Dissect_full_spreadsheet
-Preprocesses the supplementary material spreadsheet, 41586_2021_3314_MOESM3_ESM, from (Rossi et al. Nature, 2021).
+### Dissect_full_spreadsheet, Obtain_Rossi_TF_DNA
+Preprocesses the supplementary material spreadsheet, 41586_2021_3314_MOESM3_ESM and Supplementary_Data_2.xlsx, from (Rossi et al. Nature, 2021).
 
 ### ssTFs_common_names
 Contains the sequence-specific transcription factors to be included in the TF-DNA binding network.

@@ -41,3 +41,9 @@ Exports gene regulatory networks from intermediate saved states when inference s
 
 ### merge_GRN.py
 Merged two GRNs.
+
+### GRN_Dynamic_Simulator_Combinatorial_remove_dispensible_edges_2025.py
+Removes dispensable edges from a gene regulatory network that do not affect the reproduction of transcriptional profiles as stable states.
+
+### Export_final_GRN_TF_DNA.py
+Exports the final gene regulatory network and compares it against the TF–DNA binding prior, highlighting shared edges in green.

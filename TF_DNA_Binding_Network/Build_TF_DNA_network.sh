@@ -13,7 +13,8 @@ echo "Step 1: Processing the supplementary table 3 from Rossi Nature 2019..."
 python ./Dissect_full_spreadsheet.py
 
 echo "Step 2: Identifying bidirectional transcription regions and TFs in between..."
-python ./Identify_bidirectional_transcription_regions_and_TF_inbetween.py
+# python ./Identify_bidirectional_transcription_regions_and_TF_inbetween.py # For the TF-DNA network of all binding sites
+python ./Identify_bidirectional_transcription_regions_and_TF_inbetween_motif.py # For the motif-based TF-DNA network
 
 echo "Step 3: Building the TF-DNA binding network..."
 python ./TF_DNA_binding_network.py

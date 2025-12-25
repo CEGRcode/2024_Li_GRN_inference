@@ -4,13 +4,13 @@
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA
 
 ## Directions
-To recreate the TF-DNA binding network for this manuscript, please execute the shell script `Build_TF_DNA_network`.
+To recreate the gene regulatory network for this manuscript, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`.
 
 ## Dependencies
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
 ```
-conda create -n TF_DNA -c bioconda -c conda-forge numpy pandas os json math datetime
+conda create -n EvoAlg -c conda-forge -y python=3.10 numpy pandas scipy matplotlib scikit-learn pip
 ```
 
 ## Table of Contents

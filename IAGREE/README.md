@@ -16,10 +16,4 @@ conda create -n TF_DNA -c bioconda -c conda-forge numpy pandas os json math date
 ## Table of Contents
 
 ### salmon_tximport_tmm_normalize
-Performs the TMM normalization on the RNA-seq samples aligned by Salmon.
-
-### ssTFs_common_names
-Contains the sequence-specific transcription factors to be included in the TF-DNA binding network.
-
-### 2021-Rossi_Nature-master
-Contains the processed data downloaded from (Rossi et al. Nature, 2021).
+Performs the TMM normalization on the RNA-seq samples aligned by Salmon. It produces the normalized read counts in GRN_Sc_TMM_normalized_CPM.txt for downstream analysis.

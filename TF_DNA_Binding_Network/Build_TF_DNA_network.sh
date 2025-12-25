@@ -9,8 +9,9 @@ set -e
 echo "Step 0: Downloading processed data from Rossi Nature 2019..."
 bash Download_and_touch.sh
 
-echo "Step 1: Processing the supplementary table 3 from Rossi Nature 2019..."
+echo "Step 1: Processing the supplementary data from Rossi Nature 2019..."
 python ./Dissect_full_spreadsheet.py
+python ./Obtain_Rossi_TF_DNA.py
 
 echo "Step 2: Identifying bidirectional transcription regions and TFs in between..."
 # python ./Identify_bidirectional_transcription_regions_and_TF_inbetween.py # For the TF-DNA network of all binding sites

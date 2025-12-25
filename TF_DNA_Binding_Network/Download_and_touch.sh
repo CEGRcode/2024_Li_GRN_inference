@@ -21,4 +21,15 @@ mv masterNoTag_20180928.bam ./masterNoTag_20180928
 find ./masterNoTag_20180928/ -exec touch {} +
 rm -- ./*.zip
 
+# Download Supplementary data from Rossi Nature 2021.
+wget -O Supplementary_Data_2.xlsx \
+"https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-03314-8/MediaObjects/41586_2021_3314_MOESM4_ESM.xlsx"
+
+wget -O 41586_2021_3314_MOESM3_ESM.xlsx \
+"https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-03314-8/MediaObjects/41586_2021_3314_MOESM3_ESM.xlsx"
+
+mv ./Supplementary_Data_2.xlsx ./41586_2021_3314_MOESM3_ESM.xlsx ./data/
+
+
+
 cd ..

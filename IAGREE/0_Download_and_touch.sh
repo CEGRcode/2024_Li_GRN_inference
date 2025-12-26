@@ -22,12 +22,12 @@ find ./masterNoTag_20180928/ -exec touch {} +
 rm -- ./*.zip
 
 # Copy all ChExMix filtered peaks to a new folder.
-mkdir -p ./data/YEP_bed
+mkdir -p ./YEP_bed
 
-for d in ./data/*_YEP/; do
+for d in ./*_YEP/; do
   for bed in "$d"/*_chexmix_filtered_peaks.bed; do
     [ -e "$bed" ] || continue
-    cp "$bed" ./data/YEP_bed/
+    cp "$bed" ./YEP_bed/
   done
 done
 
@@ -50,11 +50,26 @@ wget -O Supplementary_Data_2.xlsx \
 wget -O 41586_2021_3314_MOESM3_ESM.xlsx \
 "https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-03314-8/MediaObjects/41586_2021_3314_MOESM3_ESM.xlsx"
 
-curl -L \
-  -A "Mozilla/5.0" \
-  -o Supplemental_Data_S5_S8.xlsx \
-  https://pmc.ncbi.nlm.nih.gov/articles/PMC6633255/bin/supp_gr.245456.118_Supplemental_Data_S5_S8.xlsx
+# 1) Download the PMC OA package tarball
+curl -L -o PMC6633255.tar.gz \
+  "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/94/02/PMC6633255.tar.gz"
 
-mv ./Supplementary_Data_2.xlsx ./41586_2021_3314_MOESM3_ESM.xlsx ./Supplemental_Data_S5_S8.xlsx ./data/
+# 2) Extract
+mkdir -p PMC6633255_pkg
+tar -xzf PMC6633255.tar.gz -C PMC6633255_pkg
+
+# 3) Find the supplemental S5–S8 file inside
+find PMC6633255_pkg -type f -iname "*Supplemental*Data*S5*S8*.xlsx" -o -iname "*S5*S8*.xlsx"
+
+# 4) Copy it to your working dir (adjust the pattern if needed)
+cp "$(find PMC6633255_pkg -type f -iname "*Supplemental*Data*S5*S8*.xlsx" | head -n 1)" \
+  supp_gr.245456.118_Supplemental_Data_S5_S8.xlsx
+
+rm PMC6633255.tar.gz
+rm -rf ./PMC6633255_pkg
+
+# 5) Verify it's a real OOXML .xlsx (ZIP container)
+mv supp_gr.245456.118_Supplemental_Data_S5_S8.xlsx Supplemental_Data_S5_S8.xlsx
+
 
 cd ..

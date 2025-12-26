@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gene Regulatory Network </title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.9.4/dist/igv.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/igv@2.9.4/dist/igv.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.1/cytoscape.min.js"></script>
+  <script src="https://unpkg.com/layout-base/layout-base.js"></script>
+  <script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+  <script src="https://unpkg.com/cose-base/cose-base.js"></script>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
+  <script src="https://unpkg.com/cytoscape-cise/cytoscape-cise.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="loading" style="display: none; position: fixed; top: 50%; left: 33%; transform: translate(-50%, -50%); z-index: 9999; background: white; padding: 10px; border: 1px solid black;">
+      Loading...
+    </div>
+    <div id="cy"></div>
+    <div id="legend">
+      <div class="legend-item">
+        <div class="legend-line legend-solid legend-triangle"></div>
+        <span>Independent activation</span>
+      </div>
+      <div class="legend-item">
+          <div class="legend-line legend-dashed">
+              <div class="legend-triangle"></div>
+          </div>
+          <span>Synergistic activation</span>
+      </div>
+        <div class="legend-item">
+            <div class="legend-line legend-solid legend-tee"></div>
+            <span>Independent inhibition</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-line legend-dashed legend-tee"></div>
+            <span>Synergistic inhibition</span>
+        </div>
+        <div id="searchContainer">
+          <label for="nodeSearchInput">Search for Gene:</label>
+          <input type="text" id="nodeSearchInput" placeholder="Enter gene name" style="width: 130px">
+          <button id="searchButton">Find Gene</button>
+        </div>
+        <div id="regulonContainer">
+          <label for="regulonSearchInput">Search regulon of:</label>
+          <input type="text" id="regulonSearchInput" placeholder="Empty to reset" style="width: 130px">
+          <button id="regulonrRearchButton">Search</button>
+        </div>
+        <div id="selectEdgeContainer">
+          <label for="colorSelect">Select Edge by Color:</label>
+          <select id="colorSelect">
+              <option value="All">All</option>
+              <option value=rgb(0,0,0)>Black</option>
+              <option value=rgb(220,20,60)>Red</option>
+              <option value=rgb(0,168,107)>Green</option>
+              <option value=rgb(247,247,0)>Yellow</option>
+              <option value=rgb(255,165,0)>Brown</option>
+          </select>
+        </div>
+    </div>
+      <h1 id="network-title">Gene Regulatory Network</h1>
+    </div>
+    <div class="container">
+      <div id="cy2"></div>
+      <div id="legend-cy2" class="legend-2">
+          <div class="legend-item2">
+              <div class="legend-node-black"></div>
+              <span>Attractors of last GRN</span>
+          </div>
+          <div class="legend-item2">
+              <div class="legend-node-red"></div>
+              <span>Attractors of current GRN</span>
+          </div>
+          <div class="legend-item2">
+              <div class="legend-edge"></div>
+              <span>Distances</span>
+          </div>
+      </div>
+      <h2>Fixed-point Attractors</h2>
+  </div>
+  <div id="fileInputContainer">
+      <label for="fileInput" id="fileInputLabel">Load GRN from .json</label>
+      <input type="file" id="fileInput" />
+  </div>
+  <div class="controls">
+    <div>
+      <label for="sourceNode">Regulator:</label>
+      <input type="text" id="sourceNode" placeholder="Enter regulator" style="width: 125px">
+    </div>
+    <div>
+      <label for="targetNode">Target Gene:</label>
+      <input type="text" id="targetNode" placeholder="Enter target gene" style="width: 135px">
+    </div>
+    <div>
+      <label for="edgeLabel">Edge Label:</label>
+      <input type="text" id="edgeLabel" placeholder="Enter edge label" style="width: 135px">
+    </div>
+    <div>
+      <label for="edgeStyle">Edge Style:</label>
+      <select id="edgeStyle">
+        <option value="solid">Independent</option>
+        <option value="dashed">Synergistic</option>
+      </select>
+    </div>
+    <div>
+      <label for="arrowShape">Arrow Shape:</label>
+      <select id="arrowShape">
+        <option value="triangle">Activation</option>
+        <option value="tee">Inhibition</option>
+      </select>
+    </div>
+      <button id="addEdgeBtn">Add/Update Edge</button>
+  </div>
+
+  <div class="layoutBtn">
+    <label for="layoutMethod">Approach:</label>
+    <select id="layoutMethod">
+      <option value="CiSE">CiSE</option>
+      <option value="Concentric">Concentric</option>
+      <option value="Circle">Circle</option>
+    </select>
+    <button id="layoutBtn">Re-layout</button>
+  </div>
+  
+
+  <button id="downloadBtn">Download GRN</button>
+  <div class="save-return">
+    <button id="saveBtn">Save GRN</button>
+    <button id="returnBtn">Return to saved GRN</button>
+  </div>
+
+  <div class="controls_2">
+    <div>
+      <label for="deleteNode">Gene to Delete:</label>
+      <input type="text" id="deleteNode" placeholder="Enter gene" style="width: 90px">
+      <button id="deleteNodeBtn">Delete Gene</button>
+    </div>
+  </div>
+  <div class="controls_3">
+    <label for="deleteSourceNode">Regulator:</label>
+    <input type="text" id="deleteSourceNode" placeholder="Enter regulator" style="width: 125px">
+    <label for="deleteTargetNode">Target Gene:</label>
+    <input type="text" id="deleteTargetNode" placeholder="Enter target gene" style="width: 135px">
+    <button id="deleteEdgeBtn">Delete Edge</button>
+  </div>
+
+  <div class="slider-container">
+    <label for="valueSlider" id="sliderLabel">Estimated Time: 5.0min</label>
+    <input type="range" id="valueSlider" min="0" max="100" step="0.1" value="0">
+  </div>
+
+  <div class="right_button">
+    <div>
+      <button id="addElementsBtn">Generate/Compare Attractors</button>
+      <button id="downloadAttractorsBtn">Download Attractors</button>
+    <div>
+  <div>
+
+  <div id="nodeModal" class="modal">
+    <div id="nodeModalContent">
+      <span class="close">&times;</span>
+      
+      <!-- Flex container for plot and sliders -->
+      <div id="modalBody" style="display: flex; align-items: flex-start; justify-content: space-between;">
+        
+        <!-- Plot Image Display (on the left) -->
+        <div id="plotContainer">
+          <img id="plotImage" src="" alt="Interactive Plot">
+        </div>
+        
+        <!-- Slider Controls Container (on the right) -->
+        <div id="plot-controls">
+          <div class="control-row">
+            <label>f0∈[0, 1]: <span id="f0Val"></span></label>
+            <input type="range" id="f0" min="0" max="1" step="0.05" value="0.5">
+            <input type="number" id="f0Input" value="0.5" step="0.1" min="0" max="1" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>f0p∈[0, 1]: <span id="f0pVal"></span></label>
+            <input type="range" id="f0p" min="0" max="1" step="0.05" value="0.5">
+            <input type="number" id="f0pInput" value="0.5" step="0.1" min="0" max="1" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>t1∈[0, 1]: <span id="t1Val"></span></label>
+            <input type="range" id="t1" min="0" max="1" step="0.01" value="0.33">
+            <input type="number" id="t1Input" value="0.33" step="0.01" min="0" max="1" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>t2∈[0, 1]: <span id="t2Val"></span></label>
+            <input type="range" id="t2" min="0" max="1" step="0.01" value="0.66">
+            <input type="number" id="t2Input" value="0.66" step="0.01" min="0" max="1" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>t3∈[0, 1]: <span id="t3Val"></span></label>
+            <input type="range" id="t3" min="0" max="1" step="0.01" value="0.66">
+            <input type="number" id="t3Input" value="0.66" step="0.01" min="0" max="1" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>k∈[0, ∞): <span id="kVal"></span></label>
+            <input type="range" id="k" min="0" max="50" step="0.5" value="30">
+            <input type="number" id="kInput" value="30" step="1" min="0" max="50" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>c1∈[0, ∞): <span id="c1Val"></span></label>
+            <input type="range" id="c1" min="0" max="100" step="0.5" value="1">
+            <input type="number" id="c1Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>c2∈[0, ∞): <span id="c2Val"></span></label>
+            <input type="range" id="c2" min="0" max="100" step="0.5" value="1">
+            <input type="number" id="c2Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>c3∈[0, ∞): <span id="c3Val"></span></label>
+            <input type="range" id="c3" min="0" max="100" step="0.5" value="1">
+            <input type="number" id="c3Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>c4∈[0, ∞): <span id="c4Val"></span></label>
+            <input type="range" id="c4" min="0" max="100" step="0.5" value="1">
+            <input type="number" id="c4Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>elevation∈[0, 360]: <span id="elevVal"></span></label>
+            <input type="range" id="elev" min="0" max="360" step="1" value="25">
+            <input type="number" id="elevInput" value="25" step="1" min="0" max="360" style="width: 60px;">
+          </div>
+          <div class="control-row">
+            <label>azimuth∈[0, 360]: <span id="azimVal"></span></label>
+            <input type="range" id="azim" min="0" max="360" step="1" value="160">
+            <input type="number" id="azimInput" value="160" step="1" min="0" max="360" style="width: 60px;">
+          </div>
+          <div style="display: flex; align-items: center; gap: 80px;margin-bottom: 24px;">
+            <label>Promoter strength∈[0, ∞): <span id="TRVal"></span></label>
+            <input type="number" id="TRInput" value="1" step="0.01" min="0" max="9999" style="width: 60px;margin-left: -9%;">
+          </div>
+          <div style="display: flex; align-items: center; gap: 80px;margin-bottom: 24px;">
+              <label>Degradation rate∈[0, ∞): <span id="DegVal"></span></label>
+              <input type="number" id="DegInput" value="0.5" step="0.01" min="0" max="9999" style="width: 60px;margin-left: -9%;">
+          </div>
+          <div style="display: flex; align-items: center; gap: 80px;">
+            <label>Leakage rate∈[0, Promoter strength]: <span id="LkVal"></span></label>
+            <input type="number" id="LkInput" value="0" step="0.01" min="0" max="9999" style="width: 60px;margin-left: -9%;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edge Modal for Solid Edges -->
+  <div id="edgeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="igv-container-solid" style="width: 90%; height: 80%;"></div>
+    </div>
+  </div>
+
+  <!-- Edge Modal for Solid Edges -->
+  <div id="PPIModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="" alt="PPI Image 1" id="PPIImage" style="width: 90%; height: 80%;">
+    </div>
+  </div>
+
+  <!-- Edge Modal for Dashed Edges -->
+  <div id="edgeModalDashed" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="" alt="Dashed Edge Image 1" id="edgeImageDashed1" style="width: 90%; height: 80%;">
+      <div id="igv-container-dashed" style="width: 90%; height: 80%;"></div>
+    </div>
+  </div>
+
+  <script>
+    let GRNInitialNodes = [
+            { data: { id: 'PDR1', label: 'PDR1', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } },
+            { data: { id: 'SOK2', label: 'SOK2', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } },
+            { data: { id: 'TBF1', label: 'TBF1', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } },
+            { data: { id: 'MET4', label: 'MET4', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } },
+            { data: { id: 'MET32', label: 'MET32', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } },
+            { data: { id: 'TBS1', label: 'TBS1', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } },
+            { data: { id: 'MET31', label: 'MET31', t1: 0.33, t2: 0.66, t3: 0.66, k: 35, f0: 0.5, f0p: 0.5, c1: 1, c2: 1, c3: 1, c4: 1, TR: 1, Deg: 0.5, Lk: 0 } }
+          ];
+    let GRNInitialEdges = [
+          { data: { source: 'PDR1', target: 'SOK2', label: ""}, classes: ["solid", "triangle"] },
+          { data: { source: 'MET4', target: 'SOK2', label: ""}, classes: ["solid", "triangle"] },
+          { data: { source: 'MET4', target: 'MET32', label: ""}, classes: ["solid", "triangle"] },
+          { data: { source: 'TBF1', target: 'TBS1', label: ""}, classes: ["solid", "triangle"] },
+          { data: { source: 'TBF1', target: 'PDR1', label: ""}, classes: ["solid", "triangle"] },
+          { data: { source: 'MET31', target: 'MET32', label: ""}, classes: ["solid", "triangle"] },
+          { data: { source: 'MET31', target: 'TBS1', label: "0"}, classes: ["dashed", "tee"] },
+          { data: { source: 'MET32', target: 'TBS1', label: "0"}, classes: ["dashed", "tee"] }
+            ];
+    document.addEventListener('DOMContentLoaded', function(){
+
+      const cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: {
+          nodes: GRNInitialNodes,
+          edges: GRNInitialEdges
+        },
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'shape': 'ellipse',
+              'border-width': 1,
+              'background-color': 'black',
+              'label': 'data(label)',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'font-size': '8',
+              'color': 'white'
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'curve-style': 'bezier',
+              'label': 'data(label)',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.solid',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'line-style': 'solid',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.dashed',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'line-style': 'dashed',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'triangle',
+              'color': 'red'
+            }
+          },
+          {
+            selector: 'edge.tee',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'target-arrow-color': 'black',
+              'target-arrow-shape': 'tee',
+              'color': 'red'
+            }
+          }
+        ],
+        userZoomingEnabled: true,
+        wheelSensitivity: 0.1,
+        layout: { name: 'concentric', spacingFactor: 1 }
+      });
+
+      //Create clusters for cytoscape
+      var clusters = cy.elements().markovClustering({
+            inflateFactor: 1.5,
+            attributes: [
+                function(edge) {
+                  console.log(edge.data('weight'))
+                    return (edge.data('weight'));
+                }
+            ]
+        });
+      cy.layout({
+          name: 'cise',
+          clusters: clusters.map(cluster => cluster.map(node => node.id())),
+          nodeSeparation: 25
+      }).run();
+
+      cy.layout({ name: 'concentric', spacingFactor: 1 }).run();
+
+      // Function to add or update an edge
+      function addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape) {
+        // Check if source and target nodes exist
+        if (cy.getElementById(sourceNode).empty()) {
+          alert(`Regulator "${sourceNode}" does not exist.`);
+          return;
+        }
+        if (cy.getElementById(targetNode).empty()) {
+          alert(`Target gene "${targetNode}" does not exist.`);
+          return;
+        }
+
+        const existingEdge = cy.edges().filter(edge =>
+          (edge.data('source') === sourceNode && edge.data('target') === targetNode)
+        );
+
+        if (existingEdge.length > 0) {
+          existingEdge.data('label', edgeLabel);
+          existingEdge.removeClass('solid dashed').addClass(edgeStyle);
+          existingEdge.removeClass('triangle tee').addClass(arrowShape);
+        } else {
+          cy.add({
+            data: {
+              source: sourceNode,
+              target: targetNode,
+              label: edgeLabel
+            },
+            classes: `${edgeStyle} ${arrowShape}`
+          });
+        }
+      }
+
+      // Event listener for Add/Update Edge button
+      document.getElementById('addEdgeBtn').addEventListener('click', function(){
+        let edgeStyle = 'solid';
+        let arrowShape = 'triangle';
+        const sourceNode = (document.getElementById('sourceNode').value.trim()).toUpperCase();
+        const targetNode = (document.getElementById('targetNode').value.trim()).toUpperCase();
+        const edgeLabel = document.getElementById('edgeLabel').value.trim();
+        edgeStyle = document.getElementById('edgeStyle').value;
+        arrowShape = document.getElementById('arrowShape').value;
+
+        if (sourceNode !== '' && targetNode !== '') {
+          addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape);
+        } else {
+          alert('Please enter source and target node names.');
+        }
+      });
+
+      // Function to delete a node
+      function deleteNode(nodeId) {
+        cy.remove(cy.getElementById(nodeId));
+      }
+
+      let NodesDeleted = [];
+      // Event listener for Delete Node button
+      document.getElementById('deleteNodeBtn').addEventListener('click', function(){
+        const nodeId = document.getElementById('deleteNode').value.trim().toUpperCase();
+        if (nodeId !== '') {
+          NodesDeleted.push(nodeId);
+          deleteNode(nodeId);
+        } else {
+          alert('Please enter a node ID to delete.');
+        }
+      });
+
+      // Function to delete an edge
+      function deleteEdge(sourceNode, targetNode) {
+        const edgesToRemove = cy.edges().filter(edge =>
+          (edge.data('source') === sourceNode && edge.data('target') === targetNode) ||
+          (edge.data('source') === targetNode && edge.data('target') === sourceNode)
+        );
+
+        if (edgesToRemove.length > 0) {
+          cy.remove(edgesToRemove);
+        } else {
+          alert('Edge does not exist between the specified nodes.');
+        }
+      }
+
+      // Event listener for Delete Edge button
+      document.getElementById('deleteEdgeBtn').addEventListener('click', function(){
+        const sourceNode = document.getElementById('deleteSourceNode').value.trim();
+        const targetNode = document.getElementById('deleteTargetNode').value.trim();
+        if (sourceNode !== '' && targetNode !== '') {
+          deleteEdge(sourceNode, targetNode);
+        } else {
+          alert('Please enter source and target node names.');
+        }
+      });
+
+      // Event listener for Layout button
+      document.getElementById('layoutBtn').addEventListener('click', function(){
+        let layoutMethod = document.getElementById('layoutMethod').value;
+        if (layoutMethod == 'CiSE') {
+        //Create clusters for cytoscape
+          var clusters = cy.elements().markovClustering({
+              inflateFactor: 1.5,
+              attributes: [
+                  function(edge) {
+                    console.log(edge.data('weight'))
+                      return (edge.data('weight'));
+                  }
+              ]
+          });
+          cy.layout({
+              name: 'cise',
+              clusters: clusters.map(cluster => cluster.map(node => node.id())),
+              nodeSeparation: 25
+          }).run();
+        } else if (layoutMethod == 'Concentric') {
+          cy.layout({ name: 'concentric', spacingFactor: 1 }).run();
+        } else if (layoutMethod == 'Circle') {
+          cy.layout({ name: 'circle', spacingFactor: 1 }).run();
+        } else {
+          alert('Undefined layout approach.');
+        }
+      });
+
+      // Slide bar for getting time limit
+      const slider = document.getElementById('valueSlider');
+      const sliderLabel = document.getElementById('sliderLabel');
+      let OneIterationTime = 0;
+
+      // Function to update slider value and label
+      function updateSliderValue() {
+        if (getNetworkType() == 'Gene Regulatory Network') {
+          const value = slider.value; // bounded between 0 and 100
+          const showOnLabel = (((0.001*value)*100000)*OneIterationTime)/60;
+          const numberOfInitialConditions = ((0.001*value)*100000);
+          sliderLabel.textContent = `Initial conditions: ${numberOfInitialConditions.toFixed(0)},  Estimated Time: ${showOnLabel.toFixed(1)}min`;
+        }
+      }
+      updateSliderValue();
+      slider.addEventListener('input', updateSliderValue);
+
+      // Get the node name from the input
+      document.getElementById('searchButton').addEventListener('click', function() {
+      var nodeName = document.getElementById('nodeSearchInput').value.trim();
+      if (nodeName === '') {
+        alert('Please enter a node name.');
+        return;
+      }
+      // Deselect any currently selected nodes
+      cy.nodes().unselect();
+      // Find the node by name
+      var node = cy.nodes().filter(function(ele) {
+        return ele.data('id') === nodeName.toUpperCase();
+      });
+      // If the node exists, select it
+      if (node.length > 0) {
+        node.select();
+        // Optionally, you can zoom to the node
+        cy.animate({
+         center: {
+            eles: node
+          },
+          zoom: 2 // Adjust zoom level as needed
+        }, {
+          duration: 500 // Duration of the animation in milliseconds
+        });
+      } else {
+        alert('Node not found.');
+      }
+    });
+
+      // Functions to get nodes and edges
+      function getNodes() {
+        return cy.nodes().map(node => {
+          return {
+            id: node.id(),
+            label: node.data('label'),
+            f0: node.data('f0'),
+            f0p: node.data('f0p'),
+            t1: node.data('t1'),
+            t2: node.data('t2'),
+            t3: node.data('t3'),
+            k: node.data('k'),
+            c1: node.data('c1'),
+            c2: node.data('c2'),
+            c3: node.data('c3'),
+            c4: node.data('c4'),
+            TR: node.data('TR'),
+            Deg: node.data('Deg'),
+            Lk: node.data('Lk'),
+          };
+        });
+      }
+
+      function getEdges() {
+        return cy.edges().map(edge => {
+          return {
+            source: edge.source().id(),
+            target: edge.target().id(),
+            label: edge.data('label'),
+            style: [edge.style('target-arrow-shape'), edge.style('line-style')]
+          };
+        });
+      }
+
+      // Function to obtain current time for naming download files
+      function getCurrentDateTimeString() {
+          const now = new Date();
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+          const day = String(now.getDate()).padStart(2, '0');
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          return `${year}${month}${day}_`;
+      }
+
+      // Function to download nodes and edges as JSON and SVG file
+      function downloadNodesAndEdges() {
+        // as svg
+        const imgData = cy.png({ output: 'base64' });
+        const link = document.createElement('a');
+        link.href = 'data:image/png;base64,' + imgData;
+        link.download = getCurrentDateTimeString()+'GRN.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // as json
+        const nodes = getNodes();
+        const edges = getEdges();
+        const data = {
+          nodes: nodes,
+          edges: edges
+        };
+        const jsonData = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = getCurrentDateTimeString()+'GRN.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      // Event listener for Download Nodes & Edges button
+      document.getElementById('downloadBtn').addEventListener('click', function(){
+        downloadNodesAndEdges();
+      });
+
+      // Function to update slider labels next to each slider control
+      function updateSliderLabels() {
+        document.getElementById('t1Val').innerText = document.getElementById('t1').value;
+        document.getElementById('t2Val').innerText = document.getElementById('t2').value;
+        document.getElementById('t3Val').innerText = document.getElementById('t3').value;
+        document.getElementById('kVal').innerText  = document.getElementById('k').value;
+        document.getElementById('f0Val').innerText = document.getElementById('f0').value;
+        document.getElementById('f0pVal').innerText = document.getElementById('f0p').value;
+        document.getElementById('c1Val').innerText = document.getElementById('c1').value;
+        document.getElementById('c2Val').innerText = document.getElementById('c2').value;
+        document.getElementById('c3Val').innerText = document.getElementById('c3').value;
+        document.getElementById('c4Val').innerText = document.getElementById('c4').value;
+        document.getElementById('elevVal').innerText = document.getElementById('elev').value;
+        document.getElementById('azimVal').innerText = document.getElementById('azim').value;
+      }
+
+      function getIncomingForNode(node) {
+          if (!node || node.isEdge && !node.isNode || node.empty && node.length === 0) {
+            return { incomingEdges: cy.collection(), sourceNodes: cy.collection() };
+          }
+          const incomingEdges = node.incomers('edge');
+          const sourceNodes = incomingEdges.sources();
+          return { incomingEdges, sourceNodes };
+        }
+
+      function foldEdgesToJSON_withSourceT(edgesCollection, pretty = false) {
+        const arr = edgesCollection.map(e => {
+          // edge-level info
+          const edgeObj = {
+            id: e.id(),
+            source: e.data('source'),
+            target: e.data('target'),
+            label: e.data('label'),
+            classes: e.classes() // array
+          };
+
+          // try to get the source node element and its t1/t2/t3 values
+          let srcNode = null;
+          try {
+            // edge.source() returns the node element (works even if source is an id)
+            srcNode = e.source ? e.source() : (cy.getElementById ? cy.getElementById(edgeObj.source) : null);
+          } catch (err) {
+            srcNode = null;
+          }
+
+          edgeObj.sourceData = {
+            t1: srcNode && srcNode.nonempty ? (srcNode.data('t1') ?? null) : null,
+            t2: srcNode && srcNode.nonempty ? (srcNode.data('t2') ?? null) : null,
+            t3: srcNode && srcNode.nonempty ? (srcNode.data('t3') ?? null) : null
+          };
+
+          return edgeObj;
+        });
+
+        return pretty ? JSON.stringify(arr, null, 2) : JSON.stringify(arr);
+      }
+
+
+      // Function to update the interactive plot image via AJAX
+      function updatePlot() {
+        const params = {
+          t1:   document.getElementById('t1').value,
+          t2:   document.getElementById('t2').value,
+          t3:   document.getElementById('t3').value,
+          k:    document.getElementById('k').value,
+          f0:   document.getElementById('f0').value,
+          f0p:  document.getElementById('f0p').value,
+          c1:   document.getElementById('c1').value,
+          c2:   document.getElementById('c2').value,
+          c3:   document.getElementById('c3').value,
+          c4:   document.getElementById('c4').value,
+          elev:   document.getElementById('elev').value,
+          azim:   document.getElementById('azim').value,
+        };
+        const node = cy.getElementById(window.currentNodeId);
+        const nodename = node.data('label');
+        const { incomingEdges, sourceNodes } = getIncomingForNode(node);
+        const folded = foldEdgesToJSON_withSourceT(incomingEdges);
+
+        fetch(`/plot?t1=${params.t1}&t2=${params.t2}&t3=${params.t3}&k=${params.k}&f0=${params.f0}&f0p=${params.f0p}&c1=${params.c1}&c2=${params.c2}&c3=${params.c3}&c4=${params.c4}&elev=${params.elev}&azim=${params.azim}&label=${nodename}&grn=${folded}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('plotImage').src = 'data:image/png;base64,' + data.img;
+          })
+          .catch(error => console.error('Error:', error));
+      }
+
+      function showOutgoingFrom(nameOrLabel) {
+        if (!nameOrLabel || String(nameOrLabel).trim() === '') {
+          console.warn('Empty name provided to showOutgoingFrom');
+          return false;
+        }
+
+        // try match by data('label') first
+        const nodesByLabel = cy.nodes().filter(n => n.data('label') === nameOrLabel);
+
+        // fallback to id if no label match
+        const nodes = nodesByLabel.length > 0
+          ? nodesByLabel
+          : (cy.getElementById ? cy.getElementById(nameOrLabel) : cy.$(`#${CSS.escape(nameOrLabel)}`));
+
+        if (!nodes || nodes.empty()) {
+          console.warn(`No node found with label or id "${nameOrLabel}".`);
+          return false;
+        }
+
+        // hide everything
+        cy.elements().style('display', 'none');
+
+        // show the selected node(s)
+        nodes.style('display', 'element');
+
+        // show outgoing edges and their target nodes
+        const outgoingEdges = nodes.outgoers('edge');
+        outgoingEdges.style('display', 'element');
+        outgoingEdges.targets().style('display', 'element');
+
+        // optional: center the view around the selected node(s)
+        try {
+          cy.animate({
+            center: { eles: nodes },
+            duration: 300
+          });
+        } catch (e) {
+          // older cytoscape versions may not support animate center this way; ignore safely
+        }
+
+        return true;
+      }
+
+      function resetShowAll() {
+        cy.elements().style('display', 'element');
+      }
+
+      // ---- wiring up your input + button ----
+      (function wireRegulonSearch() {
+        const input = document.getElementById('regulonSearchInput');
+        // keep the exact id you used in your snippet
+        const button = document.getElementById('regulonrRearchButton');
+
+        if (!input) {
+          console.warn('Regulon search input (#regulonSearchInput) not found in DOM.');
+          return;
+        }
+        if (!button) {
+          console.warn('Regulon search button (#regulonrRearchButton) not found in DOM.');
+          return;
+        }
+
+        function runSearch() {
+          const q = input.value.trim();
+          if (q === '') {
+            // if empty, treat as reset (show everything)
+            resetShowAll();
+            return;
+          }
+          const ok = showOutgoingFrom(q);
+          if (!ok) {
+            // fallback: try a case-insensitive label match (handy if users type different case)
+            const ciMatch = cy.nodes().filter(n => String(n.data('label')).toLowerCase() === q.toLowerCase());
+            if (ciMatch && ciMatch.nonempty && ciMatch.length > 0) {
+              showOutgoingFrom(ciMatch.first().id());
+            } else {
+              // give visible feedback; change to UI message if you prefer
+              alert(`No node found with label or id "${q}"`);
+              // optionally reset view
+              // resetShowAll();
+            }
+          }
+        }
+
+        // click handler
+        button.addEventListener('click', runSearch);
+
+        // Enter key in input triggers search
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            runSearch();
+          } else if (e.key === 'Escape') {
+            // ESC clears input and resets
+            input.value = '';
+            resetShowAll();
+          }
+        });
+      })();
+
+      // Function to show the interactive plot modal and initialize slider values from node data
+      function showInteractivePlotModal(node) {
+        // Populate the sliders with the node's current data or default values
+        document.getElementById('t1').value   = node.data('t1')   ?? 0.33;
+        document.getElementById('t2').value   = node.data('t2')   ?? 0.66;
+        document.getElementById('t3').value   = node.data('t3')   ?? 0.66;
+        document.getElementById('k').value    = node.data('k')    ?? 30;
+        document.getElementById('f0').value   = node.data('f0')   ?? 0.5;
+        document.getElementById('f0p').value  = node.data('f0p')  ?? 0.5;
+        document.getElementById('c1').value   = node.data('c1')   ?? 1;
+        document.getElementById('c2').value   = node.data('c2')   ?? 1;
+        document.getElementById('c3').value   = node.data('c3')   ?? 1;
+        document.getElementById('c4').value   = node.data('c4')   ?? 1;
+        document.getElementById('elev').value = 25;
+        document.getElementById('azim').value = 160;
+
+        // Populate the input boxes with the node's current data or default values
+        document.getElementById('t1Input').value   = node.data('t1')   ?? 0.33;
+        document.getElementById('t2Input').value   = node.data('t2')   ?? 0.66;
+        document.getElementById('t3Input').value   = node.data('t3')   ?? 0.66;
+        document.getElementById('kInput').value    = node.data('k')    ?? 30;
+        document.getElementById('f0Input').value   = node.data('f0')   ?? 0.5;
+        document.getElementById('f0pInput').value  = node.data('f0p')  ?? 0.5;
+        document.getElementById('c1Input').value   = node.data('c1')   ?? 1;
+        document.getElementById('c2Input').value   = node.data('c2')   ?? 1;
+        document.getElementById('c3Input').value   = node.data('c3')   ?? 1;
+        document.getElementById('c4Input').value   = node.data('c4')   ?? 1;
+        document.getElementById('elevInput').value = 25;
+        document.getElementById('azimInput').value = 160;
+        document.getElementById('TRInput').value = node.data('TR');
+        document.getElementById('DegInput').value = node.data('Deg');
+        document.getElementById('LkInput').value = node.data('Lk');
+
+        // Update slider labels to reflect current values
+        updateSliderLabels();
+
+        // Save the current node's id for later updates
+        window.currentNodeId = node.id();
+        
+        // Call updatePlot to generate the initial plot image
+        updatePlot();
+
+        // Show the modal using Bootstrap (requires jQuery)
+        $('#nodeModal').modal('show');
+
+        // Attach the close event to the close button (the <span> element with class "close")
+        const modal = document.getElementById('nodeModal');
+        const span = modal.getElementsByClassName('close')[0];
+        span.onclick = function() {
+          $('#nodeModal').modal('hide');
+        };
+      }
+
+      let debounceTimer;
+      function updatePlotDebounced() {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(updatePlot, 100); // Adjust delay as needed
+      }
+
+      // Add event listeners to sliders so that moving them updates the plot and labels
+      const sliders = document.querySelectorAll('#plot-controls input[type=range]');
+      sliders.forEach(function(slider) {
+        slider.addEventListener('input', function() {
+          updateSliderLabels();
+          updatePlotDebounced();
+        });
+      });
+
+      // Listen for node clicks in Cytoscape and open the interactive plot modal
+      cy.on('click', 'node', function(event) {
+        const node = event.target;
+        showInteractivePlotModal(node);
+      });
+
+      // Optionally, when the modal is hidden, update the node's data with the latest parameters
+      $('#nodeModal').on('hide.bs.modal', function () {
+        const node = cy.getElementById(window.currentNodeId);
+        node.data({
+          t1: parseFloat(document.getElementById('t1Input').value),
+          t2: parseFloat(document.getElementById('t2Input').value),
+          t3: parseFloat(document.getElementById('t3Input').value),
+          k:  parseFloat(document.getElementById('kInput').value),
+          f0: parseFloat(document.getElementById('f0Input').value),
+          f0p: parseFloat(document.getElementById('f0pInput').value),
+          c1: parseFloat(document.getElementById('c1Input').value),
+          c2: parseFloat(document.getElementById('c2Input').value),
+          c3: parseFloat(document.getElementById('c3Input').value),
+          c4: parseFloat(document.getElementById('c4Input').value),
+          TR: parseFloat(document.getElementById('TRInput').value),
+          Deg: parseFloat(document.getElementById('DegInput').value),
+          Lk: parseFloat(document.getElementById('LkInput').value)
+        });
+      });
+
+      // Function to update the value of the input box when the slider changes
+      function syncSliderWithInput(sliderId, inputId) {
+        const slider = document.getElementById(sliderId);
+        const input = document.getElementById(inputId);
+
+        // Update input when the slider changes
+        slider.addEventListener('input', function () {
+          input.value = slider.value;
+          updateSliderLabels();
+          updatePlot(); // Ensure plot updates when slider moves
+        });
+
+        // Update slider when the input box changes
+        input.addEventListener('input', function () {
+          slider.value = input.value;
+          updateSliderLabels();
+          updatePlot(); // Ensure plot updates when number input changes
+        });
+      }
+
+      // Call the function for each slider-input pair
+      syncSliderWithInput('t1', 't1Input');
+      syncSliderWithInput('t2', 't2Input');
+      syncSliderWithInput('t3', 't3Input');
+      syncSliderWithInput('f0', 'f0Input');
+      syncSliderWithInput('f0p', 'f0pInput');
+      syncSliderWithInput('k', 'kInput');
+      syncSliderWithInput('c1', 'c1Input');
+      syncSliderWithInput('c2', 'c2Input');
+      syncSliderWithInput('c3', 'c3Input');
+      syncSliderWithInput('c4', 'c4Input');
+      syncSliderWithInput('elev', 'elevInput');
+      syncSliderWithInput('azim', 'azimInput');
+
+      let savedNetworkState;
+      // Save the current network state
+      document.getElementById('saveBtn').addEventListener('click', function() {
+          savedNetworkState = cy.json();
+          console.log('Network state saved.');
+      });
+
+      // Return to the saved network state
+      document.getElementById('returnBtn').addEventListener('click', function() {
+          if (savedNetworkState) {
+              cy.json(savedNetworkState);
+              console.log('Returned to saved network state.');
+          } else {
+              console.log('No saved network state to return to.');
+          }
+      });
+
+      // Function to show modal with edge information
+      function showEdgeModal(edge) {
+        const modal = document.getElementById('edgeModal');
+        if (getNetworkType() == 'Protein-Protein Interaction Network') {
+          const modal = document.getElementById('PPIModal');
+        }
+        const span = modal.getElementsByClassName('close')[0];
+
+        modal.style.display = 'block';
+
+        span.onclick = function() {
+          modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = 'none';
+          }
+        };
+      }
+
+      // Function to find the closest node
+      function findClosestNode(distances) {
+        return Object.entries(distances).reduce((closest, [node, distance]) => {
+          return distance < closest.distance ? { node, distance } : closest;
+        }, { node: null, distance: Infinity }).node;
+      }
+
+      // Function to filter edges based on color selection
+      document.getElementById('colorSelect').addEventListener('change', function() {
+          const selectedColor = this.value;
+          let selectedEdges;
+          if (selectedColor == "All") {
+            selectedEdges = cy.edges();
+          } else {
+            selectedEdges = cy.edges().filter(edge => edge.style('line-color') === selectedColor);
+          }
+          cy.nodes().show();
+          cy.edges().hide();
+          selectedEdges.show();
+          cy.nodes().forEach(node => {
+                    const connectedEdges = node.connectedEdges().filter(edge => edge.visible());
+                    if (connectedEdges.length === 0) {
+                        node.hide();
+                    }
+          });
+      });
+
+      // Function to calculate Euclidean distance between two arrays
+      function getDistance(arr1, arr2, PreO, O, max_arr) {
+          // Make copies of O and PreO to avoid mutation
+          let modifiedO = O.slice(1).split('\t');
+          let modifiedPreO = PreO;
+          if (modifiedPreO !== '') {
+              // Split modifiedPreO by tabs
+              modifiedPreO = modifiedPreO.trimStart();
+              modifiedPreO = modifiedPreO.split('\t');
+          } else {
+              modifiedPreO = [];
+          }
+          //console.log('modifiedPreO', modifiedPreO);
+          //console.log('modifiedO', modifiedO);
+          // Create a copy of arr1 and arr2 to avoid mutation
+          let copyArr1 = arr1.slice();
+          let copyArr2 = arr2.slice();
+          let copyMaxArr = max_arr.slice();
+
+          let KO_indexes = modifiedPreO.map((element, index) => modifiedO.indexOf(element) === -1 ? index : -1).filter(index => index !== -1);
+          //console.log('before sorting KO_indexes: ', KO_indexes);
+          // Sort the index array in descending order
+          KO_indexes.sort((a, b) => b - a);
+          //console.log('KO_indexes: ', KO_indexes);
+          if (copyArr1.length > copyArr2.length) {
+              // Create a new array with elements removed based on KO_indexes
+              copyArr1 = copyArr1.filter((_, index) => !KO_indexes.includes(index));
+          } else if (copyArr1.length < copyArr2.length) {
+              // Create a new array with elements removed based on KO_indexes
+              copyArr2 = copyArr2.filter((_, index) => !KO_indexes.includes(index));
+          }
+          //console.log(copyArr1, copyArr2);
+          let sum = 0;
+          for (let i = 0; i < copyArr1.length; i++) {
+              if (copyMaxArr[i] === 0) continue;  // Skip if denominator is 0
+              sum += Math.abs(copyArr1[i] - copyArr2[i]) / copyMaxArr[i];
+          }
+          return sum/copyArr1.length;
+      }
+
+      // Function to get the max values for each column
+      function maxValuesPerColumn(matrix) {
+        // Check if matrix is empty
+        if (matrix.length === 0) return [];
+
+        // Initialize an array to store max values for each column
+        const maxValues = Array(matrix[0].length).fill(-Infinity);
+
+        // Iterate through each row
+        for (let i = 0; i < matrix.length; i++) {
+          // Iterate through each column
+          for (let j = 0; j < matrix[i].length; j++) {
+            // Update the max value for the current column
+            if (matrix[i][j] > maxValues[j]) {
+              maxValues[j] = matrix[i][j];
+            }
+          }
+        }
+
+        return maxValues;
+      }
+      
+      // Function to calculate distances and construct the dictionary
+      function calculateDistances(list, Batch, PreOrder, Order, length_A) {
+          let nodes = [];
+          let distances = {};
+          let max_list = maxValuesPerColumn(list);
+          for (let i = 0; i < list.length; i++) {
+              if (Batch == 'A') { // Batch is A
+                const labelA = Batch + (i + 1).toString();
+                distances[labelA] = {};
+                nodes.push({ data: { id: labelA, label: labelA }, classes: "Batch_1" });
+                for (let j = 0; j < list.length; j++) {
+                  if (i !== j) {
+                      const labelB = Batch + (j + 1).toString();
+                      distances[labelA][labelB] = getDistance(list[i], list[j], PreOrder, Order, max_list);
+                  }
+              }
+              } else { // Batch is B
+                if (i < length_A) {
+                  const labelA = 'A' + (i + 1).toString();
+                  distances[labelA] = {};
+                  nodes.push({ data: { id: labelA, label: labelA }, classes: "Batch_1" });
+                  for (let j = 0; j < list.length; j++) {
+                    if (i !== j) {
+                        if (j < length_A) 
+                        {
+                          const labelB = 'A' + (j + 1).toString();
+                          distances[labelA][labelB] = getDistance(list[i], list[j], PreOrder, Order, max_list);
+                        } else {
+                          const labelB = Batch + (j + 1 - length_A).toString();
+                          distances[labelA][labelB] = getDistance(list[i], list[j], PreOrder, Order, max_list);
+                        }
+                    }
+                  }
+                } else {
+                  const labelA = Batch + (i + 1 - length_A).toString();
+                  distances[labelA] = {};
+                  nodes.push({ data: { id: labelA, label: labelA }, style: { 'color': 'red', 'width': 20, 'height': 20, 'border-color': 'red', 'z-index': 9999 }, classes: 'Batch_2' });
+                  for (let j = 0; j < list.length; j++) {
+                    if (i !== j) {
+                        if (j < length_A) 
+                        {
+                          const labelB = 'A' + (j + 1).toString();
+                          distances[labelA][labelB] = getDistance(list[i], list[j], PreOrder, Order, max_list);
+                        } else {
+                          const labelB = Batch + (j + 1 - length_A).toString();
+                          distances[labelA][labelB] = getDistance(list[i], list[j], PreOrder, Order, max_list);
+                        }
+                    }
+                  }
+                }
+              }
+          }
+          return [distances, nodes];
+      }
+
+      // Function to generate IGV browser for an edge
+      async function makeIGV(source, target, edgeStyle) {
+            return new Promise((resolve, reject) => {
+                try {
+                    // pick the right container
+                    const igvContainer = document.getElementById(
+                        edgeStyle === 'dashed'
+                            ? 'igv-container-dashed'
+                            : 'igv-container-solid'
+                    );
+                    Object.assign(igvContainer.style, {
+                        width:  '800px',
+                        height: '600px',
+                        position:'absolute',
+                        top:    '0px',
+                        left:   '20px'
+                    });
+
+                    const sample_tracks = [];
+                    const grpFwd = `${source}_forward`;
+                    const grpRev = `${source}_reverse`;
+
+                    sample_ChIP[source.toUpperCase()].forEach(element => {
+                        // sample forward
+                        sample_tracks.push({
+                            name:          grpFwd,
+                            type:          'wig',
+                            format:        'bedgraph',
+                            url:           `/static/data/${element}_forward_processed.bedGraph`,
+                            indexed:       false,
+                            height:        50,
+                            autoHeight:    false,
+                            color:         'blue',
+                            displayMode:   'show',
+                            autoscale:     'global',
+                            autoscaleGroup: grpFwd,
+                            smoothingWindow: 1000
+                        });
+                        // sample reverse
+                        sample_tracks.push({
+                            name:          grpRev,
+                            type:          'wig',
+                            format:        'bedgraph',
+                            url:           `/static/data/${element}_reverse_processed.bedGraph`,
+                            indexed:       false,
+                            height:        50,
+                            autoHeight:    true,
+                            color:         'red',
+                            displayMode:   'show',
+                            autoscale:     'global',
+                            autoscaleGroup: grpRev,
+                            smoothingWindow: 1000
+                        });
+                        // IgG forward, shares fwd group
+                        sample_tracks.push({
+                            name:          'IgG_forward',
+                            type:          'wig',
+                            format:        'bedgraph',
+                            url:           `/static/data/IgG_forward_processed.bedGraph`,
+                            indexed:       false,
+                            height:        50,
+                            autoHeight:    true,
+                            color:         'blue',
+                            displayMode:   'show',
+                            autoscale:     'global',
+                            autoscaleGroup: grpFwd,
+                            smoothingWindow: 1000
+                        });
+                        // IgG reverse, shares rev group
+                        sample_tracks.push({
+                            name:          'IgG_reverse',
+                            type:          'wig',
+                            format:        'bedgraph',
+                            url:           `/static/data/IgG_reverse_processed.bedGraph`,
+                            indexed:       false,
+                            height:        50,
+                            autoHeight:    true,
+                            color:         'red',
+                            displayMode:   'show',
+                            autoscale:     'global',
+                            autoscaleGroup: grpRev,
+                            smoothingWindow: 1000
+                        });
+                    });
+
+                    const options = {
+                        genome: 'sacCer3',
+                        tracks: sample_tracks
+                    };
+
+                    igv.createBrowser(igvContainer, options)
+                        .then(browser => {
+                            // first zoom to gene, then extend ± around it
+                            browser.search(target.toUpperCase())
+                                .then(() => {
+                                    const rf = browser.referenceFrameList[0];
+                                    const chr   = rf.chr;
+                                    const start = Math.max(rf.initialStart - 2000, 0);
+                                    const end   = rf.initialEnd + 1000;
+                                    return browser.search(`${chr}:${start}-${end}`);
+                                })
+                                .then(locus => {
+                                    console.log(`Navigated to ${locus}`);
+                                    resolve();
+                                })
+                                .catch(err => {
+                                    console.error('Error navigating loci:', err);
+                                    reject(err);
+                                });
+                        })
+                        .catch(err => {
+                            console.error('Error creating IGV.js browser', err);
+                            reject(err);
+                        });
+
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        }
+
+        // Function to handle the files for Composite plot
+        async function makeComposite(source, target) {
+          const BED_ID = sample_ChIP[target.toUpperCase()][0];
+          let Samples_ID = [];
+          source.forEach(each => {
+            Samples_ID.push(sample_ChIP[each.toUpperCase()][0]);
+          })
+          //console.log('look', source, target);
+          Samples_ID = Samples_ID.join(',');
+          fetch('/composite_input', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ 
+                'input_samples': `${BED_ID}\t${Samples_ID}`
+            })
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.error('Failed to set input value, status:', response.status);
+                throw new Error('Failed response');
+            }
+        }).then(data => {
+            // Handle the successful response with JSON data
+            // console.log('Success:', data.message);
+            if (getNetworkType() == 'Gene Regulatory Network') {
+              const image = document.getElementById('edgeImageDashed1');
+              const baseUrl = "{{ url_for('static', filename='data/dashed_') }}";
+              const imageUrl = `${baseUrl}${data.message}.svg`;
+              image.src = imageUrl;
+            } else if (getNetworkType() == 'Protein-Protein Interaction Network') {
+              const baseUrl = "{{ url_for('static', filename='data/dashed_') }}";
+              const imageUrl = `${baseUrl}${data.message}.svg`;
+              document.getElementById('PPIImage').src = imageUrl;
+            }
+            document.getElementById('loading').style.display = 'none';
+            
+        }).catch(error => {
+            console.error('Error:', error);
+        });
+        }
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Function to handle the files for Composite plot
+        async function unzipAndProcess(source, target) {
+          try {
+              // Show loading indicator
+              const loadingElement = document.getElementById('loading');    
+              if (loadingElement) {
+                  loadingElement.style.display = 'block';
+              }
+              makeComposite(source, target);
+          } catch (error) {
+              console.error('Error:', error);
+              alert('Error during the unzip and process sequence');
+          } finally {
+          }
+        }
+
+      // Function to find edges with the same target node and label
+      function findEdgesWithTarget(sourceNodeId, targetNodeId, targetLabel) {
+          const targetNode = cy.getElementById(targetNodeId);
+          if (!targetNode) {
+              console.log('Target node not found');
+              return;
+          }
+          const edgesWithTarget = cy.edges().filter(edge => edge.data('target') === targetNodeId && edge.data('label') === targetLabel && edge.data('source') != sourceNodeId);
+          return edgesWithTarget;
+      }
+
+      const sample_ChIP = {};
+      // Function to obtain the indexes for the ChIP-exo samples
+      function GetSampleIndex() {
+        return fetch('/read-file')
+            .then(response => {
+                if (response.ok) {
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    } else {
+                        return response.text();
+                    }
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            });
+      }
+      GetSampleIndex()
+          .then(sample_index => {
+            sample_index = JSON.stringify(sample_index["content"]);
+            const lines = sample_index.trim().split('\\n');
+            lines.forEach(line => {
+              const [value, key] = line.split('\\t');
+              if (sample_ChIP[key.toUpperCase()]) {
+                sample_ChIP[key.toUpperCase()].push(value.replace(/"/g, ''));
+              } else {
+                sample_ChIP[key.toUpperCase()] = [value.replace(/"/g, '')];
+              }
+            });
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+
+      // Event listener for edge click to show different modals based on edge style
+      cy.on('tap', 'edge', function(event) {
+        const edge = event.target;
+        const sourceNodeforIGV = edge._private.data.source;
+        const targetNodeforIGV = edge._private.data.target;
+        const labelforIGV = edge._private.data.label;
+        if (edge.hasClass('dashed')) {
+          if (getNetworkType() == 'Gene Regulatory Network') {
+            document.getElementById('edgeModalDashed').style.display = 'block';
+            makeIGV(sourceNodeforIGV, targetNodeforIGV, 'dashed');
+            let nodesToMakeComposite = findEdgesWithTarget(sourceNodeforIGV, targetNodeforIGV, labelforIGV);
+            let sourceNodesWithSameLabel = [];
+            nodesToMakeComposite.forEach(edge => {
+                //console.log('Edge ID:', edge._private.data.source, edge._private.data.target, edge._private.data.label);
+                sourceNodesWithSameLabel.push(edge._private.data.source)
+            });
+            unzipAndProcess(sourceNodesWithSameLabel, edge._private.data.source);
+          } else if (getNetworkType() == 'Protein-Protein Interaction Network') {
+            document.getElementById('PPIModal').style.display = 'block';
+            unzipAndProcess([edge._private.data.source], targetNodeforIGV);
+          }
+        } else {
+          document.getElementById('edgeModal').style.display = 'block';
+          makeIGV(sourceNodeforIGV, targetNodeforIGV, 'solid');
+        }
+      });
+
+      // Generate distance plot for mRNA steady states
+      let initialNodes = [];
+      let mRNAProfiles = [];
+      let length_of_As = 0;
+      let Distances = {};
+
+      // Event listener for closing modal
+      document.querySelectorAll('.close').forEach(function(el) {
+        el.addEventListener('click', function(){
+          document.querySelectorAll('.modal').forEach(function(modal) {
+            igv.removeAllBrowsers();
+            modal.style.display = 'none';
+          });
+        });
+      });
+
+      // Find the maximum value
+      let allValues = Object.values(Distances).flatMap(obj => Object.values(obj));
+      let maxDistance = Math.max(...allValues);
+
+      // Divide all elements by the maximum value
+      for (let key in Distances) {
+        for (let subKey in Distances[key]) {
+          Distances[key][subKey] /= (maxDistance/25);
+        }
+      }
+
+      const cy2 = cytoscape({
+        container: document.getElementById('cy2'),
+        elements: {
+          nodes: initialNodes,
+          edges: []
+        },
+        style: [
+          {
+            selector: 'node',
+            style: {
+              'shape': 'ellipse',
+              'border-width': 1,
+              'background-color': 'white',
+              'label': 'data(label)',
+              'color': 'black',
+              'text-valign': 'center',
+              'text-halign': 'center',
+              'font-size': '8'
+            }
+          },
+          {
+            selector: 'edge',
+            style: {
+              'width': 2,
+              'line-color': 'black',
+              'curve-style': 'bezier',
+              'target-arrow-shape': 'none',
+              'source-arrow-shape': 'none',
+              'color': 'red'
+            }
+          }
+        ],
+        userZoomingEnabled: true,
+        wheelSensitivity: 0.1,
+        layout: { name: 'preset' }
+      });
+
+      function updateGraphBasedOnNode(nodeId, distances) {
+        const newEdges = [];
+        let positions = {};
+
+        const batch1Nodes = cy2.elements('node.Batch_1');
+        const batch2Nodes = cy2.elements('node.Batch_2');
+
+        const DistancesBatch_1 = {};
+        batch1Nodes.forEach(node => {
+          if (distances.hasOwnProperty(node.id())) {
+            DistancesBatch_1[node.id()] = distances[node.id()];
+          }
+        });
+
+        const DistancesBatch_2 = {};
+        batch2Nodes.forEach(node => {
+          if (distances.hasOwnProperty(node.id())) {
+            DistancesBatch_2[node.id()] = distances[node.id()];
+          }
+        });
+
+        // Get the cloeset Batch_1 nodes
+        let closestRelationship = {};
+
+        let DistancesBatch_2_and_excluded_1 = JSON.parse(JSON.stringify(DistancesBatch_2));
+        // Loop through DistancesBatch_2 and remove keys that exist in batch1Nodes
+        for (const key in DistancesBatch_2) {
+          for (const nodeName in DistancesBatch_2[key]) {
+            if (batch2Nodes.some(node => node.id() === nodeName)) {
+              delete DistancesBatch_2_and_excluded_1[key][nodeName];
+            }
+          }
+        }
+
+        Object.keys(DistancesBatch_2_and_excluded_1).forEach(nodeId => {
+          let closestNode = findClosestNode(DistancesBatch_2_and_excluded_1[nodeId]);
+          if (!closestRelationship[closestNode]) {
+            closestRelationship[closestNode] = [];
+          }
+          closestRelationship[findClosestNode(DistancesBatch_2_and_excluded_1[nodeId])].push(nodeId)
+        });
+
+        // Position the center node
+        positions[nodeId] = { x: cy2.width() / 2, y: cy2.height() / 2 };
+        const angles = {};
+
+        if (batch1Nodes.some(node => node.id() === nodeId)) {
+          const length_1 = nodeId in closestRelationship ? closestRelationship[nodeId].length : 0;
+          const length_2 = batch1Nodes.map(node => node.id()).length - 1;
+
+          // Calculate positions for other nodes if nodeId is from batch 1
+          let angle = 0;
+          const step = (2 * Math.PI) / (length_1+length_2);
+          
+          for (let target in DistancesBatch_1[nodeId]) {
+            const distance = DistancesBatch_1[nodeId][target] * 10; // Scale distance for visualization
+            if (batch1Nodes.some(node => node.id() === target)) {
+              positions[String(target)] = {
+                x: positions[nodeId].x + distance * Math.cos(angle),
+                y: positions[nodeId].y + distance * Math.sin(angle)
+              };
+              angles[target] = angle;
+              angle += step;
+            } else if (batch2Nodes.some(node => node.id() === target) && (closestRelationship.hasOwnProperty(nodeId) && Object.values(closestRelationship[nodeId]).includes(target))){
+              positions[String(target)] = {
+                x: positions[nodeId].x + distance * Math.cos(angle),
+                y: positions[nodeId].y + distance * Math.sin(angle)
+              };
+              angles[target] = angle;
+              angle += step;
+            }
+
+            if (batch1Nodes.some(node => node.id() === target)){
+              newEdges.push({
+                data: {
+                  source: nodeId,
+                  target: target
+                },
+                style: {
+                  'line-color': 'black',
+                }
+              });
+            } else if (closestRelationship.hasOwnProperty(nodeId) && Object.values(closestRelationship[nodeId]).includes(target)) {
+              newEdges.push({
+                data: {
+                  source: nodeId,
+                  target: target
+                },
+                style: {
+                  'line-color': 'red',
+                }
+              });
+            }
+          }
+        } else if (batch2Nodes.some(node => node.id() === nodeId)) {
+          // Calculate positions for other nodes if nodeId is from batch 2
+          let angle = 0;
+          const step = (2 * Math.PI) / (batch1Nodes.map(node => node.id()).length);
+
+          for (let target in DistancesBatch_2[nodeId]) {
+            if (!batch2Nodes.some(node => node.id() === target)) {
+              const distance = DistancesBatch_2[nodeId][target] * 10; // Scale distance for visualization
+              positions[target] = {
+                x: positions[nodeId].x + distance * Math.cos(angle),
+                y: positions[nodeId].y + distance * Math.sin(angle)
+              };
+              angles[target] = angle;
+              angle += step;
+              newEdges.push({
+                data: {
+                  source: nodeId,
+                  target: target
+                },
+                style: {
+                  'line-color': 'red',
+                }
+              });
+            }
+          }
+        }
+
+        // Put the Batch_2 nodes to the closest Batch_1 nodes
+        for (let closestNode in closestRelationship) {
+          // Get the array of nodes that are closest to this node
+          const denominator = 12+(closestRelationship[closestNode].length-1);
+          let angle = 0;
+          if (Object.values(closestRelationship[closestNode]).includes(nodeId)) {
+            angle = ((2*denominator-2*(closestRelationship[closestNode].length-2)) * Math.PI) / denominator;
+          } else {
+            angle = ((2*denominator-2*(closestRelationship[closestNode].length-1)) * Math.PI) / denominator;
+          }
+
+          const step = (4 * Math.PI) / denominator;
+          for (const target of closestRelationship[closestNode]) {
+            const distance = DistancesBatch_2[target][closestNode] * 10; // Scale distance for visualization
+            const exist = closestRelationship.hasOwnProperty(nodeId) && Object.values(closestRelationship[nodeId]).includes(target);
+            if (target !== nodeId && !exist) {
+              positions[target] = {
+                x: positions[closestNode].x + distance * Math.cos((angle + angles[closestNode])),
+                y: positions[closestNode].y + distance * Math.sin(angle + angles[closestNode])
+              };
+              angle += step;
+            }
+            if (String(nodeId)!==String(target) && !exist) {
+              newEdges.push({
+                data: {
+                  source: closestNode,
+                  target: target
+                },
+                style: {
+                  'line-color': 'red',
+                }
+              });
+            }
+          }
+        }
+
+        cy2.elements('edge').remove();
+        cy2.add(newEdges);
+
+        for (let nodes in positions) {
+          cy2.getElementById(nodes).position(positions[nodes]);
+        }
+
+        cy2.layout({ name: 'preset' }).run();
+      }
+
+      // Initial plot for node 'a'
+      updateGraphBasedOnNode(Object.keys(Distances)[0], Distances);
+
+      // Event listener for node clicks
+      cy2.on('tap', 'node', function(event) {
+        const node = event.target;
+        const nodeId_click = node.id();
+        updateGraphBasedOnNode(nodeId_click, Distances);
+      });
+
+      let globalPyOutput = '';
+      let Order_of_genes = '';
+      let Previous_Order_of_genes = '';
+      document.getElementById('addElementsBtn').addEventListener('click', function() {
+        //console.log(getNetworkType());
+        if (getNetworkType() != 'Gene Regulatory Network') {
+          alert('Only GRN can produce attractors.');
+        } else {
+          // Find fixed-point attractors for the current GRN and display
+          // Get .json for the current GRN
+          let JS_nodes = getNodes();
+          let JS_edges = getEdges();
+          let JS_data = {
+            nodes: JS_nodes,
+            edges: JS_edges
+          };
+          let Json_data_str = JSON.stringify(JS_data, null, 2);
+          let newNodes = null;
+          let NewDistances = null;
+          let percentage_progress = 0;
+          let numOfInitialStates = '|||'+JSON.stringify((0.001*slider.value)*100000);
+          console.log('Number of Initial Conditions: ', numOfInitialStates);
+          // console.log('Json_data_str: ', Json_data_str);
+          document.getElementById('addElementsBtn').textContent = 'Calculating Attractors... 0%';
+
+          // Use Fetch API to send the input value to the server
+          fetch('/set-input', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({ 'input_value': Json_data_str+numOfInitialStates })
+          }).then(response => {
+              if (response.ok) {
+                const eventSource = new EventSource('/stream-data');
+                let All_progress = 1e99;
+                let Current_iteration = 0;
+                let counter = 0;
+                eventSource.onmessage = function(event) {
+                  if (event.data.split('\t')[0] == 'All') {
+                    All_progress = parseInt(event.data.split('\t')[1], 10);
+                    console.log(event.data.split('\t')[1])
+                  } else if (event.data.split('\t')[0] == 'Message1') {
+                    console.log(event.data.split('\t')[1])
+                  }
+                  else if (event.data.split('\t')[0] == 'Message2') {
+                    console.log(event.data.split('\t')[1])
+                  }
+                  else if (event.data.split('|')[0] == 'Final') {
+                    // Assign data.output to the global variable
+                    Order_of_genes = (event.data.split('|')).slice(-(event.data.split('|').length-2))[0];
+                    globalPyOutput = JSON.parse(event.data.split('|')[1]);
+                    // console.log('globalPyOutput: ', globalPyOutput);
+                    if (mRNAProfiles.length === 0) {
+                      length_of_As = 0;
+                      mRNAProfiles = globalPyOutput;
+                      [NewDistances, newNodes] = calculateDistances(mRNAProfiles, 'A', Previous_Order_of_genes, Order_of_genes); 
+                    } else {
+                      // remove the A1, A2, .. from the mRNA profiles
+                      if (length_of_As > 0) {
+                        mRNAProfiles.splice(0, length_of_As);
+                      }
+                      length_of_As = mRNAProfiles.length;
+                      mRNAProfiles = mRNAProfiles.concat(globalPyOutput);
+                      [NewDistances, newNodes] = calculateDistances(mRNAProfiles, 'B', Previous_Order_of_genes, Order_of_genes, length_of_As);
+                    }
+                    Previous_Order_of_genes = JSON.parse(JSON.stringify(Order_of_genes));
+
+                    // Add new nodes to cy2
+                    cy2.elements('node').remove();
+                    cy2.add(newNodes);
+                    Distances = NewDistances;
+                    console.log('NewDistances', NewDistances);
+                    // Find the maximum value
+                    let allValues = Object.values(Distances).flatMap(obj => Object.values(obj));
+                    let maxDistance = Math.max(...allValues);
+                    // Divide all elements by the maximum value
+                    for (let key in Distances) {
+                      for (let subKey in Distances[key]) {
+                        Distances[key][subKey] /= (maxDistance/25);
+                      }
+                    }
+                    updateGraphBasedOnNode(Object.keys(Distances)[0], Distances);
+                    document.getElementById('addElementsBtn').textContent = 'Generate/Compare Attractors';
+                    eventSource.close();
+                  } else {
+                    Current_iteration = Number(parseInt(event.data.split('\t')[1], 10)) || 0;
+                    counter = Math.max(Current_iteration, counter);
+                    console.log('Current_iteration: ', Current_iteration);
+                    numOfInitialStates = numOfInitialStates.replace(/\|/g, '');
+                    const denom = Number(All_progress) || 1e99;
+                    const pct = denom === 0 ? 0 : Math.round(100 * Number(counter) / denom);
+                    const to_shown = Math.min(pct, 100);
+                    document.getElementById('addElementsBtn').textContent = 'Calculating Attractors... '+to_shown.toString()+'%';
+                  }
+                  
+                };
+                eventSource.onerror = function(event) {
+                    console.error('SSE error:', event);
+                    eventSource.close();
+                };
+              } else {
+                  console.error('Failed to set input value');
+              }
+          }).catch(error => {
+              console.error('Error:', error);
+          });
+          return true;
+      }
+      });
+
+    // Function to rename the rows
+    function renameRows(myList, n) {
+      // Initialize a counter for each type of row
+      let countA = 0;
+      let countB = 0;
+      // Iterate through each row in myList
+      for (let i = 0; i < myList.length; i++) {
+        // Determine the prefix based on the index
+        let prefix = '';
+        if (i < n) {
+          prefix = 'A';
+          countA++;
+        } else {
+          prefix = 'B';
+          countB++;
+        }
+        // Add the numeric suffix (1-indexed)
+        let label = prefix + (prefix === 'A' ? countA : countB);
+        // Assign the label to the row
+        myList[i].label = label;
+      }
+      return myList;
+    }
+
+    // Function to download the attractors as tsv and png
+    function downloadAttractorsAsFile() {
+      // as png
+      const imgData = cy2.png({ output: 'base64' });
+      const link1 = document.createElement('a');
+      link1.href = 'data:image/png;base64,' + imgData;
+      link1.download = getCurrentDateTimeString()+'attractors.png';
+      document.body.appendChild(link1);
+      link1.click();
+      document.body.removeChild(link1);
+      // as tsv
+      const indexed_mRNAProfiles = renameRows(mRNAProfiles, length_of_As);
+      let dataAsText = '\t' + Order_of_genes + '\n';
+      indexed_mRNAProfiles.forEach(item => {
+        dataAsText += `${item.label}\t${item.join('\t')}\n`;
+      });
+      const blob = new Blob([dataAsText], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = getCurrentDateTimeString()+'attractors.tsv'; // Specify the filename for download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // Attach click event listener to the download button
+    document.getElementById('downloadAttractorsBtn').addEventListener('click', downloadAttractorsAsFile);
+
+    // Function to identify the type of the current network
+    function getNetworkType() {
+      let current_nodes = cy.nodes();
+      let current_f0 = [];
+      let current_edges = cy.edges();
+      let current_edge_styles = [];
+      let current_edge_labels = [];
+
+      current_edges.forEach(element => {
+        current_edge_styles.push(element._private.classes.values().next().value);
+        current_edge_labels.push(element._private.data.label)
+      })
+
+      current_nodes.forEach(element => {
+        current_f0.push(element._private.data.f0);
+      })
+
+      if (current_edge_styles.every(element => element === 'dashed') && current_edge_labels.every(element => element === '')) {
+        return 'Protein-Protein Interaction Network'
+      } else if (current_f0.every(element => element === undefined) && current_edge_styles.every(element => element === 'solid')) {
+        return 'TF-DNA Binding Network'
+      } else {
+        return 'Gene Regulatory Network'
+      }
+    }
+    
+    // Upload a GRN by the upload button
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('loading').style.display = 'block';
+
+        const reader = new FileReader();
+        const CHUNK_SIZE = 1024 * 1024; // 1MB chunks
+        let offset = 0;
+        let content = '';
+
+        reader.onload = function(e) {
+          content += e.target.result;
+          offset += CHUNK_SIZE;
+
+          if (offset < file.size) {
+            // Continue reading the next chunk
+            readNextChunk();
+          } else {
+            // Process the final content
+            try {
+              const data = JSON.parse(content);
+              const elements = [];
+
+              // Convert nodes
+              data.nodes.forEach(node => {
+                elements.push({
+                  data: {
+                    id: node.id,
+                    label: node.label,
+                    f0: node.f0,
+                    f0p: node.f0p,
+                    t1: node.t1,
+                    t2: node.t2,
+                    t3: node.t3,
+                    k: node.k,
+                    c1: node.c1,
+                    c2: node.c2,
+                    c3: node.c3,
+                    c4: node.c4,
+                    TR: node.TR,
+                    Deg: node.Deg,
+                    Lk: node.Lk,
+                  },
+                  style: {
+                    'color': node.color || 'white',
+                    'background-color': node.background_color || 'black' 
+                  }
+                });
+              });
+
+              // Convert edges
+              data.edges.forEach(edge => {
+                elements.push({
+                  data: {
+                    source: edge.source,
+                    target: edge.target,
+                    label: edge.label
+                  },
+                  style: {
+                    'line-color': edge.style[2],
+                    'target-arrow-color': edge.style[2],
+                    'opacity': edge.style[3],
+                    'target-arrow-shape': edge.style[1]
+                  },
+                  classes: `${edge.style[0]} ${edge.style[1]}`
+                });
+              });
+
+              cy.batch(() => {
+                cy.elements().remove();
+                cy.add(elements);
+              });
+
+              const layout = cy.layout({ name: 'circle',  spacingFactor: 1});
+              layout.on('layoutstop', () => {
+                document.getElementById('loading').style.display = 'none';
+              });
+
+              layout.run();
+            } catch (error) {
+              console.error('Error parsing JSON:', error);
+              document.getElementById('loading').style.display = 'none';
+            }
+            document.getElementById('fileInput').value = '';
+          }
+        };
+
+        function readNextChunk() {
+          const slice = file.slice(offset, offset + CHUNK_SIZE);
+          reader.readAsText(slice);
+        }
+
+        // Start reading the next chunk
+        readNextChunk();
+
+          // Get the time needed to do one iteration
+          // Get .json for the current GRN
+          let JS_nodes = getNodes();
+          let JS_edges = getEdges();
+          let JS_data = {
+            nodes: JS_nodes,
+            edges: JS_edges
+          };
+          let Json_data_str = JSON.stringify(JS_data, null, 2);
+          let All_progress = 0;
+          let percentage_progress = 0;
+          let numOfInitialStates = '|||1';
+          
+          if (getNetworkType() == 'Gene Regulatory Network') {
+          (async function() {
+            const result = await fetch('/runtime', {
+                method: 'POST',
+                body: JSON.stringify({ input: Json_data_str+numOfInitialStates }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const response = await result.json();
+            OneIterationTime = response.output.split('***')[1];
+          })();}
+      }
+      
+      // Identify which network, GRN, TF-DNA, or PPI, is loaded, and display it on the title
+      const intervalId = setInterval(refreshNetworkTitle, 1000);
+      setTimeout(() => clearInterval(intervalId), 10000);
+
+      });
+
+      // Function to continously updating network title
+      function refreshNetworkTitle() {
+        const titleElement = document.getElementById('network-title');
+        if (getNetworkType() =="Protein-Protein Interaction Network") {
+          titleElement.textContent = 'TF-TF Colocalization Network'
+        } else {
+          titleElement.textContent = getNetworkType();
+        }
+        updateSliderValue();
+        slider.addEventListener('input', updateSliderValue);
+      }
+      
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,547 @@
+#slider-container {
+    position: absolute;
+    top: 94%;
+    left: 75%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 190px;
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    position: absolute;
+    top: 94%;
+    left: 75%;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#sliderLabel {
+    position: absolute;
+    top: 93.5%;
+    left: 75.2%;
+    font-size: 10px;
+    color: #333;
+}
+
+#nodeModalContent input[type="range"] {
+    position: relative;
+    width: 50%;
+    margin: 5px 0;
+    appearance: none;
+    height: 5px;
+    background: #ddd;
+    border-radius: 2px;
+}
+
+#nodeModalContent input[type="range"]::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    background: #000000;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#nodeModalContent input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #000000;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 0%;
+  left: 5%;
+  flex-direction: column;
+  align-items: center;
+}
+.close {
+  color: #aaa;
+  position: absolute;
+  top: -7px;
+  left: 0px;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.param-slider {
+  margin: 15px 0;
+}
+#edgeImageDashed1 {
+  width: 1500px;
+  height: 1500px;
+  border-radius: 0px;
+  margin-top: 50px;
+  margin-left: 30%;
+  align-self: flex-start;
+  position: relative;
+  object-fit: contain;
+  z-index: 9999;
+}
+#cy {
+  position: absolute;
+  top: 2.5%;
+  left: 1%;
+  width: 63%;
+  height: 89%;
+  display: block;
+  margin-bottom: 10px;
+}
+#legend {
+    width: 18%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 2%;
+    margin-left: 0;
+    position: absolute;
+    left: 0;
+}
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.legend-line {
+    width: 50px;
+    height: 2px;
+    margin-right: 10px;
+    position: relative;
+    background-color: #000000;
+}
+.legend-dashed {
+    border-top: 2px dashed #000000;
+    background-color: transparent;
+}
+.legend-solid {
+    background-color: #000000;
+}
+.legend-triangle {
+    background-color: #000000;
+    position: relative;
+}
+.legend-triangle::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 10px solid #000000;
+    transform: rotate(90deg);
+}
+.legend-tee::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -5px;
+    width: 10px;
+    height: 2px;
+    background-color: #000000;
+    transform: rotate(90deg);
+}
+.scale-bar {
+    width: 15%;
+    height: 20px;
+    background: linear-gradient(to right, white, black);
+    border: 1px solid #000;
+    box-sizing: border-box;
+    margin-top: 0px;
+    margin-right: 5px;
+}
+.scale-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 15%;
+    font-size: 12px;
+    color: #000;
+    margin-top: 1px;
+}
+.layoutBtn {
+  position: absolute;
+  top: 96.3%; 
+  left: 52%; 
+  gap: 3px;
+  margin-bottom: 1px;
+  background-color: rgba(221, 221, 221, 0.95);
+}
+#searchContainer {
+    position: fixed;
+    top: 0.25%;
+    left: 45.25%;
+    margin-bottom: 5px;
+}
+#regulonContainer {
+    position: fixed;
+    top: 4%;
+    left: 45.25%;
+    margin-bottom: 5px;
+}
+#selectEdgeContainer {
+    position: fixed;
+    top: 7.7%;
+    left: 45.25%;
+    margin-bottom: 5px;
+}
+#downloadBtn {
+  position: absolute;
+  top: 92%;
+  left: 53%;
+}
+.save-return {
+  position: absolute;
+  top: 96.3%;
+  left: 39.5%;
+  background-color: rgba(221, 221, 221, 0.95);
+}
+.controls_3 {
+  position: absolute;
+  top: 96.3%;
+  left: 15.5%;
+  background-color: rgba(221, 221, 221, 0.95);
+}
+.controls_3 input {
+  width: 105px;
+}
+h1 {
+  position: absolute;
+  top: 0%;
+  left: 25%;
+  text-align: center;
+  margin-bottom: 200px;
+  font-size: 20px;
+}
+.controls {
+  border: 0px, black;
+  position: absolute;
+  top: 92%;
+  left: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 1px;
+  background-color: rgba(221, 221, 221, 0.95);
+}
+.controls input {
+  width: 105px;
+}
+.controls_2 {
+  position: absolute;
+  top: 96.3%;
+  left: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 1px;
+  background-color: rgba(221, 221, 221, 0.95);
+}
+.controls_2 input {
+        width: 105px;
+    }
+label, select, button {
+  margin-bottom: 5px;
+}
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#cy2 {
+  position: absolute;
+  top: 1.5%;
+  right: 0%;
+  width: 35%;
+  height: 89%;
+  padding: 10px;
+  border: 0px solid #ddd;
+}
+.right_button {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 96.4%;
+  left: 75%;
+  gap: 50px;
+  margin-bottom: 10px;
+  margin-right: 50px;
+}
+#fileInputContainer {
+    margin-bottom: 10px;
+}
+#fileInputLabel {
+    display: inline-block;
+    flex-wrap: wrap;
+    padding: 5px;
+    position: absolute;
+    top: 0.25%;
+    left: 0.25%;
+    background-color: #f0f0f0;
+    color: black;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid #888888;
+    font-size: 14px;
+    text-align: center;
+}
+#fileInputLabel:hover {
+    background-color: #e0e0e0;
+}
+#fileInput {
+    display: none;
+}
+h2 {
+  position: absolute;
+  top: 0%;
+  left: 78%;
+  text-align: center;
+  margin-bottom: 200px;
+  font-size: 20px;
+}
+.container {
+  display: flex;
+  width: 80%;
+  height: 800px;
+  border: 0px solid #ddd;
+  overflow: hidden;
+}
+.legend-2 {
+  position: absolute;
+  top: 1.5%;
+  right: 17%;
+  width: 18%;
+  display: inline-block;
+  vertical-align: top;
+}
+.legend-item2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.legend-node-black {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #000;
+    border-radius: 50%;
+}
+
+.legend-node-red {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #f00;
+    background-color: transparent;
+    border-radius: 50%;
+}
+.legend-edge {
+    width: 50px;
+    height: 2px;
+    margin-right: 10px;
+    background-color: #000000;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Outer modal content: two-column layout */
+#nodeModalContent {
+  display: flex;
+  flex-direction: row;      /* left = image, right = controls */
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  background-color: #fefefe;
+  margin: 6% auto;         /* keep modal vertical offset (adjust if using Bootstrap modal) */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+  max-width: none;
+  max-height: none;
+  box-sizing: border-box;
+  overflow: visible;        /* allow internal containers to scroll if needed */
+}
+
+/* Image column: flexible (takes remaining space) */
+#imageContainer {
+  flex: 1 1 70%;           /* grow, shrink, base 65% */
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;        /* prevents overflow from image */
+}
+
+/* Image: constrain size, preserve aspect ratio, avoid very tall images */
+#plotImage {
+  display: block;
+  max-width: 100%;
+  width: 100%;                        /* let it scale but not stretch */
+  height: auto;
+  max-height: calc(85vh - 80px);      /* leave room for padding/controls */
+  object-fit: contain;
+}
+
+#plot-controls {
+  flex: 0 1 30%;     /* allow it to grow (can shrink if space tight) */
+  max-width: 80%;
+  box-sizing: border-box;
+  padding-left: 0;
+  overflow-y: visible;     /* don't create an internal scroll */
+  max-height: none;        /* remove the height cap that forced scrolling */
+}
+
+#plot-controls .control-row {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin-bottom: 24px;
+  padding: 0;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* keep label same width so things line up */
+#plot-controls label {
+  font-size: 17px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0;
+  min-width: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+#plot-controls .control-row input[type="number"] {
+  margin-left: 10%;
+  min-width: 0;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+#plot-controls .control-row input[type="range"] {
+  margin-left: -50%;
+  min-width: 0;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+/* Range thumb (kept) */
+#nodeModalContent input[type="range"]::-webkit-slider-thumb,
+#nodeModalContent input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Close button styling (if inside #nodeModalContent) */
+#nodeModalContent .close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#nodeModalContent .close:hover,
+#nodeModalContent .close:focus {
+  color: black;
+}
+
+/* Responsive: stack vertically on narrow screens */
+@media (max-width: 768px) {
+  #nodeModalContent {
+    flex-direction: column;
+    margin: 4% auto;
+    padding: 12px;
+  }
+  #imageContainer {
+    order: 0;
+    width: 100%;
+    min-width: 0;
+  }
+  #plot-controls {
+    order: 1;
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 12px;
+    padding-left: 0;
+  }
+  #plot-controls div {
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  #plot-controls input[type="range"] {
+    width: 100px;
+  }
+  #plotImage {
+    max-height: calc(50vh); /* limit taller images on mobile */
+  }
+}
+
+#network-title {
+    margin-left: -150px;
+}
+

@@ -13,6 +13,9 @@ Use the following [anaconda](https://anaconda.org/) environment initialization f
 conda create -n EvoAlg -c conda-forge -y python=3.10 numpy pandas scipy matplotlib scikit-learn pip
 ```
 
+## Outputs
+The inferred gene regulatory network (GRN) is written to the `./result` directory. The final GRN structure is saved as `GRN_filtered_Sc_GRN_final_2.json`, and the corresponding model parameters are provided in `GRN_filtered_full_Sc_GRN_final.txt`. Intermediate and final GRN instances are serialized and stored as pickle files, while all searched or simulated GRN configurations during inference are cached in the `sys_cache` directory.
+
 ## Table of Contents
 
 ### salmon_tximport_tmm_normalize

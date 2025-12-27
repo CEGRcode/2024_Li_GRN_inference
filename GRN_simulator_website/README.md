@@ -141,7 +141,7 @@ Download both the attractor visualization and the corresponding stable-state val
 - **Solid edges** represent independent regulation and link to TF–DNA ChIP-exo signals.
 - **Dashed edges** represent synergistic regulation:
   - Labeled with a red index identifying the regulatory complex
-  - Clicking displays both IGV tracks and composite binding plots
+  - Clicking displays both IGV tracks and composite plots
 
 ---
 

@@ -146,4 +146,4 @@ Download both the attractor visualization and the corresponding stable-state val
 ---
 
 ## Notes
-This tool is intended for **hypothesis generation, network exploration, and dynamical interpretation** of regulatory interactions inferred by IAGREE. Predictions should be validated experimentally.
+This tool is intended for **network visualization, manipulation, and dynamical interpretation** of regulatory interactions inferred by SETIA. Predictions should be validated experimentally.

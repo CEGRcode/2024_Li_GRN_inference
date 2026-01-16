@@ -44,7 +44,18 @@
         </div>
         <div id="searchContainer">
           <label for="nodeSearchInput">Search for Gene:</label>
-          <input type="text" id="nodeSearchInput" placeholder="Enter gene name" style="width: 130px">
+
+          <input
+            type="text"
+            id="nodeSearchInput"
+            placeholder="Enter gene name"
+            style="width: 130px"
+            list="geneSuggestions"
+            autocomplete="off"
+          >
+
+          <datalist id="geneSuggestions"></datalist>
+
           <button id="searchButton">Find Gene</button>
         </div>
         <div id="regulonContainer">
@@ -524,35 +535,70 @@
       updateSliderValue();
       slider.addEventListener('input', updateSliderValue);
 
-      // Get the node name from the input
-      document.getElementById('searchButton').addEventListener('click', function() {
-      var nodeName = document.getElementById('nodeSearchInput').value.trim();
-      if (nodeName === '') {
-        alert('Please enter a node name.');
-        return;
+      // Build a cached list of gene IDs from Cytoscape (call after cy is ready and data loaded)
+      let geneIds = [];
+      function refreshGeneIds() {
+        geneIds = cy.nodes().map(n => String(n.data('id') || '')).filter(Boolean);
       }
-      // Deselect any currently selected nodes
-      cy.nodes().unselect();
-      // Find the node by name
-      var node = cy.nodes().filter(function(ele) {
-        return ele.data('id') === nodeName.toUpperCase();
+      refreshGeneIds();
+
+      // Update datalist options based on current input
+      const inputEl = document.getElementById('nodeSearchInput');
+      const listEl  = document.getElementById('geneSuggestions');
+
+      function updateSuggestions() {
+        const q = inputEl.value.trim().toUpperCase();
+        listEl.innerHTML = ''; // clear old options
+
+        if (!q) return;
+
+        // filter matches (contains); change to startsWith if you prefer
+        const matches = geneIds
+          .filter(id => id.toUpperCase().includes(q))
+          .slice(0, 30); // limit to avoid huge dropdown
+
+        for (const m of matches) {
+          const opt = document.createElement('option');
+          opt.value = m;              // what gets filled into the input when selected
+          listEl.appendChild(opt);
+        }
+      }
+
+      inputEl.addEventListener('input', updateSuggestions);
+
+      // Optional: press Enter to search
+      inputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          document.getElementById('searchButton').click();
+        }
       });
-      // If the node exists, select it
-      if (node.length > 0) {
-        node.select();
-        // Optionally, you can zoom to the node
-        cy.animate({
-         center: {
-            eles: node
-          },
-          zoom: 2 // Adjust zoom level as needed
-        }, {
-          duration: 500 // Duration of the animation in milliseconds
-        });
-      } else {
-        alert('Node not found.');
-      }
-    });
+
+      // Get the node name from the input
+      document.getElementById('searchButton').addEventListener('click', function () {
+        var nodeName = document.getElementById('nodeSearchInput').value.trim();
+        if (nodeName === '') {
+          alert('Please enter a node name.');
+          return;
+        }
+
+        const query = nodeName.toUpperCase();
+
+        cy.nodes().unselect();
+
+        // faster than filter(fn) for large graphs
+        const node = cy.getElementById(query);
+
+        if (node && node.length > 0) {
+          node.select();
+          cy.animate(
+            { center: { eles: node }, zoom: 2 },
+            { duration: 500 }
+          );
+        } else {
+          alert('Node not found.');
+        }
+      });
 
       // Functions to get nodes and edges
       function getNodes() {
@@ -1904,6 +1950,7 @@
               document.getElementById('loading').style.display = 'none';
             }
             document.getElementById('fileInput').value = '';
+            refreshGeneIds();
           }
         };
 

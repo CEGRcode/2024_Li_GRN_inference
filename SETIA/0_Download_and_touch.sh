@@ -4,7 +4,12 @@
 
 cd ./data
 
-# Downlad YEP data
+# Download RNAseq data
+wget -O GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz https://ftp.ncbi.nlm.nih.gov/geo/series/GSE317nnn/GSE317148/suppl/GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz
+gunzip -k GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz
+mv GSE317148_GRN_Sc_TMM_normalized_CPM.txt GRN_Sc_TMM_normalized_CPM.txt
+
+# Download YEP data
 wget -r -np -nH --cut-dirs=5 --timestamping --reject "index.html*" "https://www.datacommons.psu.edu/download/eberly/pughlab/yeast-epigenome-project/"
 
 mkdir ./masterNoTag_20180928

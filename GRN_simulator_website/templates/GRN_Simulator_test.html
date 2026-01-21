@@ -60,7 +60,18 @@
         </div>
         <div id="regulonContainer">
           <label for="regulonSearchInput">Search regulon of:</label>
-          <input type="text" id="regulonSearchInput" placeholder="Empty to reset" style="width: 130px">
+        
+          <input
+            type="text"
+            id="regulonSearchInput"
+            placeholder="Empty to reset"
+            style="width: 130px"
+            list="regulonSuggestions"
+            autocomplete="off"
+          >
+        
+          <datalist id="regulonSuggestions"></datalist>
+        
           <button id="regulonrRearchButton">Search</button>
         </div>
         <div id="selectEdgeContainer">
@@ -102,11 +113,31 @@
   <div class="controls">
     <div>
       <label for="sourceNode">Regulator:</label>
-      <input type="text" id="sourceNode" placeholder="Enter regulator" style="width: 125px">
+    
+      <input
+        type="text"
+        id="sourceNode"
+        placeholder="Enter regulator"
+        style="width: 125px"
+        list="sourceNodeSuggestions"
+        autocomplete="off"
+      >
+    
+      <datalist id="sourceNodeSuggestions"></datalist>
     </div>
     <div>
       <label for="targetNode">Target Gene:</label>
-      <input type="text" id="targetNode" placeholder="Enter target gene" style="width: 135px">
+    
+      <input
+        type="text"
+        id="targetNode"
+        placeholder="Enter target gene"
+        style="width: 135px"
+        list="targetNodeSuggestions"
+        autocomplete="off"
+      >
+    
+      <datalist id="targetNodeSuggestions"></datalist>
     </div>
     <div>
       <label for="edgeLabel">Edge Label:</label>
@@ -149,15 +180,32 @@
   <div class="controls_2">
     <div>
       <label for="deleteNode">Gene to Delete:</label>
-      <input type="text" id="deleteNode" placeholder="Enter gene" style="width: 90px">
+    
+      <input
+        type="text"
+        id="deleteNode"
+        placeholder="Enter gene"
+        style="width: 90px"
+        list="deleteNodeSuggestions"
+        autocomplete="off"
+      >
+    
+      <datalist id="deleteNodeSuggestions"></datalist>
+    
       <button id="deleteNodeBtn">Delete Gene</button>
     </div>
   </div>
   <div class="controls_3">
     <label for="deleteSourceNode">Regulator:</label>
-    <input type="text" id="deleteSourceNode" placeholder="Enter regulator" style="width: 125px">
+    <input type="text" id="deleteSourceNode" placeholder="Enter regulator" style="width: 125px"
+           list="deleteSourceSuggestions" autocomplete="off">
+    <datalist id="deleteSourceSuggestions"></datalist>
+  
     <label for="deleteTargetNode">Target Gene:</label>
-    <input type="text" id="deleteTargetNode" placeholder="Enter target gene" style="width: 135px">
+    <input type="text" id="deleteTargetNode" placeholder="Enter target gene" style="width: 135px"
+           list="deleteTargetSuggestions" autocomplete="off">
+    <datalist id="deleteTargetSuggestions"></datalist>
+  
     <button id="deleteEdgeBtn">Delete Edge</button>
   </div>
 
@@ -399,6 +447,9 @@
 
       cy.layout({ name: 'concentric', spacingFactor: 1 }).run();
 
+      const sourceAuto = attachGeneAutocomplete('sourceNode', 'sourceNodeSuggestions');
+      const targetAuto = attachGeneAutocomplete('targetNode', 'targetNodeSuggestions');
+
       // Function to add or update an edge
       function addOrUpdateEdge(sourceNode, targetNode, edgeLabel, edgeStyle, arrowShape) {
         // Check if source and target nodes exist
@@ -447,6 +498,20 @@
           alert('Please enter source and target node names.');
         }
       });
+
+      const deleteAuto = attachGeneAutocomplete('deleteNode', 'deleteNodeSuggestions');
+      const deleteSourceAuto = attachGeneAutocomplete('deleteSourceNode', 'deleteSourceSuggestions');
+      const deleteTargetAuto = attachGeneAutocomplete('deleteTargetNode', 'deleteTargetSuggestions');
+
+      function refreshAllAutocompletes() {
+        nodeAuto.update();
+        regulonAuto.update();
+        sourceAuto.update();
+        targetAuto.update();
+        deleteAuto.update();
+        deleteSourceAuto.update();
+        deleteTargetAuto.update();
+      }
 
       // Function to delete a node
       function deleteNode(nodeId) {
@@ -812,6 +877,37 @@
       function resetShowAll() {
         cy.elements().style('display', 'element');
       }
+
+      function attachGeneAutocomplete(inputId, datalistId, { limit = 30, mode = "includes" } = {}) {
+        const inputEl = document.getElementById(inputId);
+        const listEl  = document.getElementById(datalistId);
+
+        function update() {
+          const q = inputEl.value.trim().toUpperCase();
+          listEl.innerHTML = '';
+          if (!q) return;
+
+          const matches = geneIds
+            .filter(id => {
+              const s = id.toUpperCase();
+              return mode === "startsWith" ? s.startsWith(q) : s.includes(q);
+            })
+            .slice(0, limit);
+
+          for (const m of matches) {
+            const opt = document.createElement('option');
+            opt.value = m;
+            listEl.appendChild(opt);
+          }
+        }
+
+        inputEl.addEventListener('input', update);
+        return { update };
+      }
+
+      // Attach to BOTH boxes
+      const nodeAuto    = attachGeneAutocomplete('nodeSearchInput',    'geneSuggestions');
+      const regulonAuto = attachGeneAutocomplete('regulonSearchInput', 'regulonSuggestions');
 
       // ---- wiring up your input + button ----
       (function wireRegulonSearch() {
@@ -1951,6 +2047,7 @@
             }
             document.getElementById('fileInput').value = '';
             refreshGeneIds();
+            refreshAllAutocompletes();
           }
         };
 

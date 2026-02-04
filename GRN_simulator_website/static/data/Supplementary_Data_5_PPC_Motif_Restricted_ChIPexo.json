@@ -1,0 +1,10829 @@
+{
+  "nodes": [
+	{
+	  "id": "AFT1",
+	  "label": "AFT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SKN7",
+	  "label": "SKN7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT7",
+	  "label": "SPT7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MED2",
+	  "label": "MED2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SWI6",
+	  "label": "SWI6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CBF1",
+	  "label": "CBF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PHD1",
+	  "label": "PHD1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ADA2",
+	  "label": "ADA2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MIG1",
+	  "label": "MIG1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HMS2",
+	  "label": "HMS2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "YAP1",
+	  "label": "YAP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "STB4",
+	  "label": "STB4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ECM22",
+	  "label": "ECM22",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RLM1",
+	  "label": "RLM1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "STE12",
+	  "label": "STE12",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MOT3",
+	  "label": "MOT3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NUT1",
+	  "label": "NUT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SGF73",
+	  "label": "SGF73",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SOH1",
+	  "label": "SOH1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SWI3",
+	  "label": "SWI3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "UME1",
+	  "label": "UME1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "STP1",
+	  "label": "STP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SWI4",
+	  "label": "SWI4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RGM1",
+	  "label": "RGM1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "STP2",
+	  "label": "STP2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ASG1",
+	  "label": "ASG1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SWI1",
+	  "label": "SWI1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RGR1",
+	  "label": "RGR1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NUT2",
+	  "label": "NUT2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MIG2",
+	  "label": "MIG2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SNF6",
+	  "label": "SNF6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MCM1",
+	  "label": "MCM1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "EAF6",
+	  "label": "EAF6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT8",
+	  "label": "SPT8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SET1",
+	  "label": "SET1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "LYS20",
+	  "label": "LYS20",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RAP1",
+	  "label": "RAP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SIR3",
+	  "label": "SIR3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ESS1",
+	  "label": "ESS1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SMD1",
+	  "label": "SMD1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF3",
+	  "label": "TAF3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NGG1",
+	  "label": "NGG1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TDA9",
+	  "label": "TDA9",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GCN5",
+	  "label": "GCN5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NCB2",
+	  "label": "NCB2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFC7",
+	  "label": "TFC7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT2",
+	  "label": "SPT2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SFP1",
+	  "label": "SFP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PRP45",
+	  "label": "PRP45",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RIF1",
+	  "label": "RIF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ARP7",
+	  "label": "ARP7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TOP1",
+	  "label": "TOP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "IES6",
+	  "label": "IES6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF4",
+	  "label": "TAF4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BUR6",
+	  "label": "BUR6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HOS2",
+	  "label": "HOS2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RIF2",
+	  "label": "RIF2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GZF3",
+	  "label": "GZF3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PUT3",
+	  "label": "PUT3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ESC2",
+	  "label": "ESC2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SWC7",
+	  "label": "SWC7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ROX1",
+	  "label": "ROX1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HPC2",
+	  "label": "HPC2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MET4",
+	  "label": "MET4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NHP10",
+	  "label": "NHP10",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RSC1",
+	  "label": "RSC1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PDR3",
+	  "label": "PDR3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CAD1",
+	  "label": "CAD1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "REF2",
+	  "label": "REF2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NRM1",
+	  "label": "NRM1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT3",
+	  "label": "SPT3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT21",
+	  "label": "SPT21",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CKB2",
+	  "label": "CKB2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MET31",
+	  "label": "MET31",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "DAT1",
+	  "label": "DAT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SSN8",
+	  "label": "SSN8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NAB2",
+	  "label": "NAB2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFC3",
+	  "label": "TFC3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MLP1",
+	  "label": "MLP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "DST1",
+	  "label": "DST1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HDA1",
+	  "label": "HDA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BDF2",
+	  "label": "BDF2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CFT1",
+	  "label": "CFT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GLN3",
+	  "label": "GLN3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SRB4",
+	  "label": "SRB4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SGF29",
+	  "label": "SGF29",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CCA1",
+	  "label": "CCA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MFT1",
+	  "label": "MFT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RSC58",
+	  "label": "RSC58",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "REB1",
+	  "label": "REB1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF9",
+	  "label": "TAF9",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TUP1",
+	  "label": "TUP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RVB1",
+	  "label": "RVB1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "FUN30",
+	  "label": "FUN30",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CKA1",
+	  "label": "CKA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SIR4",
+	  "label": "SIR4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "FKH1",
+	  "label": "FKH1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CSN12",
+	  "label": "CSN12",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SIF2",
+	  "label": "SIF2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPC25",
+	  "label": "RPC25",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "YNG2",
+	  "label": "YNG2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "EAF5",
+	  "label": "EAF5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HAP3",
+	  "label": "HAP3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PAP1",
+	  "label": "PAP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HST1",
+	  "label": "HST1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "YCS4",
+	  "label": "YCS4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PDR1",
+	  "label": "PDR1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SFH1",
+	  "label": "SFH1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SGF11",
+	  "label": "SGF11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "THP2",
+	  "label": "THP2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "IFH1",
+	  "label": "IFH1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CYC8",
+	  "label": "CYC8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "STB3",
+	  "label": "STB3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CKA2",
+	  "label": "CKA2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ESA1",
+	  "label": "ESA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CTDSER7",
+	  "label": "CTDSER7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT15",
+	  "label": "SPT15",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFA1",
+	  "label": "TFA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFA2",
+	  "label": "TFA2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFB4",
+	  "label": "TFB4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFB2",
+	  "label": "TFB2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFB1",
+	  "label": "TFB1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TOA1",
+	  "label": "TOA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFB3",
+	  "label": "TFB3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CTDSER5",
+	  "label": "CTDSER5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "KIN28",
+	  "label": "KIN28",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SSL2",
+	  "label": "SSL2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RAD3",
+	  "label": "RAD3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SUA7",
+	  "label": "SUA7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFG1",
+	  "label": "TFG1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SUB1",
+	  "label": "SUB1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SSL1",
+	  "label": "SSL1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CCL1",
+	  "label": "CCL1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MED4",
+	  "label": "MED4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ROX3",
+	  "label": "ROX3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPO31",
+	  "label": "RPO31",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "POB3",
+	  "label": "POB3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPC19",
+	  "label": "RPC19",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BRF1",
+	  "label": "BRF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NHP6A",
+	  "label": "NHP6A",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RET1",
+	  "label": "RET1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPC34",
+	  "label": "RPC34",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPC53",
+	  "label": "RPC53",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPC17",
+	  "label": "RPC17",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TFC8",
+	  "label": "TFC8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RAD9",
+	  "label": "RAD9",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPC37",
+	  "label": "RPC37",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BDP1",
+	  "label": "BDP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RSC3",
+	  "label": "RSC3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TBF1",
+	  "label": "TBF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RSC8",
+	  "label": "RSC8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RSC9",
+	  "label": "RSC9",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HTL1",
+	  "label": "HTL1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ORC5",
+	  "label": "ORC5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ORC6",
+	  "label": "ORC6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ORC2",
+	  "label": "ORC2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SIR2",
+	  "label": "SIR2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ORC4",
+	  "label": "ORC4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RNA14",
+	  "label": "RNA14",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RTT103",
+	  "label": "RTT103",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PCF11",
+	  "label": "PCF11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HAL9",
+	  "label": "HAL9",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CSE2",
+	  "label": "CSE2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "STB5",
+	  "label": "STB5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CIN5",
+	  "label": "CIN5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "YRR1",
+	  "label": "YRR1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PGD1",
+	  "label": "PGD1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GAL11",
+	  "label": "GAL11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SOK2",
+	  "label": "SOK2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MED11",
+	  "label": "MED11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "EAF1",
+	  "label": "EAF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT20",
+	  "label": "SPT20",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HSF1",
+	  "label": "HSF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF12",
+	  "label": "TAF12",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BRE1",
+	  "label": "BRE1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SIN4",
+	  "label": "SIN4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "UBP8",
+	  "label": "UBP8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF10",
+	  "label": "TAF10",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF5",
+	  "label": "TAF5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SRB5",
+	  "label": "SRB5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SUM1",
+	  "label": "SUM1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TPK2",
+	  "label": "TPK2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SRB6",
+	  "label": "SRB6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF6",
+	  "label": "TAF6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GTS1",
+	  "label": "GTS1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SSN2",
+	  "label": "SSN2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF8",
+	  "label": "TAF8",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF13",
+	  "label": "TAF13",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF1",
+	  "label": "TAF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HMO1",
+	  "label": "HMO1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "FHL1",
+	  "label": "FHL1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GOD1",
+	  "label": "GOD1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HAP1",
+	  "label": "HAP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "FKH2",
+	  "label": "FKH2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MCM16",
+	  "label": "MCM16",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MIF2",
+	  "label": "MIF2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NKP2",
+	  "label": "NKP2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NKP1",
+	  "label": "NKP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "INO2",
+	  "label": "INO2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "INO4",
+	  "label": "INO4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "URC2",
+	  "label": "URC2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RFX1",
+	  "label": "RFX1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BAS1",
+	  "label": "BAS1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "KAR4",
+	  "label": "KAR4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "DIG1",
+	  "label": "DIG1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SKO1",
+	  "label": "SKO1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "YAP7",
+	  "label": "YAP7",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "LEU3",
+	  "label": "LEU3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT10",
+	  "label": "SPT10",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HIR2",
+	  "label": "HIR2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF11",
+	  "label": "TAF11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPB3",
+	  "label": "RPB3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPB2",
+	  "label": "RPB2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "ACE2",
+	  "label": "ACE2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RXT3",
+	  "label": "RXT3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TEA1",
+	  "label": "TEA1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CHA4",
+	  "label": "CHA4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RXT1",
+	  "label": "RXT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "PHO23",
+	  "label": "PHO23",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SIN3",
+	  "label": "SIN3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SAP30",
+	  "label": "SAP30",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MBP1",
+	  "label": "MBP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPD3",
+	  "label": "RPD3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "UME6",
+	  "label": "UME6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SNF11",
+	  "label": "SNF11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RXT2",
+	  "label": "RXT2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "H4K12AC",
+	  "label": "H4K12AC",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "H3K9AC",
+	  "label": "H3K9AC",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "H3",
+	  "label": "H3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "H2B",
+	  "label": "H2B",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "CLN1",
+	  "label": "CLN1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SCC2",
+	  "label": "SCC2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SGV1",
+	  "label": "SGV1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "DBF4",
+	  "label": "DBF4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "LYS14",
+	  "label": "LYS14",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "OAF3",
+	  "label": "OAF3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GCN4",
+	  "label": "GCN4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HAP2",
+	  "label": "HAP2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GCR1",
+	  "label": "GCR1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "VID22",
+	  "label": "VID22",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "HST3",
+	  "label": "HST3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "GIS1",
+	  "label": "GIS1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "BYE1",
+	  "label": "BYE1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "MED6",
+	  "label": "MED6",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPP1",
+	  "label": "SPP1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SPT5",
+	  "label": "SPT5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPH1",
+	  "label": "RPH1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPB9",
+	  "label": "RPB9",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "AZF1",
+	  "label": "AZF1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPB11",
+	  "label": "RPB11",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "YOX1",
+	  "label": "YOX1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "SWI5",
+	  "label": "SWI5",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "TAF2",
+	  "label": "TAF2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RGT1",
+	  "label": "RGT1",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "RPN4",
+	  "label": "RPN4",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "H2BK123UB",
+	  "label": "H2BK123UB",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "H3K4ME3",
+	  "label": "H3K4ME3",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	},
+	{
+	  "id": "NRG2",
+	  "label": "NRG2",
+	  "sua7Occupancy": 1,
+	  "f0": 0
+  	}
+  ],
+  "edges": [
+	{
+	  "source": "MOT3",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB3",
+	  "target": "EAF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TFB4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "SSL1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "RSC58",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC8",
+	  "target": "RSC58",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC3",
+	  "target": "RSC58",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "RSC58",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "RSC58",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HTL1",
+	  "target": "RSC58",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC58",
+	  "target": "RSC3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC8",
+	  "target": "RSC3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "RSC3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC9",
+	  "target": "RSC3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HTL1",
+	  "target": "RSC3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "RSC3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "MCM1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "MCM1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "EAF6",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB3",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "ADA2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB3",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSN2",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UBP8",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC8",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CFT1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SIN3",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "EAF6",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HAL9",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NHP6A",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN4",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "ARP7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "RNA14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RTT103",
+	  "target": "RNA14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PCF11",
+	  "target": "RNA14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "RNA14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGM1",
+	  "target": "RNA14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CFT1",
+	  "target": "RNA14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "TFB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CSE2",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB5",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PUT3",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YRR1",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GAL11",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "HAL9",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "SFP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "SFP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "SFP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF2",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF8",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TFA1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "RAD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "RAD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "RAD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "RAD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "RAD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "RAD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED11",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC8",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PUT3",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NHP6A",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB3",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HAL9",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CFT1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "EAF6",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SIN3",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HMS2",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CSE2",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "YNG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOA1",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF1",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF12",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NCB2",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF5",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TAF8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "HMO1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB3",
+	  "target": "HMO1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "HMO1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GOD1",
+	  "target": "HMO1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CFT1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "EAF6",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RFX1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "SGF11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC58",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HST1",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC8",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NKP2",
+	  "target": "RSC1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSN2",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB6",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED6",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED11",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "MED2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RNA14",
+	  "target": "RTT103",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "HAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "SWI4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CFT1",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CKB2",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RFX1",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NHP6A",
+	  "target": "PHD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TPK2",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF9",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF6",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED11",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UBP8",
+	  "target": "GCN5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPC25",
+	  "target": "RET1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPC17",
+	  "target": "RET1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPC34",
+	  "target": "RET1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUM1",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB5",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MET31",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF9",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSN2",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UBP8",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED11",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HMS2",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF6",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "PGD1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "FKH2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "FKH2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF9",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UBP8",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HMS2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TPK2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "MED11",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MET31",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED11",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TPK2",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUM1",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF6",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UBP8",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF9",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "TAF10",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RFX1",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NHP6A",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "RAP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF2",
+	  "target": "SPT8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "RFX1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STE12",
+	  "target": "KAR4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOA1",
+	  "target": "SSL2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOA1",
+	  "target": "NCB2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "NCB2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "NCB2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MBP1",
+	  "target": "NRM1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI4",
+	  "target": "NRM1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "NRM1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "YRR1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "YRR1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPH1",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "AZF1",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "CYC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF12",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOA1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF2",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NCB2",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF8",
+	  "target": "TAF5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CSE2",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "SWI3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CKB2",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STB3",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NHP6A",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "EAF6",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RFX1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NUT2",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED6",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CFT1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "RIF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "PUT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "PUT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "LYS14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "LYS14",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YRR1",
+	  "target": "OAF3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "SUA7",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "FKH1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF5",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF2",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOA1",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPB11",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF6",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NCB2",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF8",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF12",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TAF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HAP2",
+	  "target": "GCN4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "GCN4",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "STP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "STP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "STP1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TFG1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PUT3",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HAL9",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HMS2",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YRR1",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CSE2",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB6",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GAL11",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSN2",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "UBP8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "SGF29",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "SGF29",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "SGF29",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "SGF29",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ASG1",
+	  "target": "SGF29",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED6",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CSE2",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "HMS2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPB9",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "KIN28",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HST3",
+	  "target": "VID22",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "VID22",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "VID22",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "VID22",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "VID22",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "VID22",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "MOT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "MOT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NKP2",
+	  "target": "MOT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "MOT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGM1",
+	  "target": "MOT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MET31",
+	  "target": "MOT3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSN2",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT21",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI4",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HMS2",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HTL1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CYC8",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT2",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPH1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "AZF1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOP1",
+	  "target": "MED6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YRR1",
+	  "target": "CSE2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "STB5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "STB5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "STB5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SOK2",
+	  "target": "STB5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "STB5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YRR1",
+	  "target": "STB5",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "PHO23",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPD3",
+	  "target": "PHO23",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC3",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NHP6A",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HTL1",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HAL9",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC1",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RSC58",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "RSC8",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "NKP2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI4",
+	  "target": "MET31",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "MET31",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "MET31",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPC25",
+	  "target": "RPC34",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPC19",
+	  "target": "RPC34",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RET1",
+	  "target": "RPC34",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BRF1",
+	  "target": "RPC19",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RPC34",
+	  "target": "RPC19",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDP1",
+	  "target": "RPC19",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RFX1",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "SNF6",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "STP1",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "NHP6A",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "TBF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "REB1",
+	  "target": "TBF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TBF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "HST3",
+	  "target": "TBF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "VID22",
+	  "target": "TBF1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RIF2",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAP1",
+	  "target": "STB3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SIN3",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH2",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NRM1",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SAP30",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "FKH1",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI4",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHO23",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "RPD3",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF1",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RAD3",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF12",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB4",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "NCB2",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TOA1",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF8",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFB3",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF5",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "KIN28",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA2",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "CCL1",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF3",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SUA7",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFA1",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TFG1",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL1",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SSL2",
+	  "target": "TAF2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RTT103",
+	  "target": "CFT1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PCF11",
+	  "target": "CFT1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MOT3",
+	  "target": "CFT1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RNA14",
+	  "target": "CFT1",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UBP8",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PGD1",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED4",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SWI3",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED11",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ARP7",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF10",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#F7F700"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YNG2",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "RGR1",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SPT8",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "BDF2",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED6",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MCM1",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF73",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "YRR1",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF11",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "MED2",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF6",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SNF11",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TPK2",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SGF29",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TAF9",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "ADA2",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "GCN5",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SRB4",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#00A86B"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "SFP1",
+	  "target": "NUT2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TUP1",
+	  "target": "NRG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "PHD1",
+	  "target": "NRG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#FFA500"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "UME6",
+	  "target": "NRG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle"
+	,
+		"#000000"
+	,
+		"1"
+	  ]
+  	},
+	{
+	  "source": "TBF1",
+	  "target": "NRG2",
+	  "label": "",
+	  "style": [
+		"dashed",
+		"triangle",
+		"#DC143C"
+	,
+		"1"
+	  ]
+  	}
+  ]
+}

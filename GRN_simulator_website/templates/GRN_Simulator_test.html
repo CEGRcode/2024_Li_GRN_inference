@@ -107,8 +107,26 @@
       <h2>Fixed-point Attractors</h2>
   </div>
   <div id="fileInputContainer">
-      <label for="fileInput" id="fileInputLabel">Load GRN from .json</label>
-      <input type="file" id="fileInput" />
+    <!-- Button 1: Upload -->
+    <label for="fileInput" id="uploadBtn" class="toolbarBtn">Load GRN from .json</label>
+    <input type="file" id="fileInput" accept=".json" />
+  
+    <!-- Plain text label (NOT a button) -->
+    <span id="presetLabel">Load preset:</span>
+  
+    <select id="presetSelect">
+      <option value="" selected disabled>Choose…</option>
+      <option value="tf_dna">TF-DNA</option>
+      <option value="ppc_motif">PPC_motif</option>
+      <option value="ppc_all">PPC_all</option>
+      <option value="grn_a">GRN A</option>
+      <option value="grn_b">GRN B</option>
+      <option value="grn_c">GRN C</option>
+      <option value="grn_d">GRN D</option>
+    </select>
+  
+    <!-- Button 2: Confirm -->
+    <button id="presetLoadBtn" type="button" class="toolbarBtn">Load</button>
   </div>
   <div class="controls">
     <div>
@@ -2090,17 +2108,132 @@
 
       });
 
-      // Function to continously updating network title
-      function refreshNetworkTitle() {
-        const titleElement = document.getElementById('network-title');
-        if (getNetworkType() =="Protein-Protein Interaction Network") {
-          titleElement.textContent = 'TF-TF Colocalization Network'
-        } else {
-          titleElement.textContent = getNetworkType();
-        }
-        updateSliderValue();
-        slider.addEventListener('input', updateSliderValue);
+      // ------------------------------------------------------------
+    // Preset loader: dropdown -> fetch ./static/data/<file>.json -> load into Cytoscape
+    // ------------------------------------------------------------
+
+    // Map dropdown values to files under ./static/data
+    const PRESET_PATHS = {
+      tf_dna: './static/data/Supplementary_Data_3_TF_Gene_Promoter_Binding_Network_ChIPexo.json',
+      ppc_all: './static/data/Supplementary_Data_4_PPC_All_Bound_Sites_ChIPexo.json',
+      ppc_motif:   './static/data/Supplementary_Data_5_PPC_Motif_Restricted_ChIPexo.json',
+      grn_a: './static/data/Supplementary_Data_2_SETIA_Unconstraind_GRN.json',
+      grn_b: './static/data/Supplementary_Data_6_GRN_B_TF_Binding_or_Coexpression.json',
+      grn_c: './static/data/Supplementary_Data_7_GRN_C_TF_Binding.json',
+      grn_d: './static/data/Supplementary_Data_8_GRN_D_TF_Binding_and_Motif.json'
+    };
+
+    // Reuse your existing conversion logic (factor out so both upload + preset use it)
+    function loadNetworkJsonIntoCy(data) {
+      const elements = [];
+
+      // Convert nodes
+      data.nodes.forEach(node => {
+        elements.push({
+          data: {
+            id: node.id,
+            label: node.label,
+            f0: node.f0,
+            f0p: node.f0p,
+            t1: node.t1,
+            t2: node.t2,
+            t3: node.t3,
+            k: node.k,
+            c1: node.c1,
+            c2: node.c2,
+            c3: node.c3,
+            c4: node.c4,
+            TR: node.TR,
+            Deg: node.Deg,
+            Lk: node.Lk,
+          },
+          style: {
+            'color': node.color || 'white',
+            'background-color': node.background_color || 'black'
+          }
+        });
+      });
+
+      // Convert edges
+      data.edges.forEach(edge => {
+        elements.push({
+          data: {
+            source: edge.source,
+            target: edge.target,
+            label: edge.label
+          },
+          style: {
+            'line-color': edge.style[2],
+            'target-arrow-color': edge.style[2],
+            'opacity': edge.style[3],
+            'target-arrow-shape': edge.style[1]
+          },
+          classes: `${edge.style[0]} ${edge.style[1]}`
+        });
+      });
+
+      // Replace network
+      cy.batch(() => {
+        cy.elements().remove();
+        cy.add(elements);
+      });
+
+      // Layout + hide loading on completion
+      const layout = cy.layout({ name: 'circle', spacingFactor: 1 });
+      layout.on('layoutstop', () => {
+        document.getElementById('loading').style.display = 'none';
+      });
+      layout.run();
+
+      // Refresh your UI bits
+      refreshGeneIds();
+      refreshAllAutocompletes();
+
+      // Same title refresh logic you already use
+      const intervalId = setInterval(refreshNetworkTitle, 1000);
+      setTimeout(() => clearInterval(intervalId), 10000);
+    }
+
+    // Main function: load selected preset
+    async function loadPresetFromDropdown() {
+      const key = document.getElementById('presetSelect').value;
+      if (!key || !(key in PRESET_PATHS)) {
+        alert('Please choose a preset network first.');
+        return;
       }
+
+      document.getElementById('loading').style.display = 'block';
+
+      try {
+        const res = await fetch(PRESET_PATHS[key], { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Failed to fetch ${PRESET_PATHS[key]} (${res.status})`);
+
+        const data = await res.json();
+        loadNetworkJsonIntoCy(data);
+
+      } catch (err) {
+        console.error('Error loading preset network:', err);
+        document.getElementById('loading').style.display = 'none';
+        alert(`Could not load preset network.\n${err.message}`);
+      }
+    }
+
+    // Hook up the "Load" button
+    document.getElementById('presetLoadBtn').addEventListener('click', loadPresetFromDropdown);
+
+
+    // Function to continously updating network title
+    function refreshNetworkTitle() {
+      const titleElement = document.getElementById('network-title');
+      if (getNetworkType() =="Protein-Protein Interaction Network") {
+        titleElement.textContent = 'TF-TF Colocalization Network';
+        cy.nodes().style('shape', 'pentagon');
+      } else {
+        titleElement.textContent = getNetworkType();
+      }
+      updateSliderValue();
+      slider.addEventListener('input', updateSliderValue);
+    }
       
     });
   </script>

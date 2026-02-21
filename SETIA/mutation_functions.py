@@ -156,15 +156,21 @@ def HammingMutation_2(n, strings, TF_DNA, diff_genes, max_attempts=1000):
             return candidate
     return False
 
-def HammingMutation_3(n, strings, diff_genes, max_attempts=1000, network_sparsity=0.2):
+def HammingMutation_3(n, strings, TF_DNA, diff_genes, max_attempts=1000, network_sparsity=0.2):
     '''
     Find a random valid string that is not in the tested strings.
     Instead of generating all possibilities, it tries up to max_attempts times,
     and uses frequency information from the tested strings to bias candidate generation.
     '''
+
+    if TF_DNA == []:
+        TF_DNA = [0] * n
+
+    # Precompute allowed choices per position.
+    # For each position i: if TF_DNA[i] is 1, allowed digits are "1" or "2" or "0"; if 0, biased toward "0".
     allowed_choices = [
-        ("12"+"0"*int(2/network_sparsity-2)) if i in diff_genes else "0"
-        for i in range(0, n)
+        ("120" if tf == 1 else "12"+"0"*int(2/network_sparsity-2)) if i in diff_genes else "0"
+        for i, tf in enumerate(TF_DNA)
     ]
 
     for _ in range(max_attempts):
@@ -174,6 +180,9 @@ def HammingMutation_3(n, strings, diff_genes, max_attempts=1000, network_sparsit
             for allowed_strings in allowed_choices
         ]
         candidate = ''.join(candidate_chars)
+
         if candidate not in strings:
             return candidate
+
     return False
+

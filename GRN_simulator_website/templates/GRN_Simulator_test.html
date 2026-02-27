@@ -1640,7 +1640,6 @@
 
         modal.classList.add("oai-open");
         modal.setAttribute("aria-hidden", "false");
-        fixCyPointerOffset();
       }
 
       function closeOaiModal(modal){
@@ -1659,7 +1658,6 @@
 
         if (img1) img1.src = "";
         if (img2) img2.src = "";
-        fixCyPointerOffset();
       }
 
       // Generate distance plot for mRNA steady states
@@ -2009,28 +2007,22 @@
       }
       });
 
-    function fixCyPointerOffset() {
+    function purgeAllIGV() {
+      // 1) Ask IGV to remove any browsers it knows about (best)
       try {
-        cy.resize();
-        cy.renderer().invalidateContainerClientCoordsCache();
-      } catch (e) {}
+        if (window.igv) {
+          if (typeof igv.removeAllBrowsers === "function") igv.removeAllBrowsers();
+          // some versions only support removeBrowser(browser), but removeAllBrowsers is the most common
+        }
+      } catch (e) {
+        console.warn("[IGV purge] removeAllBrowsers failed:", e);
+      }
 
-      try {
-        cy2.resize();
-        cy2.renderer().invalidateContainerClientCoordsCache();
-      } catch (e) {}
-
-      // Run again shortly after in case layout/scrollbar settles late (IGV/image does this)
-      setTimeout(() => {
-        try {
-          cy.resize();
-          cy.renderer().invalidateContainerClientCoordsCache();
-        } catch (e) {}
-        try {
-          cy2.resize();
-          cy2.renderer().invalidateContainerClientCoordsCache();
-        } catch (e) {}
-      }, 120);
+      // 2) Hard clear both containers (guarantees DOM is wiped)
+      const solid = document.getElementById("igv-container-solid");
+      const dashed = document.getElementById("igv-container-dashed");
+      if (solid) solid.replaceChildren();
+      if (dashed) dashed.replaceChildren();
     }
 
     // Function to rename the rows
@@ -2375,7 +2367,6 @@
         if (window.cy2) { cy2.resize(); cy2.fit(undefined, 30); }
       }, 200);
     });
-      fixCyPointerOffset();
     });
 
     // Robust close: works even if modals are appended later
@@ -2408,7 +2399,6 @@
           if (img1) img1.src = "";
           if (img2) img2.src = "";
         }
-      fixCyPointerOffset();
     });
   </script>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Gene Regulatory Network </title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/igv@2.9.4/dist/igv.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -18,33 +18,38 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div id="loading" style="display: none; position: fixed; top: 50%; left: 33%; transform: translate(-50%, -50%); z-index: 9999; background: white; padding: 10px; border: 1px solid black;">
-      Loading...
-    </div>
-    <div id="cy"></div>
-    <div id="legend">
-      <div class="legend-item">
-        <div class="legend-line legend-solid legend-triangle"></div>
-        <span>Independent activation</span>
-      </div>
-      <div class="legend-item">
-          <div class="legend-line legend-dashed">
-              <div class="legend-triangle"></div>
-          </div>
-          <span>Synergistic activation</span>
-      </div>
-        <div class="legend-item">
-            <div class="legend-line legend-solid legend-tee"></div>
-            <span>Independent inhibition</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-line legend-dashed legend-tee"></div>
-            <span>Synergistic inhibition</span>
-        </div>
-        <div id="searchContainer">
-          <label for="nodeSearchInput">Search for Gene:</label>
+  <div id="titleRow">
+        <div id="loading" aria-live="polite">Loading...</div>
+  </div>
+  <div id="app">
+    <!-- =========================
+         TOP TOOL ROWS
+         ========================= -->
+    <header id="topbar">
+      <div id="toolRow">
+        <!-- Upload / preset -->
+        <div id="fileInputContainer" class="toolBox">
+          <label for="fileInput" id="uploadBtn" class="toolbarBtn">Load GRN from .json</label>
+          <input type="file" id="fileInput" accept=".json" />
 
+          <span id="presetLabel">Load preset:</span>
+          <select id="presetSelect">
+            <option value="" selected disabled>Choose…</option>
+            <option value="tf_dna">TF-DNA</option>
+            <option value="ppc_motif">PPC_motif</option>
+            <option value="ppc_all">PPC_all</option>
+            <option value="grn_a">GRN A</option>
+            <option value="grn_b">GRN B</option>
+            <option value="grn_c">GRN C</option>
+            <option value="grn_d">GRN D</option>
+          </select>
+
+          <button id="presetLoadBtn" type="button" class="toolbarBtn">Load</button>
+        </div>
+
+        <!-- Search gene -->
+        <div id="searchContainer" class="toolBox">
+          <label for="nodeSearchInput">Search for Gene:</label>
           <input
             type="text"
             id="nodeSearchInput"
@@ -53,14 +58,13 @@
             list="geneSuggestions"
             autocomplete="off"
           >
-
           <datalist id="geneSuggestions"></datalist>
-
           <button id="searchButton">Find Gene</button>
         </div>
-        <div id="regulonContainer">
+
+        <!-- Search regulon -->
+        <div id="regulonContainer" class="toolBox">
           <label for="regulonSearchInput">Search regulon of:</label>
-        
           <input
             type="text"
             id="regulonSearchInput"
@@ -69,176 +73,219 @@
             list="regulonSuggestions"
             autocomplete="off"
           >
-        
           <datalist id="regulonSuggestions"></datalist>
-        
           <button id="regulonrRearchButton">Search</button>
         </div>
-        <div id="selectEdgeContainer">
+
+        <!-- Select edge by color -->
+        <div id="selectEdgeContainer" class="toolBox">
           <label for="colorSelect">Select Edge by Color:</label>
           <select id="colorSelect">
-              <option value="All">All</option>
-              <option value=rgb(0,0,0)>Black</option>
-              <option value=rgb(220,20,60)>Red</option>
-              <option value=rgb(0,168,107)>Green</option>
-              <option value=rgb(247,247,0)>Yellow</option>
-              <option value=rgb(255,165,0)>Brown</option>
+            <option value="All">All</option>
+            <option value="rgb(0,0,0)">Black</option>
+            <option value="rgb(220,20,60)">Red</option>
+            <option value="rgb(0,168,107)">Green</option>
+            <option value="rgb(247,247,0)">Yellow</option>
+            <option value="rgb(255,165,0)">Brown</option>
           </select>
         </div>
-    </div>
-      <h1 id="network-title">Gene Regulatory Network</h1>
-    </div>
-    <div class="container">
-      <div id="cy2"></div>
-      <div id="legend-cy2" class="legend-2">
-          <div class="legend-item2">
+      </div>
+    </header>
+
+    <!-- =========================
+         MAIN TWO PANES
+         ========================= -->
+    <main id="main">
+      <!-- LEFT PANE -->
+      <section id="leftPane" class="pane">
+        <div class="graphWrap">
+          <div id="network-title" class="graphTitle">Gene Regulatory Network</div>
+
+          <div id="cy"></div>
+
+          <!-- overlay legend -->
+          <div id="legend" class="legendOverlay">
+            <div class="legend-item">
+              <div class="legend-line legend-solid legend-triangle"></div>
+              <span>Independent activation</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-line legend-dashed">
+                <div class="legend-triangle"></div>
+              </div>
+              <span>Synergistic activation</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-line legend-solid legend-tee"></div>
+              <span>Independent inhibition</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-line legend-dashed legend-tee"></div>
+              <span>Synergistic inhibition</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEFT controls (beneath cy) -->
+        <div id="leftControls" class="controlsBar controlsBarLeft">
+          <div class="controls panelBox">
+            <div>
+              <label for="sourceNode">Regulator:</label>
+              <input
+                type="text"
+                id="sourceNode"
+                placeholder="Enter regulator"
+                style="width: 125px"
+                list="sourceNodeSuggestions"
+                autocomplete="off"
+              >
+              <datalist id="sourceNodeSuggestions"></datalist>
+            </div>
+
+            <div>
+              <label for="targetNode">Target Gene:</label>
+              <input
+                type="text"
+                id="targetNode"
+                placeholder="Enter target gene"
+                style="width: 135px"
+                list="targetNodeSuggestions"
+                autocomplete="off"
+              >
+              <datalist id="targetNodeSuggestions"></datalist>
+            </div>
+
+            <div>
+              <label for="edgeLabel">Edge Label:</label>
+              <input type="text" id="edgeLabel" placeholder="Enter edge label" style="width: 135px">
+            </div>
+
+            <div>
+              <label for="edgeStyle">Edge Style:</label>
+              <select id="edgeStyle">
+                <option value="solid">Independent</option>
+                <option value="dashed">Synergistic</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="arrowShape">Arrow Shape:</label>
+              <select id="arrowShape">
+                <option value="triangle">Activation</option>
+                <option value="tee">Inhibition</option>
+              </select>
+            </div>
+
+            <button id="addEdgeBtn">Add/Update Edge</button>
+          </div>
+
+          <div class="controls_3 panelBox">
+            <div>
+              <label for="deleteNode">Gene to Delete:</label>
+              <input
+                type="text"
+                id="deleteNode"
+                placeholder="Enter gene"
+                style="width: 90px"
+                list="deleteNodeSuggestions"
+                autocomplete="off"
+              >
+              <datalist id="deleteNodeSuggestions"></datalist>
+              <button id="deleteNodeBtn">Delete Gene</button>
+            </div>
+          </div>
+
+          <div class="controls_2 panelBox">
+            <label for="deleteSourceNode">Regulator:</label>
+            <input
+              type="text"
+              id="deleteSourceNode"
+              placeholder="Enter regulator"
+              style="width: 125px"
+              list="deleteSourceSuggestions"
+              autocomplete="off"
+            >
+            <datalist id="deleteSourceSuggestions"></datalist>
+
+            <label for="deleteTargetNode">Target Gene:</label>
+            <input
+              type="text"
+              id="deleteTargetNode"
+              placeholder="Enter target gene"
+              style="width: 135px"
+              list="deleteTargetSuggestions"
+              autocomplete="off"
+            >
+            <datalist id="deleteTargetSuggestions"></datalist>
+
+            <button id="deleteEdgeBtn">Delete Edge</button>
+          </div>
+
+          <div class="layoutBtn panelBox">
+            <label for="layoutMethod">Approach:</label>
+            <select id="layoutMethod">
+              <option value="CiSE">CiSE</option>
+              <option value="Concentric">Concentric</option>
+              <option value="Circle">Circle</option>
+            </select>
+            <button id="layoutBtn">Re-layout</button>
+          </div>
+
+          <div class="save-return panelBox">
+            <button id="saveBtn">Save GRN</button>
+            <button id="returnBtn">Return to saved GRN</button>
+          </div>
+
+          <div class="panelBox">
+            <button id="downloadBtn">Download GRN</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT PANE -->
+      <section id="rightPane" class="pane">
+        <div class="graphWrap">
+          <div class="graphTitle">Stable transcriptional profiles (Fixed-point attractors)</div>
+
+          <div id="cy2"></div>
+
+          <!-- overlay legend -->
+          <div id="legend-cy2" class="legendOverlay">
+            <div class="legend-item2">
               <div class="legend-node-black"></div>
               <span>Attractors of last GRN</span>
-          </div>
-          <div class="legend-item2">
+            </div>
+            <div class="legend-item2">
               <div class="legend-node-red"></div>
               <span>Attractors of current GRN</span>
-          </div>
-          <div class="legend-item2">
+            </div>
+            <div class="legend-item2">
               <div class="legend-edge"></div>
               <span>Distances</span>
+            </div>
           </div>
-      </div>
-      <h2>Fixed-point Attractors</h2>
-  </div>
-  <div id="fileInputContainer">
-    <!-- Button 1: Upload -->
-    <label for="fileInput" id="uploadBtn" class="toolbarBtn">Load GRN from .json</label>
-    <input type="file" id="fileInput" accept=".json" />
-  
-    <!-- Plain text label (NOT a button) -->
-    <span id="presetLabel">Load preset:</span>
-  
-    <select id="presetSelect">
-      <option value="" selected disabled>Choose…</option>
-      <option value="tf_dna">TF-DNA</option>
-      <option value="ppc_motif">PPC_motif</option>
-      <option value="ppc_all">PPC_all</option>
-      <option value="grn_a">GRN A</option>
-      <option value="grn_b">GRN B</option>
-      <option value="grn_c">GRN C</option>
-      <option value="grn_d">GRN D</option>
-    </select>
-  
-    <!-- Button 2: Confirm -->
-    <button id="presetLoadBtn" type="button" class="toolbarBtn">Load</button>
-  </div>
-  <div class="controls">
-    <div>
-      <label for="sourceNode">Regulator:</label>
-    
-      <input
-        type="text"
-        id="sourceNode"
-        placeholder="Enter regulator"
-        style="width: 125px"
-        list="sourceNodeSuggestions"
-        autocomplete="off"
-      >
-    
-      <datalist id="sourceNodeSuggestions"></datalist>
-    </div>
-    <div>
-      <label for="targetNode">Target Gene:</label>
-    
-      <input
-        type="text"
-        id="targetNode"
-        placeholder="Enter target gene"
-        style="width: 135px"
-        list="targetNodeSuggestions"
-        autocomplete="off"
-      >
-    
-      <datalist id="targetNodeSuggestions"></datalist>
-    </div>
-    <div>
-      <label for="edgeLabel">Edge Label:</label>
-      <input type="text" id="edgeLabel" placeholder="Enter edge label" style="width: 135px">
-    </div>
-    <div>
-      <label for="edgeStyle">Edge Style:</label>
-      <select id="edgeStyle">
-        <option value="solid">Independent</option>
-        <option value="dashed">Synergistic</option>
-      </select>
-    </div>
-    <div>
-      <label for="arrowShape">Arrow Shape:</label>
-      <select id="arrowShape">
-        <option value="triangle">Activation</option>
-        <option value="tee">Inhibition</option>
-      </select>
-    </div>
-      <button id="addEdgeBtn">Add/Update Edge</button>
-  </div>
+        </div>
 
-  <div class="layoutBtn">
-    <label for="layoutMethod">Approach:</label>
-    <select id="layoutMethod">
-      <option value="CiSE">CiSE</option>
-      <option value="Concentric">Concentric</option>
-      <option value="Circle">Circle</option>
-    </select>
-    <button id="layoutBtn">Re-layout</button>
-  </div>
-  
+        <!-- RIGHT controls (beneath cy2) -->
+        <div id="rightControls" class="controlsBar controlsBarRight">
+          <div class="slider-container panelBox">
+            <label for="valueSlider" id="sliderLabel">Estimated Time: 5.0min</label>
 
-  <button id="downloadBtn">Download GRN</button>
-  <div class="save-return">
-    <button id="saveBtn">Save GRN</button>
-    <button id="returnBtn">Return to saved GRN</button>
-  </div>
+            <div class="sliderRow">
+              <input type="range" id="valueSlider" min="0" max="100" step="0.1" value="0">
+            </div>
+          </div>
 
-  <div class="controls_2">
-    <div>
-      <label for="deleteNode">Gene to Delete:</label>
-    
-      <input
-        type="text"
-        id="deleteNode"
-        placeholder="Enter gene"
-        style="width: 90px"
-        list="deleteNodeSuggestions"
-        autocomplete="off"
-      >
-    
-      <datalist id="deleteNodeSuggestions"></datalist>
-    
-      <button id="deleteNodeBtn">Delete Gene</button>
-    </div>
-  </div>
-  <div class="controls_3">
-    <label for="deleteSourceNode">Regulator:</label>
-    <input type="text" id="deleteSourceNode" placeholder="Enter regulator" style="width: 125px"
-           list="deleteSourceSuggestions" autocomplete="off">
-    <datalist id="deleteSourceSuggestions"></datalist>
-  
-    <label for="deleteTargetNode">Target Gene:</label>
-    <input type="text" id="deleteTargetNode" placeholder="Enter target gene" style="width: 135px"
-           list="deleteTargetSuggestions" autocomplete="off">
-    <datalist id="deleteTargetSuggestions"></datalist>
-  
-    <button id="deleteEdgeBtn">Delete Edge</button>
-  </div>
+          <div class="right_button panelBox">
+            <button id="addElementsBtn">Generate/Compare Attractors</button>
+            <button id="downloadAttractorsBtn">Download Attractors</button>
+          </div>
+        </div>
+      </section>
 
-  <div class="slider-container">
-    <label for="valueSlider" id="sliderLabel">Estimated Time: 5.0min</label>
-    <input type="range" id="valueSlider" min="0" max="100" step="0.1" value="0">
-  </div>
-
-  <div class="right_button">
-    <div>
-      <button id="addElementsBtn">Generate/Compare Attractors</button>
-      <button id="downloadAttractorsBtn">Download Attractors</button>
-    <div>
-  <div>
-
+  <!-- =========================
+       MODALS (unchanged IDs)
+       ========================= -->
   <div id="nodeModal" class="modal">
     <div id="nodeModalContent">
       <span class="close">&times;</span>
@@ -328,30 +375,37 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Edge Modal for Solid Edges -->
-  <div id="edgeModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="igv-container-solid" style="width: 90%; height: 80%;"></div>
+  <div id="edgeModal" class="oai-modal" aria-hidden="true">
+    <div class="oai-modal-content">
+      <button class="oai-close" type="button" aria-label="Close">×</button>
+      <div id="igv-container-solid" style="width: 100%; height: 100%;"></div>
     </div>
   </div>
 
-  <!-- Edge Modal for Solid Edges -->
-  <div id="PPIModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <img src="" alt="PPI Image 1" id="PPIImage" style="width: 90%; height: 80%;">
+  <div id="PPIModal" class="oai-modal" aria-hidden="true">
+    <div class="oai-modal-content">
+      <button class="oai-close" type="button" aria-label="Close">×</button>
+      <img src="" alt="PPI Image" id="PPIImage" style="width: 100%; height: 100%; object-fit: contain;">
     </div>
   </div>
 
-  <!-- Edge Modal for Dashed Edges -->
-  <div id="edgeModalDashed" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <img src="" alt="Dashed Edge Image 1" id="edgeImageDashed1" style="width: 90%; height: 80%;">
-      <div id="igv-container-dashed" style="width: 90%; height: 80%;"></div>
+  <div id="edgeModalDashed" class="oai-modal">
+    <div class="oai-modal-content oai-modal-dashed">
+      <button class="oai-close" type="button" aria-label="Close">×</button>
+
+      <div class="oai-dashed-grid">
+        <!-- LEFT: IGV -->
+        <div class="oai-dashed-left">
+          <div class="oai-pane-title">IGV</div>
+          <div id="igv-container-dashed"></div>
+        </div>
+
+        <!-- RIGHT: Image/Composite -->
+        <div class="oai-dashed-right">
+          <img id="edgeImageDashed1" alt="Dashed Edge Image">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -445,6 +499,21 @@
         userZoomingEnabled: true,
         wheelSensitivity: 0.1,
         layout: { name: 'concentric', spacingFactor: 1 }
+      });
+
+      // expose globally so other handlers can resize it
+      window.cy = cy;
+
+      // resize once after paint (important after CSS/grid layout)
+      requestAnimationFrame(() => {
+        cy.resize();
+        cy.fit(undefined, 30);
+      });
+
+      window.addEventListener('resize', () => {
+        cy.resize();
+        // optional: avoid constantly changing zoom; use fit only if you want
+        // cy.fit(undefined, 30);
       });
 
       //Create clusters for cytoscape
@@ -682,6 +751,24 @@
           alert('Node not found.');
         }
       });
+
+      function purgeAllIGV() {
+        // 1) Ask IGV to remove any browsers it knows about (best)
+        try {
+          if (window.igv) {
+            if (typeof igv.removeAllBrowsers === "function") igv.removeAllBrowsers();
+            // some versions only support removeBrowser(browser), but removeAllBrowsers is the most common
+          }
+        } catch (e) {
+          console.warn("[IGV purge] removeAllBrowsers failed:", e);
+        }
+
+        // 2) Hard clear both containers (guarantees DOM is wiped)
+        const solid = document.getElementById("igv-container-solid");
+        const dashed = document.getElementById("igv-container-dashed");
+        if (solid) solid.replaceChildren();
+        if (dashed) dashed.replaceChildren();
+      }
 
       // Functions to get nodes and edges
       function getNodes() {
@@ -980,6 +1067,19 @@
         });
       })();
 
+      function showLoading(msg = "Loading...") {
+        const el = document.getElementById("loading");
+        if (!el) return;
+        el.textContent = msg;
+        el.classList.add("is-on");
+      }
+
+      function hideLoading() {
+        const el = document.getElementById("loading");
+        if (!el) return;
+        el.classList.remove("is-on");
+      }
+
       // Function to show the interactive plot modal and initialize slider values from node data
       function showInteractivePlotModal(node) {
         // Populate the sliders with the node's current data or default values
@@ -1124,27 +1224,6 @@
               console.log('No saved network state to return to.');
           }
       });
-
-      // Function to show modal with edge information
-      function showEdgeModal(edge) {
-        const modal = document.getElementById('edgeModal');
-        if (getNetworkType() == 'Protein-Protein Interaction Network') {
-          const modal = document.getElementById('PPIModal');
-        }
-        const span = modal.getElementsByClassName('close')[0];
-
-        modal.style.display = 'block';
-
-        span.onclick = function() {
-          modal.style.display = 'none';
-        };
-
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = 'none';
-          }
-        };
-      }
 
       // Function to find the closest node
       function findClosestNode(distances) {
@@ -1292,6 +1371,7 @@
 
       // Function to generate IGV browser for an edge
       async function makeIGV(source, target, edgeStyle) {
+            purgeAllIGV();
             return new Promise((resolve, reject) => {
                 try {
                     // pick the right container
@@ -1448,7 +1528,7 @@
               const imageUrl = `${baseUrl}${data.message}.svg`;
               document.getElementById('PPIImage').src = imageUrl;
             }
-            document.getElementById('loading').style.display = 'none';
+        hideLoading();
             
         }).catch(error => {
             console.error('Error:', error);
@@ -1465,7 +1545,7 @@
               // Show loading indicator
               const loadingElement = document.getElementById('loading');    
               if (loadingElement) {
-                  loadingElement.style.display = 'block';
+                showLoading("Loading");
               }
               makeComposite(source, target);
           } catch (error) {
@@ -1521,31 +1601,66 @@
           });
 
       // Event listener for edge click to show different modals based on edge style
-      cy.on('tap', 'edge', function(event) {
-        const edge = event.target;
-        const sourceNodeforIGV = edge._private.data.source;
-        const targetNodeforIGV = edge._private.data.target;
-        const labelforIGV = edge._private.data.label;
-        if (edge.hasClass('dashed')) {
-          if (getNetworkType() == 'Gene Regulatory Network') {
-            document.getElementById('edgeModalDashed').style.display = 'block';
-            makeIGV(sourceNodeforIGV, targetNodeforIGV, 'dashed');
-            let nodesToMakeComposite = findEdgesWithTarget(sourceNodeforIGV, targetNodeforIGV, labelforIGV);
-            let sourceNodesWithSameLabel = [];
-            nodesToMakeComposite.forEach(edge => {
-                //console.log('Edge ID:', edge._private.data.source, edge._private.data.target, edge._private.data.label);
-                sourceNodesWithSameLabel.push(edge._private.data.source)
-            });
-            unzipAndProcess(sourceNodesWithSameLabel, edge._private.data.source);
-          } else if (getNetworkType() == 'Protein-Protein Interaction Network') {
-            document.getElementById('PPIModal').style.display = 'block';
-            unzipAndProcess([edge._private.data.source], targetNodeforIGV);
+        cy.on('tap', 'edge', function(event) {
+          const edge = event.target;
+          const sourceNodeforIGV = edge.data('source');
+          const targetNodeforIGV = edge.data('target');
+          const labelforIGV = edge.data('label');
+
+          if (edge.hasClass('dashed')) {
+            if (getNetworkType() === 'Gene Regulatory Network') {
+              openOaiModal('edgeModalDashed');
+              makeIGV(sourceNodeforIGV, targetNodeforIGV, 'dashed');
+              setTimeout(() => window.dispatchEvent(new Event('resize')), 80);
+
+              const nodesToMakeComposite = findEdgesWithTarget(sourceNodeforIGV, targetNodeforIGV, labelforIGV);
+              const sourceNodesWithSameLabel = nodesToMakeComposite.map(e => e.data('source'));
+              unzipAndProcess(sourceNodesWithSameLabel, sourceNodeforIGV);
+
+            } else if (getNetworkType() === 'Protein-Protein Interaction Network') {
+              openOaiModal('PPIModal');
+              unzipAndProcess([sourceNodeforIGV], targetNodeforIGV);
+            }
+          } else {
+            openOaiModal('edgeModal');
+            makeIGV(sourceNodeforIGV, targetNodeforIGV, 'solid');
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 80);
           }
-        } else {
-          document.getElementById('edgeModal').style.display = 'block';
-          makeIGV(sourceNodeforIGV, targetNodeforIGV, 'solid');
+        });
+
+      function openOaiModal(id){
+        const modal = document.getElementById(id);
+        if (!modal) {
+          console.warn("[modal] missing:", id);
+          return;
         }
-      });
+
+        // Key trick: move to end of body so it's on top of Cytoscape canvases etc.
+        document.body.appendChild(modal);
+
+        modal.classList.add("oai-open");
+        modal.setAttribute("aria-hidden", "false");
+        fixCyPointerOffset();
+      }
+
+      function closeOaiModal(modal){
+        if (!modal) return;
+
+        // Clear IGV containers
+        const igvSolid = modal.querySelector('#igv-container-solid');
+        const igvDashed = modal.querySelector('#igv-container-dashed');
+
+        if (igvSolid) igvSolid.innerHTML = "";
+        if (igvDashed) igvDashed.innerHTML = "";
+
+        // Clear images
+        const img1 = modal.querySelector('#edgeImageDashed1');
+        const img2 = modal.querySelector('#PPIImage');
+
+        if (img1) img1.src = "";
+        if (img2) img2.src = "";
+        fixCyPointerOffset();
+      }
 
       // Generate distance plot for mRNA steady states
       let initialNodes = [];
@@ -1553,15 +1668,6 @@
       let length_of_As = 0;
       let Distances = {};
 
-      // Event listener for closing modal
-      document.querySelectorAll('.close').forEach(function(el) {
-        el.addEventListener('click', function(){
-          document.querySelectorAll('.modal').forEach(function(modal) {
-            igv.removeAllBrowsers();
-            modal.style.display = 'none';
-          });
-        });
-      });
 
       // Find the maximum value
       let allValues = Object.values(Distances).flatMap(obj => Object.values(obj));
@@ -1610,6 +1716,10 @@
         wheelSensitivity: 0.1,
         layout: { name: 'preset' }
       });
+
+      window.cy2 = cy2;
+      requestAnimationFrame(() => { cy2.resize(); cy2.fit(undefined, 30); });
+      window.addEventListener('resize', () => { cy2.resize(); });
 
       function updateGraphBasedOnNode(nodeId, distances) {
         const newEdges = [];
@@ -1899,6 +2009,30 @@
       }
       });
 
+    function fixCyPointerOffset() {
+      try {
+        cy.resize();
+        cy.renderer().invalidateContainerClientCoordsCache();
+      } catch (e) {}
+
+      try {
+        cy2.resize();
+        cy2.renderer().invalidateContainerClientCoordsCache();
+      } catch (e) {}
+
+      // Run again shortly after in case layout/scrollbar settles late (IGV/image does this)
+      setTimeout(() => {
+        try {
+          cy.resize();
+          cy.renderer().invalidateContainerClientCoordsCache();
+        } catch (e) {}
+        try {
+          cy2.resize();
+          cy2.renderer().invalidateContainerClientCoordsCache();
+        } catch (e) {}
+      }, 120);
+    }
+
     // Function to rename the rows
     function renameRows(myList, n) {
       // Initialize a counter for each type of row
@@ -1983,7 +2117,7 @@
     document.getElementById('fileInput').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
-        document.getElementById('loading').style.display = 'block';
+        showLoading("Loading");
 
         const reader = new FileReader();
         const CHUNK_SIZE = 1024 * 1024; // 1MB chunks
@@ -2055,13 +2189,13 @@
 
               const layout = cy.layout({ name: 'circle',  spacingFactor: 1});
               layout.on('layoutstop', () => {
-                document.getElementById('loading').style.display = 'none';
+                hideLoading();
               });
 
               layout.run();
             } catch (error) {
               console.error('Error parsing JSON:', error);
-              document.getElementById('loading').style.display = 'none';
+              hideLoading();
             }
             document.getElementById('fileInput').value = '';
             refreshGeneIds();
@@ -2181,7 +2315,7 @@
       // Layout + hide loading on completion
       const layout = cy.layout({ name: 'circle', spacingFactor: 1 });
       layout.on('layoutstop', () => {
-        document.getElementById('loading').style.display = 'none';
+        hideLoading();
       });
       layout.run();
 
@@ -2202,7 +2336,7 @@
         return;
       }
 
-      document.getElementById('loading').style.display = 'block';
+      showLoading("Loading");
 
       try {
         const res = await fetch(PRESET_PATHS[key], { cache: 'no-store' });
@@ -2213,7 +2347,7 @@
 
       } catch (err) {
         console.error('Error loading preset network:', err);
-        document.getElementById('loading').style.display = 'none';
+        hideLoading();
         alert(`Could not load preset network.\n${err.message}`);
       }
     }
@@ -2234,7 +2368,47 @@
       updateSliderValue();
       slider.addEventListener('input', updateSliderValue);
     }
-      
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => {
+        if (window.cy) { cy.resize(); cy.fit(undefined, 30); }
+        if (window.cy2) { cy2.resize(); cy2.fit(undefined, 30); }
+      }, 200);
+    });
+      fixCyPointerOffset();
+    });
+
+    // Robust close: works even if modals are appended later
+    document.addEventListener('click', (e) => {
+        const closeBtn = e.target.closest(".oai-close");
+        if (closeBtn) {
+          const modal = closeBtn.closest(".oai-modal");
+          if (modal) {
+            modal.classList.remove("oai-open");
+            modal.setAttribute("aria-hidden", "true");
+          }
+
+          // purge IGV + clear images on close
+          purgeAllIGV();
+          const img1 = document.getElementById("edgeImageDashed1");
+          const img2 = document.getElementById("PPIImage");
+          if (img1) img1.src = "";
+          if (img2) img2.src = "";
+          return;
+        }
+
+        if (e.target.classList?.contains("oai-modal")) {
+          e.target.classList.remove("oai-open");
+          e.target.setAttribute("aria-hidden", "true");
+
+          // purge on backdrop close too
+          purgeAllIGV();
+          const img1 = document.getElementById("edgeImageDashed1");
+          const img2 = document.getElementById("PPIImage");
+          if (img1) img1.src = "";
+          if (img2) img2.src = "";
+        }
+      fixCyPointerOffset();
     });
   </script>
 </body>

@@ -1,334 +1,129 @@
-#slider-container {
-    position: absolute;
-    top: 94%;
-    left: 75%;
-    flex-direction: column;
-    align-items: center;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 1px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 99;
-}
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 190px;
-    height: 8px;
-    background: #ddd;
-    outline: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    position: absolute;
-    top: 94%;
-    left: 75%;
-}
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #000000;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-input[type="range"]::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #000000;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-#sliderLabel {
-    position: absolute;
-    top: 93.5%;
-    left: 75.2%;
-    font-size: 10px;
-    color: #333;
-}
-
-#nodeModalContent input[type="range"] {
-    position: relative;
-    width: 50%;
-    margin: 5px 0;
-    appearance: none;
-    height: 5px;
-    background: #ddd;
-    border-radius: 2px;
-}
-
-#nodeModalContent input[type="range"]::-webkit-slider-thumb {
-    width: 12px;
-    height: 12px;
-    background: #000000;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-#nodeModalContent input[type="range"]::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    background: #000000;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+html, body {
   height: 100%;
-  overflow: auto;
-  background-color: rgb(255, 255, 255);
-  background-color: rgba(255, 255, 255, 0.4);
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  height: 80%;
-  position: absolute;
-  top: 0%;
-  left: 5%;
-  flex-direction: column;
-  align-items: center;
-}
-.close {
-  color: #aaa;
-  position: absolute;
-  top: -7px;
-  left: 0px;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+  margin: 0;
 }
 
-.param-slider {
-  margin: 15px 0;
-}
-#edgeImageDashed1 {
-  width: 1500px;
-  height: 1500px;
-  border-radius: 0px;
-  margin-top: 50px;
-  margin-left: 30%;
-  align-self: flex-start;
-  position: relative;
-  object-fit: contain;
-  z-index: 9999;
-}
-#cy {
-  position: absolute;
-  top: 2.5%;
-  left: 1%;
-  width: 63%;
-  height: 89%;
-  display: block;
-  margin-bottom: 10px;
-}
-#legend {
-    width: 18%;
-    display: inline-block;
-    vertical-align: top;
-    margin-top: 2%;
-    margin-left: 0;
-    position: absolute;
-    left: 0;
-}
-.legend-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.legend-line {
-    width: 50px;
-    height: 2px;
-    margin-right: 10px;
-    position: relative;
-    background-color: #000000;
-}
-.legend-dashed {
-    border-top: 2px dashed #000000;
-    background-color: transparent;
-}
-.legend-solid {
-    background-color: #000000;
-}
-.legend-triangle {
-    background-color: #000000;
-    position: relative;
-}
-.legend-triangle::after {
-    content: '';
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 10px solid #000000;
-    transform: rotate(90deg);
-}
-.legend-tee::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    right: -5px;
-    width: 10px;
-    height: 2px;
-    background-color: #000000;
-    transform: rotate(90deg);
-}
-.scale-bar {
-    width: 15%;
-    height: 20px;
-    background: linear-gradient(to right, white, black);
-    border: 1px solid #000;
-    box-sizing: border-box;
-    margin-top: 0px;
-    margin-right: 5px;
-}
-.scale-bar-labels {
-    display: flex;
-    justify-content: space-between;
-    width: 15%;
-    font-size: 12px;
-    color: #000;
-    margin-top: 1px;
-}
-.layoutBtn {
-  position: absolute;
-  top: 96.3%; 
-  left: 52%; 
-  gap: 3px;
-  margin-bottom: 1px;
-  background-color: rgba(221, 221, 221, 0.95);
-}
-#searchContainer {
-    position: fixed;
-    top: 0.25%;
-    left: 45.25%;
-    margin-bottom: 5px;
-}
-#regulonContainer {
-    position: fixed;
-    top: 4%;
-    left: 45.25%;
-    margin-bottom: 5px;
-}
-#selectEdgeContainer {
-    position: fixed;
-    top: 7.7%;
-    left: 45.25%;
-    margin-bottom: 5px;
-}
-#downloadBtn {
-  position: absolute;
-  top: 92%;
-  left: 53%;
-}
-.save-return {
-  position: absolute;
-  top: 96.3%;
-  left: 39.5%;
-  background-color: rgba(221, 221, 221, 0.95);
-}
-.controls_3 {
-  position: absolute;
-  top: 96.3%;
-  left: 15.5%;
-  background-color: rgba(221, 221, 221, 0.95);
-}
-.controls_3 input {
-  width: 105px;
-}
-h1 {
-  position: absolute;
-  top: 0%;
-  left: 27.5%;
-  text-align: center;
-  margin-bottom: 200px;
-  font-size: 20px;
-}
-.controls {
-  border: 0px, black;
-  position: absolute;
-  top: 92%;
-  left: 1%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  margin-bottom: 1px;
-  background-color: rgba(221, 221, 221, 0.95);
-}
-.controls input {
-  width: 105px;
-}
-.controls_2 {
-  position: absolute;
-  top: 96.3%;
-  left: 1%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  margin-bottom: 1px;
-  background-color: rgba(221, 221, 221, 0.95);
-}
-.controls_2 input {
-        width: 105px;
-    }
 label, select, button {
   margin-bottom: 5px;
 }
+
 button {
   padding: 5px 10px;
   cursor: pointer;
 }
-#cy2 {
-  position: absolute;
-  top: 1.5%;
-  right: 0%;
-  width: 35%;
-  height: 89%;
-  padding: 10px;
-  border: 0px solid #ddd;
+
+/* =========================================================
+   APP FRAME
+   ========================================================= */
+#app{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 8px;
+  padding: 8px;
+  box-sizing: border-box;
 }
-.right_button {
+
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+#topbar{
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 8px;
+}
+
+.graphWrap{
+  display: grid;
+  grid-template-rows: auto 1fr;  /* title + graph */
+  min-height: 0;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Title consumes height */
+.graphTitle{
+  text-align: center;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  padding: 8px 0;
+
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid #ddd;
+
+  z-index: 50; /* visually on top */
+}
+
+/* move legends down so they don't collide with centered title */
+#leftPane .legendOverlay,
+#rightPane .legendOverlay{
+  top: 48px;
+}
+
+#titleRow{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+}
+
+#loading{
+  position: fixed;
+  inset: 0;                    /* full screen */
+  z-index: 99999999999999999999999999999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(3px);
+
+  font-size: 50px;
+  font-weight: 700;
+  color: white;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+}
+
+#loading.is-on{
+  opacity: 1;
+  visibility: visible;
+}
+
+#network-title{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#toolRow{
   display: flex;
   flex-wrap: wrap;
-  position: absolute;
-  top: 96.4%;
-  left: 75%;
-  gap: 50px;
-  margin-bottom: 10px;
-  margin-right: 50px;
+  gap: 12px;
+  align-items: flex-end;
 }
 
-#fileInputContainer{
-  position:absolute;
-  top:0.5%;
-  left:0.25%;
-  z-index:9999;
-  display:flex;
-  align-items:center;
-  gap:10px;
+.toolBox{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.85);
 }
 
-/* Hide the raw file input, use label as the button */
+/* Hide raw file input, use label as button */
 #fileInput{
   display:none;
 }
@@ -343,224 +138,646 @@ button {
   text-align:center;
   user-select:none;
 
-  border:2px solid black;   /* ADD */
-  border-radius:2px;          /* ADD */
-  line-height:1.2;            /* helps label/button match height */
+  border:2px solid black;
+  border-radius:2px;
+  line-height:1.2;
 }
 
-/* Remove native button styling differences */
 button.toolbarBtn{
   appearance:none;
   -webkit-appearance:none;
-  background-color:#f0f0f0;   /* ensure same */
+  background-color:#f0f0f0;
 }
 
-/* Apply hover to BOTH */
 .toolbarBtn:hover{
   background-color:#e0e0e0;
 }
 
-h2 {
-  position: absolute;
-  top: 0%;
-  left: 78%;
-  text-align: center;
-  margin-bottom: 200px;
-  font-size: 20px;
+/* =========================================================
+   MAIN: LEFT/RIGHT PANES
+   ========================================================= */
+#main{
+  display: grid;
+  grid-template-columns: 63fr 37fr;
+  gap: 8px;
+  min-height: 0;
 }
-.container {
-  display: flex;
-  width: 80%;
-  height: 800px;
-  border: 0px solid #ddd;
+
+.pane{
+  display: grid;
+  grid-template-rows: 1fr auto;  /* graph + controls */
+  gap: 8px;
+  min-height: 0;
+}
+
+#rightTitleOverlay{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 25;
+
+  font-size: 16px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+}
+
+/* Graph area wrapper */
+.graphWrap{
+  position: relative;
+  min-height: 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   overflow: hidden;
 }
-.legend-2 {
+
+/* Cytoscape containers must have a real height */
+#cy, #cy2{
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   LEGEND OVERLAYS (top-left on each graph)
+   ========================================================= */
+.legendOverlay{
   position: absolute;
-  top: 1.5%;
-  right: 17%;
-  width: 18%;
-  display: inline-block;
-  vertical-align: top;
-}
-.legend-item2 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.legend-node-black {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 2px solid #000;
-    border-radius: 50%;
+  top: 10px;
+  left: 10px;
+  z-index: 20;
+
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+
+  max-width: 260px;
 }
 
-.legend-node-red {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    border: 2px solid #f00;
-    background-color: transparent;
-    border-radius: 50%;
+.legend-item, .legend-item2{
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
 }
-.legend-edge {
-    width: 50px;
-    height: 2px;
-    margin-right: 10px;
-    background-color: #000000;
+.legend-item:last-child,
+.legend-item2:last-child{
+  margin-bottom: 0;
 }
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
+/* left legend symbols */
+.legend-line{
+  width: 34px;
+  height: 2px;
+  margin-right: 10px;
+  position: relative;
+  background-color: #000;
+}
+
+.legend-dashed{
+  border-top: 2px dashed #000;
+  background-color: transparent;
+}
+.legend-solid{
+  background-color: #000;
+}
+
+.legend-triangle{
+  background-color: #000;
+  position: relative;
+}
+.legend-triangle::after{
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid #000;
+  transform: rotate(90deg);
+}
+.legend-tee::after{
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -5px;
+  width: 10px;
+  height: 2px;
+  background-color: #000;
+  transform: rotate(90deg);
+}
+
+/* right legend symbols */
+.legend-node-black{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid #000;
+  border-radius: 50%;
+}
+.legend-node-red{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid #f00;
+  background-color: transparent;
+  border-radius: 50%;
+}
+.legend-edge{
+  width: 50px;
+  height: 2px;
+  margin-right: 10px;
+  background-color: #000;
+}
+
+/* =========================================================
+   CONTROLS BARS UNDER EACH GRAPH
+   ========================================================= */
+.controlsBar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+
+  background-color: rgba(221,221,221,0.95);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.controlsBarLeft{
+  display: grid;
+
+  /* 2 rows */
+  grid-template-rows: auto auto;
+
+  /* 3 columns (first wider) */
+  grid-template-columns: 2fr 1fr 1fr;
+
+  gap: 8px;
+  align-items: end;
+}
+
+/* Explicit placement */
+.controlsBarLeft > .controls        { grid-column: 1; grid-row: 1; }
+.controlsBarLeft > .layoutBtn       { grid-column: 2; grid-row: 1; }
+.controlsBarLeft > .controls_3      { grid-column: 3; grid-row: 1; }
+
+.controlsBarLeft > .controls_2      { grid-column: 1; grid-row: 2; }
+.controlsBarLeft > #downloadBtn     { grid-column: 3; grid-row: 2; }
+.controlsBarLeft > .save-return     { grid-column: 2; grid-row: 2; }
+
+.panelBox{
+  background: rgba(255,255,255,0.85);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.panelBtn{
+  background: rgba(255,255,255,0.85);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+/* Your groups should wrap nicely */
+.controls, .controls_2, .controls_3, .layoutBtn, .save-return{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.controlsBarRight{
+  display: grid;
+  grid-template-columns: 1fr;   /* stack blocks */
+  gap: 8px;
+  align-items: stretch;
+}
+
+/* Make the two attractor buttons lay out nicely */
+.right_button{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Prevent the slider box from shrinking weirdly */
+.slider-container{
+  width: 100%;
+}
+.slider-container input[type="range"]{
+  width: 100%;
+  max-width: 320px;  /* keeps it reasonable */
+}
+
+#sliderLabel{
+  font-size: 12px;
+  color: #333;
+  margin: 0;
+}
+
+.slider-container input[type="range"]{
+  width: 190px;
+  height: 8px;
+  background: #ddd;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 6px;
+  appearance: none;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #000;
+  cursor: pointer;
+}
+.slider-container input[type="range"]::-moz-range-thumb{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #000;
+  cursor: pointer;
+}
+.sliderRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+#valueSlider{
+  width: 220px;   /* or 100% */
+}
+
+#valueSliderInput{
+  width: 70px;
+}
+
+
+/* =========================================================
+   MODALS (fixed positioning is correct)
+   ========================================================= */
+.oai-modal{
+  display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 99999;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
 
-/* Outer modal content: two-column layout */
-#nodeModalContent {
+.modal-content{
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 80%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.close{
+  color: #aaa;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover, .close:focus{
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Node modal layout */
+#nodeModalContent{
+  background-color: #fefefe;
+  margin: 4% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#modalBody{
   display: flex;
-  flex-direction: row;      /* left = image, right = controls */
   gap: 24px;
   align-items: flex-start;
   justify-content: space-between;
-
-  background-color: #fefefe;
-  margin: 6% auto;         /* keep modal vertical offset (adjust if using Bootstrap modal) */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 70%;
-  max-width: none;
-  max-height: none;
-  box-sizing: border-box;
-  overflow: visible;        /* allow internal containers to scroll if needed */
 }
 
-/* Image column: flexible (takes remaining space) */
-#imageContainer {
-  flex: 1 1 70%;           /* grow, shrink, base 65% */
-  min-width: 200px;
+#plotContainer{
+  flex: 1 1 70%;
+  min-width: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;        /* prevents overflow from image */
+  overflow: hidden;
 }
 
-/* Image: constrain size, preserve aspect ratio, avoid very tall images */
-#plotImage {
+#plotImage{
   display: block;
   max-width: 100%;
-  width: 100%;                        /* let it scale but not stretch */
+  width: 100%;
   height: auto;
-  max-height: calc(85vh - 80px);      /* leave room for padding/controls */
+  max-height: calc(85vh - 120px);
   object-fit: contain;
 }
 
-#plot-controls {
-  flex: 0 1 30%;     /* allow it to grow (can shrink if space tight) */
-  max-width: 80%;
-  box-sizing: border-box;
-  padding-left: 0;
-  overflow-y: visible;     /* don't create an internal scroll */
-  max-height: none;        /* remove the height cap that forced scrolling */
+#plot-controls{
+  flex: 0 1 30%;
+  min-width: 260px;
 }
 
-#plot-controls .control-row {
+#plot-controls .control-row{
   display: flex;
   align-items: center;
-  gap: 1px;
-  margin-bottom: 24px;
-  padding: 0;
-  box-sizing: border-box;
-  min-width: 0;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
-/* keep label same width so things line up */
-#plot-controls label {
-  font-size: 17px;
-  font-weight: bold;
+#plot-controls label{
+  font-size: 14px;
+  font-weight: 700;
   color: #333;
-  margin-bottom: 0;
-  min-width: 0;
   white-space: nowrap;
-  box-sizing: border-box;
-}
-#plot-controls .control-row input[type="number"] {
-  margin-left: 10%;
-  min-width: 0;
-  padding-left: 0;
-  box-sizing: border-box;
-}
-#plot-controls .control-row input[type="range"] {
-  margin-left: -50%;
-  min-width: 0;
-  padding-left: 0;
-  box-sizing: border-box;
 }
 
-/* Range thumb (kept) */
-#nodeModalContent input[type="range"]::-webkit-slider-thumb,
-#nodeModalContent input[type="range"]::-moz-range-thumb {
+#plot-controls input[type="range"]{
+  width: 160px;
+  height: 5px;
+  background: #ddd;
+  border-radius: 2px;
+  appearance: none;
+}
+
+#plot-controls input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
   width: 12px;
   height: 12px;
-  background: #000;
   border-radius: 50%;
+  background: #000;
+  cursor: pointer;
+}
+#plot-controls input[type="range"]::-moz-range-thumb{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #000;
   cursor: pointer;
 }
 
-/* Close button styling (if inside #nodeModalContent) */
-#nodeModalContent .close {
-  color: #aaa;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-#nodeModalContent .close:hover,
-#nodeModalContent .close:focus {
-  color: black;
+/* Responsive: stack node modal on narrow screens */
+@media (max-width: 900px){
+  #modalBody{ flex-direction: column; }
+  #plot-controls{ width: 100%; min-width: 0; }
+  #plot-controls .control-row{ flex-wrap: wrap; }
 }
 
-/* Responsive: stack vertically on narrow screens */
-@media (max-width: 768px) {
-  #nodeModalContent {
+/* =========================================================
+   MOBILE / SMALL SCREENS
+   ========================================================= */
+@media (max-width: 900px){
+  /* Overall app: allow scroll on small screens */
+  #app{
+    height: auto;          /* allow content to extend */
+    min-height: 100vh;
+  }
+
+  /* Top tool row becomes stacked and full width */
+  #toolRow{
     flex-direction: column;
-    margin: 4% auto;
-    padding: 12px;
+    align-items: stretch;
   }
-  #imageContainer {
-    order: 0;
+  .toolBox{
     width: 100%;
-    min-width: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
-  #plot-controls {
-    order: 1;
-    flex: 0 0 auto;
-    width: 100%;
+  .toolBox input[type="text"],
+  .toolBox select{
     max-width: 100%;
-    margin-top: 12px;
-    padding-left: 0;
   }
-  #plot-controls div {
-    flex-direction: row;
-    gap: 12px;
-    margin-bottom: 16px;
+
+  /* MAIN panes stack vertically */
+  #main{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
   }
-  #plot-controls input[type="range"] {
-    width: 100px;
+
+  /* Give each pane a reasonable graph height (so Cytoscape renders) */
+  .pane{
+    grid-template-rows: auto auto; /* graphWrap + controlsBar */
   }
-  #plotImage {
-    max-height: calc(50vh); /* limit taller images on mobile */
+
+  .graphWrap{
+    /* fixed-ish height per panel; tweak as you like */
+    height: 55vh;
+    min-height: 420px;
+  }
+
+  /* Titles remain normal (they already consume height) */
+  .graphTitle{
+    font-size: 20px;
+    font-weight: 700;
+    padding: 8px 0;
+    pointer-events: none;
+  }
+
+  /* Legends: smaller, not too wide */
+  .legendOverlay{
+    max-width: 210px;
+    font-size: 12px;
+    padding: 6px 8px;
+    pointer-events: none;
+  }
+
+  /* Under-graph controls: stack vertically */
+  .controlsBar{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* LEFT controls: override your 2x3 grid -> single column */
+  .controlsBarLeft{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Make each block use full width */
+  .panelBox,
+  .panelBtn{
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Right side button pair should stack (not 2 columns) */
+  .right_button{
+    grid-template-columns: 1fr;
+  }
+
+  /* Slider should fill width */
+  .slider-container input[type="range"]{
+    width: 100%;
+    max-width: none;
   }
 }
 
-#network-title {
-    margin-left: -150px;
+/* Extra small phones */
+@media (max-width: 480px){
+  .graphWrap{
+    height: 52vh;
+    min-height: 360px;
+  }
+
+  .legendOverlay{
+    max-width: 180px;
+    font-size: 11px;
+  }
 }
 
+/* Robust modal base (wins against other rules) */
+.oai-modal{
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  background: rgba(0,0,0,0.55) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Open state */
+.oai-modal.oai-open{
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Modal inner box */
+.oai-modal-content{
+  position: fixed !important;
+
+  top: 5vh !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  width: 95vw !important;     /* almost full width */
+  height: 90vh !important;    /* almost full height */
+
+  max-width: none !important;
+  max-height: none !important;
+
+  background: #fff !important;
+  border: 2px solid #000 !important;
+  border-radius: 12px !important;
+
+  padding: 16px !important;
+  box-sizing: border-box !important;
+
+  overflow: hidden !important;
+}
+
+/* Close button */
+.oai-close{
+  position: absolute !important;
+  top: 6px !important;
+  right: 10px !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 28px !important;
+  cursor: pointer !important;
+  z-index: 999999999  !important;
+  pointer-events: auto !important;
+}
+
+/* Make the dashed modal use a 2-column grid */
+.oai-modal-dashed{
+  /* use your existing .oai-modal-content sizing (95vw/90vh etc.) */
+  padding: 14px !important;
+}
+
+/* the inner layout: two columns */
+.oai-dashed-grid{
+  height: calc(100% - 40px); /* leave room for close button */
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* equal split */
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+/* each pane */
+.oai-dashed-left{
+  padding: 16px;
+  box-sizing: border-box;
+  min-height: 0;
+}
+.oai-dashed-right{
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  display: grid;
+  grid-template-rows: auto 1fr; /* title + content */
+  min-width: 0; /* important: prevents grid overflow */
+  min-height: 0;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* small title strip */
+.oai-pane-title{
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  font-weight: 700;
+  font-size: 14px;
+  background: rgba(255,255,255,0.9);
+}
+
+/* IGV must fill its pane */
+#igv-container-dashed{
+  width: 50% !important;
+  margin: 0 auto;
+}
+
+/* Image fills its pane nicely */
+#edgeImageDashed1{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 900px){
+  .oai-dashed-grid{
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+html { scrollbar-gutter: stable; }
+
+/* Backup for browsers that don't fully respect scrollbar-gutter */
+body { overflow-y: scroll; }

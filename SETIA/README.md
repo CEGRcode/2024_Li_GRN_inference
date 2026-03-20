@@ -95,6 +95,7 @@ python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -e 42 \
     -f 0 \
     -k 0
+conda deactivate
 ```
 
 ## Outputs

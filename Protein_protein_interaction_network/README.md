@@ -4,11 +4,30 @@
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
 <sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
-## Directions
-To recreate the protein-protein interaction (PPI) network for this manuscript, please execute the shell scripts in numerical order. We built two types of PPIs, a motif-based PPI, and a PPI for all binding sites.
-To recreate the motif-based PPI, please execute the shell scripts: `00_Download_and_touch`, `01_Get_MEME_report`, `02_Get_YEP_motifs_and_binding_sites`, `030_Tag_pileup_and_NCIS_1`, `040_Tag_pileup_and_NCIS_2`, `05_JSK_calculation`, `06_Secondary_sort`, and then finally `070_Build_PPI_network`.
-To recreate the PPI for all binding sites, please execute the shell scripts: `00_Download_and_touch`, `01_Get_MEME_report`, `02_Get_YEP_motifs_and_binding_sites`, `031_Tag_pileup_and_NCIS_1`, `041_Tag_pileup_and_NCIS_2`, `05_JSK_calculation`, `06_Secondary_sort`, and then finally `071_Build_PPI_network`.
-Please note that this process may be computationally demanding and could require parallel computing for efficiency.
+## Pipeline 1: Motif-based PPI network  
+1. `00_Download_and_touch.sh` → downloads and initializes required data  
+2. `01_Get_MEME_report.sh` → generates motif discovery results  
+3. `02_Get_YEP_motifs_and_binding_sites.sh` → identifies motif-supported binding sites  
+4. `030_Tag_pileup_and_NCIS_1.sh` → computes tag pileup and normalization (part 1)  
+5. `040_Tag_pileup_and_NCIS_2.sh` → computes tag pileup and normalization (part 2)  
+6. `05_JSK_calculation.sh` → calculates Jensen–Shannon-based similarity  
+7. `06_Secondary_sort.sh` → refines interaction ranking  
+8. `070_Build_PPI_network.sh` → constructs the final motif-based PPI network  
+
+## Pipeline 2: PPI network using all binding sites  
+1. `00_Download_and_touch.sh` → downloads and initializes required data  
+2. `01_Get_MEME_report.sh` → generates motif discovery results  
+3. `02_Get_YEP_motifs_and_binding_sites.sh` → identifies all binding sites  
+4. `031_Tag_pileup_and_NCIS_1.sh` → computes tag pileup and normalization (part 1)  
+5. `041_Tag_pileup_and_NCIS_2.sh` → computes tag pileup and normalization (part 2)  
+6. `05_JSK_calculation.sh` → calculates Jensen–Shannon-based similarity  
+7. `06_Secondary_sort.sh` → refines interaction ranking  
+8. `071_Build_PPI_network.sh` → constructs the final PPI network  
+
+### Notes
+- Scripts must be executed in the specified order.  
+- The two pipelines differ in how binding sites are defined (motif-restricted vs. all sites).  
+- This workflow is computationally intensive and may require parallel computing (e.g., HPC clusters).
 
 ## Dependencies
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies

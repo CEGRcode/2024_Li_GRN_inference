@@ -74,7 +74,7 @@ To test the pipeline without full datasets:
 cd SETIA
 conda activate EvoAlg
 # -r: input transcriptional profiles
-# -n: time scale in solveIVP
+# -n: time scale in solve_ivp
 # -i: iteration times for model training
 # -p: perturbation setting to the initial states
 # -t: input promoter strength settings

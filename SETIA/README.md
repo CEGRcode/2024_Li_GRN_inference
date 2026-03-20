@@ -65,6 +65,28 @@ conda activate EvoAlg
 pip install flask tqdm seaborn joblib
 ```
 
+
+## Minimal Example
+
+To test the pipeline without full datasets:
+
+```bash
+cd SETIA
+conda activate EvoAlg
+python EGRN_Multi_Genalg_Combinatorial_2025.py \
+    -r data/example_RNA_profiles.txt \
+    -n 3000 \
+    -i 800 \
+    -p 0 \
+    -t data/example_promoter_strength.txt \
+    -l data/example_gene_length.txt \
+    -o "Minimal_example_" \
+    -e 42 \
+    -f 0 \
+    -k 0
+conda deactivate
+```
+
 ## Outputs
 The inferred gene regulatory network (GRN) is written to the `./result` directory. The final GRN structure is saved as `GRN_filtered_Sc_GRN_final_2.json`, and the corresponding model parameters are provided in `GRN_filtered_full_Sc_GRN_final.txt`. Intermediate and final GRN instances are serialized and stored as pickle files, while all searched or simulated GRN configurations during inference are cached in the `sys_cache_*` files.
 

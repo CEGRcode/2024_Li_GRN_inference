@@ -73,6 +73,16 @@ To test the pipeline without full datasets:
 ```bash
 cd SETIA
 conda activate EvoAlg
+# -r: input transcriptional profiles
+# -n: time scale in solveIVP
+# -i: iteration times for model training
+# -p: perturbation setting to the initial states
+# -t: input promoter strength settings
+# -l: input gene lengths
+# -o: prefix for output files
+# -e: random seed
+# -f: allow edges not supported by ChIP
+# -k: whether to pickle GRN instances
 python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -r data/example_RNA_profiles.txt \
     -n 3000 \
@@ -84,7 +94,6 @@ python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -e 42 \
     -f 0 \
     -k 0
-conda deactivate
 ```
 
 ## Outputs

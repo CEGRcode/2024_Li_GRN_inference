@@ -39,8 +39,22 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 
 ---
 
-## Directions
-To reproduce gene regulatory networks in this study, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`, `2_GRN_inference.sh`, and `3_Final_GRN_construction.sh`. To connect the core ssTF regulatory netowrk to non-TF target genes, please execute `4_Scale_GRN_to_nonTF_targets.sh`.
+## Pipeline
+
+1. `0_Download_and_touch.sh`  
+   → downloads and initializes required data  
+
+2. `1_Preprocessing...`  
+   → identifies discrete expression states  
+
+3. `2_GRN_inference.sh`  
+   → performs evolutionary GRN search  
+
+4. `3_Final_GRN_construction.sh`  
+   → filters and constructs final GRN  
+
+5. `4_Scale_GRN_to_nonTF_targets.sh`  
+   → extends network to non-TF genes
 
 ## Dependencies
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies

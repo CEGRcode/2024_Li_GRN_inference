@@ -48,7 +48,7 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
    → identifies discrete expression states  
 
 3. `2_GRN_inference.sh`  
-   → performs evolutionary GRN search  
+   → performs GRN inference  
 
 4. `3_Final_GRN_construction.sh`  
    → filters and constructs final GRN  

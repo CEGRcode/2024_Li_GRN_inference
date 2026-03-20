@@ -30,10 +30,10 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 
 ```text
 .
-├── SETIA/                                #Core GRN inference and simulation framework
-├── TF_DNA_Binding_Network/               #TF–DNA regulatory networks
-├── Protein_protein_interaction_network/  #PPC-based regulation
-├── GRN_simulator_website/                #Web interface
+├── SETIA/                                # Core GRN inference and simulation framework
+├── TF_DNA_Binding_Network/               # TF–DNA regulatory networks
+├── Protein_protein_interaction_network/  # PPC-based regulation
+├── GRN_simulator_website/                # Web interface
 └── README.md
 ```
 
@@ -68,14 +68,14 @@ pip install flask tqdm seaborn joblib
 
 ## Minimal Example
 
-To test the pipeline without full datasets:
+This example demonstrates how to run SETIA on a small test dataset.
 
 ```bash
 cd SETIA
 conda activate EvoAlg
 # -r: input transcriptional profiles
 # -n: time span used in solve_ivp
-# -i: iteration times for model training
+# -i: number of training iterations
 # -p: perturbation setting to the initial states
 # -t: input promoter strength settings
 # -l: input gene lengths
@@ -134,7 +134,7 @@ Miscellaneous helper functions.
 Exports gene regulatory networks from intermediate saved states when inference stops before the pre-set number of iterations. Transient GRN states are saved at each iteration and can be recovered using this script.
 
 ### merge_GRN.py
-Merged two GRNs.
+Merges two GRNs.
 
 ### GRN_Dynamic_Simulator_Combinatorial_remove_dispensible_edges_2025.py
 Removes dispensable edges from a gene regulatory network that do not affect the reproduction of transcriptional profiles as stable states.

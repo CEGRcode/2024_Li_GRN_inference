@@ -1,8 +1,9 @@
 # GRN Simulator Website  
 **TF–DNA Binding, Protein Colocalization, and Gene Regulatory Network Visualization**
 
-**Ruihao Li¹, William K. M. Lai¹, B. Franklin Pugh¹**  
-¹Department of Molecular Biology and Genetics, Cornell University, Ithaca, NY 14853, USA
+**Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>**  
+<sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
+<sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
 ---
 

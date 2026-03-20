@@ -10,7 +10,7 @@ SETIA integrates multiple layers of molecular evidence:
 - RNA-seq (transcriptional states across genotypes)
 - ChIP-exo (TF–DNA binding)
 - PRO-seq / CAGE-seq (promoter activity)
-- Protein–protein colocalization (PPC)
+- Protein–protein interaction (PPI) including protein-protein colocalization (PPC)
 
 These data are used to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
 

@@ -38,7 +38,7 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 ---
 
 ## Directions
-To infer gene regulatory networks, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`, `2_GRN_inference.sh`, and `3_Final_GRN_construction.sh`. To connect the core ssTF regulatory netowrk to non-TF target genes, please execute `4_Scale_GRN_to_nonTF_targets.sh`.
+To reproduce gene regulatory networks in this study, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`, `2_GRN_inference.sh`, and `3_Final_GRN_construction.sh`. To connect the core ssTF regulatory netowrk to non-TF target genes, please execute `4_Scale_GRN_to_nonTF_targets.sh`.
 
 ## Dependencies
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
@@ -94,87 +94,3 @@ Exports the final gene regulatory network and compares it against the TF–DNA b
 ### EGRN_Multi_non_TF_2025.py
 Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.
 
-
-
----
-
-## Overview
-
-
-
----
-
-
-
-## Quick Start (Conceptual)
-
-⚠️ Note: This repository currently requires user-provided datasets.
-
-### 1. Clone the repository
-
-git clone https://github.com/CEGRcode/2024_Li_GRN_inference.git
-cd 2024_Li_GRN_inference
-
-### 2. Set up environment
-
-conda create -n setia python=3.9
-conda activate setia
-
-pip install numpy pandas scipy matplotlib flask
-
-### 3. Prepare input data
-
-SETIA requires:
-
-- RNA-seq expression matrix
-- TF–DNA binding network
-- Optional: PRO-seq / CAGE-seq, PPC data
-
-### 4. Run GRN simulation (example)
-
-cd SETIA
-
-python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py \\
-    --input your_GRN_file \\
-    --expression your_expression_matrix
-
----
-
-## Web-Based GRN Simulator
-
-https://grn.cac.cornell.edu:5000
-
-To run locally:
-
-cd GRN_simulator_website
-python app_test.py
-
----
-
-## Method Summary
-
-SETIA formulates GRN inference as a dynamical systems problem:
-
-dx/dt = f(x; θ)
-
----
-
-## Publication
-
-Li, Ruihao et al.  
-PLoS Computational Biology (2023)
-
----
-
-## Notes
-
-- Research codebase (not fully packaged)
-- HPC-oriented scripts
-- Data preprocessing not automated
-
----
-
-## Contact
-
-Ruihao Li
-Cornell University

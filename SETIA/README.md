@@ -1,8 +1,18 @@
-# Gene regulatory network inference using IAGREE
+# Gene regulatory network inference using SETIA
 
 ### Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
 <sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
+
+## Overview
+SETIA integrates multiple layers of molecular evidence:
+
+- RNA-seq (transcriptional states across genotypes)
+- ChIP-exo (TF–DNA binding)
+- PRO-seq / CAGE-seq (promoter activity)
+- Protein–protein colocalization (PPC)
+
+These data are used to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
 
 ## Directions
 To infer gene regulatory networks, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`, `2_GRN_inference.sh`, and `3_Final_GRN_construction.sh`. To connect the core ssTF regulatory netowrk to non-TF target genes, please execute `4_Scale_GRN_to_nonTF_targets.sh`.
@@ -61,24 +71,13 @@ Exports the final gene regulatory network and compares it against the TF–DNA b
 ### EGRN_Multi_non_TF_2025.py
 Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.
 
-# SETIA: Dynamical Gene Regulatory Network Inference
 
-This repository contains the implementation of SETIA (Stable Expression–Transcriptional Inference Algorithm), a framework for inferring executable gene regulatory networks (GRNs) by modeling transcriptional profiles as stable dynamical attractor states.
-
-Unlike conventional GRN inference methods that focus on recovering regulatory edges, SETIA infers networks whose simulated dynamics reproduce observed transcriptional states across perturbations, enabling both predictive modeling and mechanistic interpretability.
 
 ---
 
 ## Overview
 
-SETIA integrates multiple layers of molecular evidence:
 
-- RNA-seq (transcriptional states across genotypes)
-- ChIP-exo (TF–DNA binding)
-- PRO-seq / CAGE-seq (promoter activity)
-- Protein–protein colocalization (PPC)
-
-These data are used to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
 
 ---
 

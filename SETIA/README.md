@@ -74,7 +74,7 @@ To test the pipeline without full datasets:
 cd SETIA
 conda activate EvoAlg
 # -r: input transcriptional profiles
-# -n: time scale in solve_ivp
+# -n: time span used in solve_ivp
 # -i: iteration times for model training
 # -p: perturbation setting to the initial states
 # -t: input promoter strength settings
@@ -83,6 +83,7 @@ conda activate EvoAlg
 # -e: random seed
 # -f: allow edges not supported by ChIP
 # -k: whether to pickle GRN instances
+The following command runs SETIA on a minimal example dataset and writes output files with the prefix Minimal_example_.
 python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -r data/example_RNA_profiles.txt \
     -n 3000 \

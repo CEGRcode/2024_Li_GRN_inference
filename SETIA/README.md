@@ -18,7 +18,7 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 
 ## Key Features
 
-- Infers dynamical GRNs that reproduce stable transcriptional states  
+- Infers dynamical GRNs that reproduce cell-type-specific stable transcriptional states  
 - Integrates multi-omics data for mechanistic constraints  
 - Supports combinatorial regulation (AND / OR logic)  
 - Implements parallelized optimization for scalability  

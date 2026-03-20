@@ -1,7 +1,8 @@
 # Gene regulatory network inference using IAGREE
 
-### Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1</sup>, B. Franklin Pugh<sup>1</sup>
+### Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA
+<sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
 ## Directions
 To infer gene regulatory networks, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`, `2_GRN_inference.sh`, and `3_Final_GRN_construction.sh`. To connect the core ssTF regulatory netowrk to non-TF target genes, please execute `4_Scale_GRN_to_nonTF_targets.sh`.
@@ -59,3 +60,118 @@ Exports the final gene regulatory network and compares it against the TF–DNA b
 
 ### EGRN_Multi_non_TF_2025.py
 Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.
+
+# SETIA: Dynamical Gene Regulatory Network Inference
+
+This repository contains the implementation of SETIA (Stable Expression–Transcriptional Inference Algorithm), a framework for inferring executable gene regulatory networks (GRNs) by modeling transcriptional profiles as stable dynamical attractor states.
+
+Unlike conventional GRN inference methods that focus on recovering regulatory edges, SETIA infers networks whose simulated dynamics reproduce observed transcriptional states across perturbations, enabling both predictive modeling and mechanistic interpretability.
+
+---
+
+## Overview
+
+SETIA integrates multiple layers of molecular evidence:
+
+- RNA-seq (transcriptional states across genotypes)
+- ChIP-exo (TF–DNA binding)
+- PRO-seq / CAGE-seq (promoter activity)
+- Protein–protein colocalization (PPC)
+
+These data are used to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
+
+---
+
+## Key Features
+
+- Infers dynamical GRNs that reproduce stable transcriptional states  
+- Integrates multi-omics data for mechanistic constraints  
+- Supports combinatorial regulation (AND / OR logic)  
+- Implements parallelized optimization for scalability  
+- Provides an interactive web platform for simulation and visualization  
+
+---
+
+## Repository Structure
+
+.
+├── SETIA/                              # Core GRN inference and simulation framework
+├── TF_DNA_Binding_Network/             # Construction of TF–DNA regulatory networks
+├── Protein_protein_interaction_network/ # PPC-based combinatorial regulation
+├── GRN_simulator_website/              # Web interface for GRN simulation and visualization
+├── README.md
+
+---
+
+## Quick Start (Conceptual)
+
+⚠️ Note: This repository currently requires user-provided datasets.
+
+### 1. Clone the repository
+
+git clone https://github.com/CEGRcode/2024_Li_GRN_inference.git
+cd 2024_Li_GRN_inference
+
+### 2. Set up environment
+
+conda create -n setia python=3.9
+conda activate setia
+
+pip install numpy pandas scipy matplotlib flask
+
+### 3. Prepare input data
+
+SETIA requires:
+
+- RNA-seq expression matrix
+- TF–DNA binding network
+- Optional: PRO-seq / CAGE-seq, PPC data
+
+### 4. Run GRN simulation (example)
+
+cd SETIA
+
+python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py \\
+    --input your_GRN_file \\
+    --expression your_expression_matrix
+
+---
+
+## Web-Based GRN Simulator
+
+https://grn.cac.cornell.edu:5000
+
+To run locally:
+
+cd GRN_simulator_website
+python app_test.py
+
+---
+
+## Method Summary
+
+SETIA formulates GRN inference as a dynamical systems problem:
+
+dx/dt = f(x; θ)
+
+---
+
+## Publication
+
+Li, Ruihao et al.  
+PLoS Computational Biology (2023)
+
+---
+
+## Notes
+
+- Research codebase (not fully packaged)
+- HPC-oriented scripts
+- Data preprocessing not automated
+
+---
+
+## Contact
+
+Ruihao Li
+Cornell University

@@ -29,10 +29,10 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 ## Repository Structure
 
 .
-├── SETIA/                               Core GRN inference and simulation framework  
- ├── TF_DNA_Binding_Network/              Construction of TF–DNA regulatory networks  
- ├── Protein_protein_interaction_network/ PPC-based combinatorial regulation  
- ├── GRN_simulator_website/               Web interface for GRN simulation and visualization  
+├── SETIA/                                 (Core GRN inference and simulation framework)  
+ ├── TF_DNA_Binding_Network/               (Construction of TF–DNA regulatory networks)  
+ ├── Protein_protein_interaction_network/  (PPC-based combinatorial regulation)  
+ ├── GRN_simulator_website/                (Web interface for GRN simulation and visualization)  
  ├── README.md  
 
 ---

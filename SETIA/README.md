@@ -45,8 +45,10 @@ To reproduce gene regulatory networks in this study, please execute the shell sc
 ## Dependencies
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
-```
+```bash
 conda create -n EvoAlg -c conda-forge -y python=3.10 numpy pandas scipy matplotlib scikit-learn pip
+conda activate EvoAlg
+pip install flask tqdm seaborn joblib
 ```
 
 ## Outputs

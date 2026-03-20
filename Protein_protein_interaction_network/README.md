@@ -4,7 +4,7 @@
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
 <sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
-### Pipeline 1: Motif-based PPI network  
+### Pipeline 1: Motif-based PPC network  
 1. `00_Download_and_touch.sh` → downloads and initializes required data  
 2. `01_Get_MEME_report.sh` → generates motif discovery results  
 3. `02_Get_YEP_motifs_and_binding_sites.sh` → identifies motif-supported binding sites  
@@ -14,7 +14,7 @@
 7. `06_Secondary_sort.sh` → refines interaction ranking  
 8. `070_Build_PPI_network.sh` → constructs the final motif-based PPI network  
 
-### Pipeline 2: PPI network using all binding sites  
+### Pipeline 2: PPC network using all binding sites  
 1. `00_Download_and_touch.sh` → downloads and initializes required data  
 2. `01_Get_MEME_report.sh` → generates motif discovery results  
 3. `02_Get_YEP_motifs_and_binding_sites.sh` → identifies all binding sites  

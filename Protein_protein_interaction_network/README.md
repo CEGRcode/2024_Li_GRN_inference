@@ -33,7 +33,7 @@
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
 ```
-conda create -n PPI -c bioconda -c conda-forge bedtools numpy pandas math matplotlib scipy scikit-learn re samtools wget pybigwig sra-tools opencv bwa shutil zipfile
+conda create -n PPC -c bioconda -c conda-forge bedtools numpy pandas math matplotlib scipy scikit-learn re samtools wget pybigwig sra-tools opencv bwa shutil zipfile
 ```
 
 ## Table of Contents

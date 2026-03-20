@@ -14,6 +14,29 @@ SETIA integrates multiple layers of molecular evidence:
 
 These data are used to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
 
+---
+
+## Key Features
+
+- Infers dynamical GRNs that reproduce stable transcriptional states  
+- Integrates multi-omics data for mechanistic constraints  
+- Supports combinatorial regulation (AND / OR logic)  
+- Implements parallelized optimization for scalability  
+- Provides an interactive web platform for simulation and visualization  
+
+---
+
+## Repository Structure
+
+.
+├── SETIA/                              # Core GRN inference and simulation framework
+├── TF_DNA_Binding_Network/             # Construction of TF–DNA regulatory networks
+├── Protein_protein_interaction_network/ # PPC-based combinatorial regulation
+├── GRN_simulator_website/              # Web interface for GRN simulation and visualization
+├── README.md
+
+---
+
 ## Directions
 To infer gene regulatory networks, please execute the shell scripts in order: `0_Download_and_touch.sh`, `1_Preprocessing_dicrete_gene_expression_state_identification.sh`, `2_GRN_inference.sh`, and `3_Final_GRN_construction.sh`. To connect the core ssTF regulatory netowrk to non-TF target genes, please execute `4_Scale_GRN_to_nonTF_targets.sh`.
 
@@ -81,26 +104,7 @@ Extends the core ssTF GRN to downstream non-TF target genes by fitting their sta
 
 ---
 
-## Key Features
 
-- Infers dynamical GRNs that reproduce stable transcriptional states  
-- Integrates multi-omics data for mechanistic constraints  
-- Supports combinatorial regulation (AND / OR logic)  
-- Implements parallelized optimization for scalability  
-- Provides an interactive web platform for simulation and visualization  
-
----
-
-## Repository Structure
-
-.
-├── SETIA/                              # Core GRN inference and simulation framework
-├── TF_DNA_Binding_Network/             # Construction of TF–DNA regulatory networks
-├── Protein_protein_interaction_network/ # PPC-based combinatorial regulation
-├── GRN_simulator_website/              # Web interface for GRN simulation and visualization
-├── README.md
-
----
 
 ## Quick Start (Conceptual)
 

@@ -1,7 +1,8 @@
 # TF-DNA binding network inference from ChIP-exo data on YEP
 
-### Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1</sup>, B. Franklin Pugh<sup>1</sup>
+### Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA
+<sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
 ## Directions
 To recreate the TF-DNA binding network for this manuscript, please execute the shell script `Build_TF_DNA_network`.

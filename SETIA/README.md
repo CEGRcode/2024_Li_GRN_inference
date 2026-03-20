@@ -83,7 +83,7 @@ conda activate EvoAlg
 # -e: random seed
 # -f: allow edges not supported by ChIP
 # -k: whether to pickle GRN instances
-The following command runs SETIA on a minimal example dataset and writes output files with the prefix Minimal_example_.
+# The following command runs SETIA on a minimal example dataset and writes output files with the prefix Minimal_example_.
 python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -r data/example_RNA_profiles.txt \
     -n 3000 \

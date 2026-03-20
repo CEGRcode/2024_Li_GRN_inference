@@ -1,6 +1,7 @@
 # Towards a comprehensive gene regulatory network in *Saccharomyces cerevisiae*
-## Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1</sup>, B. Franklin Pugh<sup>1</sup>
-<sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA
+## Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>
+<sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
+<sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 ### Abstract
 The collection and synergistic interplay of genes within an organism's genome form gene regulatory networks (GRNs) that orchestrate gene expression, enabling cellular differentiation, development, and the maintenance of stable transcriptional states. However, existing GRN inference methods are evaluated by overlap with known transcription factor (TF)–target interactions rather than by their ability to explain transcriptional states as emergent properties of network dynamics. Here we present SETIA, a framework that identifies multiple discrete gene expression stable states and infers GRNs whose explicit, predictive dynamical model reproduces stable, multi-state transcriptional profiles across distinct cell types.
 

@@ -46,6 +46,7 @@ def Multi_GenerateMutation(GRN_instances_dict, instance_key):
 
 if __name__ == '__main__':
     np.seterr(over='ignore')
+    os.makedirs("./result", exist_ok=True)
 
     sys_path = os.getcwd()
     sys_input_RNAseq = ""

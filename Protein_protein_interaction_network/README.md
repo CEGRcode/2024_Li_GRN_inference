@@ -14,7 +14,7 @@
 7. `06_Secondary_sort.sh` → refines interaction ranking  
 8. `070_Build_PPI_network.sh` → constructs the final motif-based PPI network  
 
-### Pipeline 2: PPC network using all binding sites  
+### Pipeline 2: PPC network using all bound locations  
 1. `00_Download_and_touch.sh` → downloads and initializes required data  
 2. `01_Get_MEME_report.sh` → generates motif discovery results  
 3. `02_Get_YEP_motifs_and_binding_sites.sh` → identifies all binding sites  

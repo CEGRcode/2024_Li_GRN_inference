@@ -91,7 +91,7 @@ python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -p 0 \
     -t data/example_promoter_strength.txt \
     -l data/example_gene_length.txt \
-    -o "Minimal_example_" \
+    -o "Minimal_example" \
     -e 42 \
     -f 0 \
     -k 0

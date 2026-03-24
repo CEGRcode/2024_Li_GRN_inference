@@ -1,49 +1,26 @@
 import numpy as np
 import os
 from utility_functions import *
+from pathlib import Path
 
 def get_edges_from_json(json_file):
-    # Dictionary to store edges
     edge_dict = {}
-    # Load the JSON data
+    if not os.path.exists(json_file):
+        return edge_dict  # return empty dict
     with open(json_file, 'r') as file:
         data = json.load(file)
-    # Assuming edges are stored under the 'edges' key
     edges = data.get('edges', [])
-    # Iterate over the edges and add them to the dictionary
     for edge in edges:
         source = edge['source']
         target = edge['target']
         if source in edge_dict:
             edge_dict[source].append(target)
         else:
-            edge_dict[source] = [target]  # Store the edge as a tuple key
+            edge_dict[source] = [target]
     return edge_dict
 
 directory = './result/'
 sys_output_name = 'Sc_GRN_final'
-
-Order_of_genes = []
-infile = open('./data/GRN_ssTFs_column_names.txt' ,'r')
-for line in infile:
-    Order_of_genes = line.split()
-infile.close()
-
-Result_Flow_Dict = {}
-for filename in os.listdir(directory):
-    if filename.endswith('ResultFlow.txt'):
-        filepath = os.path.join(directory, filename)
-        if os.path.isfile(filepath):
-            with open(filepath, 'r') as f:
-                lines = f.readlines()
-                if lines:  # if file is not empty
-                    last_row = lines[-1].strip()  # Remove trailing newline/whitespace
-                    #print(f"File: {filename} -> Last row: {last_row}")
-                    Result_Flow_Dict[filename.split('_')[1]] = list(map(float, last_row.split()))
-    else:
-        continue
-
-print(Result_Flow_Dict)
 
 GRN_Components_Dict = {}
 for filename in os.listdir(directory):
@@ -69,6 +46,35 @@ indexes_of_diff_genes = sorted(list(map(int, GRN_Components_Dict[next(iter(GRN_C
 outfile = open('./result/indexes_of_diff_gene.txt', 'w')
 outfile.write('\t'.join(map(str, indexes_of_diff_genes)))
 outfile.close()
+
+file_path = Path('./data/GRN_ssTFs_column_names.txt')
+Order_of_genes = []
+if file_path.exists():
+    with file_path.open() as f:
+        for line in f:
+            Order_of_genes = line.split()
+if not Order_of_genes:
+    Order_of_genes = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+
+print(Order_of_genes)
+Order_of_genes = Order_of_genes[:len(indexes_of_diff_genes)]
+print(Order_of_genes)
+
+Result_Flow_Dict = {}
+for filename in os.listdir(directory):
+    if filename.endswith('ResultFlow.txt'):
+        filepath = os.path.join(directory, filename)
+        if os.path.isfile(filepath):
+            with open(filepath, 'r') as f:
+                lines = f.readlines()
+                if lines:  # if file is not empty
+                    last_row = lines[-1].strip()  # Remove trailing newline/whitespace
+                    #print(f"File: {filename} -> Last row: {last_row}")
+                    Result_Flow_Dict[filename.split('_')[1]] = list(map(float, last_row.split()))
+    else:
+        continue
+
+print(Result_Flow_Dict)
 
 TF_DNA_net = get_edges_from_json('./data/Rossi_Ruihao_TF_DNA_union_all.json')
 

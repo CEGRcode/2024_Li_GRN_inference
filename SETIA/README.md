@@ -60,7 +60,7 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
 ```bash
-conda create -n EvoAlg -c conda-forge -y python=3.10 numpy pandas scipy sympy matplotlib scikit-learn pip
+conda create -n EvoAlg -c conda-forge -y python=3.10 numpy pandas scipy sympy numexpr matplotlib scikit-learn pip
 conda activate EvoAlg
 pip install flask tqdm seaborn joblib
 ```

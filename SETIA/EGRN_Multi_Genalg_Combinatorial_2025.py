@@ -18,7 +18,7 @@ from utility_functions import *
 from matplotlib import pyplot as plt
 import itertools
 
-def Multi_GenerateMutation(GRN_instances_dict, instance_key):
+def Multi_GenerateMutation(GRN_instances_dict, instance_key, indexes_of_diff_gene):
     GRN_instances = GRN_instances_dict[instance_key]
     if GRN_instances.f0_c[indexes_of_diff_gene[j]][:2] in [[0, 0], [1, 1]]:
         sys_cache_00 = copy.deepcopy(sys_cache)
@@ -529,7 +529,7 @@ if __name__ == '__main__':
             else:
                 pass
             shared_dict[GRN_List[j]] = eval(GRN_List[j])
-            p = multiprocessing.Process(target=Multi_GenerateMutation, args=(shared_dict, GRN_List[j]))
+            p = multiprocessing.Process(target=Multi_GenerateMutation, args=(shared_dict, GRN_List[j], indexes_of_diff_gene))
             jobs.append(p)
             p.start()
 

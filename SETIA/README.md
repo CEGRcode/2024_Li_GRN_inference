@@ -68,7 +68,7 @@ pip install flask tqdm seaborn joblib
 
 ## Minimal Example
 
-This example demonstrates how to run SETIA on a small test dataset. As the code is optimized for HPC platforms, running it on a local PC may take longer (approximately 10 minutes).
+This example demonstrates how to run SETIA on a small test dataset. As the code is optimized for HPC platforms, running it on a local PC may take longer (approximately 10 minutes). The example inferred GRN will be written to `./result/GRN_filtered_Sc_GRN_final_raw.json`.
 
 ```bash
 cd SETIA
@@ -98,7 +98,6 @@ python EGRN_Multi_Genalg_Combinatorial_2025.py \
 python Export_GRN_from_ResultFlow_Component.py
 conda deactivate
 ```
-The example inferred GRN will be written to `./result/GRN_filtered_Sc_GRN_final_raw.json`.
 
 ## Outputs
 The inferred gene regulatory network (GRN) is written to the `./result` directory. The final GRN structure is saved as `GRN_filtered_Sc_GRN_final_2.json`, and the corresponding model parameters are provided in `GRN_filtered_full_Sc_GRN_final.txt`. Intermediate and final GRN instances are serialized and stored as pickle files, while all searched or simulated GRN configurations during inference are cached in the `sys_cache_*` files.

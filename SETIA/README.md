@@ -68,7 +68,7 @@ pip install flask tqdm seaborn joblib
 
 ## Minimal Example
 
-This example demonstrates how to run SETIA on a small test dataset.
+This example demonstrates how to run SETIA on a small test dataset. As the code is optimized for HPC platforms, running it on a local PC may take longer (approximately 10 minutes).
 
 ```bash
 cd SETIA
@@ -87,7 +87,7 @@ conda activate EvoAlg
 python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -r data/example_RNA_profiles.txt \
     -n 3000 \
-    -i 100 \
+    -i 10 \
     -p 0 \
     -t data/example_promoter_strength.txt \
     -l data/example_gene_length.txt \

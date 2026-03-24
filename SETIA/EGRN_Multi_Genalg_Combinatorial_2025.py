@@ -18,21 +18,21 @@ from utility_functions import *
 from matplotlib import pyplot as plt
 import itertools
 
-def Multi_GenerateMutation(GRN_instances_dict, instance_key, indexes_of_diff_gene):
+def Multi_GenerateMutation(GRN_instances_dict, instance_key, indexes_of_diff_gene, j_mutation):
     GRN_instances = GRN_instances_dict[instance_key]
-    if GRN_instances.f0_c[indexes_of_diff_gene[j]][:2] in [[0, 0], [1, 1]]:
+    if GRN_instances.f0_c[indexes_of_diff_gene[j_mutation]][:2] in [[0, 0], [1, 1]]:
         sys_cache_00 = copy.deepcopy(sys_cache)
-        sys_cache_00[j] = {key[3:]: value for key, value in sys_cache[j].items() if key.startswith('00\t')}
+        sys_cache_00[j_mutation] = {key[3:]: value for key, value in sys_cache[j_mutation].items() if key.startswith('00\t')}
         sys_cache_11 = copy.deepcopy(sys_cache)
-        sys_cache_11[j] = {key[3:]: value for key, value in sys_cache[j].items() if key.startswith('11\t')}
-        if GRN_instances.f0_c[indexes_of_diff_gene[j]][:2] == [0, 0]:
+        sys_cache_11[j_mutation] = {key[3:]: value for key, value in sys_cache[j_mutation].items() if key.startswith('11\t')}
+        if GRN_instances.f0_c[indexes_of_diff_gene[j_mutation]][:2] == [0, 0]:
             sys_cache_list = [sys_cache_00, sys_cache_11]
         else:
             sys_cache_list = [sys_cache_11, sys_cache_00]
         GRN_instances.GenerateMutation(sys_cache_list[0], indexes_of_diff_gene, sys_LG, sys_only_TF_DNA, sys_max_attempts)  # Generate Mutation
         if GRN_instances.MutationRate == 'All tested!':
             GRN_instances.SetMutationRate(1)
-            if GRN_instances.f0_c[indexes_of_diff_gene[j]][:2] == [0, 0]:
+            if GRN_instances.f0_c[indexes_of_diff_gene[j_mutation]][:2] == [0, 0]:
                 GRN_instances.Setf0([1,1,1,1,1,1])
             else:
                 GRN_instances.Setf0([0,0,1,1,1,1])
@@ -529,7 +529,7 @@ if __name__ == '__main__':
             else:
                 pass
             shared_dict[GRN_List[j]] = eval(GRN_List[j])
-            p = multiprocessing.Process(target=Multi_GenerateMutation, args=(shared_dict, GRN_List[j], indexes_of_diff_gene))
+            p = multiprocessing.Process(target=Multi_GenerateMutation, args=(shared_dict, GRN_List[j], indexes_of_diff_gene, j))
             jobs.append(p)
             p.start()
 

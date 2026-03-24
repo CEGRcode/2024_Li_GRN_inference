@@ -145,3 +145,5 @@ Exports the final gene regulatory network and compares it against the TF–DNA b
 ### EGRN_Multi_non_TF_2025.py
 Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.
 
+### EGRN_Multi_Genalg_Combinatorial_2025.py
+The main executable for SETIA, implementing evolutionary optimization of ODE-based GRNs to recapitulate observed transcriptional stable states based on given GRN structural information.

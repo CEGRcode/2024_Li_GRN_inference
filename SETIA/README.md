@@ -68,7 +68,7 @@ pip install flask tqdm seaborn joblib
 
 ## Minimal Example
 
-This example demonstrates how to run SETIA on a small test dataset. As the code is optimized for HPC platforms, running it on a local PC may take longer (approximately 10 minutes). The example inferred GRN will be written to `./result/GRN_filtered_Sc_GRN_final_raw.json`.
+This example demonstrates how to run SETIA on a small test dataset. As the code is optimized for HPC platforms, running it on a local PC may take longer (approximately 10 minutes). The example inferred GRN will be written to `./result/GRN_filtered_Sc_GRN_final_raw.json`, and can be uploaded to our GRN simulator website (https://grn.cac.cornell.edu:5000/) for interactive exploration.
 
 ```bash
 cd SETIA

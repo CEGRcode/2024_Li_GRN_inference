@@ -108,4 +108,5 @@ Performs the TMM normalization on the RNA-seq samples aligned by Salmon. It prod
 ### EGRN_Multi_Genalg_Combinatorial_2025.py
 The main executable for SETIA, implementing evolutionary optimization of ODE-based GRNs to recapitulate observed transcriptional stable states based on given GRN structural information.
 
-### GRN_in
+### GRN_input_acquisition.py
+Preprocess the RNA-seq, ChIP-exo, and other data for GRN inference in yeast.

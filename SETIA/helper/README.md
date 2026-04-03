@@ -12,8 +12,5 @@ Contains functions for population-level evolutionary dynamics of gene regulatory
 ### utility_functions.py
 Miscellaneous helper functions.
 
-### Export_GRN_from_ResultFlow_Component.py
-Exports gene regulatory networks from intermediate saved states when inference stops before the pre-set number of iterations. Transient GRN states are saved at each iteration and can be recovered using this script.
-
 ### merge_GRN.py
 Merges two GRNs.

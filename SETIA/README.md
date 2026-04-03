@@ -189,6 +189,43 @@ Optional prior inputs include:
 
 If omitted, the corresponding preprocessing steps are automatically skipped.
 
+### Step 3: Run Input Preprocessing
+Use `GRN_input_acquisition_v2.py` to convert the gene metadata file, normalized RNA-seq matrix, and optional prior information into SETIA-compatible preprocessing files. The script writes its outputs primarily to `./data`, and also generates summary files in `./result`. The main generated files are:  
+
+**Core outputs used by SETIA**
+- `./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt`  
+  Discretized steady-state expression matrix used as the transcriptional-state input for GRN inference.
+- `./data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt`  
+  Per-gene standard deviations associated with the discretized steady states.
+- `./data/GRN_ssTFs_Sc_gene_length.txt`  
+  Gene lengths for the modeled genes.
+- `./data/GRN_ssTFs_row_names.txt`  
+  Row labels corresponding to genotype / condition names.
+- `./data/GRN_ssTFs_column_names.txt`  
+  Column labels corresponding to the modeled genes.
+
+**Optional prior-derived outputs**
+- `./data/GRN_ssTFs_Sc_TF_DNA.txt`  
+  TF–DNA prior adjacency matrix generated when `-t` is provided.
+- `./data/GRN_ssTFs_Sc_LG.txt`  
+  Local-group / complex-structure file derived from promoter binding and colocalization information when the corresponding optional prior files are provided.
+- `./data/GRN_ssTFs_Sc_promoter_strength.txt`  
+  Promoter strength matrix generated when the required promoter-annotation resources are available.
+- `./data/GRN_ssTFs_Sc_TF_DNA_TPM_union.txt`  
+  Union of TF–DNA prior and TPM-derived relationships, generated when `-t` is provided.
+- `./data/GRN_ssTFs_Sc_initial_condition.txt`  
+  Initial GRN edge-state string derived from TF–DNA and expression similarity, generated when `-t` is provided.
+
+**Additional preprocessing summaries**
+- `./data/GRN_ssTFs_Salmon_SteadyStates_2025.txt`  
+  Average / grouped steady-state expression values before discretization.
+- `./result/Steady_state_count.txt`  
+  Summary of the number of inferred discrete states per gene.
+- `./result/GMM_figures/AIC/`  
+  Diagnostic plots for discrete-state identification.
+
+If optional inputs such as `-t`, `-c`, `-a`, or `-b` are not provided, the corresponding prior-dependent preprocessing steps are skipped automatically.
+
 ---
 
 ### Step 4: Run SETIA Inference

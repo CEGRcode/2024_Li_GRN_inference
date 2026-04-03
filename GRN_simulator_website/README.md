@@ -36,7 +36,7 @@ python app_test.py
 ```
 
 We recommend using a process manager or watchdog service (e.g., systemd, supervisord, or pm2) to keep the web application running reliably.
-The website source code can be used independently of the full dataset. Because the files in ./data are too large to host on GitHub, the complete dataset is separately provided through Zenodo.
+The website source code can be used independently of the full dataset. Because the files in ./static/data are too large to host on GitHub, the complete dataset is separately provided through Zenodo.
 
 ---
 

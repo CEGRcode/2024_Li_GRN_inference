@@ -1,8 +1,18 @@
-# Towards a comprehensive gene regulatory network in *Saccharomyces cerevisiae*
+# A causal gene regulatory network grounded in orthogonal molecular evidence
 ## Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
 <sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 ### Abstract
-The coordinated activity of genes within an organism’s genome forms gene regulatory networks (GRNs) that govern gene expression, cellular differentiation, and the maintenance of stable transcriptional states. However, transcriptional profiles across cell types and genetic perturbations reflect underlying dynamical states of the GRN. Inferring GRNs that both integrate molecular regulatory mechanisms as priors and reproduce transcriptional states as stable dynamical outcomes remains a central challenge.
+The coordinated activity of genes within an organism's genome forms a gene regulatory network (GRN) that governs gene expression, cellular differentiation, and maintenance of stable transcriptional states. Transcriptional profiles across cell types, conditions, and genetic perturbations reflect underlying dynamics of GRNs, yet inferring GRNs that both integrate molecular regulatory mechanisms and reproduce transcriptional states as stable outcomes remains a central challenge. We present SETIA, a framework that identifies multiple discrete gene expression states from RNA–seq data and infers GRNs whose explicit dynamical models reproduce transcriptional profiles as stable states across conditions. Applied to RNA–seq data from wild–type and transcription factor knockout strains in *Saccharomyces cerevisiae*, SETIA infers GRNs that accurately reproduce observed transcriptional profiles and generalize to held–out transcriptional states in cross–validation. Incorporating TF–promoter binding and protein–protein interaction priors at differing strengths, SETIA yields GRNs ranging from mechanistically grounded architectures to flexible models that capture indirect regulatory influences. SETIA provides a systems–level framework for GRN inference that explains and predicts transcriptional states while maintaining fidelity to its molecular regulatory structure.
+---
 
-Here we present SETIA, a framework that identifies discrete gene expression states from RNA–seq data and infers GRNs whose explicit dynamical model reproduces the observed stable transcriptional profiles across distinct cell types. Using this framework, we find that genes can occupy multiple distinct and reproducible transcriptional states across perturbations. Applying SETIA to RNA–seq data from wild–type and transcription factor knockout strains in *Saccharomyces cerevisiae*, we show that the inferred GRNs accurately reproduce observed transcriptional profiles and can generalize to completely held–out transcriptional states in cross–validation. By incorporating TF–promoter binding and protein–protein interaction priors at differing strengths, SETIA yields GRNs ranging from mechanistically grounded architectures to flexible models that capture indirect regulatory influences. Together, SETIA provides a systems–level framework for GRN inference that explains and predicts transcriptional states from network dynamics while maintaining fidelity to regulatory structure.
+## Repository Structure
+
+```text
+.
+├── SETIA/                                # Core GRN inference and simulation framework
+├── TF_DNA_Binding_Network/               # TF–DNA regulatory networks
+├── Protein_protein_interaction_network/  # PPC-based regulation
+├── GRN_simulator_website/                # Web interface
+└── README.md
+```

@@ -120,3 +120,5 @@ Exports the final gene regulatory network and compares it against the TF–DNA b
 ### EGRN_Multi_non_TF_2025.py
 Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.
 
+### Export_GRN_from_ResultFlow_Component.py
+Exports gene regulatory networks from intermediate saved states when inference stops before the pre-set number of iterations. Transient GRN states are saved at each iteration and can be recovered using this script.

@@ -11,7 +11,7 @@ To recreate the TF-DNA binding network for this manuscript, please execute the s
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
 ```
-conda create -n TF_DNA -c bioconda -c conda-forge numpy pandas os json math datetime
+conda create -n TF_DNA -c bioconda -c conda-forge python=3.10 numpy=1.26 pandas=2.2 os json math datetime
 ```
 
 ## Table of Contents

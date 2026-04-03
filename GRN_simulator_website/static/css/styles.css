@@ -756,7 +756,7 @@ button.toolbarBtn{
 
 /* IGV must fill its pane */
 #igv-container-dashed{
-  width: 50% !important;
+  width: 100% !important;
   margin: 0 auto;
 }
 

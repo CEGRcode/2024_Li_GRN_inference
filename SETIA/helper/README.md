@@ -17,12 +17,3 @@ Exports gene regulatory networks from intermediate saved states when inference s
 
 ### merge_GRN.py
 Merges two GRNs.
-
-### GRN_Dynamic_Simulator_Combinatorial_remove_dispensible_edges_2025.py
-Removes dispensable edges from a gene regulatory network that do not affect the reproduction of transcriptional profiles as stable states.
-
-### Export_final_GRN_TF_DNA.py
-Exports the final gene regulatory network and compares it against the TF–DNA binding prior, highlighting shared edges in green.
-
-### EGRN_Multi_non_TF_2025.py
-Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.

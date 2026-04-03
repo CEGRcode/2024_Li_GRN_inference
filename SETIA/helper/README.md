@@ -1,5 +1,4 @@
-## Table of Contents
-
+## File Descriptions
 ### distance_functions.py
 Contains helper functions for computing Hamming distance and mean normalized L1 distance at the per-gene and per-profile levels.
 

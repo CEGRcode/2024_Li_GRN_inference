@@ -48,13 +48,14 @@ find . -mindepth 1 -maxdepth 1 \
   ! -name "PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json" \
   -exec rm -rf {} +
 
-# Download Supplementary data from Rossi 2021 and Lu 2020.
+# Download Supplementary data from Rossi 2021.
 wget -O Supplementary_Data_2.xlsx \
 "https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-03314-8/MediaObjects/41586_2021_3314_MOESM4_ESM.xlsx"
 
 wget -O 41586_2021_3314_MOESM3_ESM.xlsx \
 "https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-03314-8/MediaObjects/41586_2021_3314_MOESM3_ESM.xlsx"
 
+# Download the CAGE-seq data from Lu 2020 for the promoter strength estimation.
 # 1) Download the PMC OA package tarball
 curl -L -o PMC6633255.tar.gz \
   "https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/94/02/PMC6633255.tar.gz"

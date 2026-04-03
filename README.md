@@ -11,7 +11,7 @@ The coordinated activity of genes within an organism's genome forms a gene regul
 .
 ├── SETIA/                                # Core GRN inference and simulation framework
 ├── TF_DNA_Binding_Network/               # TF–DNA regulatory networks
-├── Protein_protein_interaction_network/  # PPC-based regulation
+├── Protein_protein_interaction_network/  # Colocalization-based protein-protein interaction networks
 ├── GRN_simulator_website/                # Web interface
 └── README.md
 ```

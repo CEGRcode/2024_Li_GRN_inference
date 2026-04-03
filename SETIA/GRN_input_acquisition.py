@@ -47,34 +47,55 @@ def parse_args():
     parser.add_argument(
         "-t", "--TF_DNA_prior",
         type=str,
-        required=True,
-        help="Path to TF–DNA prior JSON file"
+        required=False,
+        default=None,
+        help="Optional path to TF–DNA prior JSON file"
     )
 
     parser.add_argument(
         "-c", "--protein_protein_colocalization_prior",
         type=str,
-        required=True,
-        help="Path to protein–protein colocalization prior JSON file"
+        required=False,
+        default=None,
+        help="Optional path to protein–protein colocalization prior JSON file"
     )
 
     parser.add_argument(
         "-a", "--annotation",
         type=str,
-        required=True,
-        help="Path to genome annotation file"
+        required=False,
+        default=None,
+        help="Optional path to genome annotation file"
     )
 
     parser.add_argument(
         "-b", "--YEP_replicate_ID",
         type=str,
-        required=True,
-        help="Path to YEP replicate ID file"
+        required=False,
+        default=None,
+        help="Optional path to YEP replicate ID file"
     )
 
     return parser.parse_args()
 
+
 args = parse_args()
+
+def optional_path_provided(path):
+    return path is not None and str(path).strip() != ""
+
+def file_exists(path):
+    return optional_path_provided(path) and os.path.exists(path)
+
+def log_step(step_name):
+    print(f"[RUN] {step_name}", flush=True)
+
+def log_skip(step_name, reason):
+    print(f"[SKIP] {step_name}: {reason}", flush=True)
+
+os.makedirs("./result", exist_ok=True)
+os.makedirs("./result/GMM_figures/AIC", exist_ok=True)
+
 
 def kde_likelihood_empirical_p(A, B, bw_method=None, n_permutations=2000,
                                alternative='greater', eps=1e-300,
@@ -407,14 +428,12 @@ def merge_with_threshold(groups, df_pairs, alpha):
     return merged, merged_map
 
 def get_edges_from_json(json_file):
-    # Dictionary to store edges
     edge_dict = {}
-    # Load the JSON data
+    if not file_exists(json_file):
+        return edge_dict
     with open(json_file, 'r') as file:
         data = json.load(file)
-    # Assuming edges are stored under the 'edges' key
     edges = data.get('edges', [])
-    # Iterate over the edges and add them to the dictionary
     for edge in edges:
         source = edge['source']
         target = edge['target']
@@ -423,6 +442,7 @@ def get_edges_from_json(json_file):
         else:
             edge_dict[source] = [target]
     return edge_dict
+
 
 def cluster_numbers(arr, threshold):
     # Sort the numbers
@@ -454,26 +474,21 @@ def find_corresponding_letters(numbers, A, B):
     return result
 
 def get_edges_from_json(json_file):
-    # Dictionary to store edges
     edge_dict = {}
-
-    # Load the JSON data
+    if not file_exists(json_file):
+        return edge_dict
     with open(json_file, 'r') as file:
         data = json.load(file)
-
-    # Assuming edges are stored under the 'edges' key
     edges = data.get('edges', [])
-
-    # Iterate over the edges and add them to the dictionary
     for edge in edges:
         source = edge['source']
         target = edge['target']
         if source in edge_dict:
             edge_dict[source].append(target)
         else:
-            edge_dict[source] = [target]  # Store the edge as a tuple key
-
+            edge_dict[source] = [target]
     return edge_dict
+
 
 def assign_component(x, groups, mapping, original_comp):
     """
@@ -512,7 +527,7 @@ def select_and_convert_gmm_aicc(Samples_Dic, TPM_values_for_gene, Batch_values_f
     number_of_clusters = [len(merge_with_threshold(TPM_values_for_gene_cleaned, df_pairs, test_alpha)[0]) for test_alpha in np.linspace(df_pairs['p_value'].min(), df_pairs['p_value'].max(), clustering_sensitivity, endpoint=False)]
     #print('num of clusters: ', number_of_clusters, flush=True)
     most_val, idx_of_elbow = find_elbow_idx_by_cutoff(number_of_clusters, 8)
-    print('idx_of_elbow: ', idx_of_elbow, 'most_val: ', most_val, 'linspace: ', np.linspace(df_pairs['p_value'].min(), df_pairs['p_value'].max(), clustering_sensitivity, endpoint=False), flush=True)
+    #print('idx_of_elbow: ', idx_of_elbow, 'most_val: ', most_val, 'linspace: ', np.linspace(df_pairs['p_value'].min(), df_pairs['p_value'].max(), clustering_sensitivity, endpoint=False), flush=True)
     if idx_of_elbow == None:
         optimal_alpha = df_pairs['p_value'].min() # no elbow point, separate everything.
     elif most_val == 1:
@@ -672,7 +687,7 @@ def plot_GMM_distribution(values_, batch_labels, merged_clusters_, mapping_, ori
     axes[1].set_xlabel("TMM normalized read counts")
     axes[1].set_ylabel("Condition (replicates shown)")
     plt.tight_layout()
-    os.makedirs('./result/GMM_figures', exist_ok=True)
+    os.makedirs('./result/GMM_figures/AIC', exist_ok=True)
     plt.savefig('./result/GMM_figures/AIC/{}_{}.jpg'.format(Factor_name, outname), dpi=300)
     plt.close()
     return
@@ -815,258 +830,299 @@ outfile.close()
 
 '''Step 4: obtain TF-DNA'''
 ########################################################################################################################################################################
-PPI_dic = get_edges_from_json(args.TF_DNA_prior)
-PPI_matrix_TF_DNA = np.zeros((len(Column_order), len(Column_order)))
-for i in range(0, len(Column_order)):
-    for j in range(0, len(Column_order)):
-        if Column_order[i] in PPI_dic and Column_order[j] in PPI_dic[Column_order[i]]:
-            PPI_matrix_TF_DNA[i,j] = 1
-        else:
-            continue
+if file_exists(args.TF_DNA_prior):
+    log_step("Step 4: obtain TF-DNA")
+    PPI_dic = get_edges_from_json(args.TF_DNA_prior)
+    PPI_matrix_TF_DNA = np.zeros((len(Column_order), len(Column_order)))
+    for i in range(0, len(Column_order)):
+        for j in range(0, len(Column_order)):
+            if Column_order[i] in PPI_dic and Column_order[j] in PPI_dic[Column_order[i]]:
+                PPI_matrix_TF_DNA[i,j] = 1
+            else:
+                continue
 
-np.savetxt('./data/GRN_ssTFs_Sc_TF_DNA.txt', PPI_matrix_TF_DNA, delimiter='\t', fmt='%d')
+    np.savetxt('./data/GRN_ssTFs_Sc_TF_DNA.txt', PPI_matrix_TF_DNA, delimiter='\t', fmt='%d')
+    ########################################################################################################################################################################
+
+
+
+else:
+    log_skip("Step 4: obtain TF-DNA", "TF-DNA prior not provided or file does not exist.")
 ########################################################################################################################################################################
-
 
 '''Step 5: obtain the union of Motif-based PPI and all-binding sites PPI'''
 ########################################################################################################################################################################
-TF_DNA_all = get_edges_from_json('./data/Rossi_Ruihao_TF_DNA_union_motif_based.json')
-TF_DNA = {}
-for each_source in TF_DNA_all:
-    for each_target in TF_DNA_all[each_source]:
-        if each_source in ssTFs_len and each_target in ssTFs_len:
-            if each_source not in TF_DNA:
-                TF_DNA[each_source] = [each_target]
+step5_requirements = {
+    "protein_protein_colocalization_prior": args.protein_protein_colocalization_prior,
+    "annotation": args.annotation,
+    "YEP_replicate_ID": args.YEP_replicate_ID,
+    "motif_based_TF_DNA": "./data/Rossi_Ruihao_TF_DNA_union_motif_based.json",
+}
+missing_step5 = [name for name, path in step5_requirements.items() if not file_exists(path)]
+
+if not missing_step5:
+    log_step("Step 5: obtain the union of Motif-based PPI and all-binding sites PPI")
+    TF_DNA_all = get_edges_from_json('./data/Rossi_Ruihao_TF_DNA_union_motif_based.json')
+    TF_DNA = {}
+    for each_source in TF_DNA_all:
+        for each_target in TF_DNA_all[each_source]:
+            if each_source in ssTFs_len and each_target in ssTFs_len:
+                if each_source not in TF_DNA:
+                    TF_DNA[each_source] = [each_target]
+                else:
+                    TF_DNA[each_source].append(each_target)
             else:
-                TF_DNA[each_source].append(each_target)
+                continue
+
+    PPI_dic = get_edges_from_json(args.protein_protein_colocalization_prior)
+    Motif_PPI_dic = get_edges_from_json(args.protein_protein_colocalization_prior)
+    #print(PPI_dic)
+    #print(Motif_PPI_dic, '\n\n')
+    for keys in Motif_PPI_dic:
+        if keys not in PPI_dic:
+            PPI_dic[keys] = Motif_PPI_dic[keys]
         else:
-            continue
-
-PPI_dic = get_edges_from_json(args.protein_protein_colocalization_prior)
-Motif_PPI_dic = get_edges_from_json(args.protein_protein_colocalization_prior)
-#print(PPI_dic)
-#print(Motif_PPI_dic, '\n\n')
-for keys in Motif_PPI_dic:
-    if keys not in PPI_dic:
-        PPI_dic[keys] = Motif_PPI_dic[keys]
-    else:
-        for factors in Motif_PPI_dic[keys]:
-            if factors not in PPI_dic[keys]:
-                PPI_dic[keys].append(factors)
-            else:
-                pass
-#print(PPI_dic)
-
-PPI_matrix = np.zeros((len(Column_order), len(Column_order)))
-for i in range(0, len(Column_order)):
-    for j in range(0, len(Column_order)):
-        if Column_order[i] in PPI_dic and Column_order[j] in PPI_dic[Column_order[i]]:
-            PPI_matrix[i,j] = 1
-        else:
-            continue
-
-# obtain genome annotation
-inputfile = open(args.annotation, 'r')
-Genome_anno = {}
-NDR_or_NFR = {}
-for line in inputfile:
-    if line.split()[1] == '+':
-        Genome_anno[line.split()[4]] = [line.split()[0], int(line.split()[2]), int(line.split()[3])]
-        if line.split()[4] in ssTFs_SGDID:
-            NDR_or_NFR[ssTFs_SGDID[line.split()[4]]] = [int(line.split()[-2]), int(line.split()[-1])]
-    elif line.split()[1] == '-':
-        Genome_anno[line.split()[4]] = [line.split()[0], int(line.split()[3]), int(line.split()[2])]
-        if line.split()[4] in ssTFs_SGDID:
-            NDR_or_NFR[ssTFs_SGDID[line.split()[4]]] = [int(line.split()[-2]), int(line.split()[-1])]
-    if line.split()[4] in ssTFs_SGDID and ssTFs_SGDID[line.split()[4]] in NDR_or_NFR:
-        NDR_or_NFR[ssTFs_SGDID[line.split()[4]]].append(line.split()[0])
-inputfile.close()
-
-infile = open(args.YEP_replicate_ID, 'r')
-YEP_best_rep = {}
-for line in infile:
-    YEP_best_rep[line.split()[0].upper()] = line.split()[1]
-    if 'RSC1' == line.split()[0].upper():
-        YEP_best_rep['AFT1'] = line.split()[1]
-    else:
-        pass
-infile.close()
-
-Promoter_binding_summary = []
-for each_source in TF_DNA:
-    for each_target in TF_DNA[each_source]:
-        if each_target == each_source:
-            continue
-        else:
-            infile = open('./data/YEP_bed/{}_chexmix_filtered_peaks.bed'.format(YEP_best_rep[each_source]), 'r')
-            dist_list = {}
-            for line in infile:
-                if line.split()[0] == NDR_or_NFR[each_target][2]:
-                    dist_list[abs(int(line.split()[1])-0.5*abs(NDR_or_NFR[each_target][0] + NDR_or_NFR[each_target][1]))] = int(line.split()[1])
+            for factors in Motif_PPI_dic[keys]:
+                if factors not in PPI_dic[keys]:
+                    PPI_dic[keys].append(factors)
                 else:
                     pass
-            infile.close()
-            if dist_list == {}:
-                pass
+    #print(PPI_dic)
+
+    PPI_matrix = np.zeros((len(Column_order), len(Column_order)))
+    for i in range(0, len(Column_order)):
+        for j in range(0, len(Column_order)):
+            if Column_order[i] in PPI_dic and Column_order[j] in PPI_dic[Column_order[i]]:
+                PPI_matrix[i,j] = 1
             else:
-                Promoter_binding_summary.append([each_target, each_source, dist_list[min(list(dist_list.keys()))]])
-#print(Promoter_binding_summary)
+                continue
 
-Complexes = {}
-for each in Promoter_binding_summary:
-    if each[0] not in Complexes:
-        Complexes[each[0]] = [[each[1]], [each[2]]]
-    else:
-        Complexes[each[0]][0].append(each[1])
-        Complexes[each[0]][1].append(each[2])
+    # obtain genome annotation
+    inputfile = open(args.annotation, 'r')
+    Genome_anno = {}
+    NDR_or_NFR = {}
+    for line in inputfile:
+        if line.split()[1] == '+':
+            Genome_anno[line.split()[4]] = [line.split()[0], int(line.split()[2]), int(line.split()[3])]
+            if line.split()[4] in ssTFs_SGDID:
+                NDR_or_NFR[ssTFs_SGDID[line.split()[4]]] = [int(line.split()[-2]), int(line.split()[-1])]
+        elif line.split()[1] == '-':
+            Genome_anno[line.split()[4]] = [line.split()[0], int(line.split()[3]), int(line.split()[2])]
+            if line.split()[4] in ssTFs_SGDID:
+                NDR_or_NFR[ssTFs_SGDID[line.split()[4]]] = [int(line.split()[-2]), int(line.split()[-1])]
+        if line.split()[4] in ssTFs_SGDID and ssTFs_SGDID[line.split()[4]] in NDR_or_NFR:
+            NDR_or_NFR[ssTFs_SGDID[line.split()[4]]].append(line.split()[0])
+    inputfile.close()
 
-Factor_binding_distance = 50
+    infile = open(args.YEP_replicate_ID, 'r')
+    YEP_best_rep = {}
+    for line in infile:
+        YEP_best_rep[line.split()[0].upper()] = line.split()[1]
+        if 'RSC1' == line.split()[0].upper():
+            YEP_best_rep['AFT1'] = line.split()[1]
+        else:
+            pass
+    infile.close()
 
-Complexes_names = {}
-for each in Complexes:
-    Complexes_names[each] = []
-    for i in range(0, len(cluster_numbers(Complexes[each][1], Factor_binding_distance))):
-        Complexes_names[each].append(find_corresponding_letters(cluster_numbers(Complexes[each][1], Factor_binding_distance)[i], Complexes[each][0], Complexes[each][1]))
-#print(Complexes_names)
-
-LG_String = ''
-for each in Column_order:
-    LG_String_temp = ''
-    if each not in Complexes_names:
-        LG_String_temp = ','.join(map(str, range(len(Column_order))))
-    else:
-        index_converter = {}
-        for each_complex in Complexes_names[each]:
-            if len(each_complex) == 1:
-                pass
+    Promoter_binding_summary = []
+    for each_source in TF_DNA:
+        for each_target in TF_DNA[each_source]:
+            if each_target == each_source:
+                continue
             else:
-                indexes_for_the_complex = []
-                for each_component in each_complex:
-                    if each_component in Column_order:
-                        indexes_for_the_complex.append(Column_order.index(each_component))
+                infile = open('./data/YEP_bed/{}_chexmix_filtered_peaks.bed'.format(YEP_best_rep[each_source]), 'r')
+                dist_list = {}
+                for line in infile:
+                    if line.split()[0] == NDR_or_NFR[each_target][2]:
+                        dist_list[abs(int(line.split()[1])-0.5*abs(NDR_or_NFR[each_target][0] + NDR_or_NFR[each_target][1]))] = int(line.split()[1])
                     else:
                         pass
-                for each_index in indexes_for_the_complex:
-                    index_converter[each_index] = min(indexes_for_the_complex)
-        for i in range(0, len(Column_order)):
-            if i not in index_converter:
-                LG_String_temp = LG_String_temp + str(i) + ','
-            else:
-                LG_String_temp = LG_String_temp + str(index_converter[i]) + ','
-        LG_String_temp = LG_String_temp[:-1]
-    LG_String = LG_String + ',' + LG_String_temp
+                infile.close()
+                if dist_list == {}:
+                    pass
+                else:
+                    Promoter_binding_summary.append([each_target, each_source, dist_list[min(list(dist_list.keys()))]])
+    #print(Promoter_binding_summary)
 
-#print('\n', LG_String[1:], '\n')
-outfile = open('./data/GRN_ssTFs_Sc_LG.txt', 'a')
-outfile.write(LG_String[1:])
-outfile.close()
+    Complexes = {}
+    for each in Promoter_binding_summary:
+        if each[0] not in Complexes:
+            Complexes[each[0]] = [[each[1]], [each[2]]]
+        else:
+            Complexes[each[0]][0].append(each[1])
+            Complexes[each[0]][1].append(each[2])
+
+    Factor_binding_distance = 50
+
+    Complexes_names = {}
+    for each in Complexes:
+        Complexes_names[each] = []
+        for i in range(0, len(cluster_numbers(Complexes[each][1], Factor_binding_distance))):
+            Complexes_names[each].append(find_corresponding_letters(cluster_numbers(Complexes[each][1], Factor_binding_distance)[i], Complexes[each][0], Complexes[each][1]))
+    #print(Complexes_names)
+
+    LG_String = ''
+    for each in Column_order:
+        LG_String_temp = ''
+        if each not in Complexes_names:
+            LG_String_temp = ','.join(map(str, range(len(Column_order))))
+        else:
+            index_converter = {}
+            for each_complex in Complexes_names[each]:
+                if len(each_complex) == 1:
+                    pass
+                else:
+                    indexes_for_the_complex = []
+                    for each_component in each_complex:
+                        if each_component in Column_order:
+                            indexes_for_the_complex.append(Column_order.index(each_component))
+                        else:
+                            pass
+                    for each_index in indexes_for_the_complex:
+                        index_converter[each_index] = min(indexes_for_the_complex)
+            for i in range(0, len(Column_order)):
+                if i not in index_converter:
+                    LG_String_temp = LG_String_temp + str(i) + ','
+                else:
+                    LG_String_temp = LG_String_temp + str(index_converter[i]) + ','
+            LG_String_temp = LG_String_temp[:-1]
+        LG_String = LG_String + ',' + LG_String_temp
+
+    #print('\n', LG_String[1:], '\n')
+    outfile = open('./data/GRN_ssTFs_Sc_LG.txt', 'a')
+    outfile.write(LG_String[1:])
+    outfile.close()
+    ########################################################################################################################################################################
+
+
+
+else:
+    log_skip("Step 5: obtain the union of Motif-based PPI and all-binding sites PPI", "Missing required input(s): " + ", ".join(missing_step5))
 ########################################################################################################################################################################
-
 
 '''Step 6: obtain promoter strength'''
 ########################################################################################################################################################################
-df_YEP = pd.read_excel('./data/41586_2021_3314_MOESM3_ESM.xlsx', sheet_name='Supplementary Data 1')
+step6_requirements = [
+    "./data/41586_2021_3314_MOESM3_ESM.xlsx",
+    "./data/Supplemental_Data_S5_S8.xlsx",
+]
 
-selected_columns = df_YEP[['Systematic ID', 'Chrom', 'Experiment_Left', 'Experiment_Right']]
-ssTFs_NFRs_df = selected_columns[df_YEP['Systematic ID'].isin(ssTFs_SGDID.keys())]
+if all(file_exists(path) for path in step6_requirements):
+    log_step("Step 6: obtain promoter strength")
+    df_YEP = pd.read_excel('./data/41586_2021_3314_MOESM3_ESM.xlsx', sheet_name='Supplementary Data 1')
 
-ssTFs_NFRs_dic = {}
-chr_convert = {'chr1': 'chrI', 'chr2': 'chrII', 'chr3': 'chrIII', 'chr4': 'chrIV', 'chr9': 'chrIX', 'chr5': 'chrV', 'chr6': 'chrVI',
-              'chr7': 'chrVII', 'chr8': 'chrVIII', 'chr10': 'chrX', 'chr11': 'chrXI', 'chr12': 'chrXII', 'chr13': 'chrXIII', 'chr14': 'chrXIV',
-              'chr15': 'chrXV', 'chr16': 'chrXVI'}
-for index, row in ssTFs_NFRs_df.iterrows():
-    ssTFs_NFRs_dic[row.values.tolist()[0]] = [chr_convert[row.values.tolist()[1]], int(row.values.tolist()[2]), int(row.values.tolist()[3])]
+    selected_columns = df_YEP[['Systematic ID', 'Chrom', 'Experiment_Left', 'Experiment_Right']]
+    ssTFs_NFRs_df = selected_columns[df_YEP['Systematic ID'].isin(ssTFs_SGDID.keys())]
 
-df_CAGE = pd.read_excel('./data/Supplemental_Data_S5_S8.xlsx', header=12, sheet_name='Data S5')
-selected_columns = df_CAGE[['gene/transcript', 'chr', 'start', 'end', 'YPD.tpm']]
+    ssTFs_NFRs_dic = {}
+    chr_convert = {'chr1': 'chrI', 'chr2': 'chrII', 'chr3': 'chrIII', 'chr4': 'chrIV', 'chr9': 'chrIX', 'chr5': 'chrV', 'chr6': 'chrVI',
+                  'chr7': 'chrVII', 'chr8': 'chrVIII', 'chr10': 'chrX', 'chr11': 'chrXI', 'chr12': 'chrXII', 'chr13': 'chrXIII', 'chr14': 'chrXIV',
+                  'chr15': 'chrXV', 'chr16': 'chrXVI'}
+    for index, row in ssTFs_NFRs_df.iterrows():
+        ssTFs_NFRs_dic[row.values.tolist()[0]] = [chr_convert[row.values.tolist()[1]], int(row.values.tolist()[2]), int(row.values.tolist()[3])]
 
-ssTFs_CAGE_df = selected_columns[df_CAGE['gene/transcript'].isin(ssTFs_SGDID.keys())].dropna(subset=['YPD.tpm'])
+    df_CAGE = pd.read_excel('./data/Supplemental_Data_S5_S8.xlsx', header=12, sheet_name='Data S5')
+    selected_columns = df_CAGE[['gene/transcript', 'chr', 'start', 'end', 'YPD.tpm']]
 
-ssTFs_CAGE_dic = {}
-for index, row in ssTFs_CAGE_df.iterrows():
-    if row.values.tolist()[0] not in ssTFs_CAGE_dic:
-        ssTFs_CAGE_dic[row.values.tolist()[0]] = [row.values.tolist()[1], int(row.values.tolist()[2]), int(row.values.tolist()[3]), float(row.values.tolist()[4])]
-    else:
-        if ssTFs_CAGE_dic[row.values.tolist()[0]][3] > float(row.values.tolist()[4]):
-            pass
-        else:
+    ssTFs_CAGE_df = selected_columns[df_CAGE['gene/transcript'].isin(ssTFs_SGDID.keys())].dropna(subset=['YPD.tpm'])
+
+    ssTFs_CAGE_dic = {}
+    for index, row in ssTFs_CAGE_df.iterrows():
+        if row.values.tolist()[0] not in ssTFs_CAGE_dic:
             ssTFs_CAGE_dic[row.values.tolist()[0]] = [row.values.tolist()[1], int(row.values.tolist()[2]), int(row.values.tolist()[3]), float(row.values.tolist()[4])]
-
-outfile = open('./data/GRN_ssTFs_Sc_promoter_strength.txt', 'a')
-for each_sample in sorted(Samples_Dic.keys()):
-    for each in Column_order:
-        if (1+Column_order.index(each)) == len(Column_order):
-            #print(each_sample, each, ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1])
-            outfile.write(str(ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1]))
         else:
-            #print(each_sample, each, ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1])
-            outfile.write(str(ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1])+'\t')
-    outfile.write('\n')
-outfile.close()
-########################################################################################################################################################################
+            if ssTFs_CAGE_dic[row.values.tolist()[0]][3] > float(row.values.tolist()[4]):
+                pass
+            else:
+                ssTFs_CAGE_dic[row.values.tolist()[0]] = [row.values.tolist()[1], int(row.values.tolist()[2]), int(row.values.tolist()[3]), float(row.values.tolist()[4])]
 
+    outfile = open('./data/GRN_ssTFs_Sc_promoter_strength.txt', 'a')
+    for each_sample in sorted(Samples_Dic.keys()):
+        for each in Column_order:
+            if (1+Column_order.index(each)) == len(Column_order):
+                #print(each_sample, each, ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1])
+                outfile.write(str(ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1]))
+            else:
+                #print(each_sample, each, ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1])
+                outfile.write(str(ssTFs_CAGE_dic[[key for key, value in ssTFs_SGDID.items() if value == each][0]][-1])+'\t')
+        outfile.write('\n')
+    outfile.close()
+    ########################################################################################################################################################################
+
+
+
+else:
+    missing_step6 = [path for path in step6_requirements if not file_exists(path)]
+    log_skip("Step 6: obtain promoter strength", "Missing required input file(s): " + ", ".join(missing_step6))
+########################################################################################################################################################################
 
 '''Step 7: obtain initial GRN from TF-DNA and TPM'''
 ########################################################################################################################################################################
-GMM_TPM_levels = np.array(TPM_matrix)
-KO_index_GMM = GMM_TPM_levels[:, 0]
+if file_exists(args.TF_DNA_prior):
+    log_step("Step 7: obtain initial GRN from TF-DNA and TPM")
+    GMM_TPM_levels = np.array(TPM_matrix)
+    KO_index_GMM = GMM_TPM_levels[:, 0]
 
-TF_DNA_all = get_edges_from_json(args.TF_DNA_prior)
-PPI_dic = {}
-for each_source in TF_DNA_all:
-    for each_target in TF_DNA_all[each_source]:
-        if each_source in ssTFs_len and each_target in ssTFs_len:
-            if each_source not in PPI_dic:
-                PPI_dic[each_source] = [each_target]
+    TF_DNA_all = get_edges_from_json(args.TF_DNA_prior)
+    PPI_dic = {}
+    for each_source in TF_DNA_all:
+        for each_target in TF_DNA_all[each_source]:
+            if each_source in ssTFs_len and each_target in ssTFs_len:
+                if each_source not in PPI_dic:
+                    PPI_dic[each_source] = [each_target]
+                else:
+                    PPI_dic[each_source].append(each_target)
             else:
-                PPI_dic[each_source].append(each_target)
-        else:
-            continue
+                continue
         
-PPI_matrix_TF_DNA = np.zeros((len(Column_order), len(Column_order)))
-for i in range(0, len(Column_order)):
-    for j in range(0, len(Column_order)):
-        if Column_order[i] in PPI_dic and Column_order[j] in PPI_dic[Column_order[i]]:
-            PPI_matrix_TF_DNA[i,j] = 1
-        else:
-            continue
-
-expression_data = GMM_TPM_levels[:, 1:].T
-num_arrays = expression_data.shape[0]
-nmi_matrix = np.zeros((num_arrays, num_arrays))
-TPM_driven_matrix = np.zeros((num_arrays, num_arrays))
-union_matrix = np.zeros((num_arrays, num_arrays))
-nmi_cutoff = 0.5
-
-for i in range(num_arrays):
-    for j in range(num_arrays):
-        print('expression_data[i]: ', expression_data[i])
-        nmi_matrix[i, j] = normalized_mutual_info_score(list(map(str, expression_data[i])), list(map(str, expression_data[j])), average_method='arithmetic')
-        if nmi_matrix[i, j] < 0.5 and PPI_matrix_TF_DNA[i, j] == 0:
-            TPM_driven_matrix[i, j] = 0
-        else:
-            tau, p_ = kendalltau(expression_data[i], expression_data[j])
-            if tau >= 0.25:
-                TPM_driven_matrix[i, j] = 1
-            elif tau <= -0.25:
-                TPM_driven_matrix[i, j] = 2
+    PPI_matrix_TF_DNA = np.zeros((len(Column_order), len(Column_order)))
+    for i in range(0, len(Column_order)):
+        for j in range(0, len(Column_order)):
+            if Column_order[i] in PPI_dic and Column_order[j] in PPI_dic[Column_order[i]]:
+                PPI_matrix_TF_DNA[i,j] = 1
             else:
-                TPM_driven_matrix[i, j] = 0
+                continue
 
-for i in range(num_arrays):
-    for j in range(num_arrays):
-        if int(PPI_matrix_TF_DNA[i, j]) == 0 and int(TPM_driven_matrix[i, j]) == 0:
-            pass
-        else:
-            union_matrix[i, j] = 1
-np.savetxt('./data/GRN_ssTFs_Sc_TF_DNA_TPM_union.txt', union_matrix, delimiter='\t', fmt='%d')
+    expression_data = GMM_TPM_levels[:, 1:].T
+    num_arrays = expression_data.shape[0]
+    nmi_matrix = np.zeros((num_arrays, num_arrays))
+    TPM_driven_matrix = np.zeros((num_arrays, num_arrays))
+    union_matrix = np.zeros((num_arrays, num_arrays))
+    nmi_cutoff = 0.5
+
+    for i in range(num_arrays):
+        for j in range(num_arrays):
+            print('expression_data[i]: ', expression_data[i])
+            nmi_matrix[i, j] = normalized_mutual_info_score(list(map(str, expression_data[i])), list(map(str, expression_data[j])), average_method='arithmetic')
+            if nmi_matrix[i, j] < 0.5 and PPI_matrix_TF_DNA[i, j] == 0:
+                TPM_driven_matrix[i, j] = 0
+            else:
+                tau, p_ = kendalltau(expression_data[i], expression_data[j])
+                if tau >= 0.25:
+                    TPM_driven_matrix[i, j] = 1
+                elif tau <= -0.25:
+                    TPM_driven_matrix[i, j] = 2
+                else:
+                    TPM_driven_matrix[i, j] = 0
+
+    for i in range(num_arrays):
+        for j in range(num_arrays):
+            if int(PPI_matrix_TF_DNA[i, j]) == 0 and int(TPM_driven_matrix[i, j]) == 0:
+                pass
+            else:
+                union_matrix[i, j] = 1
+    np.savetxt('./data/GRN_ssTFs_Sc_TF_DNA_TPM_union.txt', union_matrix, delimiter='\t', fmt='%d')
             
-TPM_driven_matrix = TPM_driven_matrix.astype(int)
-String_TF_DNA = ''
-for i in range(0, len(TPM_driven_matrix)):
-    for j in range(0, len(TPM_driven_matrix[i])):
-        String_TF_DNA = String_TF_DNA + str(TPM_driven_matrix[i][j])
-outfile = open('./data/GRN_ssTFs_Sc_initial_condition.txt', 'a')
-outfile.write(String_TF_DNA)
-outfile.close()
+    TPM_driven_matrix = TPM_driven_matrix.astype(int)
+    String_TF_DNA = ''
+    for i in range(0, len(TPM_driven_matrix)):
+        for j in range(0, len(TPM_driven_matrix[i])):
+            String_TF_DNA = String_TF_DNA + str(TPM_driven_matrix[i][j])
+    outfile = open('./data/GRN_ssTFs_Sc_initial_condition.txt', 'a')
+    outfile.write(String_TF_DNA)
+    outfile.close()
+    ########################################################################################################################################################################
+
+else:
+    log_skip("Step 7: obtain initial GRN from TF-DNA and TPM", "TF-DNA prior not provided or file does not exist.")
 ########################################################################################################################################################################

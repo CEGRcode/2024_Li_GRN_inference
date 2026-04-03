@@ -26,7 +26,7 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 
 ---
 
-## Pipeline
+## Pipeline to reproduce GRNs from the paper
 
 1. `0_Download_and_touch.sh`  
    → downloads and initializes required data  

@@ -50,16 +50,16 @@ We recommend initializing the following dedicated Anaconda environment for repro
 
 ```bash
 conda create -n EvoAlg -c conda-forge -y \
-    python=3.10 \
-    numpy=1.26  \
-    pandas=2.2  \
-    scipy=1.12  \
-    sympy=1.12  \
-    numexpr=2.10 \
-    h5py=3.11  \
-    matplotlib=3.8  \
-    scikit-learn=1.4  \
-    pip
+  python=3.10 \
+  numpy=1.26 \
+  pandas=2.2 \
+  scipy=1.12 \
+  sympy=1.12 \
+  numexpr=2.10 \
+  h5py=3.11 \
+  matplotlib=3.8 \
+  scikit-learn=1.4 \
+  pip
 conda activate EvoAlg
 pip install flask tqdm seaborn joblib
 ```

@@ -123,7 +123,17 @@ https://grn.cac.cornell.edu:5000/
 cd SETIA
 conda activate EvoAlg
 
-python EGRN_Multi_Genalg_Combinatorial_2025.py     -r data/example_RNA_profiles.txt     -n 3000     -i 10     -p 0     -t data/example_promoter_strength.txt     -l data/example_gene_length.txt     -o "Minimal_example"     -e 42     -f 0     -k 0
+python EGRN_Multi_Genalg_Combinatorial_2025.py \
+  -r data/example_RNA_profiles.txt \
+  -n 3000 \
+  -i 10 \
+  -p 0 \
+  -t data/example_promoter_strength.txt \
+  -l data/example_gene_length.txt \
+  -o "Minimal_example" \
+  -e 42 \
+  -f 0 \
+  -k 0
 
 python Export_GRN_from_ResultFlow_Component.py
 conda deactivate

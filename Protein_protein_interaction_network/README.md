@@ -26,7 +26,7 @@
 
 ### Notes
 - Scripts must be executed in the specified order.  
-- The two pipelines differ in how binding sites are defined (motif-restricted vs. all sites).  
+- The two pipelines differ in how binding sites are defined (motif-based vs. all bound locations).  
 - This workflow is computationally intensive and may require parallel computing (e.g., HPC clusters).
 
 ## Dependencies

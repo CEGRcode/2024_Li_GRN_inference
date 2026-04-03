@@ -56,8 +56,6 @@ pip install flask tqdm seaborn joblib
 
 ---
 ## Repository Structure
-A recommended repository organization for reproducing the SETIA workflow is:
-
 ```text
 SETIA/
 ├── data/

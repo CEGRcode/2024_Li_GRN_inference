@@ -28,6 +28,26 @@ Due to size constraints, processed datasets are **not included** in this reposit
 
 ---
 
+## Dependencies
+Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
+
+```bash
+conda create -n GRNSim -c conda-forge -y \
+    python=3.10 \
+    numpy=1.26 \
+    pandas=2.2 \
+    scipy=1.12 \
+    sympy=1.12 \
+    numexpr=2.10 \
+    h5py=3.11 \
+    matplotlib=3.8 \
+    scikit-learn=1.4 \
+    pip
+conda activate GRNSim
+pip install flask tqdm seaborn joblib
+```
+---
+
 ## Deploying the Website
 To deploy the GRN simulator website on your own server, run:
 

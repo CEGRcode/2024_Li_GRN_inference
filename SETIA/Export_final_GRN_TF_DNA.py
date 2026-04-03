@@ -1,6 +1,7 @@
 import sys
 import getopt
 import os, re, json
+import path_setup
 import pandas as pd
 import numpy as np
 import random

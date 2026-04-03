@@ -108,7 +108,7 @@ Searches for stable states of a given gene regulatory network (GRN) using a loca
 ### GRN_Dynamic_Simulator_Combinatorial_Global_multistate_2025.py
 Searches for stable states of a given GRN using a global exploration strategy. The simulator samples a large, evenly distributed set of initial states across the full expression space, where each dimension corresponds to a gene’s expression level, and evolves the GRN dynamics from each starting point. This mode is designed to systematically map the global attractor landscape of the GRN and identify all accessible stable states, and therefore will be computationally expensive.
 
-### salmon_tximport_tmm_normalize
+### salmon_tximport_tmm_normalize.R
 Performs the TMM normalization on the RNA-seq samples aligned by Salmon. It produces the normalized read counts in GRN_Sc_TMM_normalized_CPM.txt for downstream analysis.
 
 ### GRN_Expanded_Combinatorial_2025.py

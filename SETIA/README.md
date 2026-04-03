@@ -21,7 +21,7 @@ These data are integrated to construct and constrain GRNs whose dynamics are mod
 ## Key Features
 - Infers dynamical GRNs that reproduce stable transcriptional states
 - Integrates multi-omics data as mechanistic structural constraints
-- Supports combinatorial regulation (AND / OR logic)
+- Supports combinatorial regulation
 - Implements parallelized optimization for scalable GRN inference
 - Provides an interactive web platform for simulation and visualization
 
@@ -162,88 +162,116 @@ GENOTYPE_batch_batch#_rep_replicate#
 ---
 
 ### Step 3: Run Input Preprocessing
-Use GRN_input_acquisition.py:
+Use `GRN_input_acquisition_v2.py` to convert the gene metadata file, normalized RNA-seq matrix, and optional prior information into SETIA-compatible preprocessing files.
+
+Minimal required usage:
 
 ```bash
-python GRN_input_acquisition.py
-
-Required:
--g: gene metadata file
--r: normalized RNA-seq expression matrix
-
-Optional:
--p: p-value cutoff for discrete state identification (default: 0.01)
--t: TF–DNA prior (json format, see ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json)
--c: protein–protein colocalization prior (json format, see ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json)
--a: genome annotation (./data/Sc_genome_annotations.txt)
--b: YEP replicate mapping (./data/YEP_best_rep.txt)
+python GRN_input_acquisition_v2.py \
+  -g ./data/ssTFs_MATa_Spots_76.txt \
+  -r ./data/GRN_Sc_TMM_normalized_CPM.txt
 ```
 
-Optional prior inputs include:
-- TF–DNA prior
-- protein colocalization prior
-- genome annotation
-- YEP replicate mapping
+Full usage with optional prior information:
 
-This generates SETIA-compatible preprocessing outputs in `./data`.
+```bash
+python GRN_input_acquisition_v2.py \
+  -p 0.01 \
+  -g ./data/ssTFs_MATa_Spots_76.txt \
+  -r ./data/GRN_Sc_TMM_normalized_CPM.txt \
+  -t ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json \
+  -c ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json \
+  -a ./data/Sc_genome_annotations.txt \
+  -b ./data/YEP_best_rep.txt
+```
+
+Command-line arguments:
+
+**Required**
+- `-g`: gene metadata file
+- `-r`: normalized RNA-seq expression matrix
+
+**Optional**
+- `-p`: p-value cutoff for discrete state identification (default: `0.01`)
+- `-t`: TF–DNA prior in JSON format
+- `-c`: protein–protein colocalization prior in JSON format
+- `-a`: genome annotation file
+- `-b`: YEP replicate mapping file
+
+This script writes preprocessing outputs primarily to `./data` and diagnostic summaries to `./result`.
+
 **Core outputs used by SETIA**
 - `./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt`  
-  Discretized steady-state expression matrix used as the transcriptional-state input for GRN inference.
+  Discretized steady-state expression matrix used as the transcriptional-state input for GRN inference
 - `./data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt`  
-  Per-gene standard deviations associated with the discretized steady states.
+  Per-gene standard deviations associated with the discretized steady states
 - `./data/GRN_ssTFs_Sc_gene_length.txt`  
-  Gene lengths for the modeled genes.
+  Gene lengths for the modeled genes
 - `./data/GRN_ssTFs_row_names.txt`  
-  Row labels corresponding to genotype / condition names.
+  Row labels corresponding to genotype or condition names
 - `./data/GRN_ssTFs_column_names.txt`  
-  Column labels corresponding to the modeled genes.
+  Column labels corresponding to the modeled genes
 
 **Optional prior-derived outputs**
 - `./data/GRN_ssTFs_Sc_TF_DNA.txt`  
-  TF–DNA prior adjacency matrix generated when `-t` is provided.
+  TF–DNA prior adjacency matrix generated when `-t` is provided
 - `./data/GRN_ssTFs_Sc_LG.txt`  
-  Local-group / complex-structure file derived from promoter binding and colocalization information when the corresponding optional prior files are provided.
+  Local-group / complex-structure file derived from promoter binding and colocalization information when the corresponding optional prior files are provided
 - `./data/GRN_ssTFs_Sc_promoter_strength.txt`  
-  Promoter strength matrix generated when the required promoter-annotation resources are available.
+  Promoter strength matrix generated when the required promoter-annotation resources are available
 - `./data/GRN_ssTFs_Sc_TF_DNA_TPM_union.txt`  
-  Union of TF–DNA prior and TPM-derived relationships, generated when `-t` is provided.
+  Union of TF–DNA prior and TPM-derived relationships, generated when `-t` is provided
 - `./data/GRN_ssTFs_Sc_initial_condition.txt`  
-  Initial GRN edge-state string derived from TF–DNA and expression similarity, generated when `-t` is provided.
+  Initial GRN edge-state string derived from TF–DNA and expression similarity, generated when `-t` is provided
 
 **Additional preprocessing summaries**
 - `./data/GRN_ssTFs_Salmon_SteadyStates_2025.txt`  
-  Average / grouped steady-state expression values before discretization.
+  Average / grouped steady-state expression values before discretization
 - `./result/Steady_state_count.txt`  
-  Summary of the number of inferred discrete states per gene.
+  Summary of the number of inferred discrete states per gene
 - `./result/GMM_figures/AIC/`  
-  Diagnostic plots for discrete-state identification.
+  Diagnostic plots for discrete-state identification
 
 If optional inputs such as `-t`, `-c`, `-a`, or `-b` are not provided, the corresponding prior-dependent preprocessing steps are skipped automatically.
 
 ---
 
 ### Step 4: Run SETIA Inference
-Run the main evolutionary GRN inference:
+Run the main evolutionary GRN inference using the processed inputs from Step 3.
+
+Example command:
 
 ```bash
-python EGRN_Multi_Genalg_Combinatorial_2025.py
-
-Required:
--r: discretized transcriptional steady-state matrix
--t: promoter strength matrix
--l: gene length file
-
-Optional:
--n: simulation time span used in solve_ivp
--i: number of evolutionary optimization iterations
--p: perturbation magnitude applied to initial states
--o: output file prefix
--e: random seed
--f: allow edges unsupported by ChIP prior
--k: whether to serialize intermediate GRN instances as pickle files
+python EGRN_Multi_Genalg_Combinatorial_2025.py \
+    -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
+    -n 3000 \
+    -i 100 \
+    -p 0 \
+    -t ./data/GRN_ssTFs_Sc_promoter_strength.txt \
+    -l ./data/GRN_ssTFs_Sc_gene_length.txt \
+    -o "SETIA_run" \
+    -e 42 \
+    -f 0 \
+    -k 1
 ```
 
-using the processed inputs from Step 3.
+Command-line arguments:
+
+**Required**
+- `-r`: discretized transcriptional steady-state matrix
+- `-t`: promoter strength matrix
+- `-l`: gene length file
+
+**Optional**
+- `-n`: simulation time span used in `solve_ivp`
+- `-i`: number of evolutionary optimization iterations
+- `-p`: perturbation magnitude applied to initial states
+- `-o`: output file prefix
+- `-e`: random seed
+- `-f`: allow edges unsupported by the ChIP prior
+- `-k`: whether to serialize intermediate GRN instances as pickle files
+
+The files `GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt`, `GRN_ssTFs_Sc_promoter_strength.txt`, and `GRN_ssTFs_Sc_gene_length.txt` generated in Step 3 can be used directly here.
 
 ---
 

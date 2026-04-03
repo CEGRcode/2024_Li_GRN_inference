@@ -162,7 +162,7 @@ GENOTYPE_batch_batch#_rep_replicate#
 ---
 
 ### Step 3: Run Input Preprocessing
-Use:
+Use GRN_input_acquisition.py:
 
 ```bash
 python GRN_input_acquisition.py
@@ -179,16 +179,13 @@ Optional:
 -b: YEP replicate mapping (./data/YEP_best_rep.txt)
 ```
 
-This generates SETIA-compatible preprocessing outputs in `./data`.
-
 Optional prior inputs include:
 - TF–DNA prior
 - protein colocalization prior
 - genome annotation
 - YEP replicate mapping
 
-If omitted, the corresponding preprocessing steps are automatically skipped.
-
+This generates SETIA-compatible preprocessing outputs in `./data`.
 **Core outputs used by SETIA**
 - `./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt`  
   Discretized steady-state expression matrix used as the transcriptional-state input for GRN inference.
@@ -230,6 +227,20 @@ Run the main evolutionary GRN inference:
 
 ```bash
 python EGRN_Multi_Genalg_Combinatorial_2025.py
+
+Required:
+-r: discretized transcriptional steady-state matrix
+-t: promoter strength matrix
+-l: gene length file
+
+Optional:
+-n: simulation time span used in solve_ivp
+-i: number of evolutionary optimization iterations
+-p: perturbation magnitude applied to initial states
+-o: output file prefix
+-e: random seed
+-f: allow edges unsupported by ChIP prior
+-k: whether to serialize intermediate GRN instances as pickle files
 ```
 
 using the processed inputs from Step 3.

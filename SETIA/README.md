@@ -32,7 +32,7 @@ These data are integrated to construct and constrain GRNs whose dynamics are mod
    Downloads and initializes required data
 
 2. `1_Preprocessing_dicrete_gene_expression_state_identification.sh`  
-   Identifies discrete gene expression states
+   Identifies discrete gene expression states and preprocess available data
 
 3. `2_GRN_inference.sh`  
    Performs GRN inference

@@ -49,17 +49,7 @@ These data are integrated to construct and constrain GRNs whose dynamics are mod
 We recommend initializing the following dedicated Anaconda environment for reproducibility:
 
 ```bash
-conda create -n EvoAlg -c conda-forge -y \
-    python=3.10 \
-    numpy=1.26 \
-    pandas=2.2 \
-    scipy=1.12 \
-    sympy=1.12 \
-    numexpr=2.10 \
-    h5py=3.11 \
-    matplotlib=3.8 \
-    scikit-learn=1.4 \
-    pip
+conda create -n EvoAlg -c conda-forge -y     python=3.10     numpy=1.26     pandas=2.2     scipy=1.12     sympy=1.12     numexpr=2.10     h5py=3.11     matplotlib=3.8     scikit-learn=1.4     pip
 conda activate EvoAlg
 pip install flask tqdm seaborn joblib
 ```
@@ -90,17 +80,7 @@ https://grn.cac.cornell.edu:5000/
 cd SETIA
 conda activate EvoAlg
 
-python EGRN_Multi_Genalg_Combinatorial_2025.py \
-    -r data/example_RNA_profiles.txt \
-    -n 3000 \
-    -i 10 \
-    -p 0 \
-    -t data/example_promoter_strength.txt \
-    -l data/example_gene_length.txt \
-    -o "Minimal_example" \
-    -e 42 \
-    -f 0 \
-    -k 0
+python EGRN_Multi_Genalg_Combinatorial_2025.py     -r data/example_RNA_profiles.txt     -n 3000     -i 10     -p 0     -t data/example_promoter_strength.txt     -l data/example_gene_length.txt     -o "Minimal_example"     -e 42     -f 0     -k 0
 
 python Export_GRN_from_ResultFlow_Component.py
 conda deactivate
@@ -167,22 +147,13 @@ Use `GRN_input_acquisition_v2.py` to convert the gene metadata file, normalized 
 Minimal required usage:
 
 ```bash
-python GRN_input_acquisition_v2.py \
-  -g ./data/ssTFs_MATa_Spots_76.txt \
-  -r ./data/GRN_Sc_TMM_normalized_CPM.txt
+python GRN_input_acquisition_v2.py   -g ./data/ssTFs_MATa_Spots_76.txt   -r ./data/GRN_Sc_TMM_normalized_CPM.txt
 ```
 
 Full usage with optional prior information:
 
 ```bash
-python GRN_input_acquisition_v2.py \
-  -p 0.01 \
-  -g ./data/ssTFs_MATa_Spots_76.txt \
-  -r ./data/GRN_Sc_TMM_normalized_CPM.txt \
-  -t ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json \
-  -c ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json \
-  -a ./data/Sc_genome_annotations.txt \
-  -b ./data/YEP_best_rep.txt
+python GRN_input_acquisition_v2.py   -p 0.01   -g ./data/ssTFs_MATa_Spots_76.txt   -r ./data/GRN_Sc_TMM_normalized_CPM.txt   -t ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json   -c ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json   -a ./data/Sc_genome_annotations.txt   -b ./data/YEP_best_rep.txt
 ```
 
 Command-line arguments:
@@ -239,20 +210,10 @@ If optional inputs such as `-t`, `-c`, `-a`, or `-b` are not provided, the corre
 ### Step 4: Run SETIA Inference
 Run the main evolutionary GRN inference using the processed inputs from Step 3.
 
-Example command:
+General example command:
 
 ```bash
-python EGRN_Multi_Genalg_Combinatorial_2025.py \
-    -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
-    -n 3000 \
-    -i 100 \
-    -p 0 \
-    -t ./data/GRN_ssTFs_Sc_promoter_strength.txt \
-    -l ./data/GRN_ssTFs_Sc_gene_length.txt \
-    -o "SETIA_run" \
-    -e 42 \
-    -f 0 \
-    -k 1
+python EGRN_Multi_Genalg_Combinatorial_2025.py     -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt     -n 3000     -i 100     -p 0     -t ./data/GRN_ssTFs_Sc_promoter_strength.txt     -l ./data/GRN_ssTFs_Sc_gene_length.txt     -o "SETIA_run"     -e 42     -f 0     -k 1
 ```
 
 Command-line arguments:
@@ -263,15 +224,43 @@ Command-line arguments:
 - `-l`: gene length file
 
 **Optional**
+- `-c`: structural prior adjacency matrix
+- `-g`: logic-gate / local-group file
+- `-b`: per-gene steady-state standard deviation file
+- `-d`: initial GRN edge-state string
 - `-n`: simulation time span used in `solve_ivp`
 - `-i`: number of evolutionary optimization iterations
 - `-p`: perturbation magnitude applied to initial states
 - `-o`: output file prefix
 - `-e`: random seed
-- `-f`: allow edges unsupported by the ChIP prior
+- `-f`: constraint mode
 - `-k`: whether to serialize intermediate GRN instances as pickle files
 
 The files `GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt`, `GRN_ssTFs_Sc_promoter_strength.txt`, and `GRN_ssTFs_Sc_gene_length.txt` generated in Step 3 can be used directly here.
+
+#### GRN configurations used in this study
+We evaluated multiple GRN configurations in the manuscript by changing the structural prior supplied to `-c` and the constraint mode set by `-f`.
+
+**GRN A: unconstrained GRN**
+```bash
+python EGRN_Multi_Genalg_Combinatorial_2025.py     -c data/GRN_ssTFs_Sc_TF_DNA.txt     -g data/GRN_ssTFs_Sc_LG.txt     -r data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt     -b data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt     -n 3000     -i 200     -p 0     -t data/GRN_ssTFs_Sc_promoter_strength.txt     -l data/GRN_ssTFs_Sc_gene_length.txt     -o "${output}"     -e "${seed}"     -d data/GRN_ssTFs_Sc_initial_condition.txt     -f 0     -k 0
+```
+
+**GRN B**
+- `-f 1`
+- `-c data/GRN_ssTFs_Sc_TF_DNA_TPM_union.txt`
+
+**GRN C**
+- `-f 1`
+- `-c data/GRN_ssTFs_Sc_TF_DNA.txt`
+
+**GRN D**
+- `-f 1`
+- `-c data/GRN_ssTFs_Sc_TF_DNA_Motif.txt`
+
+Unless otherwise specified, the remaining command-line arguments are the same as those shown for GRN A.
+
+---
 
 ### Step 5: Evaluate GRN Dynamical Performance
 Use `GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py` to evaluate an inferred GRN for its ability to reproduce the target transcriptional profiles as dynamical stable states.
@@ -279,13 +268,7 @@ Use `GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py` to evaluate a
 Example command:
 
 ```bash
-python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py \
-    -j ./result/GRN_filtered_full_Sc_GRN_final_raw.txt \
-    -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
-    -l ./data/GRN_ssTFs_Sc_gene_length.txt \
-    -t ./data/GRN_ssTFs_Sc_promoter_strength.txt \
-    -o GRN_dynamical_performance \
-    -m 0
+python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py     -j ./result/GRN_filtered_full_Sc_GRN_final_raw.txt     -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt     -l ./data/GRN_ssTFs_Sc_gene_length.txt     -t ./data/GRN_ssTFs_Sc_promoter_strength.txt     -o GRN_dynamical_performance     -m 0
 ```
 
 Command-line arguments:
@@ -324,8 +307,7 @@ At the end of the file, the script also reports:
 - the sum of attractor distances across all evaluated profiles
 
 Interpretation:
-Lower attractor distances indicate better dynamical agreement between the inferred GRN and the target transcriptional profiles. A strong-performing GRN should drive perturbed initial states back toward the expected transcriptional stable states while maintaining point-attractor behavior for the evaluated profiles.
-
+Lower attractor distances indicate better dynamical agreement between the inferred GRN and the target transcriptional profiles. A strong-performing GRN should drive perturbed initial states back toward the expected transcriptional stable states while maintaining point-attractor behavior for the evaluated profiles. The mean per-gene normalized L1 distances shown in Figures 3b and 6c of the paper are computed from these initial and final point-attractor profiles.
 
 ---
 
@@ -352,8 +334,8 @@ Extends the core ssTF GRN to downstream non-TF targets.
 ### `Export_GRN_from_ResultFlow_Component.py`
 Recovers and exports GRNs from intermediate saved optimization states.
 
-### GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py
+### `GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py`
 Searches for stable states of a given gene regulatory network (GRN) using a local exploration strategy. The simulator initializes the system from a specified set of initial transcriptional states and evolves the GRN dynamics forward in time to determine whether each trajectory converges to a stable or unstable final state. This mode is intended to assess attractor stability and basin structure near biologically relevant initial conditions, such as the transcriptional profiles of stable cells.
 
-### GRN_Dynamic_Simulator_Combinatorial_Global_multistate_2025.py
+### `GRN_Dynamic_Simulator_Combinatorial_Global_multistate_2025.py`
 Searches for stable states of a given GRN using a global exploration strategy. The simulator samples a large, evenly distributed set of initial states across the full expression space, where each dimension corresponds to a gene’s expression level, and evolves the GRN dynamics from each starting point. This mode is designed to systematically map the global attractor landscape of the GRN and identify all accessible stable states, and therefore will be computationally expensive.

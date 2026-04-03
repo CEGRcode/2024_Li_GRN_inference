@@ -403,8 +403,6 @@ def plot():
 
 if __name__ == '__main__':
     app.run(
-        ssl_context=('/etc/letsencrypt/live/grn.cac.cornell.edu/fullchain.pem',
-        '/etc/letsencrypt/live/grn.cac.cornell.edu/privkey.pem'),
         host='0.0.0.0',
         port=5000
     )

@@ -1,4 +1,4 @@
-## File descriptions
+## File Descriptions
 
 ### GRN_Expanded_Combinatorial_2025.py
 Contains classes and functions for representing GRN instances, including their kinetic parameters and associated attributes.

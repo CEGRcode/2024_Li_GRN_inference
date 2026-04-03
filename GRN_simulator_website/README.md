@@ -21,7 +21,7 @@ Due to size constraints, processed datasets are **not included** in this reposit
 
 ---
 
-## Getting Started
+## Usage
 1. Open the GRN simulator website (https://grn.cac.cornell.edu:5000/) in a supported web browser (Chrome recommended).
 2. Upload a GRN file in JSON format to begin interactive analysis.
 3. Use the controls described below to edit the network, simulate dynamics, and export results.
@@ -146,5 +146,4 @@ Download both the attractor visualization and the corresponding stable-state val
 
 ---
 
-## Notes
-This tool is intended for **network visualization, manipulation, and dynamical interpretation** of regulatory interactions inferred by SETIA. Predictions should be validated experimentally.
+## To Deploy the GRN simulator website on your own server, run python app_test.py. Recommend using a watch dog to maintain the website. This code of the website can be used without the data. The data in ./data is too big to provide on Github and uploaded on Zenodo.

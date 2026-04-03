@@ -55,7 +55,42 @@ pip install flask tqdm seaborn joblib
 ```
 
 ---
+## Repository Structure
+A recommended repository organization for reproducing the SETIA workflow is:
 
+```text
+SETIA/
+├── data/
+│   ├── example_RNA_profiles.txt
+│   ├── example_promoter_strength.txt
+│   ├── example_gene_length.txt
+│   ├── GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt
+│   ├── GRN_ssTFs_Salmon_SteadyStates_2025_std.txt
+│   ├── GRN_ssTFs_Sc_gene_length.txt
+│   ├── GRN_ssTFs_Sc_promoter_strength.txt
+│   ├── GRN_ssTFs_Sc_TF_DNA.txt
+│   ├── GRN_ssTFs_Sc_LG.txt
+│   └── ...
+├── result/
+│   ├── GRN_filtered_Sc_GRN_final_2.json
+│   ├── GRN_filtered_full_Sc_GRN_final.txt
+│   ├── *.pkl
+│   └── GMM_figures/
+├── helper/
+│   ├── path_setup.py
+│   └── utility scripts
+├── dynamics_module/
+│   ├── dynamics.py
+│   └── ODE simulation modules
+├── EGRN_Multi_Genalg_Combinatorial_2025.py
+├── GRN_input_acquisition_v2.py
+├── GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py
+├── GRN_Dynamic_Simulator_Combinatorial_Global_multistate_2025.py
+├── Export_GRN_from_ResultFlow_Component.py
+├── salmon_tximport_tmm_normalize.R
+└── README.md
+```
+---
 ## Outputs
 The inferred GRN is written to the `./result` directory.
 

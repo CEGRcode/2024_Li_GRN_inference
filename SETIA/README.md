@@ -165,7 +165,19 @@ GENOTYPE_batch_batch#_rep_replicate#
 Use:
 
 ```bash
-python GRN_input_acquisition_v2.py
+python GRN_input_acquisition.py
+Required
+
+-g: gene metadata file
+-r: normalized RNA-seq expression matrix
+
+Optional
+
+-p: p-value cutoff for discrete state identification (default: 0.01)
+-t: TF–DNA prior (json format; see ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json)
+-c: protein–protein colocalization prior (json format; see ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json)
+-a: genome annotation (./data/Sc_genome_annotations.txt)
+-b: YEP replicate mapping (./data/YEP_best_rep.txt)
 ```
 
 This generates SETIA-compatible preprocessing outputs in `./data`.

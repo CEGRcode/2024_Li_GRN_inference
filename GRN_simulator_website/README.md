@@ -22,7 +22,7 @@ Due to size constraints, processed datasets are **not included** in this reposit
 ---
 
 ## Getting Started
-1. Open the GRN simulator website in a supported web browser (Chrome recommended).
+1. Open the GRN simulator website (https://grn.cac.cornell.edu:5000/) in a supported web browser (Chrome recommended).
 2. Upload a GRN file in JSON format to begin interactive analysis.
 3. Use the controls described below to edit the network, simulate dynamics, and export results.
 

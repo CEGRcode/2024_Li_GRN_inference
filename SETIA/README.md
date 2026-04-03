@@ -185,18 +185,27 @@ GENOTYPE_batch_batch#_rep_replicate#
 ---
 
 ### Step 3: Run Input Preprocessing
-Use `GRN_input_acquisition_v2.py` to convert the gene metadata file, normalized RNA-seq matrix, and optional prior information into SETIA-compatible preprocessing files.
+Use `GRN_input_acquisition.py` to convert the gene metadata file, normalized RNA-seq matrix, and optional prior information into SETIA-compatible preprocessing files.
 
 Minimal required usage:
 
 ```bash
-python GRN_input_acquisition_v2.py   -g ./data/ssTFs_MATa_Spots_76.txt   -r ./data/GRN_Sc_TMM_normalized_CPM.txt
+python GRN_input_acquisition.py \
+  -g ./data/ssTFs_MATa_Spots_76.txt \
+  -r ./data/GRN_Sc_TMM_normalized_CPM.txt
 ```
 
 Full usage with optional prior information:
 
 ```bash
-python GRN_input_acquisition_v2.py   -p 0.01   -g ./data/ssTFs_MATa_Spots_76.txt   -r ./data/GRN_Sc_TMM_normalized_CPM.txt   -t ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json   -c ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json   -a ./data/Sc_genome_annotations.txt   -b ./data/YEP_best_rep.txt
+python GRN_input_acquisition.py \
+  -p 0.01 \
+  -g ./data/ssTFs_MATa_Spots_76.txt \
+  -r ./data/GRN_Sc_TMM_normalized_CPM.txt \
+  -t ./data/Rossi_Ruihao_TF_DNA_union_motif_based.json \
+  -c ./data/PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json \
+  -a ./data/Sc_genome_annotations.txt \
+  -b ./data/YEP_best_rep.txt
 ```
 
 Command-line arguments:
@@ -256,7 +265,17 @@ Run the main evolutionary GRN inference using the processed inputs from Step 3.
 General example command:
 
 ```bash
-python EGRN_Multi_Genalg_Combinatorial_2025.py     -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt     -n 3000     -i 100     -p 0     -t ./data/GRN_ssTFs_Sc_promoter_strength.txt     -l ./data/GRN_ssTFs_Sc_gene_length.txt     -o "SETIA_run"     -e 42     -f 0     -k 1
+python EGRN_Multi_Genalg_Combinatorial_2025.py \
+  -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
+  -n 3000 \
+  -i 100 \
+  -p 0 \
+  -t ./data/GRN_ssTFs_Sc_promoter_strength.txt \
+  -l ./data/GRN_ssTFs_Sc_gene_length.txt \
+  -o "SETIA_run" \
+  -e 42 \
+  -f 0 \
+  -k 1
 ```
 
 Command-line arguments:
@@ -286,7 +305,21 @@ We evaluated multiple GRN configurations in the manuscript by changing the struc
 
 **GRN A: unconstrained GRN**
 ```bash
-python EGRN_Multi_Genalg_Combinatorial_2025.py     -c data/GRN_ssTFs_Sc_TF_DNA.txt     -g data/GRN_ssTFs_Sc_LG.txt     -r data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt     -b data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt     -n 3000     -i 200     -p 0     -t data/GRN_ssTFs_Sc_promoter_strength.txt     -l data/GRN_ssTFs_Sc_gene_length.txt     -o "${output}"     -e "${seed}"     -d data/GRN_ssTFs_Sc_initial_condition.txt     -f 0     -k 0
+python EGRN_Multi_Genalg_Combinatorial_2025.py \
+  -c data/GRN_ssTFs_Sc_TF_DNA.txt \
+  -g data/GRN_ssTFs_Sc_LG.txt \
+  -r data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
+  -b data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt \
+  -n 3000 \
+  -i 200 \
+  -p 0 \
+  -t data/GRN_ssTFs_Sc_promoter_strength.txt \
+  -l data/GRN_ssTFs_Sc_gene_length.txt \
+  -o "${output}" \
+  -e "${seed}" \
+  -d data/GRN_ssTFs_Sc_initial_condition.txt \
+  -f 0 \
+  -k 0
 ```
 
 **GRN B**
@@ -311,7 +344,13 @@ Use `GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py` to evaluate a
 Example command:
 
 ```bash
-python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py     -j ./result/GRN_filtered_full_Sc_GRN_final_raw.txt     -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt     -l ./data/GRN_ssTFs_Sc_gene_length.txt     -t ./data/GRN_ssTFs_Sc_promoter_strength.txt     -o GRN_dynamical_performance     -m 0
+python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py \
+  -j ./result/GRN_filtered_full_Sc_GRN_final_raw.txt \
+  -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
+  -l ./data/GRN_ssTFs_Sc_gene_length.txt \
+  -t ./data/GRN_ssTFs_Sc_promoter_strength.txt \
+  -o GRN_dynamical_performance \
+  -m 0
 ```
 
 Command-line arguments:

@@ -5,7 +5,7 @@
 <sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
 ## Overview
-SETIA (Stable Expression–guided Transcriptional Inference Architecture) integrates multiple layers of molecular evidence to infer mechanistically interpretable and dynamically executable gene regulatory networks (GRNs).
+SETIA integrates multiple layers of molecular evidence to infer mechanistically interpretable and dynamically executable gene regulatory networks (GRNs).
 
 Supported evidence layers include:
 

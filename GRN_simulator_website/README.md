@@ -28,6 +28,18 @@ Due to size constraints, processed datasets are **not included** in this reposit
 
 ---
 
+## Deploying the Website
+To deploy the GRN simulator website on your own server, run:
+
+```bash
+python app_test.py
+
+We recommend using a process manager or watchdog service (e.g., systemd, supervisord, or pm2) to keep the web application running reliably.
+
+The website source code can be used independently of the full dataset. Because the files in ./data are too large to host on GitHub, the complete dataset is separately provided through Zenodo.
+```
+---
+
 ## Interface Controls
 
 ### Upload GRN from `.json`
@@ -145,5 +157,3 @@ Download both the attractor visualization and the corresponding stable-state val
   - Clicking displays both IGV tracks and composite plots
 
 ---
-
-## To Deploy the GRN simulator website on your own server, run python app_test.py. Recommend using a watch dog to maintain the website. This code of the website can be used without the data. The data in ./data is too big to provide on Github and uploaded on Zenodo.

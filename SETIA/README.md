@@ -81,7 +81,7 @@ SETIA/
 │   ├── dynamics.py
 │   └── ODE simulation modules
 ├── EGRN_Multi_Genalg_Combinatorial_2025.py
-├── GRN_input_acquisition_v2.py
+├── GRN_input_acquisition.py
 ├── GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py
 ├── GRN_Dynamic_Simulator_Combinatorial_Global_multistate_2025.py
 ├── Export_GRN_from_ResultFlow_Component.py

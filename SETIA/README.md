@@ -60,8 +60,8 @@ pip install flask tqdm seaborn joblib
 The inferred GRN is written to the `./result` directory.
 
 Key outputs include:
-- `GRN_filtered_Sc_GRN_final_2.json`: final GRN structure
-- `GRN_filtered_full_Sc_GRN_final.txt`: fitted model parameters
+- `GRN_filtered_Sc_GRN_final_2.json`: final GRN structure in json format
+- `GRN_filtered_full_Sc_GRN_final.txt`: fitted model parameters in text
 - `*.pkl`: intermediate and final serialized GRN instances
 - `sys_cache_*`: cached searched or simulated GRN configurations
 

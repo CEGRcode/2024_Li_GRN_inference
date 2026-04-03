@@ -31,7 +31,7 @@ These data are used to construct and constrain GRNs whose dynamics are modeled u
 1. `0_Download_and_touch.sh`  
    → downloads and initializes required data  
 
-2. `1_Preprocessing...`  
+2. `1_Preprocessing_dicrete_gene_expression_state_identification.sh`  
    → identifies discrete expression states  
 
 3. `2_GRN_inference.sh`  

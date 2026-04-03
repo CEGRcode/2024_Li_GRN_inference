@@ -189,9 +189,6 @@ Optional prior inputs include:
 
 If omitted, the corresponding preprocessing steps are automatically skipped.
 
-### Step 3: Run Input Preprocessing
-Use `GRN_input_acquisition_v2.py` to convert the gene metadata file, normalized RNA-seq matrix, and optional prior information into SETIA-compatible preprocessing files. The script writes its outputs primarily to `./data`, and also generates summary files in `./result`. The main generated files are:  
-
 **Core outputs used by SETIA**
 - `./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt`  
   Discretized steady-state expression matrix used as the transcriptional-state input for GRN inference.

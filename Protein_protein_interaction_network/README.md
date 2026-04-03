@@ -33,7 +33,20 @@
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
 ```
-conda create -n PPC -c bioconda -c conda-forge bedtools numpy pandas math matplotlib scipy scikit-learn re samtools wget pybigwig sra-tools opencv bwa shutil zipfile
+conda create -n PPC -c bioconda -c conda-forge 
+    python=3.10 \
+    bedtools=2.31 \
+    samtools=1.19 \
+    bwa=0.7 \
+    sra-tools=3.0 \
+    pybigwig=0.3 \
+    numpy=1.26 \
+    pandas=2.2 \
+    scipy=1.12 \
+    scikit-learn=1.4 \
+    matplotlib=3.8 \
+    opencv=4.9 \
+    wget=1.21
 ```
 
 ## Table of Contents

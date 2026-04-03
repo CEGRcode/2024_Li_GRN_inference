@@ -1,50 +1,52 @@
-# Gene regulatory network inference using SETIA
+# Gene Regulatory Network Inference Using SETIA
 
 ### Ruihao Li<sup>1</sup>, William K. M. Lai<sup>1,2</sup>, B. Franklin Pugh<sup>1</sup>
 <sup>1</sup>Department of Molecular Biology and Genetics, Cornell University, Ithaca, New York, 14853, USA  
 <sup>2</sup>Department of Computational Biology, Cornell University, Ithaca, New York, 14853, USA
 
 ## Overview
-SETIA integrates multiple layers of molecular evidence:
+SETIA (Stable Expression–guided Transcriptional Inference Architecture) integrates multiple layers of molecular evidence to infer mechanistically interpretable and dynamically executable gene regulatory networks (GRNs).
 
-- RNA-seq (transcriptional states across genotypes)
-- ChIP-exo (TF–DNA binding)
-- PRO-seq / CAGE-seq (promoter activity)
-- Protein–protein interaction (PPI) including protein-protein colocalization (PPC)
+Supported evidence layers include:
 
-These data are used to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
+- RNA-seq transcriptional profiles across genotypes and perturbations
+- ChIP-exo TF–DNA binding
+- PRO-seq / CAGE-seq promoter activity
+- Protein–protein interactions (PPI), including protein–protein colocalization (PPC)
+
+These data are integrated to construct and constrain GRNs whose dynamics are modeled using ordinary differential equations (ODEs).
 
 ---
 
 ## Key Features
-
-- Infers dynamical GRNs that reproduce cell-type-specific stable transcriptional states  
-- Integrates multi-omics data for mechanistic constraints  
-- Supports combinatorial regulation (AND / OR logic)  
-- Implements parallelized optimization for scalability  
-- Provides an interactive web platform for simulation and visualization  
+- Infers dynamical GRNs that reproduce stable transcriptional states
+- Integrates multi-omics data as mechanistic structural constraints
+- Supports combinatorial regulation (AND / OR logic)
+- Implements parallelized optimization for scalable GRN inference
+- Provides an interactive web platform for simulation and visualization
 
 ---
 
-## Pipeline to reproduce GRNs from the paper
-
+## Pipeline to Reproduce GRNs from the Paper
 1. `0_Download_and_touch.sh`  
-   → downloads and initializes required data  
+   Downloads and initializes required data
 
 2. `1_Preprocessing_dicrete_gene_expression_state_identification.sh`  
-   → identifies discrete expression states  
+   Identifies discrete gene expression states
 
 3. `2_GRN_inference.sh`  
-   → performs GRN inference  
+   Performs GRN inference
 
 4. `3_Final_GRN_construction.sh`  
-   → filters and constructs final GRN  
+   Filters and constructs the final GRN
 
 5. `4_Scale_GRN_to_nonTF_targets.sh`  
-   → extends network to non-TF genes
+   Extends the GRN to downstream non-TF targets
+
+---
 
 ## Dependencies
-Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
+We recommend initializing the following dedicated Anaconda environment for reproducibility:
 
 ```bash
 conda create -n EvoAlg -c conda-forge -y \
@@ -62,27 +64,32 @@ conda activate EvoAlg
 pip install flask tqdm seaborn joblib
 ```
 
+---
+
 ## Outputs
-The inferred gene regulatory network (GRN) is written to the `./result` directory. The final GRN structure is saved as `GRN_filtered_Sc_GRN_final_2.json`, and the corresponding model parameters are provided in `GRN_filtered_full_Sc_GRN_final.txt`. Intermediate and final GRN instances are serialized and stored as pickle files, while all searched or simulated GRN configurations during inference are cached in the `sys_cache_*` files.
+The inferred GRN is written to the `./result` directory.
+
+Key outputs include:
+- `GRN_filtered_Sc_GRN_final_2.json`: final GRN structure
+- `GRN_filtered_full_Sc_GRN_final.txt`: fitted model parameters
+- `*.pkl`: intermediate and final serialized GRN instances
+- `sys_cache_*`: cached searched or simulated GRN configurations
+
+---
 
 ## Minimal Example
+This example demonstrates how to run SETIA on a small test dataset. Because the code is optimized for HPC environments, local execution may take longer (~10 minutes).
 
-This example demonstrates how to run SETIA on a small test dataset. As the code is optimized for HPC platforms, running it on a local PC may take longer (approximately 10 minutes). The example inferred GRN will be written to `./result/GRN_filtered_Sc_GRN_final_raw.json`, and can be uploaded to our GRN simulator website (https://grn.cac.cornell.edu:5000/) for interactive exploration.
+The inferred GRN will be written to:
+`./result/GRN_filtered_Sc_GRN_final_raw.json`
+
+This output can be uploaded to the GRN simulator website for interactive exploration:
+https://grn.cac.cornell.edu:5000/
 
 ```bash
 cd SETIA
 conda activate EvoAlg
-# -r: input transcriptional profiles
-# -n: time span used in solve_ivp
-# -i: number of training iterations
-# -p: perturbation setting to the initial states
-# -t: input promoter strength settings
-# -l: input gene lengths
-# -o: prefix for output files
-# -e: random seed
-# -f: allow edges not supported by ChIP
-# -k: whether to pickle GRN instances
-# The following command runs SETIA on a minimal example dataset and writes output files with the prefix Minimal_example_.
+
 python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -r data/example_RNA_profiles.txt \
     -n 3000 \
@@ -94,31 +101,115 @@ python EGRN_Multi_Genalg_Combinatorial_2025.py \
     -e 42 \
     -f 0 \
     -k 0
+
 python Export_GRN_from_ResultFlow_Component.py
 conda deactivate
 ```
 
+---
 
+## Usage with Custom Data
 
-## Table of Contents
+### Step 1: Prepare Gene Metadata
+Create a gene metadata file describing all genes to be modeled in the GRN.
 
-### salmon_tximport_tmm_normalize.R
-Performs the TMM normalization on the RNA-seq samples aligned by Salmon. It produces the normalized read counts in GRN_Sc_TMM_normalized_CPM.txt for downstream analysis.
+Required format:
+```text
+TF_NAME    SGD_ID    GENE_LENGTH
+```
 
-### EGRN_Multi_Genalg_Combinatorial_2025.py
-The main executable for SETIA, implementing evolutionary optimization of ODE-based GRNs to recapitulate observed transcriptional stable states based on given GRN structural information.
+Example:
+```text
+ABF1    YKL112W    2196
+AFT1    YGL071W    2073
+MET4    YNL103W    2019
+```
 
-### GRN_input_acquisition.py
-Preprocess the RNA-seq, ChIP-exo, and other data for GRN inference in yeast.
+---
 
-### GRN_Dynamic_Simulator_Combinatorial_remove_dispensible_edges_2025.py
-Removes dispensable edges from a gene regulatory network that do not affect the reproduction of transcriptional profiles as stable states.
+### Step 2: Prepare Normalized RNA-seq Input
+RNA-seq data are required.
 
-### Export_final_GRN_TF_DNA.py
-Exports the final gene regulatory network and compares it against the TF–DNA binding prior, highlighting shared edges in green.
+We recommend TMM normalization, and an example workflow is provided in:
+`salmon_tximport_tmm_normalize.R`
 
-### EGRN_Multi_non_TF_2025.py
-Extends the core ssTF GRN to downstream non-TF target genes by fitting their stable expression states using ssTF-to-target edges supported by TF–DNA binding evidence.
+Other normalization methods are also supported, provided the final input format remains compatible.
 
-### Export_GRN_from_ResultFlow_Component.py
-Exports gene regulatory networks from intermediate saved states when inference stops before the pre-set number of iterations. Transient GRN states are saved at each iteration and can be recovered using this script.
+Expression matrix (`-r`) requirements:
+- first column: `samples`
+- remaining columns: SGD systematic gene IDs
+- rows: individual RNA-seq samples
+- values: normalized expression values
+
+Example:
+```text
+samples    YKL112W    YGL071W    YPL202C
+WT_batch_1_rep_1    120.5    45.2    18.9
+WT_batch_2_rep_1    118.3    44.7    19.1
+AZF1_batch_1_rep_1  12.4     39.8    5.2
+```
+
+Requirements:
+- the `samples` header is required
+- sample names must use underscore-delimited formatting
+- the text before the first underscore is treated as the genotype label
+
+Recommended naming convention:
+```text
+GENOTYPE_batch_batch#_rep_replicate#
+```
+
+---
+
+### Step 3: Run Input Preprocessing
+Use:
+
+```bash
+python GRN_input_acquisition_v2.py
+```
+
+This generates SETIA-compatible preprocessing outputs in `./data`.
+
+Optional prior inputs include:
+- TF–DNA prior
+- protein colocalization prior
+- genome annotation
+- YEP replicate mapping
+
+If omitted, the corresponding preprocessing steps are automatically skipped.
+
+---
+
+### Step 4: Run SETIA Inference
+Run the main evolutionary GRN inference:
+
+```bash
+python EGRN_Multi_Genalg_Combinatorial_2025.py
+```
+
+using the processed inputs from Step 3.
+
+---
+
+## File Descriptions
+
+### `salmon_tximport_tmm_normalize.R`
+Performs TMM normalization on Salmon-aligned RNA-seq samples.
+
+### `EGRN_Multi_Genalg_Combinatorial_2025.py`
+Main SETIA executable implementing evolutionary optimization of ODE-based GRNs.
+
+### `GRN_input_acquisition_v2.py`
+Preprocesses RNA-seq and optional prior data into SETIA-compatible inputs.
+
+### `GRN_Dynamic_Simulator_Combinatorial_remove_dispensible_edges_2025.py`
+Removes dispensable GRN edges that do not affect stable-state recovery.
+
+### `Export_final_GRN_TF_DNA.py`
+Exports the final GRN and compares it against the TF–DNA prior.
+
+### `EGRN_Multi_non_TF_2025.py`
+Extends the core ssTF GRN to downstream non-TF targets.
+
+### `Export_GRN_from_ResultFlow_Component.py`
+Recovers and exports GRNs from intermediate saved optimization states.

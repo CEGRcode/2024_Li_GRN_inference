@@ -1,4 +1,6 @@
 #!/bin/bash
+# ---------------------- GRN inference was performed on HPC environment ------------------------
+
 #SBATCH --nodes=1
 #SBATCH --ntasks=9
 #SBATCH --mem=32GB

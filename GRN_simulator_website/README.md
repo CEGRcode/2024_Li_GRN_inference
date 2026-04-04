@@ -35,9 +35,27 @@ Due to size constraints, processed datasets are **not included** in this reposit
 
 <p align="center">
   <em>
-    Figure 1. Overview of the GRN simulator website workflow. 
-    Users can input genes or regulatory interactions, explore the inferred network structure,
-    inspect genome-browser level evidence, and simulate dynamical trajectories of transcriptional states.
+    **Figure | An overview of the GRN simulator website.**  
+    **(a) Main interface.**  
+    (1) Load a network either by uploading a local JSON file or by selecting a preset network, including TF–DNA binding, protein–protein colocalization (PPC), or gene regulatory network (GRN).  
+    (2) Find a gene by name and center it in the network.  
+    (3) Subset the network to a gene of interest and its downstream targets.  
+    (4) PPC networks only: highlight edges by STRING’s confidence category (green, very high; yellow, high; orange, medium; red, exploratory).  
+    (5) Click a gene node to display its regulation function and fitted parameters.  
+    (6) Click a dashed GRN edge (synergistic regulation) to view both the IGV tracks and an overlaid ChIP–exo composite plot for the two factors, highlighting similar crosslinking patterns.  
+    (7) Click a solid GRN edge to view the ChIP–exo signal of the regulator TF at the target promoter in IGV (IgG shown as a negative-control track).  
+    (8) Add or update an edge by specifying regulator, target, an optional complex label, edge style (solid, independent; dashed, synergistic), and sign (triangle, activation; blunt, inhibition).  
+    (9) Apply a selected layout algorithm for the network.  
+    (10–12) Delete genes or edges, and save/restore a working network state.  
+    (13) Export the current network as an image and JSON.  
+    (14) Stable states (attractors) of the GRN are displayed in the right panel; edges denote Euclidean distances between attractors.  
+    (15) Generate evenly spaced initial conditions in expression space (with an estimated runtime).  
+    (16) Integrate the GRN ODE system to identify attractors.  
+    (17) Download attractor expression profiles.  
+    
+    **(b)** Example regulation function and kinetic parameters for **TBS1**, editable via interactive controls.  
+    **(c)** Example IGV view showing ChIP–exo signal of **Tbf1** at the **PDR1** promoter.  
+    **(d)** Example overlaid composite plots for **Met31** and **Met32**.
   </em>
 </p>
 

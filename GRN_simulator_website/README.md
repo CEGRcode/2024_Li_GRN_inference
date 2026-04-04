@@ -20,15 +20,8 @@ The repository also includes the associated `Plotter` module used for visualizat
 Due to size constraints, processed datasets are **not included** in this repository.
 
 ---
-
-## Usage
-1. Open the GRN simulator website (https://grn.cac.cornell.edu:5000/) in a supported web browser (Chrome recommended).
-2. Upload a GRN file in JSON format to begin interactive analysis.
-3. Use the controls described below to edit the network, simulate dynamics, and export results.
-
----
 ## Website Usage Guide
-
+Open the GRN simulator website (https://grn.cac.cornell.edu:5000/) in a supported web browser (Chrome recommended).
 <p align="center">
   <img src="./Figures/web_usage_guideline.png" alt="Website usage demo" width="900">
 </p>

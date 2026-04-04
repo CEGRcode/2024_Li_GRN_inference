@@ -26,8 +26,6 @@ Open the GRN simulator website (https://grn.cac.cornell.edu:5000/) in a supporte
   <img src="./Figures/web_usage_guideline.png" alt="Website usage demo" width="900">
 </p>
 
-**Figure | An overview of the GRN simulator website.**
-
 **(a) Main interface.**  
 ① Load a network either by uploading a local JSON file or by selecting a preset network, including TF–DNA binding, protein–protein colocalization (PPC), or gene regulatory network (GRN).  
 ② Find a gene by name and center it in the network.  

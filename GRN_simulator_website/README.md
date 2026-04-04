@@ -30,7 +30,7 @@ Due to size constraints, processed datasets are **not included** in this reposit
 ## Website Usage Guide
 
 <p align="center">
-  <img src="./Figures/Extended Data Fig. 2.pdf" alt="Website usage demo" width="900">
+  <img src="./Figures/web_usage_guideline.png" alt="Website usage demo" width="900">
 </p>
 
 <p align="center">

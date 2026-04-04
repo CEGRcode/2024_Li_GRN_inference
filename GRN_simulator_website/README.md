@@ -35,8 +35,7 @@ Due to size constraints, processed datasets are **not included** in this reposit
 
 <p align="center">
   <em>
-    <strong>Extended Data Fig. 2 <img width="468" height="25" alt="image" src="https://github.com/user-attachments/assets/8cfaee42-2432-4441-9f07-30a20ddb348d" />
- | An overview of the GRN simulator website.</strong><br>
+    <strong>Extended Data Fig. 2 | An overview of the GRN simulator website.</strong><br>
     <strong>(a) Main interface.</strong><br>
     (1) Load a network either by uploading a local JSON file or by selecting a preset network, including TF–DNA binding, protein–protein colocalization (PPC), or gene regulatory network (GRN).<br>
     (2) Find a gene by name and center it in the network.<br>

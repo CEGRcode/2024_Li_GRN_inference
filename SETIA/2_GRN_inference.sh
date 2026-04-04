@@ -1,6 +1,43 @@
 #!/bin/bash
-# ---------------------- GRN inference was performed on HPC environment ------------------------
 
+# -------------------------------------- For local PC -------------------------------------- #
+seeds=(42 123 456 789 101112 131415 161718 192021 222324 252627)
+outputs=("Sc_0" "Sc_1" "Sc_2" "Sc_3" "Sc_4" "Sc_5" "Sc_6" "Sc_7" "Sc_8" "Sc_9")
+
+# activate conda
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate EvoAlg
+
+for i in "${!seeds[@]}"; do
+    seed=${seeds[$i]}
+    output=${outputs[$i]}
+
+    echo "Running seed ${seed} -> ${output}"
+
+    python EGRN_Multi_Genalg_Combinatorial_2025.py \
+        -c data/GRN_ssTFs_Sc_TF_DNA.txt \
+        -g data/GRN_ssTFs_Sc_LG.txt \
+        -r data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
+        -b data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt \
+        -n 3000 \
+        -i 200 \
+        -p 0 \
+        -t data/GRN_ssTFs_Sc_promoter_strength.txt \
+        -l data/GRN_ssTFs_Sc_gene_length.txt \
+        -o "${output}" \
+        -e "${seed}" \
+        -d data/GRN_ssTFs_Sc_initial_condition.txt \
+        -f 0 \
+        -k 0
+done
+
+conda deactivate
+
+
+
+
+# -------------------------------------- For HPC (highly recommended) -------------------------------------- #
+'''
 #SBATCH --nodes=1
 #SBATCH --ntasks=9
 #SBATCH --mem=32GB
@@ -38,3 +75,4 @@ python EGRN_Multi_Genalg_Combinatorial_2025.py \
 
 # Deactivate the conda environment
 conda deactivate
+'''

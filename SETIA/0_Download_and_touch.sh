@@ -4,8 +4,8 @@
 
 cd ./data
 
-# Download RNAseq data
-wget -O GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz https://ftp.ncbi.nlm.nih.gov/geo/series/GSE317nnn/GSE317148/suppl/GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz
+# Download RNAseq data (if not public yet, use the reviewer token to download the GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz)
+#wget -O GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz https://ftp.ncbi.nlm.nih.gov/geo/series/GSE317nnn/GSE317148/suppl/GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz
 gunzip -k GSE317148_GRN_Sc_TMM_normalized_CPM.txt.gz
 mv GSE317148_GRN_Sc_TMM_normalized_CPM.txt GRN_Sc_TMM_normalized_CPM.txt
 

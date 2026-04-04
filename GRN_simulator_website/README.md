@@ -27,6 +27,21 @@ Due to size constraints, processed datasets are **not included** in this reposit
 3. Use the controls described below to edit the network, simulate dynamics, and export results.
 
 ---
+## Website Usage Guide
+
+<p align="center">
+  <img src="./Figures/Extended Data Fig. 2.pdf" alt="Website usage demo" width="900">
+</p>
+
+<p align="center">
+  <em>
+    Figure 1. Overview of the GRN simulator website workflow. 
+    Users can input genes or regulatory interactions, explore the inferred network structure,
+    inspect genome-browser level evidence, and simulate dynamical trajectories of transcriptional states.
+  </em>
+</p>
+
+---
 
 ## Dependencies
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies

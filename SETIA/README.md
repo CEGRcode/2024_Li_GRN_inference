@@ -42,6 +42,9 @@ These data are integrated to construct and constrain GRNs whose dynamics are mod
 
 5. `4_Scale_GRN_to_nonTF_targets.sh`  
    Extends the GRN to downstream non-TF targets
+   
+5. `5_GRN_performance_evaluation.sh`  
+   Evaluates whether the inferred GRN can reproduce transcriptional profiles as stable states
 
 ---
 

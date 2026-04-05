@@ -13,3 +13,6 @@ Miscellaneous helper functions.
 
 ### merge_GRN.py
 Merges two GRNs.
+
+### Combine_Redundant_Attractors.py
+Merge identical/similar predicted stable states.

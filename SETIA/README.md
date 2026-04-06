@@ -196,7 +196,7 @@ GENOTYPE_batch_batch#_rep_replicate#
 ```
 
 ---
-### Step 3: Run input preprocessing
+### Step 3: Run Input Preprocessing
 
 Use `GRN_input_acquisition.py` to convert the gene list, normalized RNA-seq matrix, and optional prior files into SETIA-ready input files.
 

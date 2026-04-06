@@ -151,7 +151,8 @@ for Global_i in range(0, len(WTTP)):
             Jacobian_matrix[matrix_i].append(eval('df{}_dy{}_at_point'.format(matrix_i, matrix_j)))
     eigenvalues = np.linalg.eigvals(Jacobian_matrix)
     Derivative_values = [abs(x) for x in Derivative_values]
-    if max(eigenvalues) < 0 and max(Derivative_values) < max(0.5, 0.01*np.max(npmRNA_continuous)):
+    if max(eigenvalues) < 0 and max(Derivative_values) < (max(0.5, 0.01*np.max(npmRNA_continuous)) or eigenvalues+abs(Derivative_values[0])<0):
+    #if max(eigenvalues) < 0 and max(Derivative_values) < max(0.5, 0.01*np.max(npmRNA_continuous)):
         IsPointAttractor = True
     else:
         IsPointAttractor = False

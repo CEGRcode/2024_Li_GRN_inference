@@ -21,14 +21,129 @@
   <div id="titleRow">
         <div id="loading" aria-live="polite">Loading...</div>
   </div>
+
+  <!-- ========================= ONBOARDING GUIDE MODAL ========================= -->
+  <div id="guideModal" class="guide-overlay">
+    <div class="guide-box">
+      <button class="guide-close" id="guideCloseBtn" aria-label="Close guide">&times;</button>
+      <div class="guide-header">
+        <h2>Welcome to the GRN Simulator</h2>
+        <p class="guide-subtitle">A quick walkthrough to get you started</p>
+      </div>
+
+      <div class="guide-steps">
+        <!-- Step indicators -->
+        <div class="guide-progress">
+          <span class="guide-dot active" data-step="0"></span>
+          <span class="guide-dot" data-step="1"></span>
+          <span class="guide-dot" data-step="2"></span>
+          <span class="guide-dot" data-step="3"></span>
+          <span class="guide-dot" data-step="4"></span>
+        </div>
+
+        <!-- Step 0: Overview -->
+        <div class="guide-step active" data-step="0">
+          <div class="guide-step-icon">🧬</div>
+          <h3>What is this tool?</h3>
+          <p>This simulator lets you <strong>visualize</strong>, <strong>edit</strong>, and <strong>analyze</strong> Gene Regulatory Networks (GRNs). You can explore how genes regulate each other, compute stable transcriptional profiles (attractors), and see what happens when you modify the network. For detailed information and tutorial, please visit     <a href="https://github.com/CEGRcode/2024_Li_GRN_inference/tree/main/GRN_simulator_website" target="_blank">
+      the GitHub repository
+    </a>.</p>
+          <div class="guide-hint">
+            <strong>Example question this tool answers:</strong><br>
+            "Given a GRN, if a specific gene is knocked out, what are the resulting stable transcriptional profiles?"
+          </div>
+        </div>
+
+        <!-- Step 1: Load a network -->
+        <div class="guide-step" data-step="1">
+          <div class="guide-step-icon">📂</div>
+          <h3>Step 1: Load a Network</h3>
+          <p>Start by loading a network. You have two options:</p>
+          <ul>
+            <li><strong>Upload a .json file</strong> — click "Load GRN from .json" in the toolbar</li>
+            <li><strong>Choose a preset</strong> — select one from the dropdown and click "Load"</li>
+          </ul>
+          <p>The presets include three types of networks:</p>
+          <ul>
+            <li><strong>GRN A–D</strong> — Gene Regulatory Networks with activating &amp; inhibiting edges. You can compute attractors, click nodes to see regulation functions, and simulate gene knockouts.</li>
+            <li><strong>TF-DNA</strong> — A TF-DNA Binding Network showing which transcription factors bind to which gene promoters (based on ChIP-exo data).</li>
+            <li><strong>PPC (motif / all)</strong> — TF-TF Colocalization Networks showing potential protein-protein interactions. Edge colors indicate STRING database confidence levels (green = very high, orange = high, yellow = medium, red = exploratory, black = not in STRING).</li>
+          </ul>
+          <div class="guide-hint">
+            <strong>Tip:</strong> The default small GRN is already loaded for you to explore. The attractor panel on the right is only available for GRN-type networks.
+          </div>
+        </div>
+
+        <!-- Step 2: Explore the network -->
+        <div class="guide-step" data-step="2">
+          <div class="guide-step-icon">🔍</div>
+          <h3>Step 2: Explore the Network</h3>
+          <p>Once a network is loaded in the left panel:</p>
+          <ul>
+            <li><strong>Click a gene (node)</strong> to see its regulation function as a 3D surface plot, with adjustable parameters</li>
+            <li><strong>Click an edge</strong> to view ChIP-exo binding evidence (IGV browser)</li>
+            <li><strong>Search</strong> for a gene by name using the search box in the toolbar</li>
+            <li><strong>View regulon</strong> — type a gene name and click "Search" to see all genes it regulates</li>
+          </ul>
+          <div class="guide-hint">
+            <strong>Tip:</strong> Solid arrows = independent regulation; Dashed arrows = synergistic (requires cooperating partners, labeled with the same number).
+          </div>
+        </div>
+
+        <!-- Step 3: Edit the network -->
+        <div class="guide-step" data-step="3">
+          <div class="guide-step-icon">✏️</div>
+          <h3>Step 3: Edit the Network</h3>
+          <p>Use the controls below the network graph to modify the GRN:</p>
+          <ul>
+            <li><strong>Add/Update Edge</strong> — specify a regulator, target gene, edge style (independent/synergistic) and type (activation/inhibition)</li>
+            <li><strong>Delete Gene</strong> — remove a gene and all its connections (simulates a gene knockout)</li>
+            <li><strong>Delete Edge</strong> — remove a specific regulatory relationship</li>
+            <li><strong>Save / Return</strong> — save the current state and restore it later to compare</li>
+          </ul>
+        </div>
+
+        <!-- Step 4: Compute attractors -->
+        <div class="guide-step" data-step="4">
+          <div class="guide-step-icon">🎯</div>
+          <h3>Step 4: Compute Attractors</h3>
+          <p>The right panel shows <strong>stable transcriptional profiles</strong> (fixed-point attractors) — the steady states the GRN converges to.</p>
+          <ul>
+            <li>Adjust the <strong>slider</strong> to set how many initial conditions to sample (more = slower but more thorough)</li>
+            <li>Click <strong>"Generate/Compare Attractors"</strong> to compute</li>
+            <li>After modifying the GRN (e.g., knocking out a gene), click again to compare <span style="color:red">new attractors (red)</span> vs <span style="color:black">previous ones (black)</span></li>
+          </ul>
+          <div class="guide-hint">
+            <strong>Workflow example:</strong> Load GRN → Generate Attractors → Delete a gene → Generate again → Compare how the stable states changed.
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-nav">
+        <button id="guidePrevBtn" class="guide-nav-btn" disabled>← Previous</button>
+        <button id="guideNextBtn" class="guide-nav-btn">Next →</button>
+        <button id="guideDoneBtn" class="guide-nav-btn guide-done-btn" style="display:none;">Start Exploring</button>
+      </div>
+
+      <label class="guide-remember">
+        <input type="checkbox" id="guideDontShow"> Don't show this again
+      </label>
+    </div>
+  </div>
+
   <div id="app">
     <!-- =========================
          TOP TOOL ROWS
          ========================= -->
     <header id="topbar">
       <div id="toolRow">
+        <!-- Help button -->
+        <div class="toolBox" style="flex-shrink:0;">
+          <button id="helpBtn" class="toolbarBtn" title="Open the getting-started guide">❓ Guide</button>
+        </div>
+
         <!-- Upload / preset -->
-        <div id="fileInputContainer" class="toolBox">
+        <div id="fileInputContainer" class="toolBox" title="Load a gene regulatory network from a JSON file or choose a preset">
           <label for="fileInput" id="uploadBtn" class="toolbarBtn">Load GRN from .json</label>
           <input type="file" id="fileInput" accept=".json" />
 
@@ -38,17 +153,17 @@
             <option value="tf_dna">TF-DNA</option>
             <option value="ppc_motif">PPC_motif</option>
             <option value="ppc_all">PPC_all</option>
-            <option value="grn_a">GRN A</option>
-            <option value="grn_b">GRN B</option>
-            <option value="grn_c">GRN C</option>
-            <option value="grn_d">GRN D</option>
+            <option value="grn_a">GRN A — Unconstrained</option>
+            <option value="grn_b">GRN B — TF–DNA + coexpression union constrained</option>
+            <option value="grn_c">GRN C — TF–DNA constrained</option>
+            <option value="grn_d">GRN D — Motif-based TF–DNA constrained</option>
           </select>
 
           <button id="presetLoadBtn" type="button" class="toolbarBtn">Load</button>
         </div>
 
         <!-- Search gene -->
-        <div id="searchContainer" class="toolBox">
+        <div id="searchContainer" class="toolBox" title="Search for a specific gene in the network and zoom to it">
           <label for="nodeSearchInput">Search for Gene:</label>
           <input
             type="text"
@@ -63,7 +178,7 @@
         </div>
 
         <!-- Search regulon -->
-        <div id="regulonContainer" class="toolBox">
+        <div id="regulonContainer" class="toolBox" title="Show all genes regulated by a specific gene (its regulon). Leave empty and click Search to reset.">
           <label for="regulonSearchInput">Search regulon of:</label>
           <input
             type="text"
@@ -78,7 +193,7 @@
         </div>
 
         <!-- Select edge by color -->
-        <div id="selectEdgeContainer" class="toolBox">
+        <div id="selectEdgeContainer" class="toolBox" title="Filter edges by color to focus on specific regulatory relationships">
           <label for="colorSelect">Select Edge by Color:</label>
           <select id="colorSelect">
             <option value="All">All</option>
@@ -103,25 +218,64 @@
 
           <div id="cy"></div>
 
-          <!-- overlay legend -->
+          <!-- overlay legend (dynamic — switches with network type) -->
           <div id="legend" class="legendOverlay">
-            <div class="legend-item">
-              <div class="legend-line legend-solid legend-triangle"></div>
-              <span>Independent activation</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-line legend-dashed">
-                <div class="legend-triangle"></div>
+            <!-- GRN legend -->
+            <div id="legend-grn" class="legend-mode">
+              <div class="legend-item">
+                <div class="legend-line legend-solid legend-triangle"></div>
+                <span>Independent activation</span>
               </div>
-              <span>Synergistic activation</span>
+              <div class="legend-item">
+                <div class="legend-line legend-dashed">
+                  <div class="legend-triangle"></div>
+                </div>
+                <span>Synergistic activation</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line legend-solid legend-tee"></div>
+                <span>Independent inhibition</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line legend-dashed legend-tee"></div>
+                <span>Synergistic inhibition</span>
+              </div>
             </div>
-            <div class="legend-item">
-              <div class="legend-line legend-solid legend-tee"></div>
-              <span>Independent inhibition</span>
+
+            <!-- TF-DNA legend -->
+            <div id="legend-tfdna" class="legend-mode" style="display:none;">
+              <div class="legend-item">
+                <div class="legend-line legend-solid legend-triangle"></div>
+                <span>TF binds target gene promoter</span>
+              </div>
             </div>
-            <div class="legend-item">
-              <div class="legend-line legend-dashed legend-tee"></div>
-              <span>Synergistic inhibition</span>
+
+            <!-- PPC legend -->
+            <div id="legend-ppc" class="legend-mode" style="display:none;">
+              <div class="legend-item">
+                <div class="legend-line legend-solid" style="background-color:rgb(0,168,107);"></div>
+                <span>STRING: very high confidence</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line legend-solid" style="background-color:rgb(255,165,0);"></div>
+                <span>STRING: high confidence</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line legend-solid" style="background-color:rgb(247,247,0);"></div>
+                <span>STRING: medium confidence</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line legend-solid" style="background-color:rgb(220,20,60);"></div>
+                <span>STRING: exploratory</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-line legend-solid" style="background-color:rgb(0,0,0);"></div>
+                <span>Not in STRING</span>
+              </div>
+              <div class="legend-item" style="margin-top:6px;border-top:1px solid #ddd;padding-top:6px;">
+                <div class="legend-line legend-dashed" style="background:none;border-top-color:#000;"></div>
+                <span>TF colocalizes on target TF's binding sites</span>
+              </div>
             </div>
           </div>
         </div>
@@ -242,7 +396,6 @@
         </div>
       </section>
 
-      <!-- RIGHT PANE -->
       <section id="rightPane" class="pane">
         <div class="graphWrap">
           <div class="graphTitle">Stable transcriptional profiles (Fixed-point attractors)</div>
@@ -282,6 +435,13 @@
           </div>
         </div>
       </section>
+    </main>
+
+    <!-- Tab button lives OUTSIDE #main so it never affects grid column count -->
+    <button id="rightPaneTab" class="right-pane-tab" title="Open attractor panel (only available for GRN)">
+      <span class="tab-icon">📊</span>
+      <span class="tab-label">Attractors</span>
+    </button>
 
   <!-- =========================
        MODALS (unchanged IDs)
@@ -300,78 +460,94 @@
         
         <!-- Slider Controls Container (on the right) -->
         <div id="plot-controls">
-          <div class="control-row">
-            <label>f0∈[0, 1]: <span id="f0Val"></span></label>
-            <input type="range" id="f0" min="0" max="1" step="0.05" value="0.5">
-            <input type="number" id="f0Input" value="0.5" step="0.1" min="0" max="1" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>f0p∈[0, 1]: <span id="f0pVal"></span></label>
-            <input type="range" id="f0p" min="0" max="1" step="0.05" value="0.5">
-            <input type="number" id="f0pInput" value="0.5" step="0.1" min="0" max="1" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>t1∈[0, 1]: <span id="t1Val"></span></label>
-            <input type="range" id="t1" min="0" max="1" step="0.01" value="0.33">
-            <input type="number" id="t1Input" value="0.33" step="0.01" min="0" max="1" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>t2∈[0, 1]: <span id="t2Val"></span></label>
-            <input type="range" id="t2" min="0" max="1" step="0.01" value="0.66">
-            <input type="number" id="t2Input" value="0.66" step="0.01" min="0" max="1" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>t3∈[0, 1]: <span id="t3Val"></span></label>
-            <input type="range" id="t3" min="0" max="1" step="0.01" value="0.66">
-            <input type="number" id="t3Input" value="0.66" step="0.01" min="0" max="1" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>k∈[0, ∞): <span id="kVal"></span></label>
-            <input type="range" id="k" min="0" max="50" step="0.5" value="30">
-            <input type="number" id="kInput" value="30" step="1" min="0" max="50" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>c1∈[0, ∞): <span id="c1Val"></span></label>
-            <input type="range" id="c1" min="0" max="100" step="0.5" value="1">
-            <input type="number" id="c1Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>c2∈[0, ∞): <span id="c2Val"></span></label>
-            <input type="range" id="c2" min="0" max="100" step="0.5" value="1">
-            <input type="number" id="c2Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>c3∈[0, ∞): <span id="c3Val"></span></label>
-            <input type="range" id="c3" min="0" max="100" step="0.5" value="1">
-            <input type="number" id="c3Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>c4∈[0, ∞): <span id="c4Val"></span></label>
-            <input type="range" id="c4" min="0" max="100" step="0.5" value="1">
-            <input type="number" id="c4Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>elevation∈[0, 360]: <span id="elevVal"></span></label>
-            <input type="range" id="elev" min="0" max="360" step="1" value="25">
-            <input type="number" id="elevInput" value="25" step="1" min="0" max="360" style="width: 60px;">
-          </div>
-          <div class="control-row">
-            <label>azimuth∈[0, 360]: <span id="azimVal"></span></label>
-            <input type="range" id="azim" min="0" max="360" step="1" value="160">
-            <input type="number" id="azimInput" value="160" step="1" min="0" max="360" style="width: 60px;">
-          </div>
-          <div style="display: flex; align-items: center; gap: 80px;margin-bottom: 24px;">
-            <label>Promoter strength∈[0, ∞): <span id="TRVal"></span></label>
-            <input type="number" id="TRInput" value="1" step="0.01" min="0" max="9999" style="width: 60px;margin-left: -9%;">
-          </div>
-          <div style="display: flex; align-items: center; gap: 80px;margin-bottom: 24px;">
+          <!-- Key parameters (always visible) -->
+          <div class="params-section">
+            <h4 class="params-heading">Key Parameters</h4>
+            <div class="control-row">
+              <label>Promoter strength∈[0, ∞): <span id="TRVal"></span></label>
+              <input type="number" id="TRInput" value="1" step="0.01" min="0" max="9999" style="width: 60px;">
+            </div>
+            <div class="control-row">
               <label>Degradation rate∈[0, ∞): <span id="DegVal"></span></label>
-              <input type="number" id="DegInput" value="0.5" step="0.01" min="0" max="9999" style="width: 60px;margin-left: -9%;">
+              <input type="number" id="DegInput" value="0.5" step="0.01" min="0" max="9999" style="width: 60px;">
+            </div>
+            <div class="control-row">
+              <label>Leakage rate∈[0, TR]: <span id="LkVal"></span></label>
+              <input type="number" id="LkInput" value="0" step="0.01" min="0" max="9999" style="width: 60px;">
+            </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 80px;">
-            <label>Leakage rate∈[0, Promoter strength]: <span id="LkVal"></span></label>
-            <input type="number" id="LkInput" value="0" step="0.01" min="0" max="9999" style="width: 60px;margin-left: -9%;">
+
+          <!-- View angle (always visible) -->
+          <div class="params-section">
+            <h4 class="params-heading">View Angle</h4>
+            <div class="control-row">
+              <label>elevation∈[0, 360]: <span id="elevVal"></span></label>
+              <input type="range" id="elev" min="0" max="360" step="1" value="25">
+              <input type="number" id="elevInput" value="25" step="1" min="0" max="360" style="width: 60px;">
+            </div>
+            <div class="control-row">
+              <label>azimuth∈[0, 360]: <span id="azimVal"></span></label>
+              <input type="range" id="azim" min="0" max="360" step="1" value="160">
+              <input type="number" id="azimInput" value="160" step="1" min="0" max="360" style="width: 60px;">
+            </div>
           </div>
+
+          <!-- Detailed parameters (collapsed by default) -->
+          <details class="params-details">
+            <summary class="params-summary">Detailed Regulation Parameters ▸</summary>
+            <div class="params-detail-inner">
+              <div class="control-row">
+                <label>f0∈[0, 1]: <span id="f0Val"></span></label>
+                <input type="range" id="f0" min="0" max="1" step="0.05" value="0.5">
+                <input type="number" id="f0Input" value="0.5" step="0.1" min="0" max="1" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>f0p∈[0, 1]: <span id="f0pVal"></span></label>
+                <input type="range" id="f0p" min="0" max="1" step="0.05" value="0.5">
+                <input type="number" id="f0pInput" value="0.5" step="0.1" min="0" max="1" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>t1∈[0, 1]: <span id="t1Val"></span></label>
+                <input type="range" id="t1" min="0" max="1" step="0.01" value="0.33">
+                <input type="number" id="t1Input" value="0.33" step="0.01" min="0" max="1" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>t2∈[0, 1]: <span id="t2Val"></span></label>
+                <input type="range" id="t2" min="0" max="1" step="0.01" value="0.66">
+                <input type="number" id="t2Input" value="0.66" step="0.01" min="0" max="1" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>t3∈[0, 1]: <span id="t3Val"></span></label>
+                <input type="range" id="t3" min="0" max="1" step="0.01" value="0.66">
+                <input type="number" id="t3Input" value="0.66" step="0.01" min="0" max="1" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>k∈[0, ∞): <span id="kVal"></span></label>
+                <input type="range" id="k" min="0" max="50" step="0.5" value="30">
+                <input type="number" id="kInput" value="30" step="1" min="0" max="50" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>c1∈[0, ∞): <span id="c1Val"></span></label>
+                <input type="range" id="c1" min="0" max="100" step="0.5" value="1">
+                <input type="number" id="c1Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>c2∈[0, ∞): <span id="c2Val"></span></label>
+                <input type="range" id="c2" min="0" max="100" step="0.5" value="1">
+                <input type="number" id="c2Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>c3∈[0, ∞): <span id="c3Val"></span></label>
+                <input type="range" id="c3" min="0" max="100" step="0.5" value="1">
+                <input type="number" id="c3Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+              </div>
+              <div class="control-row">
+                <label>c4∈[0, ∞): <span id="c4Val"></span></label>
+                <input type="range" id="c4" min="0" max="100" step="0.5" value="1">
+                <input type="number" id="c4Input" value="1" step="0.5" min="0" max="100" style="width: 60px;">
+              </div>
+            </div>
+          </details>
         </div>
       </div>
     </div>
@@ -2101,6 +2277,8 @@
         return 'Gene Regulatory Network'
       }
     }
+    // Expose globally so legend/pane scripts outside DOMContentLoaded can use it
+    window.getNetworkType = getNetworkType;
     
     // Upload a GRN by the upload button
     document.getElementById('fileInput').addEventListener('change', function(event) {
@@ -2176,9 +2354,20 @@
                 cy.add(elements);
               });
 
+              // Update pane/legend BEFORE layout so container has correct width
+              if (typeof window._clearSavedCyViewport === 'function') {
+                window._clearSavedCyViewport();
+              }
+              if (typeof window._onNetworkChanged === 'function') {
+                window._onNetworkChanged();
+              }
+              void document.getElementById('cy').offsetWidth;
+              cy.resize();
+
               const layout = cy.layout({ name: 'circle',  spacingFactor: 1});
               layout.on('layoutstop', () => {
                 hideLoading();
+                cy.fit(undefined, 30);
               });
 
               layout.run();
@@ -2301,10 +2490,38 @@
         cy.add(elements);
       });
 
+      // Update pane/legend BEFORE running layout, so that #cy container
+      // already has its correct width when cytoscape computes positions.
+      // Clear any saved viewport since we're loading a brand new network.
+      if (typeof window._clearSavedCyViewport === 'function') {
+        window._clearSavedCyViewport();
+      }
+      if (typeof window._onNetworkChanged === 'function') {
+        window._onNetworkChanged();
+      }
+      // Force #cy to respect new container size
+      var cyEl = document.getElementById('cy');
+      // console.log('[GRN-UI] cy inline style BEFORE clear:', cyEl.getAttribute('style'));
+      cyEl.style.width = '';
+      cyEl.style.height = '';
+      // Also check for cytoscape's internal container
+      var cyCanvas = cyEl.querySelector('canvas');
+      // Force reflow
+      void cyEl.offsetWidth;
+      cy.resize();
+
       // Layout + hide loading on completion
       const layout = cy.layout({ name: 'circle', spacingFactor: 1 });
       layout.on('layoutstop', () => {
+        var cyEl2 = document.getElementById('cy');
+        cyEl2.style.width = '';
+        cyEl2.style.height = '';
+        void cyEl2.offsetWidth;
+        cy.resize();
+        // console.log('[GRN-UI] layoutstop: cyEl.offsetWidth =', cyEl2.offsetWidth, 'leftPane =', document.getElementById('leftPane').offsetWidth);
         hideLoading();
+        cy.fit(undefined, 30);
+        // console.log('[GRN-UI] layoutstop after fit: cy.pan() =', JSON.stringify(cy.pan()));
       });
       layout.run();
 
@@ -2356,6 +2573,10 @@
       }
       updateSliderValue();
       slider.addEventListener('input', updateSliderValue);
+      // Notify external legend/pane listeners
+      if (typeof window._onNetworkChanged === 'function') {
+        window._onNetworkChanged();
+      }
     }
 
     window.addEventListener('orientationchange', () => {
@@ -2365,6 +2586,174 @@
       }, 200);
     });
     });
+
+    // ============================================================
+    // ONBOARDING GUIDE
+    // ============================================================
+    (function initGuide() {
+      const modal   = document.getElementById('guideModal');
+      if (!modal) return;
+      const steps   = modal.querySelectorAll('.guide-step');
+      const dots    = modal.querySelectorAll('.guide-dot');
+      const prevBtn = document.getElementById('guidePrevBtn');
+      const nextBtn = document.getElementById('guideNextBtn');
+      const doneBtn = document.getElementById('guideDoneBtn');
+      const closeBtn= document.getElementById('guideCloseBtn');
+      const dontShowCb = document.getElementById('guideDontShow');
+      let cur = 0;
+      const total = steps.length;
+
+      function show(i) {
+        cur = i;
+        steps.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        steps[i].classList.add('active');
+        dots[i].classList.add('active');
+        prevBtn.disabled = (i === 0);
+        if (i === total - 1) {
+          nextBtn.style.display = 'none';
+          doneBtn.style.display = '';
+        } else {
+          nextBtn.style.display = '';
+          doneBtn.style.display = 'none';
+        }
+      }
+
+      prevBtn.addEventListener('click', () => { if (cur > 0) show(cur - 1); });
+      nextBtn.addEventListener('click', () => { if (cur < total - 1) show(cur + 1); });
+
+      function closeGuide() {
+        modal.classList.remove('guide-visible');
+        if (dontShowCb.checked) {
+          try { localStorage.setItem('grn_guide_dismissed', '1'); } catch(e) {}
+        }
+      }
+      doneBtn.addEventListener('click', closeGuide);
+      closeBtn.addEventListener('click', closeGuide);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeGuide(); });
+
+      // Show guide on load — always show for new users
+      modal.classList.add('guide-visible');
+
+      // Help button re-opens guide
+      document.getElementById('helpBtn').addEventListener('click', () => {
+        show(0);
+        modal.classList.add('guide-visible');
+      });
+
+      dots.forEach(d => {
+        d.addEventListener('click', () => show(parseInt(d.dataset.step)));
+      });
+
+      show(0);
+    })();
+
+    // ============================================================
+    // DYNAMIC LEGEND — switches based on network type
+    // ============================================================
+    // ============================================================
+    // RIGHT PANE: collapse to a tab when NOT in GRN mode
+    // ============================================================
+    (function initNetworkUI() {
+      // --- Legend elements ---
+      const legendGRN   = document.getElementById('legend-grn');
+      const legendTFDNA = document.getElementById('legend-tfdna');
+      const legendPPC   = document.getElementById('legend-ppc');
+
+      // --- Right pane elements ---
+      const rightPane = document.getElementById('rightPane');
+      const rightTab  = document.getElementById('rightPaneTab');
+      const mainEl    = document.getElementById('main');
+
+      let lastLegendType = '';
+      let lastPaneState  = null; // 'open' | 'closed'
+
+      // --- Legend update ---
+      function updateLegend(netType) {
+        if (netType === lastLegendType) return;
+        lastLegendType = netType;
+        legendGRN.style.display   = 'none';
+        legendTFDNA.style.display = 'none';
+        legendPPC.style.display   = 'none';
+        if (netType === 'Gene Regulatory Network') {
+          legendGRN.style.display = '';
+        } else if (netType === 'TF-DNA Binding Network') {
+          legendTFDNA.style.display = '';
+        } else {
+          legendPPC.style.display = '';
+        }
+      }
+
+      // --- Pane open/close with viewport save/restore ---
+      let savedCyViewport = null;
+
+      function setOpen() {
+        // console.log('[GRN-UI] setOpen called. mainEl classes before:', mainEl.className);
+        rightPane.style.display = '';
+        rightTab.classList.remove('tab-visible');
+        mainEl.classList.remove('right-pane-hidden');
+        lastPaneState = 'open';
+        // console.log('[GRN-UI] setOpen done. mainEl classes after:', mainEl.className, 'leftPane width:', document.getElementById('leftPane').offsetWidth, 'rightPane display:', rightPane.style.display);
+        // After grid reflow, resize cy then restore saved viewport
+        setTimeout(() => {
+          // console.log('[GRN-UI] setOpen timeout. leftPane width:', document.getElementById('leftPane').offsetWidth);
+          if (window.cy) {
+            window.cy.resize();
+            if (savedCyViewport) {
+              window.cy.viewport(savedCyViewport);
+              savedCyViewport = null;
+            }
+          }
+          if (window.cy2) { window.cy2.resize(); }
+        }, 50);
+      }
+
+      function setClosed() {
+        // console.log('[GRN-UI] setClosed called');
+        // Save current viewport before hiding the right pane
+        if (window.cy) {
+          savedCyViewport = { zoom: window.cy.zoom(), pan: { ...window.cy.pan() } };
+        }
+        rightPane.style.display = 'none';
+        rightTab.classList.add('tab-visible');
+        mainEl.classList.add('right-pane-hidden');
+        lastPaneState = 'closed';
+        setTimeout(() => {
+          if (window.cy) { window.cy.resize(); }
+        }, 50);
+      }
+
+      // --- Combined update (called on every network change) ---
+      function updateAll() {
+        if (typeof window.getNetworkType !== 'function') return;
+        const netType = window.getNetworkType();
+
+        updateLegend(netType);
+
+        const isGRN = (netType === 'Gene Regulatory Network');
+        if (isGRN && lastPaneState !== 'open') {
+          setOpen();
+        } else if (!isGRN && lastPaneState !== 'closed') {
+          setClosed();
+        }
+      }
+
+      // Register as callback — called directly from refreshNetworkTitle / layoutstop
+      window._onNetworkChanged = updateAll;
+      // Allow clearing saved viewport (used when loading a brand new network)
+      window._clearSavedCyViewport = function() { savedCyViewport = null; };
+
+      // Also poll as fallback (for initial load and edge cases)
+      setInterval(updateAll, 500);
+      setTimeout(updateAll, 300);
+
+      // Tab click handler
+      rightTab.addEventListener('click', () => {
+        if (typeof window.getNetworkType === 'function' && window.getNetworkType() !== 'Gene Regulatory Network') {
+          alert('The attractor panel is only available when a Gene Regulatory Network is loaded.\n\nLoad a GRN (e.g. preset "GRN A") to use this feature.');
+        }
+      });
+    })();
 
     // Robust close: works even if modals are appended later
     document.addEventListener('click', (e) => {

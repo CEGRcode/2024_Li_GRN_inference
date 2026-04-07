@@ -332,9 +332,9 @@ def composite_input():
             outfile.write(BED_ID+'_{}'.format(Sample_Keys[int(BED_ID)])+'_anti'+'\t'+'\t'.join(map(str, reverse_IgG))+'\n')
         composite_command = composite_command + ' composite ./static/data/temp_composite_igg.out --color \'#bfbfbb\' --name {}'.format('IgG')
         if Sample_Keys[int(BED_ID)].capitalize()+'_'+Sample_Keys[int(each)].capitalize() not in Binding_sites:
-            plot_xlabel = '{} bound sites for {}, of which {} are bound by {}'.format(Binding_sites[Sample_Keys[int(BED_ID)].capitalize()], Sample_Keys[int(BED_ID)].capitalize(), 'none', Sample_Keys[int(each)].capitalize())
+            plot_xlabel = 'Distance from {} {} peaks (bps); {} co-bound by {}'.format(Binding_sites[Sample_Keys[int(BED_ID)].capitalize()], Sample_Keys[int(BED_ID)].capitalize(), 'none', Sample_Keys[int(each)].capitalize())
         else:
-            plot_xlabel = '{} bound sites for {}, of which {} are bound by {}'.format(Binding_sites[Sample_Keys[int(BED_ID)].capitalize()], Sample_Keys[int(BED_ID)].capitalize(), Binding_sites[Sample_Keys[int(BED_ID)].capitalize()+'_'+Sample_Keys[int(each)].capitalize()], Sample_Keys[int(each)].capitalize())
+            plot_xlabel = 'Distance from {} {} peaks (bps); {} co-bound by {}'.format(Binding_sites[Sample_Keys[int(BED_ID)].capitalize()], Sample_Keys[int(BED_ID)].capitalize(), Binding_sites[Sample_Keys[int(BED_ID)].capitalize()+'_'+Sample_Keys[int(each)].capitalize()], Sample_Keys[int(each)].capitalize())
         composite_command = composite_command + ' plot --xlabel \"' + plot_xlabel + '\"' + ' --title \"' + 'Overlapping composite plot on {} bound sites'.format(Sample_Keys[int(BED_ID)].capitalize()) + '\" --smoothing 3 --color-trace --out ./static/data/dashed_{}.svg'.format(str(source)+'_'+str(target[0]))        
         composite_args = shlex.split(composite_command)
         proc = subprocess.run(composite_args, check=False, capture_output=True, text=True)

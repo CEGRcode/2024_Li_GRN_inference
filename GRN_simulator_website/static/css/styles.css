@@ -40,6 +40,7 @@ button {
   display: grid;
   grid-template-rows: auto 1fr;  /* title + graph */
   min-height: 0;
+  min-width: 0;
 
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -168,6 +169,7 @@ button.toolbarBtn{
   grid-template-rows: 1fr auto;  /* graph + controls */
   gap: 8px;
   min-height: 0;
+  min-width: 0;
 }
 
 #rightTitleOverlay{
@@ -189,6 +191,7 @@ button.toolbarBtn{
 .graphWrap{
   position: relative;
   min-height: 0;
+  min-width: 0;
   border: 1px solid #ddd;
   border-radius: 6px;
   overflow: hidden;
@@ -198,6 +201,10 @@ button.toolbarBtn{
 #cy, #cy2{
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
 }
 
 /* =========================================================
@@ -781,3 +788,317 @@ html { scrollbar-gutter: stable; }
 
 /* Backup for browsers that don't fully respect scrollbar-gutter */
 body { overflow-y: scroll; }
+
+/* =========================================================
+   ONBOARDING GUIDE MODAL
+   ========================================================= */
+.guide-overlay{
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+}
+.guide-overlay.guide-visible{
+  display: flex;
+}
+
+.guide-box{
+  position: relative;
+  width: 94vw;
+  max-width: 640px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  padding: 32px 28px 24px;
+  box-sizing: border-box;
+}
+
+.guide-close{
+  position: absolute;
+  top: 8px; right: 14px;
+  background: none; border: none;
+  font-size: 26px; cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+.guide-close:hover{ color: #333; }
+
+.guide-header{
+  text-align: center;
+  margin-bottom: 20px;
+}
+.guide-header h2{
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+.guide-subtitle{
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+/* Step dots */
+.guide-progress{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.guide-dot{
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.guide-dot.active{
+  background: #333;
+  transform: scale(1.25);
+}
+
+/* Steps */
+.guide-step{
+  display: none;
+}
+.guide-step.active{
+  display: block;
+}
+
+.guide-step-icon{
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.guide-step h3{
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: #222;
+}
+
+.guide-step p,
+.guide-step ul{
+  font-size: 14px;
+  line-height: 1.65;
+  color: #444;
+  margin: 0 0 10px;
+}
+
+.guide-step ul{
+  padding-left: 20px;
+}
+.guide-step li{
+  margin-bottom: 5px;
+}
+
+.guide-hint{
+  background: #f4f7fa;
+  border-left: 3px solid #5a9fd4;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #3a3a3a;
+  margin-top: 10px;
+}
+
+/* Nav buttons */
+.guide-nav{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.guide-nav-btn{
+  padding: 8px 22px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.guide-nav-btn:hover:not(:disabled){
+  background: #333;
+  color: #fff;
+}
+.guide-nav-btn:disabled{
+  opacity: 0.35;
+  cursor: default;
+}
+.guide-done-btn{
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+.guide-done-btn:hover{
+  background: #555 !important;
+}
+
+.guide-remember{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+}
+.guide-remember input{ cursor: pointer; }
+
+/* =========================================================
+   NODE MODAL — COLLAPSIBLE PARAMS
+   ========================================================= */
+.params-section{
+  margin-bottom: 16px;
+}
+
+.params-heading{
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.params-details{
+  margin-top: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.params-summary{
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  background: #f7f7f7;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background 0.15s;
+}
+.params-summary::-webkit-details-marker{ display: none; }
+.params-summary:hover{ background: #eee; }
+
+.params-details[open] .params-summary{
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.params-detail-inner{
+  padding: 12px 14px;
+}
+
+/* Override the old margin-heavy rows inside the collapsible */
+.params-detail-inner .control-row,
+.params-section .control-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* =========================================================
+   TOOLBAR — HELP BUTTON HIGHLIGHT
+   ========================================================= */
+#helpBtn{
+  font-weight: 700;
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+#helpBtn:hover{
+  background: #555;
+  border-color: #555;
+}
+
+/* =========================================================
+   TOOLTIP-STYLE FOR TOOLBOXES (native title is ok,
+   but let's also add a subtle bottom-border accent
+   for grouped sections)
+   ========================================================= */
+.toolBox[title]{
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.toolBox[title]:hover{
+  border-bottom-color: #aaa;
+}
+
+/* =========================================================
+   DYNAMIC LEGEND MODES
+   ========================================================= */
+.legend-mode{
+  /* each mode block; shown/hidden via JS */
+}
+
+/* =========================================================
+   RIGHT PANE — COLLAPSIBLE TAB
+   ========================================================= */
+
+/* When right pane is hidden, main grid becomes single column */
+#main.right-pane-hidden{
+  grid-template-columns: 1fr !important;
+}
+
+.right-pane-tab{
+  /* Hidden by default; appears when not GRN */
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+
+  padding: 14px 8px;
+  border: 2px solid #333;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+
+  background: #fff;
+  box-shadow: -3px 2px 10px rgba(0,0,0,0.15);
+
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  letter-spacing: 0.5px;
+
+  transition: background 0.2s, color 0.2s;
+}
+
+.right-pane-tab:hover{
+  background: #f0f0f0;
+  color: #222;
+}
+
+.right-pane-tab.tab-visible{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-icon{
+  font-size: 18px;
+  writing-mode: horizontal-tb;  /* keep emoji upright */
+}
+
+.tab-label{
+  font-size: 12px;
+}

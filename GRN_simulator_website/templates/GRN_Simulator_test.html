@@ -116,6 +116,9 @@
           <div class="guide-hint">
             <strong>Workflow example:</strong> Load GRN → Generate Attractors → Delete a gene → Generate again → Compare how the stable states changed.
           </div>
+          <div class="guide-hint" style="background:#fff3cd; border-color:#ffc107; color:#664d03;">
+            <strong>⚠️ Note:</strong> This is a <strong>demo instance</strong> with limited compute resources. For large-scale attractor analysis, please run the simulator locally.
+          </div>
         </div>
       </div>
 
@@ -421,6 +424,11 @@
 
         <!-- RIGHT controls (beneath cy2) -->
         <div id="rightControls" class="controlsBar controlsBarRight">
+          <div class="demo-disclaimer panelBox" style="background:#fff3cd; border:1px solid #ffc107; border-radius:6px; padding:8px 12px; font-size:12px; color:#664d03; text-align:center; margin-bottom:4px;">
+            ⚠️ <strong>Demo Mode</strong> — This is a demonstration instance with limited computational resources. Attractor calculations for large networks may be slow or time out. For production-scale analysis, please run the tool locally via
+            <a href="https://github.com/CEGRcode/2024_Li_GRN_inference/tree/main/GRN_simulator_website" target="_blank" style="color:#664d03; text-decoration:underline;">the GitHub repository</a>.
+          </div>
+
           <div class="slider-container panelBox">
             <label for="valueSlider" id="sliderLabel">Estimated Time: 5.0min</label>
 
@@ -855,13 +863,45 @@
       function updateSliderValue() {
         if (getNetworkType() == 'Gene Regulatory Network') {
           const value = slider.value; // bounded between 0 and 100
-          const showOnLabel = (((0.001*value)*100000)*OneIterationTime)/60;
           const numberOfInitialConditions = ((0.001*value)*100000);
-          sliderLabel.textContent = `Initial conditions: ${numberOfInitialConditions.toFixed(0)},  Estimated Time: ${showOnLabel.toFixed(1)}min`;
+          if (OneIterationTime > 0) {
+            const showOnLabel = (numberOfInitialConditions * OneIterationTime) / 60;
+            sliderLabel.textContent = `Initial conditions: ${numberOfInitialConditions.toFixed(0)},  Estimated Time: ${showOnLabel.toFixed(1)}min`;
+          } else {
+            sliderLabel.textContent = `Initial conditions: ${numberOfInitialConditions.toFixed(0)},  Estimated Time: calibrating...`;
+          }
         }
       }
       updateSliderValue();
       slider.addEventListener('input', updateSliderValue);
+
+      // Reusable function to benchmark runtime for the CURRENT network in cy
+      function benchmarkRuntime() {
+        if (getNetworkType() !== 'Gene Regulatory Network') return;
+        // Reset immediately so the slider shows "calibrating..." while we wait
+        OneIterationTime = 0;
+        updateSliderValue();
+
+        const JS_nodes = getNodes();
+        const JS_edges = getEdges();
+        const JS_data = { nodes: JS_nodes, edges: JS_edges };
+        const Json_data_str = JSON.stringify(JS_data, null, 2);
+        const numOfInitialStates = '|||1';
+        fetch('/runtime', {
+          method: 'POST',
+          body: JSON.stringify({ input: Json_data_str + numOfInitialStates }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+        .then(r => r.json())
+        .then(response => {
+          OneIterationTime = parseFloat(response.output.split('***')[1]) || 0;
+          updateSliderValue();
+        })
+        .catch(err => console.warn('Runtime benchmark failed:', err));
+      }
+
+      // Benchmark the default network on first load
+      benchmarkRuntime();
 
       // Build a cached list of gene IDs from Cytoscape (call after cy is ready and data loaded)
       let geneIds = [];
@@ -1407,6 +1447,51 @@
           return distance < closest.distance ? { node, distance } : closest;
         }, { node: null, distance: Infinity }).node;
       }
+
+      // ---- Dynamic edge color dropdown ----
+      const COLOR_LABELS = {
+        'rgb(0,0,0)':     'Black',
+        'rgb(220,20,60)': 'Red',
+        'rgb(0,168,107)': 'Green',
+        'rgb(247,247,0)': 'Yellow',
+        'rgb(255,165,0)': 'Brown'
+      };
+
+      function refreshColorSelectOptions() {
+        const colorSelect = document.getElementById('colorSelect');
+        const currentVal = colorSelect.value;
+        // Collect unique edge colors present in the network
+        const presentColors = new Set();
+        cy.edges().forEach(edge => {
+          const c = edge.style('line-color');
+          if (c) presentColors.add(c);
+        });
+        // Rebuild options: always include "All"
+        colorSelect.innerHTML = '';
+        const allOpt = document.createElement('option');
+        allOpt.value = 'All';
+        allOpt.textContent = 'All';
+        colorSelect.appendChild(allOpt);
+
+        for (const [rgb, label] of Object.entries(COLOR_LABELS)) {
+          if (presentColors.has(rgb)) {
+            const opt = document.createElement('option');
+            opt.value = rgb;
+            opt.textContent = label;
+            colorSelect.appendChild(opt);
+          }
+        }
+        // Restore previous selection if still valid, else reset to All
+        if ([...colorSelect.options].some(o => o.value === currentVal)) {
+          colorSelect.value = currentVal;
+        } else {
+          colorSelect.value = 'All';
+        }
+      }
+
+      // Refresh the dropdown whenever the network changes
+      cy.on('add remove', refreshColorSelectOptions);
+      refreshColorSelectOptions();
 
       // Function to filter edges based on color selection
       document.getElementById('colorSelect').addEventListener('change', function() {
@@ -2073,10 +2158,16 @@
       let Order_of_genes = '';
       let Previous_Order_of_genes = '';
       document.getElementById('addElementsBtn').addEventListener('click', function() {
+        const addBtn = document.getElementById('addElementsBtn');
         //console.log(getNetworkType());
         if (getNetworkType() != 'Gene Regulatory Network') {
           alert('Only GRN can produce attractors.');
         } else {
+          // Disable the button to prevent re-clicks during calculation
+          addBtn.disabled = true;
+          addBtn.style.opacity = '0.5';
+          addBtn.style.cursor = 'not-allowed';
+
           // Find fixed-point attractors for the current GRN and display
           // Get .json for the current GRN
           let JS_nodes = getNodes();
@@ -2092,7 +2183,14 @@
           let numOfInitialStates = '|||'+JSON.stringify((0.001*slider.value)*100000);
           console.log('Number of Initial Conditions: ', numOfInitialStates);
           // console.log('Json_data_str: ', Json_data_str);
-          document.getElementById('addElementsBtn').textContent = 'Calculating Attractors... 0%';
+          addBtn.textContent = 'Calculating Attractors... 0%';
+
+          function reEnableBtn() {
+            addBtn.disabled = false;
+            addBtn.style.opacity = '';
+            addBtn.style.cursor = '';
+            addBtn.textContent = 'Generate/Compare Attractors';
+          }
 
           // Use Fetch API to send the input value to the server
           fetch('/set-input', {
@@ -2152,7 +2250,7 @@
                       }
                     }
                     updateGraphBasedOnNode(Object.keys(Distances)[0], Distances);
-                    document.getElementById('addElementsBtn').textContent = 'Generate/Compare Attractors';
+                    reEnableBtn();
                     eventSource.close();
                   } else {
                     Current_iteration = Number(parseInt(event.data.split('\t')[1], 10)) || 0;
@@ -2162,19 +2260,22 @@
                     const denom = Number(All_progress) || 1e99;
                     const pct = denom === 0 ? 0 : Math.round(100 * Number(counter) / denom);
                     const to_shown = Math.min(pct, 100);
-                    document.getElementById('addElementsBtn').textContent = 'Calculating Attractors... '+to_shown.toString()+'%';
+                    addBtn.textContent = 'Calculating Attractors... '+to_shown.toString()+'%';
                   }
                   
                 };
                 eventSource.onerror = function(event) {
                     console.error('SSE error:', event);
                     eventSource.close();
+                    reEnableBtn();
                 };
               } else {
                   console.error('Failed to set input value');
+                  reEnableBtn();
               }
           }).catch(error => {
               console.error('Error:', error);
+              reEnableBtn();
           });
           return true;
       }
@@ -2368,6 +2469,7 @@
               layout.on('layoutstop', () => {
                 hideLoading();
                 cy.fit(undefined, 30);
+                benchmarkRuntime();
               });
 
               layout.run();
@@ -2388,30 +2490,6 @@
 
         // Start reading the next chunk
         readNextChunk();
-
-          // Get the time needed to do one iteration
-          // Get .json for the current GRN
-          let JS_nodes = getNodes();
-          let JS_edges = getEdges();
-          let JS_data = {
-            nodes: JS_nodes,
-            edges: JS_edges
-          };
-          let Json_data_str = JSON.stringify(JS_data, null, 2);
-          let All_progress = 0;
-          let percentage_progress = 0;
-          let numOfInitialStates = '|||1';
-          
-          if (getNetworkType() == 'Gene Regulatory Network') {
-          (async function() {
-            const result = await fetch('/runtime', {
-                method: 'POST',
-                body: JSON.stringify({ input: Json_data_str+numOfInitialStates }),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const response = await result.json();
-            OneIterationTime = response.output.split('***')[1];
-          })();}
       }
       
       // Identify which network, GRN, TF-DNA, or PPI, is loaded, and display it on the title
@@ -2522,6 +2600,7 @@
         hideLoading();
         cy.fit(undefined, 30);
         // console.log('[GRN-UI] layoutstop after fit: cy.pan() =', JSON.stringify(cy.pan()));
+        benchmarkRuntime();
       });
       layout.run();
 

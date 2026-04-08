@@ -1,19 +1,26 @@
+#!/bin/bash
 # ---------------------- MAKE BEDGRAPH FOR EACH BAM ----------------------
 # ---------------------- rl884@cornell.edu, 24/08/89 ----------------------------------------------------
 
-for file in *.bam; do
-	# get sample ID.
-	ID="${file%%_*}"
-	
-	# samtools sort BAM files.
-	samtools sort -o "${ID}_filtered_sorted.bam" "${ID}_filtered.bam"
+set -e
 
-	# samtools index BAM files.
-	samtools index "${ID}_filtered_sorted.bam"
+module load PPI
 
-	# expand the bed file.
-	java -jar ScriptManager-v0.14.jar bam-format-converter bam-to-bedgraph -o "${ID}" "${ID}_filtered_sorted.bam"
+OUTDIR="../Protein_protein_interaction_network/static/data"
 
-	# clean-up.
-	rm "${ID}_filtered.bam"
+for folder in ./*_YEP/; do
+    [ -d "$folder" ] || continue
+
+    dirname=$(basename "$folder")
+    ID="${dirname%%_*}"
+
+    bam="${folder}${ID}_filtered_sorted.bam"
+    [ -e "$bam" ] || continue
+
+    java -jar ScriptManager-v0.14.jar \
+        bam-format-converter bam-to-bedgraph \
+        -o "${folder}${ID}" \
+        "$bam"
+
+    mv "${folder}"*.bedGraph "$OUTDIR"/
 done

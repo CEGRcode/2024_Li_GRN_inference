@@ -77,7 +77,7 @@ python app_test.py
 ```
 
 We recommend using a process manager or watchdog service (e.g., systemd, supervisord, or pm2) to keep the web application running reliably.
-The website source code can be used independently of the data. For the complete visualization dataset, first finish the pipeline in `../Protein_protein_interaction_network/`. Then run `./Website_data_process.sh`, which converts the processed protein–protein interaction outputs into website-ready files and places them in `./static/data`.
+The website source code can be used independently of the data. For the complete visualization dataset, first finish the pipeline in `../Protein_protein_interaction_network/`. Then run `./Website_backend_dataset_process.sh`, which converts the processed protein–protein interaction outputs into website-ready files and places them in `./static/data`.
 
 ---
 

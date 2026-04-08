@@ -33,7 +33,7 @@
 Use the following [anaconda](https://anaconda.org/) environment initialization for setting up dependencies
 
 ```
-conda create -n PPC -c bioconda -c conda-forge \
+conda create -n PPI -c bioconda -c conda-forge \
     python=3.10 \
     bedtools=2.31 \
     samtools=1.19 \

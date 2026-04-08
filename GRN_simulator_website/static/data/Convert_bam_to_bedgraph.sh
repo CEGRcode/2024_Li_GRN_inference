@@ -1,14 +1,17 @@
 #!/bin/bash
 # ---------------------- MAKE BEDGRAPH FOR EACH BAM ----------------------
-# ---------------------- rl884@cornell.edu, 24/08/89 ----------------------------------------------------
+# ---------------------- rl884@cornell.edu, 24/08/29 ---------------------
 
 set -e
 
 module load PPI
 
-OUTDIR="../Protein_protein_interaction_network/static/data"
+INPUT_ROOT="../Protein_protein_interaction_network"
+OUTDIR="./static/data"
 
-for folder in ./*_YEP/; do
+mkdir -p "$OUTDIR"
+
+for folder in "$INPUT_ROOT"/*_YEP/; do
     [ -d "$folder" ] || continue
 
     dirname=$(basename "$folder")
@@ -17,7 +20,7 @@ for folder in ./*_YEP/; do
     bam="${folder}${ID}_filtered_sorted.bam"
     [ -e "$bam" ] || continue
 
-    java -jar ScriptManager-v0.14.jar \
+    java -jar ./static/data/ScriptManager-v0.14.jar \
         bam-format-converter bam-to-bedgraph \
         -o "${folder}${ID}" \
         "$bam"

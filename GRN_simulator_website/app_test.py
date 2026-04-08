@@ -335,7 +335,7 @@ def composite_input():
             plot_xlabel = 'Distance from {} {} peaks (bps); {} co-bound by {}'.format(Binding_sites[Sample_Keys[int(BED_ID)].capitalize()], Sample_Keys[int(BED_ID)].capitalize(), 'none', Sample_Keys[int(each)].capitalize())
         else:
             plot_xlabel = 'Distance from {} {} peaks (bps); {} co-bound by {}'.format(Binding_sites[Sample_Keys[int(BED_ID)].capitalize()], Sample_Keys[int(BED_ID)].capitalize(), Binding_sites[Sample_Keys[int(BED_ID)].capitalize()+'_'+Sample_Keys[int(each)].capitalize()], Sample_Keys[int(each)].capitalize())
-        composite_command = composite_command + ' plot --xlabel \"' + plot_xlabel + '\"' + ' --title \"' + 'Overlapping composite plot on {} bound sites'.format(Sample_Keys[int(BED_ID)].capitalize()) + '\" --smoothing 3 --color-trace --out ./static/data/dashed_{}.svg'.format(str(source)+'_'+str(target[0]))        
+        composite_command = composite_command + ' plot --xlabel \"' + plot_xlabel + '\"' + ' --title \"' + 'Overlapping composite plot on {} ChIP-exo peaks'.format(Sample_Keys[int(BED_ID)].capitalize()) + '\" --smoothing 3 --color-trace --out ./static/data/dashed_{}.svg'.format(str(source)+'_'+str(target[0]))        
         composite_args = shlex.split(composite_command)
         proc = subprocess.run(composite_args, check=False, capture_output=True, text=True)
         # Example processing

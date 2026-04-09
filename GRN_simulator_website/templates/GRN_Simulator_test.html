@@ -45,9 +45,7 @@
         <div class="guide-step active" data-step="0">
           <div class="guide-step-icon">🧬</div>
           <h3>What is this tool?</h3>
-          <p>This simulator lets you <strong>visualize</strong>, <strong>edit</strong>, and <strong>analyze</strong> Gene Regulatory Networks (GRNs). You can explore how genes regulate each other, compute stable transcriptional profiles (attractors), and see what happens when you modify the network. For detailed information and tutorial, please visit     <a href="https://github.com/CEGRcode/2024_Li_GRN_inference/tree/main/GRN_simulator_website" target="_blank">
-      the GitHub repository
-    </a>.</p>
+          <p>This simulator lets you <strong>visualize</strong>, <strong>edit</strong>, and <strong>analyze</strong> Gene Regulatory Networks (GRNs). You can explore how genes regulate each other, compute stable transcriptional profiles (attractors), and see what happens when you modify the network. For detailed information, please visit <a href="https://github.com/CEGRcode/2024_Li_GRN_inference/tree/main/GRN_simulator_website" target="_blank">the GitHub repository</a>. For a video tutorial, please visit <a href="https://www.youtube.com/watch?v=sXdy-4LS4H8" target="_blank">YouTube</a>.</p>
           <div class="guide-hint">
             <strong>Example question this tool answers:</strong><br>
             "Given a GRN, if a specific gene is knocked out, what are the resulting stable transcriptional profiles?"
@@ -153,6 +151,7 @@
           <span id="presetLabel">Load preset:</span>
           <select id="presetSelect">
             <option value="" selected disabled>Choose…</option>
+            <option value="demo_grn">Demo GRN (default small network)</option>
             <option value="tf_dna">TF-DNA</option>
             <option value="ppc_motif">PPC_motif</option>
             <option value="ppc_all">PPC_all</option>
@@ -2616,6 +2615,39 @@
     // Main function: load selected preset
     async function loadPresetFromDropdown() {
       const key = document.getElementById('presetSelect').value;
+
+      // Handle the demo GRN — reload the hardcoded initial network
+      if (key === 'demo_grn') {
+        showLoading("Loading");
+        const elements = [];
+        GRNInitialNodes.forEach(n => elements.push(JSON.parse(JSON.stringify(n))));
+        GRNInitialEdges.forEach(e => elements.push(JSON.parse(JSON.stringify(e))));
+
+        cy.batch(() => {
+          cy.elements().remove();
+          cy.add(elements);
+        });
+
+        if (typeof window._clearSavedCyViewport === 'function') window._clearSavedCyViewport();
+        if (typeof window._onNetworkChanged === 'function') window._onNetworkChanged();
+        void document.getElementById('cy').offsetWidth;
+        cy.resize();
+
+        const layout = cy.layout({ name: 'concentric', spacingFactor: 1 });
+        layout.on('layoutstop', () => {
+          hideLoading();
+          cy.fit(undefined, 30);
+          benchmarkRuntime();
+        });
+        layout.run();
+
+        refreshGeneIds();
+        refreshAllAutocompletes();
+        const intervalId = setInterval(refreshNetworkTitle, 1000);
+        setTimeout(() => clearInterval(intervalId), 10000);
+        return;
+      }
+
       if (!key || !(key in PRESET_PATHS)) {
         alert('Please choose a preset network first.');
         return;

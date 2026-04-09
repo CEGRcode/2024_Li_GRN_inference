@@ -21,6 +21,7 @@ Due to size constraints, processed datasets are **not included** in this reposit
 
 ---
 ## Website Usage Guide
+For a video tutorial, please visit https://www.youtube.com/watch?v=sXdy-4LS4H8.
 Open the GRN simulator website (https://grn.cac.cornell.edu:5000/) in a supported web browser (Chrome recommended).
 <p align="center">
   <img src="./Figures/web_usage_guideline.png" alt="Website usage demo" width="900">

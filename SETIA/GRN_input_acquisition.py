@@ -96,6 +96,35 @@ def log_skip(step_name, reason):
 os.makedirs("./result", exist_ok=True)
 os.makedirs("./result/GMM_figures/AIC", exist_ok=True)
 
+# ── Clean up output files from previous runs to prevent append-corruption ──
+_OUTPUT_FILES_TO_CLEAN = [
+    './result/Steady_state_count.txt',
+    './data/GRN_ssTFs_Salmon_SteadyStates_2025.txt',
+    './data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt',
+    './data/GRN_ssTFs_Salmon_SteadyStates_2025_std.txt',
+    './data/GRN_ssTFs_Sc_gene_length.txt',
+    './data/GRN_ssTFs_row_names.txt',
+    './data/GRN_ssTFs_column_names.txt',
+    './data/GRN_ssTFs_Sc_LG.txt',
+    './data/GRN_ssTFs_Sc_promoter_strength.txt',
+    './data/GRN_ssTFs_Sc_initial_condition.txt',
+    './data/GRN_ssTFs_Sc_TF_DNA.txt',
+    './data/GRN_ssTFs_Sc_TF_DNA_TPM_union.txt',
+]
+for _f in _OUTPUT_FILES_TO_CLEAN:
+    if os.path.exists(_f):
+        os.remove(_f)
+        print(f"[CLEANUP] Removed stale output: {_f}", flush=True)
+
+# Also clear previous GMM figures
+_gmm_dir = './result/GMM_figures/AIC'
+if os.path.isdir(_gmm_dir):
+    for _fig in os.listdir(_gmm_dir):
+        _fig_path = os.path.join(_gmm_dir, _fig)
+        if os.path.isfile(_fig_path):
+            os.remove(_fig_path)
+    print(f"[CLEANUP] Cleared GMM figures in {_gmm_dir}", flush=True)
+
 
 def kde_likelihood_empirical_p(A, B, bw_method=None, n_permutations=2000,
                                alternative='greater', eps=1e-300,

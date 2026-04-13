@@ -62,9 +62,12 @@ conda create -n EvoAlg -c conda-forge -y \
   h5py=3.11 \
   matplotlib=3.8 \
   scikit-learn=1.4 \
+  seaborn=0.13.2 \
+  openpyxl=3.1.5 \
+
   pip
 conda activate EvoAlg
-pip install flask tqdm seaborn joblib
+pip install flask tqdm joblib
 ```
 
 ---

@@ -306,7 +306,7 @@ class GRN:
             if mutated_Configuration == False and (not only_TF_DNA):
                 mutated_Configuration = HammingMutation_2(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
                 if mutated_Configuration == False:
-                    mutated_Configuration = HammingMutation_3(len(self.Configuration), tesetd_AM_strings, index_of_diff_gene, max_iter)
+                    mutated_Configuration = HammingMutation_3(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
                     if mutated_Configuration == False:
                         for _ in range(0, max_iter):
                             mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
@@ -327,7 +327,7 @@ class GRN:
                                         self.Configuration = mutated_Configuration
                                         return
                                     else:
-                                        mutated_Configuration = HammingMutation_3(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], index_of_diff_gene, max_iter)
+                                        mutated_Configuration = HammingMutation_3(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
                                         if mutated_Configuration != False:
                                             self.LogicGates = mutated_LogicGates
                                             self.Configuration = mutated_Configuration

@@ -8,7 +8,7 @@
 # ------------------------------------------------------------------
 
 python GRN_Dynamic_Simulator_Combinatorial_Local_multistate_2025.py \
-  -j ./result/GRN_filtered_full_Sc_GRN_final_raw.txt \
+  -j ./result/GRN_filtered_full_Sc_GRN_final.txt \
   -r ./data/GRN_ssTFs_Salmon_SteadyStates_2025_discrete.txt \
   -l ./data/GRN_ssTFs_Sc_gene_length.txt \
   -t ./data/GRN_ssTFs_Sc_promoter_strength.txt \

@@ -237,7 +237,7 @@ if __name__ == '__main__':
     else:
         pass
     
-    outfile = open('./GRN_dynamic_local_search_result_{}.txt'.format(sys_output_name), 'a')
+    outfile = open('./result/GRN_dynamic_local_search_result_{}.txt'.format(sys_output_name), 'a')
     outfile.write('indexes_of_diff_gene\t'+'\t'.join(map(str, indexes_of_diff_gene))+'\n')
     print('indexes_of_diff_gene: ', indexes_of_diff_gene)
     #print('Overexpression: ', Overexpression)

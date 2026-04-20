@@ -442,9 +442,7 @@ if __name__ == '__main__':
         (Configuration, MutationRate, TranscriptionRate, DegradationRatemRNA, TranscriptionThreshold, LogicGates, Sigmoid_ks, Leakages, f0_c, t1_t2_t3) = ParametersInitiations(GRN_for_the_gene.Configuration, GRN_for_the_gene.LogicGates, node_index, diff_TFs_index)
         json_ = json_ + '\t{\n\t  ' + '"id": "{}",\n'.format(sys_all_genes[node_index]) + '\t  "label": "{}",\n'.format(sys_all_genes[node_index]) + '\t  "TR": {},\n'.format(10) + '\t  "f0": {},\n'.format(f0_c[0][0]) + '\t  "f0p": {},\n'.format(f0_c[0][1])  + '\t  "t1": {},\n'.format(t1_t2_t3[0][0]) + '\t  "t2": {},\n'.format(t1_t2_t3[0][1]) + '\t  "t3": {},\n'.format(t1_t2_t3[0][2]) + '\t  "c1": {},\n'.format(f0_c[0][2]) + '\t  "c2": {},\n'.format(f0_c[0][3]) + '\t  "c3": {},\n'.format(f0_c[0][4]) + '\t  "c4": {},\n'.format(f0_c[0][5]) + '\t  "k": {},\n'.format(Sigmoid_ks) + '\t  "Lk": {},\n'.format(Leakages) + '\t  "Deg": {}'.format(DegradationRatemRNA) + '\n  \t},\n'
     json_ = json_[:-2]
-                
     json_ = json_ + '\n  ],\n  "edges": [\n'
-
     for each_edge in output_edges_1_solid:
         json_ = json_ + '\t{\n\t  ' + '"source": "{}",\n'.format(sys_all_genes[each_edge[0]]) + '\t  "target": "{}",\n'.format(sys_all_genes[each_edge[1]]) + '\t  "label": "",\n' + '\t  "style": [\n\t\t"solid",\n\t\t"triangle"\n\t,\n\t\t"#00A86B"\n\t  ]'+ '\n  \t},\n'
     for each_edge in output_edges_2_solid:
@@ -456,6 +454,9 @@ if __name__ == '__main__':
     json_ = json_[:-2]
     json_ = json_ + '\n  ]\n}'
 
-    outfile = open('./result'+'/GRN_nonTF_{}.json'.format(sys_chunck_i), 'a')
-    outfile.write(json_)
-    outfile.close()
+    if not output_nodes:
+        with open('./result/GRN_nonTF_{}.json'.format(sys_chunck_i), 'w') as outfile:
+            outfile.write('{"nodes": [], "edges": []}')
+    else:
+        with open('./result/GRN_nonTF_{}.json'.format(sys_chunck_i), 'w') as outfile:
+            outfile.write(json_)

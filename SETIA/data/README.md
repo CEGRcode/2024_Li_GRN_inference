@@ -21,3 +21,6 @@ Contains the union TF–DNA binding network based on all bound sites from Rossi 
 
 ### PPI_network_Cutoff_0_STRING_overlapping_motif_sites_0_2025_union.json
 Contains the protein–protein colocalization network generated in the previous step, combined with very high-confidence protein–protein interactions from the STRING database.
+
+### GRN_ssTFs_TF_set.txt
+Contains the names of genes that form the TF core of the semi-genome-scale GRN.

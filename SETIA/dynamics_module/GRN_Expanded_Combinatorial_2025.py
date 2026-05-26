@@ -438,7 +438,7 @@ class GRN:
                         TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
                         TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
                     else:
-                        TempString_HA_complexes = '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
+                        TempString_HA_complexes = '{}*'.format(initial_values[each_subunit])
                         TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
                         TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
 
@@ -493,7 +493,7 @@ class GRN:
                         TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
                         TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
                     else:
-                        TempString_HR_complexes = '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
+                        TempString_HR_complexes = '{}*'.format(initial_values[each_subunit])
                         TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
                         TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
 

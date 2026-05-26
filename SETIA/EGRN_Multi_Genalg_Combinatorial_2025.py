@@ -19,7 +19,7 @@ from utility_functions import *
 from matplotlib import pyplot as plt
 import itertools
 
-def Multi_GenerateMutation(GRN_instances_dict, instance_key, sys_cache, j, indexes_of_diff_gene, sys_LG, sys_only_TF_DNA, sys_max_attempts):
+def Multi_GenerateMutation(GRN_instances_dict, instance_key, sys_cache, j, indexes_of_diff_gene, sys_LG, sys_only_TF_DNA, sys_max_attempts, residuals_j=None, expression_data=None, t1_cache=None):
     GRN_instances = GRN_instances_dict[instance_key]
 
     if GRN_instances.f0_c[indexes_of_diff_gene[j]][:2] in ([0, 0], [1, 1]):
@@ -47,7 +47,10 @@ def Multi_GenerateMutation(GRN_instances_dict, instance_key, sys_cache, j, index
             indexes_of_diff_gene,
             sys_LG,
             sys_only_TF_DNA,
-            sys_max_attempts
+            sys_max_attempts,
+            residuals_j,
+            expression_data,
+            t1_cache
         )
 
         if GRN_instances.MutationRate == 'All tested!':
@@ -62,7 +65,10 @@ def Multi_GenerateMutation(GRN_instances_dict, instance_key, sys_cache, j, index
                 indexes_of_diff_gene,
                 sys_LG,
                 sys_only_TF_DNA,
-                sys_max_attempts
+                sys_max_attempts,
+                residuals_j,
+                expression_data,
+                t1_cache
             )
 
     else:
@@ -71,7 +77,10 @@ def Multi_GenerateMutation(GRN_instances_dict, instance_key, sys_cache, j, index
             indexes_of_diff_gene,
             sys_LG,
             sys_only_TF_DNA,
-            sys_max_attempts
+            sys_max_attempts,
+            residuals_j,
+            expression_data,
+            t1_cache
         )
 
     GRN_instances_dict[instance_key] = GRN_instances
@@ -167,8 +176,12 @@ if __name__ == '__main__':
             sys_LG = sys_path + '/' + arg
             sys_LG = open(sys_LG).readline().strip()
         elif opt in ("-d", "--initial_GRN_configuration"):
-            sys_inital_AM = sys_path + '/' + arg
-            sys_inital_AM = open(sys_inital_AM).readline().strip()
+            sys_inital_AM_path = sys_path + '/' + arg
+            sys_inital_AM = open(sys_inital_AM_path).readline().strip()
+            # 读取同目录下所有AM文件，供重启时随机选择
+            import glob
+            _am_dir = os.path.dirname(sys_inital_AM_path)
+            all_AMs = [open(f).readline().strip() for f in sorted(glob.glob(os.path.join(_am_dir, 'AM_*.txt')))]
         elif opt in ("-e", "--randomseed"):
             sys_random_seed = int(arg)
         elif opt in ("-l", "--gene_length"):
@@ -248,6 +261,17 @@ if __name__ == '__main__':
         TranscriptionPofileMax.append(np.nanmax(row))
         TranscriptionPofileMin.append(np.nanmin(row))
         TranscriptionPofileAve.append(0.5 * (TranscriptionPofileMax[-1] + TranscriptionPofileMin[-1]))
+
+    # t1_cache_global：每个基因的Hill threshold（split_and_average的第一个值）
+    # 供HammingMutation_guided使用，在主循环外预计算一次
+    t1_cache_global = {}
+    for gi in range(TotalNumberOfGenes):
+        expr = np.array(sorted(set(BaseMatrixCollector.T[gi])))
+        expr = expr[~np.isnan(expr)]
+        if len(expr) == 0:
+            t1_cache_global[gi] = 0.0
+        else:
+            t1_cache_global[gi] = split_and_average(sorted(expr))[0]
 
     BaseMatrixCollector_2 = []
     if type(sys_input_RNAseq_2) != str:
@@ -400,7 +424,7 @@ if __name__ == '__main__':
                 sys_cache[i] = copy.deepcopy(data_dict)
 
         else:
-            (Configuration, MutationRate, TranscriptionRate, DegradationRatemRNA, TranscriptionThreshold, LogicGates, Sigmoid_ks, Leakages, f0_c) = ParametersInitiations(GlobalMutationRate, 0, False, indexes_of_diff_gene[i])
+            (Configuration, MutationRate, TranscriptionRate, DegradationRatemRNA, TranscriptionThreshold, LogicGates, Sigmoid_ks, Leakages, f0_c) = ParametersInitiations(GlobalMutationRate, 0, True, indexes_of_diff_gene[i])
             exec('{} = GRN(\'{}\', {},{},{},{},{},{},{},{},{},{},{})'.format(GRN_List[i], GRN_List[i], '[]', 'Configuration', 'MutationRate', 'TranscriptionRate', 'DegradationRatemRNA', 'TranscriptionThreshold', 'LogicGates', 'Sigmoid_ks', 'Leakages', 'f0_c', 'sys_input_ChIP'))
             exec('{}=copy.deepcopy({})'.format(Out_List[i], GRN_List[i]))
 
@@ -410,11 +434,16 @@ if __name__ == '__main__':
     
     FinishedGenes = []
     Fitness = [1e6 for j in range(0, len(indexes_of_diff_gene))]
+    stagnation_counter = [0] * len(indexes_of_diff_gene)
+    STAGNATION_THRESHOLD = 100
     while Loopcounter <= int(sys_iteration_num):
         print('GRN1==>', GRN_1.Configuration)
         # Loop n times
         starting_time = time.time()
         DistanceOnLoop = [[] for m in range(0, len(WTTP))]
+        # ResidualOnLoop[condition][gene_col] = ss - target（带符号）
+        # 正值=ss>target需要更多抑制，负值=ss<target需要更多激活
+        ResidualOnLoop = [[0.0]*len(indexes_of_diff_gene) for _ in range(len(WTTP))]
 
         for i in range(0, len(WTTP)):
             '''Re-initiate CurrentDistance'''
@@ -461,80 +490,30 @@ if __name__ == '__main__':
             ########################## Recording GRNs that have been tested to avoid repetitive calculation ##########################
 
             
-            '''Run the dynamics model'''
-            manager = multiprocessing.Manager()
-            return_dict = manager.dict()
-            jobs = []
-
+            '''Run the dynamics model (analytic steady state, no subprocess overhead)'''
+            return_dict = {}
             for each_GRN in range(0, len(indexes_of_diff_gene)):
                 if each_GRN in FinishedGenes:
                     continue
-                else:
-                    pass
-                p = multiprocessing.Process(
-                    target=Run_Dynamics,
-                    args=(eval('{}'.format(GRN_List[each_GRN])), i, each_GRN, TrainingCount, WTTP, Overexpression[i], return_dict, indexes_of_diff_gene))
-                jobs.append(p)
-                p.start()
-
-            for proc in jobs:
-                proc.join()
+                ss = Compute_Analytic_SS_direct(
+                    eval('{}'.format(GRN_List[each_GRN])), i, WTTP, Overexpression[i], indexes_of_diff_gene)
+                return_dict[each_GRN] = [ss] * 251
 
             for j in range(0, len(indexes_of_diff_gene)):
                 if j in FinishedGenes:
                     continue
                 else:
                     pass
-                IsPointAttractor = False
+                # 解析稳态：Compute_Analytic_SS返回的是[ss]*251
+                # npmRNA_continuous[-1] = ss，IsPointAttractor永远True（1D线性系统）
                 npmRNA_continuous = np.array(return_dict[j])
-                ########################## Using Jacobian eigenvalue to judge if this is a fixed-point attractor ###################
-                y = sp.symbols('y1:%d' % (TotalNumberOfGenes + 1))
-                #print('indexes_of_diff_gene: ', indexes_of_diff_gene[j])
-                point = {}
-                temp_scipystring = eval('{}.Delta_mRNA({}, {}, {}, analytical_expression=1)'.format(GRN_List[j], WTTP[str(i)][0], list(Overexpression[i]), list(WTTP[str(i)][1])))
-                for npmRNA_i in range(0, TotalNumberOfGenes):
-                    if npmRNA_i == indexes_of_diff_gene[j]:
-                        point[y[npmRNA_i]] = npmRNA_continuous[-1]
-                    else:
-                        point[y[npmRNA_i]] = list(WTTP[str(i)][1])[npmRNA_i]
-                #print('list(WTTP[str(i)][1])', list(WTTP[str(i)][1]))
-                #print('point: ', point, '\n\n')
-                #print('temp_scipystring: ', temp_scipystring)
-                
-                Derivative_values = []
-                for eq_i in range(0, len(temp_scipystring.split('\n'))):
-                    eq_string = temp_scipystring.split('\n')[eq_i].replace(" ", "")
-                    #print('KO_List: ', WTTP[str(i)][0], 'npmRNA_continuous[-1]: ', list(np.round(npmRNA_continuous[-1])))
-                    if eq_string[:10] == 'delta_mRNA':
-                        temp_eq_string = eq_string.split('=')[1]
-                        #print('temp_eq_string: ', temp_eq_string)
-                        exec('eq_of_string = {}'.format(eq_string.split('=')[1]))
-                        if npmRNA_continuous[-1]+eq_of_string.subs(point) < 0:
-                            Derivative_values.append(-npmRNA_continuous[-1])
-                        elif indexes_of_diff_gene[j] in WTTP[str(i)][0]:
-                            Derivative_values.append(0)
-                        else:
-                            Derivative_values.append(eq_of_string.subs(point))
-                    else:
-                        continue
-                if sp.diff(eq_of_string, y[indexes_of_diff_gene[j]]).subs(point) < 0 and (abs(Derivative_values[0]) < max(0.5, 0.01*max(npmRNA_continuous)) or sp.diff(eq_of_string, y[indexes_of_diff_gene[j]]).subs(point)+abs(Derivative_values[0])<0):
-                    IsPointAttractor = True
-                else:
-                    IsPointAttractor = False
-                    print('Gene {} Derivative: '.format(indexes_of_diff_gene[j]), abs(Derivative_values[0]), max(0.5, 0.01*max(npmRNA_continuous)), '2nd Derivative: ', sp.diff(eq_of_string, y[indexes_of_diff_gene[j]]).subs(point))
-                #print('Derivative_values: ', Derivative_values)
-                #print('sp.diff(eq_of_string, y[var_j]).subs(point): ', sp.diff(eq_of_string, y[indexes_of_diff_gene[j]]).subs(point))
-                #print('*******************************************************************\n\n\n\n\n')
-                #print('max Derivative: ', max(Derivative_values), 'index: ', Derivative_values.index(max(Derivative_values)))
-                ########################## Using Jacobian eigenvalue to judge if this is a fixed-point attractor ###################
+                ss = npmRNA_continuous[-1]  # 即解析稳态值
 
                 if indexes_of_diff_gene[j] in WTTP[str(i)][0]:
                     CurrentDistance[j] = 0
                 else:
-                    if IsPointAttractor:
-                        CurrentDistance[j] = abs(WTTP[str(i)][1][indexes_of_diff_gene[j]]-npmRNA_continuous[-1])/(TranscriptionPofileMax[indexes_of_diff_gene[j]]-TranscriptionPofileMin[indexes_of_diff_gene[j]])
-                    else:
-                        pass
+                    CurrentDistance[j] = abs(WTTP[str(i)][1][indexes_of_diff_gene[j]] - ss) / (TranscriptionPofileMax[indexes_of_diff_gene[j]] - TranscriptionPofileMin[indexes_of_diff_gene[j]])
+                    ResidualOnLoop[i][j] = ss - float(WTTP[str(i)][1][indexes_of_diff_gene[j]])
 
             DistanceOnLoop[i] = CurrentDistance
             #print(i, '\'s CurrentDistance: ', CurrentDistance)
@@ -550,23 +529,37 @@ if __name__ == '__main__':
             if np.mean(DistanceOnLoop, axis=0)[j] < float(Fitness[j]):
                 exec('{}=copy.deepcopy({})'.format(Out_List[j], GRN_List[j]))
                 Fitness[j] = np.mean(DistanceOnLoop, axis=0)[j]
+                stagnation_counter[j] = 0
             else:
-                exec('{}=copy.deepcopy({})'.format(GRN_List[j], Out_List[j]))
+                stagnation_counter[j] += 1
+                if stagnation_counter[j] >= STAGNATION_THRESHOLD:
+                    # 随机重启：从AM列表里随机选一个初始config
+                    grn_obj = eval(GRN_List[j])
+                    restart_AM = random.choice(all_AMs)
+                    grn_obj.Configuration = GetRegulatorForGene(restart_AM, indexes_of_diff_gene[j])
+                    stagnation_counter[j] = 0
+                    print(f'Restart gene {indexes_of_diff_gene[j]} at loop {Loopcounter}')
+                else:
+                    exec('{}=copy.deepcopy({})'.format(GRN_List[j], Out_List[j]))
         print('GRN2==>', GRN_1.Configuration)
         manager = multiprocessing.Manager()
         shared_dict = manager.dict()
-        jobs = []
+        max_workers = int(os.environ.get('OMP_NUM_THREADS', multiprocessing.cpu_count()))
+
+        active_jobs = []
         for j in range(0, len(indexes_of_diff_gene)):
             if j in FinishedGenes:
                 continue
-            else:
-                pass
             shared_dict[GRN_List[j]] = eval(GRN_List[j])
-            p = multiprocessing.Process(target=Multi_GenerateMutation, args=(shared_dict, GRN_List[j], sys_cache, j, indexes_of_diff_gene, sys_LG, sys_only_TF_DNA, sys_max_attempts))
-            jobs.append(p)
+            residuals_j = [ResidualOnLoop[i][j] for i in range(len(WTTP))]
+            p = multiprocessing.Process(target=Multi_GenerateMutation, args=(shared_dict, GRN_List[j], sys_cache, j, indexes_of_diff_gene, sys_LG, sys_only_TF_DNA, sys_max_attempts, residuals_j, np.array(BaseMatrixCollector), t1_cache_global))
+            active_jobs.append(p)
             p.start()
+            # 限制同时运行的进程数不超过max_workers
+            while sum(1 for p in active_jobs if p.is_alive()) >= max_workers:
+                pass
 
-        for proc in jobs:
+        for proc in active_jobs:
             proc.join()
 
         for j in range(0, len(indexes_of_diff_gene)):

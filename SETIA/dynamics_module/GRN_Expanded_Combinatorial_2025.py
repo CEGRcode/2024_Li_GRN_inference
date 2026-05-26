@@ -268,7 +268,7 @@ class GRN:
 
         return(scipystring)
 
-    def GenerateMutation(self, tested_AMLG, index_of_diff_gene, sys_LG_, only_TF_DNA=False, max_iter=1000):
+    def GenerateMutation(self, tested_AMLG, index_of_diff_gene, sys_LG_, only_TF_DNA=False, max_iter=1000, residuals=None, expression_data=None, t1_cache=None):
         '''Mutations occur upon 1.Configuration; 2.LogicGates'''
         specific_gene = int(self.Name.split('_')[1])
         cache_index = index_of_diff_gene.index(specific_gene)
@@ -302,65 +302,40 @@ class GRN:
                 self.Configuration = mutated_Configuration
                 return
         else:
-            mutated_Configuration = HammingMutation_1(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-            if mutated_Configuration == False and (not only_TF_DNA):
-                mutated_Configuration = HammingMutation_2(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                if mutated_Configuration == False:
-                    mutated_Configuration = HammingMutation_3(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                    if mutated_Configuration == False:
-                        for _ in range(0, max_iter):
-                            mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
-                            if ",".join(map(str, mutated_LogicGates)) not in tested_LG_strings:
-                                self.LogicGates = mutated_LogicGates
-                                self.Configuration = HammingMutation_1(len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                                return
-                            else:
-                                mutated_Configuration = HammingMutation_1(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                                if mutated_Configuration != False:
-                                    self.LogicGates = mutated_LogicGates
-                                    self.Configuration = mutated_Configuration
-                                    return
-                                else:
-                                    mutated_Configuration = HammingMutation_2(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                                    if mutated_Configuration != False:
-                                        self.LogicGates = mutated_LogicGates
-                                        self.Configuration = mutated_Configuration
-                                        return
-                                    else:
-                                        mutated_Configuration = HammingMutation_3(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                                        if mutated_Configuration != False:
-                                            self.LogicGates = mutated_LogicGates
-                                            self.Configuration = mutated_Configuration
-                                            return
-                                        else:
-                                            continue
-                        self.MutationRate = 'All tested!'
+            # 有方向性的局部mutation：根据当前residual决定加/删哪个方向的边
+            # only_TF_DNA=True(-f 1): 只允许ChIP=1的位置变动
+            # only_TF_DNA=False(-f 0): 允许所有diff_genes位置变动（包括违规边）
+            if residuals is not None and expression_data is not None and t1_cache is not None:
+                mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+            else:
+                mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+            if mutated_Configuration == False:
+                # guided/local失败，尝试改LG后继续guided/local
+                for _ in range(0, max_iter):
+                    mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
+                    if ",".join(map(str, mutated_LogicGates)) not in tested_LG_strings:
+                        self.LogicGates = mutated_LogicGates
+                        if residuals is not None and expression_data is not None and t1_cache is not None:
+                            mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+                        else:
+                            mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+                        if mutated_Configuration != False:
+                            self.Configuration = mutated_Configuration
                         return
                     else:
-                        self.Configuration = mutated_Configuration
-                        return
-                else:
-                    self.Configuration = mutated_Configuration
-                    return
-            else:
-                if mutated_Configuration == False:
-                    for _ in range(0, max_iter):
-                        mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
-                        if ",".join(map(str, mutated_LogicGates)) not in tested_LG_strings:
+                        if residuals is not None and expression_data is not None and t1_cache is not None:
+                            mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+                        else:
+                            mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+                        if mutated_Configuration != False:
                             self.LogicGates = mutated_LogicGates
-                            self.Configuration = HammingMutation_1(len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                            self.Configuration = mutated_Configuration
                             return
                         else:
-                            mutated_Configuration = HammingMutation_1(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
-                            if mutated_Configuration != False:
-                                self.LogicGates = mutated_LogicGates
-                                self.Configuration = mutated_Configuration
-                                return
-                            else:
-                                continue
-                    self.MutationRate = 'All tested!'
-                    return
-                else:
+                            continue
+                self.MutationRate = 'All tested!'
+                return
+            else:
                     self.Configuration = mutated_Configuration
                     return
 
@@ -371,7 +346,8 @@ class GRN:
             if knockout_list[i] >= 0:
                 self.mRNA[knockout_list[i]] = 0
             else:
-                self.mRNA[-knockout_list[i]-2] = Overexpression[i]
+                gene_idx = -knockout_list[i] - 2
+                self.mRNA[gene_idx] = Overexpression[gene_idx]
         return
 
     def SetMemo(self, NewMemo):
@@ -580,7 +556,7 @@ class GRN:
                                             '\n    else:'
                                             '\n        outlist[{}] = delta_mRNA[{}]').format(
                     i, i, indexes_of_diff_gene[i], i, i,
-                    -2-indexes_of_diff_gene[i], i, TRM[i], i, i, i)
+                    -2-indexes_of_diff_gene[i], i, TRM[indexes_of_diff_gene[i]], i, i, i)
             else:
                 scipystring = scipystring + ('\n    if (y[{}]<=0 and delta_mRNA[{}]<=0) or ({} in knockoutlist):'
                                             '\n        outlist[{}] = -y[{}]'
@@ -589,7 +565,7 @@ class GRN:
                                             '\n    else:'
                                             '\n        outlist[{}] = 0').format(
                     i, i, indexes_of_diff_gene[i], i, i,
-                    -2-indexes_of_diff_gene[i], i, TRM[i], i, i, i)              
+                    -2-indexes_of_diff_gene[i], i, TRM[indexes_of_diff_gene[i]], i, i, i)              
 
         scipystring = scipystring + '\n    return outlist'
 

@@ -18,3 +18,4 @@ Gene regulatory networks (GRNs) govern gene expression, cellular differentiation
 ├── GRN_simulator_website/                # Web interface
 └── README.md
 ```
+The repository grew yeast-first, so the yeast analysis lives in the component directories above (SETIA/, TF_DNA_Binding_Network/, Protein_protein_interaction_network/). The human work was added later as a self-contained application under human/, which reuses the SETIA/ engine.

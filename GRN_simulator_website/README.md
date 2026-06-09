@@ -14,7 +14,7 @@ This repository contains the source code for the **GRN Simulator web application
 The simulator enables interactive exploration, editing, and dynamical simulation of:
 - TF–DNA binding networks inferred from ChIP-exo data  
 - Protein–protein colocalization (PPC) networks  
-- Gene regulatory networks (GRNs) inferred by **IAGREE**
+- Gene regulatory networks (GRNs) inferred by **SETIA**
 
 The repository also includes the associated `Plotter` module used for visualization.  
 Due to size constraints, processed datasets are **not included** in this repository.

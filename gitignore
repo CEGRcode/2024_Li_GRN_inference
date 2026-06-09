@@ -1,0 +1,25 @@
+# ---- Python / Jupyter ----
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.virtual_documents/
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- Human application: large external inputs (download locally, do not commit) ----
+Human/data/Granja2019_annotated.h5ad
+Human/data/GTEx_v11/
+Human/data/Lambert2018_TF_list.xlsx
+Human/data/*.gct
+Human/data/*.h5ad
+
+# ---- generated output / caches (any module) ----
+Human/output/
+**/*_output/
+**/*_cache/
+**/cache/
+**/result_bmmc/
+# NOTE: this does NOT untrack files already committed (e.g. an intentionally
+# committed result JSON). Run `git rm --cached <path>` to drop one.

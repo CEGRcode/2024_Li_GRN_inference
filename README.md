@@ -14,6 +14,7 @@ Gene regulatory networks (GRNs) govern gene expression, cellular differentiation
 ├── SETIA/                                # Core GRN inference and simulation framework
 ├── TF_DNA_Binding_Network/               # TF–DNA regulatory networks
 ├── Protein_protein_interaction_network/  # Colocalization-based protein-protein interaction networks
+├── human/                                # Human application (BMMC + GTEx): SETIA input building and Figure 3
 ├── GRN_simulator_website/                # Web interface
 └── README.md
 ```

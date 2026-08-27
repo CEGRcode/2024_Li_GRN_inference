@@ -103,19 +103,19 @@ class GRN:
 
             for each_subunit in CA_complexes[each_complex]:
                 if analytical_expression:
-                    TempString_HA_complexes = '{}*'.format('y[{}]'.format(each_subunit))
-                    TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
+                    TempString_HA_complexes += '{}*'.format('y[{}]'.format(each_subunit))
+                    TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
 
                 elif each_subunit == specific_gene:
-                    TempString_HA_complexes = '{}*'.format('y')
-                    TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
+                    TempString_HA_complexes += '{}*'.format('y')
+                    TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
 
                 else:
-                    TempString_HA_complexes = '{}*'.format(initial_values[each_subunit])
-                    TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
+                    TempString_HA_complexes += '{}*'.format(initial_values[each_subunit])
+                    TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
 
             TempString_HA_complexes = TempString_HA_complexes[:-1]
             TempString_HA_t1_complexes = TempString_HA_t1_complexes[:-1]
@@ -164,18 +164,18 @@ class GRN:
             TempString_HR_t2_complexes = ''
             for each_subunit in CR_complexes[each_complex]:
                 if analytical_expression:
-                    TempString_HR_complexes = '{}*'.format('y[{}]'.format(each_subunit))
-                    TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
+                    TempString_HR_complexes += '{}*'.format('y[{}]'.format(each_subunit))
+                    TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
 
                 elif each_subunit == specific_gene:
-                    TempString_HR_complexes = '{}*'.format('y')
-                    TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
+                    TempString_HR_complexes += '{}*'.format('y')
+                    TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
                 else:
-                    TempString_HR_complexes = '{}*'.format(initial_values[each_subunit])
-                    TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
+                    TempString_HR_complexes += '{}*'.format(initial_values[each_subunit])
+                    TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
 
             TempString_HR_complexes = TempString_HR_complexes[:-1]
             TempString_HR_t1_complexes = TempString_HR_t1_complexes[:-1]
@@ -458,13 +458,13 @@ class GRN:
                 TempString_HA_t2_complexes = ''
                 for each_subunit in CA_complexes[each_complex]:
                     if each_subunit in indexes_of_diff_gene:
-                        TempString_HA_complexes = '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
-                        TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
+                        TempString_HA_complexes += '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
+                        TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
                     else:
-                        TempString_HA_complexes = '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
-                        TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
+                        TempString_HA_complexes += '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
+                        TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
 
                 TempString_HA_complexes = TempString_HA_complexes[:-1]
                 TempString_HA_t1_complexes = TempString_HA_t1_complexes[:-1]
@@ -513,13 +513,13 @@ class GRN:
                 TempString_HR_t2_complexes = ''
                 for each_subunit in CR_complexes[each_complex]:
                     if each_subunit in indexes_of_diff_gene:
-                        TempString_HR_complexes = '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
-                        TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
+                        TempString_HR_complexes += '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
+                        TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
                     else:
-                        TempString_HR_complexes = '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
-                        TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
+                        TempString_HR_complexes += '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
+                        TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
 
                 TempString_HR_complexes = TempString_HR_complexes[:-1]
                 TempString_HR_t1_complexes = TempString_HR_t1_complexes[:-1]

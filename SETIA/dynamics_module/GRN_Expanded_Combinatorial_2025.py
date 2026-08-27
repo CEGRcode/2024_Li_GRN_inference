@@ -103,19 +103,19 @@ class GRN:
 
             for each_subunit in CA_complexes[each_complex]:
                 if analytical_expression:
-                    TempString_HA_complexes = '{}*'.format('y[{}]'.format(each_subunit))
-                    TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
+                    TempString_HA_complexes += '{}*'.format('y[{}]'.format(each_subunit))
+                    TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
 
                 elif each_subunit == specific_gene:
-                    TempString_HA_complexes = '{}*'.format('y')
-                    TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
+                    TempString_HA_complexes += '{}*'.format('y')
+                    TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
 
                 else:
-                    TempString_HA_complexes = '{}*'.format(initial_values[each_subunit])
-                    TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
+                    TempString_HA_complexes += '{}*'.format(initial_values[each_subunit])
+                    TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][1])
 
             TempString_HA_complexes = TempString_HA_complexes[:-1]
             TempString_HA_t1_complexes = TempString_HA_t1_complexes[:-1]
@@ -164,18 +164,18 @@ class GRN:
             TempString_HR_t2_complexes = ''
             for each_subunit in CR_complexes[each_complex]:
                 if analytical_expression:
-                    TempString_HR_complexes = '{}*'.format('y[{}]'.format(each_subunit))
-                    TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
+                    TempString_HR_complexes += '{}*'.format('y[{}]'.format(each_subunit))
+                    TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
 
                 elif each_subunit == specific_gene:
-                    TempString_HR_complexes = '{}*'.format('y')
-                    TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
+                    TempString_HR_complexes += '{}*'.format('y')
+                    TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
                 else:
-                    TempString_HR_complexes = '{}*'.format(initial_values[each_subunit])
-                    TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
-                    TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
+                    TempString_HR_complexes += '{}*'.format(initial_values[each_subunit])
+                    TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][0])
+                    TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[specific_gene][each_subunit][2])
 
             TempString_HR_complexes = TempString_HR_complexes[:-1]
             TempString_HR_t1_complexes = TempString_HR_t1_complexes[:-1]
@@ -303,39 +303,71 @@ class GRN:
                 return
         else:
             # 有方向性的局部mutation：根据当前residual决定加/删哪个方向的边
-            # only_TF_DNA=True(-f 1): 只允许ChIP=1的位置变动
-            # only_TF_DNA=False(-f 0): 允许所有diff_genes位置变动（包括违规边）
+            # 如果residual信息可用，用guided；否则退化为local随机扰动
             if residuals is not None and expression_data is not None and t1_cache is not None:
-                mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+                mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2)
             else:
-                mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
+                mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2)
             if mutated_Configuration == False:
-                # guided/local失败，尝试改LG后继续guided/local
-                for _ in range(0, max_iter):
-                    mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
-                    if ",".join(map(str, mutated_LogicGates)) not in tested_LG_strings:
-                        self.LogicGates = mutated_LogicGates
-                        if residuals is not None and expression_data is not None and t1_cache is not None:
-                            mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
-                        else:
-                            mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
-                        if mutated_Configuration != False:
-                            self.Configuration = mutated_Configuration
+                mutated_Configuration = HammingMutation_3(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+            if mutated_Configuration == False and (not only_TF_DNA):
+                mutated_Configuration = HammingMutation_2(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                if mutated_Configuration == False:
+                    mutated_Configuration = HammingMutation_3(len(self.Configuration), tesetd_AM_strings, list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                    if mutated_Configuration == False:
+                        for _ in range(0, max_iter):
+                            mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
+                            if ",".join(map(str, mutated_LogicGates)) not in tested_LG_strings:
+                                self.LogicGates = mutated_LogicGates
+                                self.Configuration = HammingMutation_1(len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                                return
+                            else:
+                                mutated_Configuration = HammingMutation_1(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                                if mutated_Configuration != False:
+                                    self.LogicGates = mutated_LogicGates
+                                    self.Configuration = mutated_Configuration
+                                    return
+                                else:
+                                    mutated_Configuration = HammingMutation_2(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                                    if mutated_Configuration != False:
+                                        self.LogicGates = mutated_LogicGates
+                                        self.Configuration = mutated_Configuration
+                                        return
+                                    else:
+                                        mutated_Configuration = HammingMutation_3(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                                        if mutated_Configuration != False:
+                                            self.LogicGates = mutated_LogicGates
+                                            self.Configuration = mutated_Configuration
+                                            return
+                                        else:
+                                            continue
+                        self.MutationRate = 'All tested!'
                         return
                     else:
-                        if residuals is not None and expression_data is not None and t1_cache is not None:
-                            mutated_Configuration = HammingMutation_guided(self.Configuration, len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, residuals, expression_data, t1_cache, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
-                        else:
-                            mutated_Configuration = HammingMutation_local(self.Configuration, len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter, hamming_dist=2, only_TF_DNA=only_TF_DNA)
-                        if mutated_Configuration != False:
+                        self.Configuration = mutated_Configuration
+                        return
+                else:
+                    self.Configuration = mutated_Configuration
+                    return
+            else:
+                if mutated_Configuration == False:
+                    for _ in range(0, max_iter):
+                        mutated_LogicGates = Mutation_LG_Simple(self.MutationRate, sys_LG_[specific_gene], index_of_diff_gene)
+                        if ",".join(map(str, mutated_LogicGates)) not in tested_LG_strings:
                             self.LogicGates = mutated_LogicGates
-                            self.Configuration = mutated_Configuration
+                            self.Configuration = HammingMutation_1(len(self.Configuration), [], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
                             return
                         else:
-                            continue
-                self.MutationRate = 'All tested!'
-                return
-            else:
+                            mutated_Configuration = HammingMutation_1(len(self.Configuration), tested_AMLG[cache_index][",".join(map(str, mutated_LogicGates))], list(self.sys_input_ChIP[:, specific_gene]), index_of_diff_gene, max_iter)
+                            if mutated_Configuration != False:
+                                self.LogicGates = mutated_LogicGates
+                                self.Configuration = mutated_Configuration
+                                return
+                            else:
+                                continue
+                    self.MutationRate = 'All tested!'
+                    return
+                else:
                     self.Configuration = mutated_Configuration
                     return
 
@@ -434,13 +466,13 @@ class GRN:
                 TempString_HA_t2_complexes = ''
                 for each_subunit in CA_complexes[each_complex]:
                     if each_subunit in indexes_of_diff_gene:
-                        TempString_HA_complexes = '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
-                        TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
+                        TempString_HA_complexes += '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
+                        TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
                     else:
-                        TempString_HA_complexes = '{}*'.format(initial_values[each_subunit])
-                        TempString_HA_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HA_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
+                        TempString_HA_complexes += '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
+                        TempString_HA_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HA_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][1])
 
                 TempString_HA_complexes = TempString_HA_complexes[:-1]
                 TempString_HA_t1_complexes = TempString_HA_t1_complexes[:-1]
@@ -489,13 +521,13 @@ class GRN:
                 TempString_HR_t2_complexes = ''
                 for each_subunit in CR_complexes[each_complex]:
                     if each_subunit in indexes_of_diff_gene:
-                        TempString_HR_complexes = '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
-                        TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
+                        TempString_HR_complexes += '{}*'.format('(y[{}])'.format(indexes_of_diff_gene.index(each_subunit)))
+                        TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
                     else:
-                        TempString_HR_complexes = '{}*'.format(initial_values[each_subunit])
-                        TempString_HR_t1_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
-                        TempString_HR_t2_complexes = '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
+                        TempString_HR_complexes += '{}*'.format('(y[{}])'.format(initial_values[each_subunit]))
+                        TempString_HR_t1_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][0])
+                        TempString_HR_t2_complexes += '{}*'.format(self.TranscriptionThreshold[i][each_subunit][2])
 
                 TempString_HR_complexes = TempString_HR_complexes[:-1]
                 TempString_HR_t1_complexes = TempString_HR_t1_complexes[:-1]
